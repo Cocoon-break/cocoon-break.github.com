@@ -157,6 +157,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Mac下打造流畅的终端使用环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/27/Mac下打造流畅的终端使用环境/">Mac下打造流畅的终端使用环境</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/27/Mac下打造流畅的终端使用环境/" class="archive-article-date">
+  	<time datetime="2017-05-27T09:02:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>作为程序员Mac上自带的终端是远远满足不了我们的，这时我们就要自己手动搭一个我们顺手的终端环境。下面我们就来搭建iterm2+ oh my zsh + tmux  的终端工具</p>
+<h2 id="ITerm2-安装"><a href="#ITerm2-安装" class="headerlink" title="ITerm2 安装"></a>ITerm2 安装</h2><ol>
+<li><p>上Iterm2的官网下载iterm2,<a href="http://www.iterm2.com/" target="_blank" rel="external">iterm2下载</a></p>
+</li>
+<li><p>下载完成之后，发现iterm2 自带的配色我不太喜欢，安装完成之后进行item2的配色，这个纯属看个人喜好了。</p>
+<ul>
+<li><p>要进行配色，我们当然得要有配色的方案啦！什么你要自己配一个，嗯…… 这也是可以的，不过有很多现成的方案你要不要啊。github 上有超多的配色方案，我们先把这个库给clone下来。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> git@github.com:mbadolato/iTerm2-Color-Schemes.git</div></pre></td></tr></table></figure>
+<p>要是你没有git，那我觉得你没太必要继续下去了。当然你还想继续的话，你就上GitHub手动download 下来。</p>
+</li>
+<li><p>好了配色方案是有了接下来我们就是进行配色了,这个也是比较简单，打开iterm2的偏好设置，找到Profiles下的Colors，选中import，这里选择刚才git 克隆下来文件中的schemes文件夹下的文件，这些文件就是各种各样的配色方案，这就看个人喜好了哈，这样你的iterm2配色方案就完成了</p>
+<p><img src="images/screenShot/iterm2_color.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="安装oh-my-zsh"><a href="#安装oh-my-zsh" class="headerlink" title="安装oh-my-zsh"></a>安装oh-my-zsh</h2><ol>
+<li><p>通过git 把oh-my-zsh 下载下来</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加配置文件并设置为默认的shell</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div><div class="line">chsh <span class="_">-s</span> /bin/zsh</div></pre></td></tr></table></figure>
+<p><strong>注:</strong> .zshrc 就相当于.bashrc了以后配置环境就在.zshrc中配置就行</p>
+</li>
+<li><p>配置oh-my-zsh 的主题</p>
+<p>oh-my-zsh 提供了很多的主题，可以选择自己喜欢的风格。具体的主题效果可以参考<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes" target="_blank" rel="external">主题预览</a>，选好主题了，接下来就是配置了。编辑~/.zshrc 文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vim ~/.zshrc</div><div class="line"><span class="comment">#编辑主题，af-magic是我机器上的主题风格，具体可以设置为刚才主题预览中的</span></div><div class="line">ZSH_THEME=<span class="string">"af-magic"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>oh-my-zsh 就配置完了</p>
+</li>
+</ol>
+<h2 id="安装tmux"><a href="#安装tmux" class="headerlink" title="安装tmux"></a>安装tmux</h2><ol>
+<li><p>先安装Homebrew，这个是Mac平台的包管理器。用来安装一些开发工具还是很方便。Mac系统自带了ruby的环境，我们通过ruby来安装Homebrew</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>通过homebrew 安装oh-my-zsh</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install tmux</div></pre></td></tr></table></figure>
+</li>
+<li><p>就是这么简单tmux就装完了</p>
+</li>
+</ol>
+<p>下一篇会讲具体的使用方法，包括iterm快捷键，tmux的使用</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技巧</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/27/Mac下打造流畅的终端使用环境/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-shell 脚本中读取参数值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -191,7 +291,7 @@
 </ol>
 <h2 id="指定key-获取参数"><a href="#指定key-获取参数" class="headerlink" title="指定key 获取参数"></a>指定key 获取参数</h2><ol>
 <li><p>一样的我们先定义脚本test.sh，一会儿我们在解读shell脚本中的含义</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">#先定义接收各个参数值的变量</div><div class="line">IP_VALUE=&quot;&quot;; NODE_VALUE=&quot;&quot;;VIP_VALUE=&quot;&quot;;</div><div class="line"></div><div class="line">while true;do </div><div class="line">	case $1 in</div><div class="line">		-i|--ip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)IP_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)IP_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-n|--node)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-v|--vip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		 --) shift ;break ;;</div><div class="line">		 *) break;;</div><div class="line">		esac</div><div class="line">done</div><div class="line"></div><div class="line">if [ -z &quot;$&#123;IP_VALUE&#125;&quot; ];    then echo &quot;error: ip is not found.&quot;;             exit 1; fi</div><div class="line">if [ -z &quot;$&#123;NODE_VALUE&#125;&quot; ];  then echo &quot;error: node is not found.&quot;;           exit 1; fi</div><div class="line">if [ -z &quot;$&#123;VIP_VALUE&#125;&quot; ];   then echo &quot;error: vip is not found.&quot;;            exit 1; fi</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">#先定义接收各个参数值的变量</div><div class="line">IP_VALUE=&quot;&quot;; NODE_VALUE=&quot;&quot;;VIP_VALUE=&quot;&quot;;</div><div class="line"></div><div class="line">while true;do </div><div class="line">	if [ ! $2 ]; then break; fi</div><div class="line">	case $1 in</div><div class="line">		-i|--ip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)IP_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)IP_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-n|--node)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-v|--vip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		 --) shift ;break ;;</div><div class="line">		 *) break;;</div><div class="line">		esac</div><div class="line">done</div><div class="line"></div><div class="line">if [ -z &quot;$&#123;IP_VALUE&#125;&quot; ];    then echo &quot;error: ip is not found.&quot;;             exit 1; fi</div><div class="line">if [ -z &quot;$&#123;NODE_VALUE&#125;&quot; ];  then echo &quot;error: node is not found.&quot;;           exit 1; fi</div><div class="line">if [ -z &quot;$&#123;VIP_VALUE&#125;&quot; ];   then echo &quot;error: vip is not found.&quot;;            exit 1; fi</div></pre></td></tr></table></figure>
 <ul>
 <li>通过while 循环参数的$1 和$2 取key 和 value。</li>
 <li>case $1取参数的key，case $2取其中的值，如果取到了，就通过shift 2，把最前面的两个位置给移除了比如:<code>./test.sh -v kkk -n bbbb</code> 读取到如果执行了 shift 2,它就会把-v kkk 给扔了</li>
@@ -608,6 +708,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
               </li>
             
             <div class="clearfix"></div>

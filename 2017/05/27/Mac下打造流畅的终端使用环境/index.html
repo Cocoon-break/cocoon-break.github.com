@@ -6,19 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>ffmpeg简易介绍 | cocoon-break的博客</title>
+  <title>Mac下打造流畅的终端使用环境 | cocoon-break的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="媒体文件结构一个媒体文件并不像许多人想象的那样，是将媒体内容编码起来直接作为文件的。实际上，它通常是由多个不同种类的媒体流（ Stream ）组成，再以特定的封装格式封装起来的。 比较常见的媒体流就是视频流跟音频流了，顾名思义，视频流存储的就是视频信息，音频流存储的就是音频信息。一个视频流或者音频流的内容，就是以特定的编码格式所存储的视频或音频信息。 一个文件的里面的媒体流所采用的编码格式跟这个文">
-<meta name="keywords" content="Linux RN android 博客">
+  <meta name="description" content="作为程序员Mac上自带的终端是远远满足不了我们的，这时我们就要自己手动搭一个我们顺手的终端环境。下面我们就来搭建iterm2+ oh my zsh + tmux  的终端工具 ITerm2 安装 上Iterm2的官网下载iterm2,iterm2下载  下载完成之后，发现iterm2 自带的配色我不太喜欢，安装完成之后进行item2的配色，这个纯属看个人喜好了。  要进行配色，我们当然得要有配色的">
+<meta name="keywords" content="技巧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ffmpeg简易介绍">
-<meta property="og:url" content="http://yoursite.com/2017/05/22/ffmpeg简易介绍/index.html">
+<meta property="og:title" content="Mac下打造流畅的终端使用环境">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/Mac下打造流畅的终端使用环境/index.html">
 <meta property="og:site_name" content="cocoon-break的博客">
-<meta property="og:description" content="媒体文件结构一个媒体文件并不像许多人想象的那样，是将媒体内容编码起来直接作为文件的。实际上，它通常是由多个不同种类的媒体流（ Stream ）组成，再以特定的封装格式封装起来的。 比较常见的媒体流就是视频流跟音频流了，顾名思义，视频流存储的就是视频信息，音频流存储的就是音频信息。一个视频流或者音频流的内容，就是以特定的编码格式所存储的视频或音频信息。 一个文件的里面的媒体流所采用的编码格式跟这个文">
-<meta property="og:updated_time" content="2017-05-23T06:24:21.000Z">
+<meta property="og:description" content="作为程序员Mac上自带的终端是远远满足不了我们的，这时我们就要自己手动搭一个我们顺手的终端环境。下面我们就来搭建iterm2+ oh my zsh + tmux  的终端工具 ITerm2 安装 上Iterm2的官网下载iterm2,iterm2下载  下载完成之后，发现iterm2 自带的配色我不太喜欢，安装完成之后进行item2的配色，这个纯属看个人喜好了。  要进行配色，我们当然得要有配色的">
+<meta property="og:image" content="http://yoursite.com/2017/05/27/Mac下打造流畅的终端使用环境/images/screenShot/iterm2_color.jpg">
+<meta property="og:updated_time" content="2017-05-27T10:30:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ffmpeg简易介绍">
-<meta name="twitter:description" content="媒体文件结构一个媒体文件并不像许多人想象的那样，是将媒体内容编码起来直接作为文件的。实际上，它通常是由多个不同种类的媒体流（ Stream ）组成，再以特定的封装格式封装起来的。 比较常见的媒体流就是视频流跟音频流了，顾名思义，视频流存储的就是视频信息，音频流存储的就是音频信息。一个视频流或者音频流的内容，就是以特定的编码格式所存储的视频或音频信息。 一个文件的里面的媒体流所采用的编码格式跟这个文">
+<meta name="twitter:title" content="Mac下打造流畅的终端使用环境">
+<meta name="twitter:description" content="作为程序员Mac上自带的终端是远远满足不了我们的，这时我们就要自己手动搭一个我们顺手的终端环境。下面我们就来搭建iterm2+ oh my zsh + tmux  的终端工具 ITerm2 安装 上Iterm2的官网下载iterm2,iterm2下载  下载完成之后，发现iterm2 自带的配色我不太喜欢，安装完成之后进行item2的配色，这个纯属看个人喜好了。  要进行配色，我们当然得要有配色的">
+<meta name="twitter:image" content="http://yoursite.com/2017/05/27/Mac下打造流畅的终端使用环境/images/screenShot/iterm2_color.jpg">
   
     <link rel="alternative" href="/atom.xml" title="cocoon-break的博客" type="application/atom+xml">
   
@@ -156,62 +158,68 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ffmpeg简易介绍" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Mac下打造流畅的终端使用环境" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      ffmpeg简易介绍
+      Mac下打造流畅的终端使用环境
     </h1>
   
 
         
-        <a href="/2017/05/22/ffmpeg简易介绍/" class="archive-article-date">
-  	<time datetime="2017-05-22T06:34:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-22</time>
+        <a href="/2017/05/27/Mac下打造流畅的终端使用环境/" class="archive-article-date">
+  	<time datetime="2017-05-27T09:02:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="媒体文件结构"><a href="#媒体文件结构" class="headerlink" title="媒体文件结构"></a>媒体文件结构</h2><p>一个媒体文件并不像许多人想象的那样，是将媒体内容编码起来直接作为文件的。实际上，它通常是由多个不同种类的媒体流（ Stream ）组成，再以特定的封装格式封装起来的。</p>
-<p>比较常见的媒体流就是视频流跟音频流了，顾名思义，视频流存储的就是视频信息，音频流存储的就是音频信息。一个视频流或者音频流的内容，就是以特定的编码格式所存储的视频或音频信息。</p>
-<p><strong>一个文件的里面的媒体流所采用的编码格式跟这个文件的后缀名并没有完全的必然联系。</strong> <strong>文件的后缀名通常就代表这个文件的封装格式。</strong></p>
-<h2 id="ffmpeg-安装"><a href="#ffmpeg-安装" class="headerlink" title="ffmpeg 安装"></a>ffmpeg 安装</h2><p>自行下载使用系统安装对应的安装包<a href="https://ffmpeg.org/download.html" target="_blank" rel="external">官网下载</a></p>
-<p>以下使用的平台都为Mac系统下</p>
-<h2 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h2><ol>
-<li><p>打开终端，查看ffmpeg帮助文档，简要了解ffmpeg的使用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ffmpeg -help</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">ffmpeg version 3.3 Copyright (c) 2000-2017 the FFmpeg developers</div><div class="line">  built with Apple LLVM version 8.1.0 (clang-802.0.41)</div><div class="line">  configuration: --prefix=/usr/local/Cellar/ffmpeg/3.3 --enable-shared --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --cc=clang --host-cflags= --host-ldflags= --enable-libmp3lame --enable-libx264 --enable-libxvid --enable-opencl --disable-lzma --enable-vda</div><div class="line">  libavutil      55. 58.100 / 55. 58.100</div><div class="line">  libavcodec     57. 89.100 / 57. 89.100</div><div class="line">  libavformat    57. 71.100 / 57. 71.100</div><div class="line">  libavdevice    57.  6.100 / 57.  6.100</div><div class="line">  libavfilter     6. 82.100 /  6. 82.100</div><div class="line">  libavresample   3.  5.  0 /  3.  5.  0</div><div class="line">  libswscale      4.  6.100 /  4.  6.100</div><div class="line">  libswresample   2.  7.100 /  2.  7.100</div><div class="line">  libpostproc    54.  5.100 / 54.  5.100</div><div class="line">Hyper fast Audio and Video encoder</div><div class="line">usage: ffmpeg [options] [[infile options] -i infile]... &#123;[outfile options] outfile&#125;...</div></pre></td></tr></table></figure>
-<p>重点是关注 usage: ffmpeg [options][[infile options] -i infile]… {[outfile options] outfile}… 这句是说ffmpeg 的主要用法</p>
+        <p>作为程序员Mac上自带的终端是远远满足不了我们的，这时我们就要自己手动搭一个我们顺手的终端环境。下面我们就来搭建iterm2+ oh my zsh + tmux  的终端工具</p>
+<h2 id="ITerm2-安装"><a href="#ITerm2-安装" class="headerlink" title="ITerm2 安装"></a>ITerm2 安装</h2><ol>
+<li><p>上Iterm2的官网下载iterm2,<a href="http://www.iterm2.com/" target="_blank" rel="external">iterm2下载</a></p>
 </li>
-<li><p>查看ffmpeg 支持的格式</p>
-<p>查看封装格式，包括音频，视频等封装格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ffmpeg -formats</div></pre></td></tr></table></figure>
-<p>查看编解码器包括音频，视频等封装格式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ffmpeg -codecs</div></pre></td></tr></table></figure>
+<li><p>下载完成之后，发现iterm2 自带的配色我不太喜欢，安装完成之后进行item2的配色，这个纯属看个人喜好了。</p>
+<ul>
+<li><p>要进行配色，我们当然得要有配色的方案啦！什么你要自己配一个，嗯…… 这也是可以的，不过有很多现成的方案你要不要啊。github 上有超多的配色方案，我们先把这个库给clone下来。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> git@github.com:mbadolato/iTerm2-Color-Schemes.git</div></pre></td></tr></table></figure>
+<p>要是你没有git，那我觉得你没太必要继续下去了。当然你还想继续的话，你就上GitHub手动download 下来。</p>
 </li>
-<li><p>进行格式转换</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ffmpeg -i a.mp4 b.mkv</div></pre></td></tr></table></figure>
-<p>这里是将mp4格式的视频转换成mkv格式。</p>
-<p><strong>注：</strong> 查看默认编码格式，以下的Matroska也就是指 mkv</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ffmpeg -help muxer=Matroska</div><div class="line"></div><div class="line">#以下为摘要信息，从中可以看出默认的视频编码为h264,音频编码为ac3,字幕流编码为ass，部分格式视频不支持字幕流</div><div class="line">Muxer matroska [Matroska]:</div><div class="line">    Common extensions: mkv.</div><div class="line">    Mime type: video/x-matroska.</div><div class="line">    Default video codec: h264.</div><div class="line">    Default audio codec: ac3.</div><div class="line">    Default subtitle codec: ass.</div></pre></td></tr></table></figure>
+<li><p>好了配色方案是有了接下来我们就是进行配色了,这个也是比较简单，打开iterm2的偏好设置，找到Profiles下的Colors，选中import，这里选择刚才git 克隆下来文件中的schemes文件夹下的文件，这些文件就是各种各样的配色方案，这就看个人喜好了哈，这样你的iterm2配色方案就完成了</p>
+<p><img src="images/screenShot/iterm2_color.jpg" alt=""></p>
 </li>
-<li><p>指定编码器进行转换</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ffmpeg -i a.mp4 -c:v hevc -c:a aac b.mkv</div></pre></td></tr></table></figure>
-<p><strong>注：</strong> <code>-c:v</code> 可以用<code>-vcodec</code>替换，当它们的值为copy时，就表示编码格式不进行转换</p>
-</li>
-<li><p>在转换时可以进行的调整</p>
-<p>在 <code>ffmpeg -help</code> 时可以看到有一些和音频，视频，字幕相关的选项</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">Video options:</div><div class="line">-vframes number     set the number of video frames to output</div><div class="line">-r rate             set frame rate (Hz value, fraction or abbreviation)</div><div class="line">-s size             set frame size (WxH or abbreviation)</div><div class="line">-aspect aspect      set aspect ratio (4:3, 16:9 or 1.3333, 1.7777)</div><div class="line">-bits_per_raw_sample number  set the number of bits per raw sample</div><div class="line">-vn                 disable video</div><div class="line">-vcodec codec       force video codec (&apos;copy&apos; to copy stream)</div><div class="line">-timecode hh:mm:ss[:;.]ff  set initial TimeCode value.</div><div class="line">-pass n             select the pass number (1 to 3)</div><div class="line">-vf filter_graph    set video filters</div><div class="line">-ab bitrate         audio bitrate (please use -b:a)</div><div class="line">-b bitrate          video bitrate (please use -b:v)</div><div class="line">-dn                 disable data</div><div class="line"></div><div class="line">Audio options:</div><div class="line">-aframes number     set the number of audio frames to output</div><div class="line">-aq quality         set audio quality (codec-specific)</div><div class="line">-ar rate            set audio sampling rate (in Hz)</div><div class="line">-ac channels        set number of audio channels</div><div class="line">-an                 disable audio</div><div class="line">-acodec codec       force audio codec (&apos;copy&apos; to copy stream)</div><div class="line">-vol volume         change audio volume (256=normal)</div><div class="line">-af filter_graph    set audio filters</div><div class="line"></div><div class="line">Subtitle options:</div><div class="line">-s size             set frame size (WxH or abbreviation)</div><div class="line">-sn                 disable subtitle</div><div class="line">-scodec codec       force subtitle codec (&apos;copy&apos; to copy stream)</div><div class="line">-stag fourcc/tag    force subtitle tag/fourcc</div><div class="line">-fix_sub_duration   fix subtitles duration</div><div class="line">-canvas_size size   set canvas size (WxH or abbreviation)</div><div class="line">-spre preset        set the subtitle options to the indicated preset</div></pre></td></tr></table></figure>
-<p>当然还有对整个文件进行调整的参数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">Per-file main options:</div><div class="line">-f fmt              force format</div><div class="line">-c codec            codec name</div><div class="line">-codec codec        codec name</div><div class="line">-pre preset         preset name</div><div class="line">-map_metadata outfile[,metadata]:infile[,metadata]  set metadata information of outfile from infile</div><div class="line">-t duration         record or transcode &quot;duration&quot; seconds of audio/video</div><div class="line">-to time_stop       record or transcode stop time</div><div class="line">-fs limit_size      set the limit file size in bytes</div><div class="line">-ss time_off        set the start time offset</div><div class="line">-sseof time_off     set the start time offset relative to EOF</div><div class="line">-seek_timestamp     enable/disable seeking by timestamp with -ss</div><div class="line">-timestamp time     set the recording timestamp (&apos;now&apos; to set the current time)</div><div class="line">-metadata string=string  add metadata</div><div class="line">-program title=string:st=number...  add program with specified streams</div><div class="line">-target type        specify target file type (&quot;vcd&quot;, &quot;svcd&quot;, &quot;dvd&quot;, &quot;dv&quot; or &quot;dv50&quot; with optional prefixes &quot;pal-&quot;, &quot;ntsc-&quot; or &quot;film-&quot;)</div><div class="line">-apad               audio pad</div><div class="line">-frames number      set the number of frames to output</div><div class="line">-filter filter_graph  set stream filtergraph</div><div class="line">-filter_script filename  read stream filtergraph description from a file</div><div class="line">-reinit_filter      reinit filtergraph on input parameter changes</div><div class="line">-discard            discard</div><div class="line">-disposition        disposition</div></pre></td></tr></table></figure>
-<p><a href="https://github.com/FiveYellowMice/how-to-convert-videos-with-ffmpeg-zh" target="_blank" rel="external">文章参考</a> </p>
-<p>​</p>
+</ul>
 </li>
 </ol>
+<h2 id="安装oh-my-zsh"><a href="#安装oh-my-zsh" class="headerlink" title="安装oh-my-zsh"></a>安装oh-my-zsh</h2><ol>
+<li><p>通过git 把oh-my-zsh 下载下来</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加配置文件并设置为默认的shell</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div><div class="line">chsh <span class="_">-s</span> /bin/zsh</div></pre></td></tr></table></figure>
+<p><strong>注:</strong> .zshrc 就相当于.bashrc了以后配置环境就在.zshrc中配置就行</p>
+</li>
+<li><p>配置oh-my-zsh 的主题</p>
+<p>oh-my-zsh 提供了很多的主题，可以选择自己喜欢的风格。具体的主题效果可以参考<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes" target="_blank" rel="external">主题预览</a>，选好主题了，接下来就是配置了。编辑~/.zshrc 文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">vim ~/.zshrc</div><div class="line"><span class="comment">#编辑主题，af-magic是我机器上的主题风格，具体可以设置为刚才主题预览中的</span></div><div class="line">ZSH_THEME=<span class="string">"af-magic"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>oh-my-zsh 就配置完了</p>
+</li>
+</ol>
+<h2 id="安装tmux"><a href="#安装tmux" class="headerlink" title="安装tmux"></a>安装tmux</h2><ol>
+<li><p>先安装Homebrew，这个是Mac平台的包管理器。用来安装一些开发工具还是很方便。Mac系统自带了ruby的环境，我们通过ruby来安装Homebrew</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>通过homebrew 安装oh-my-zsh</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install tmux</div></pre></td></tr></table></figure>
+</li>
+<li><p>就是这么简单tmux就装完了</p>
+</li>
+</ol>
+<p>下一篇会讲具体的使用方法，包括iterm快捷键，tmux的使用</p>
 
       
 
@@ -251,6 +259,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技巧</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -301,7 +320,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/22/ffmpeg简易介绍/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/27/Mac下打造流畅的终端使用环境/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -315,18 +334,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/05/25/shell 脚本中读取参数值/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          shell 脚本中读取参数值
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/05/15/Linux下打RPM包/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Linux下打RPM包</div>
+    <a href="/2017/05/25/shell 脚本中读取参数值/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">shell 脚本中读取参数值</div>
       <i class="icon-circle-right"></i>
     </a>
   
