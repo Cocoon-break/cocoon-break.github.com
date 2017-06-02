@@ -151,6 +151,70 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iterm,tmux,vim的常用快捷键" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/02/iterm,tmux,vim的常用快捷键/">iterm,tmux,vim 的常用快捷键</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/02/iterm,tmux,vim的常用快捷键/" class="archive-article-date">
+  	<time datetime="2017-06-02T05:52:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇博客我们搭建了Mac下流畅的终端使用环境，这篇博客我们讲一些常用的快捷键来提高开发效率。废话不多说我们开始吧</p>
+<h2 id="iterm2-快捷"><a href="#iterm2-快捷" class="headerlink" title="iterm2 快捷"></a>iterm2 快捷</h2><p>通常我们在使用时，一个窗口总是感觉不够用，这时我们就需要多窗口，或者一个窗口需要多个屏。打开Iterm2，我们按下<code>command + t</code>，来新建窗口，通过<code>commmand + w</code>来关闭当前窗口，如果我们想要切换不同的窗口时，我们可以通过<code>command + 方向键</code> 或者<code>command +  数字</code>来切换窗口。<code>command + q</code> 退出应用程序</p>
+<p><strong>注：</strong> <code>command + t</code>或者<code>command + w</code>或者<code>command +q</code> 在很多应用都是通用的,比如在chrom 上，这几个快捷键，分别表示新建tab页，关闭tab页，推出chrom。但是chrom 切换tab是使用<code>command + option +方向键</code> 这个就和iterm2有区别了。</p>
+<p>在链接远程服务器时，我需要在同一窗口，查看不同服务器的状态，或者其他的一些信息。多窗口去查看就太麻烦 了。iterm 的分屏就能满足你的需要了。iterm2在分屏时，可以进行横向分屏和纵向分屏。纵向分屏使用<code>command + d</code>横向分屏使用<code>command + shift +d</code>，关闭当前分屏的快捷键也是使用<code>command + w</code>，切换各个分屏使用的是<code>command + option + 方向键</code>，以下是效果图</p>
+        
+          <a class="article-more-a" href="/2017/06/02/iterm,tmux,vim的常用快捷键/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技巧</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/02/iterm,tmux,vim的常用快捷键/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Mac下打造流畅的终端使用环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -329,77 +393,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/05/22/ffmpeg简易介绍/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-Linux下打RPM包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/15/Linux下打RPM包/">Linux下打RPM包</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/15/Linux下打RPM包/" class="archive-article-date">
-  	<time datetime="2017-05-15T06:34:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h2><ol>
-<li><p>安装rpmtools工具</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install rpmdevtools</div></pre></td></tr></table></figure>
-</li>
-<li><p>创建文件夹</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -pv ~/rpmbuild/&#123;BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS&#125;</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="配置文件及源码准备"><a href="#配置文件及源码准备" class="headerlink" title="配置文件及源码准备"></a>配置文件及源码准备</h2><ol>
-<li><p>spec脚本文件创建，在SPECS文件夹下创建一个.spec文件 如h5-megvii.spec</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">Name:           h5-megvii</div><div class="line">License:        copyright</div><div class="line">Version:        1.0</div><div class="line">Release:        1%&#123;?dist&#125;</div><div class="line">Summary:        HTML FaceID Server</div><div class="line">AutoReqProv:    no</div><div class="line"></div><div class="line">Group:          Megvii</div><div class="line">URL:            http://www.megvii.com</div><div class="line">Source:         %&#123;name&#125;-%&#123;version&#125;.tar.gz</div><div class="line">BuildRoot:      %&#123;_tmppath&#125;/%&#123;name&#125;-%&#123;version&#125;-%&#123;release&#125;-root</div><div class="line"></div><div class="line">%description</div><div class="line">The rpm version of html-megvii package</div><div class="line"></div><div class="line">%prep</div><div class="line">%setup -q</div><div class="line"></div><div class="line">%build</div><div class="line">%install</div><div class="line">rm -rf <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line">mkdir -p <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line">cp <span class="_">-a</span> * <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line"></div><div class="line">%clean</div><div class="line">rm -rf <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line"></div><div class="line">%files</div><div class="line">%defattr(-,root,root,-)</div><div class="line">/opt/megvii</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/05/15/Linux下打RPM包/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/15/Linux下打RPM包/">展开全文 >></a>
         </p>
       
 
