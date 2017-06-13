@@ -151,6 +151,129 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-shell 脚本中读取参数值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/25/shell 脚本中读取参数值/">shell 脚本中读取参数值</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/25/shell 脚本中读取参数值/" class="archive-article-date">
+  	<time datetime="2017-05-25T03:14:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>shell 脚本中读取参数值</p>
+<p>通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了</p>
+<h2 id="根据参数位置直接获取"><a href="#根据参数位置直接获取" class="headerlink" title="根据参数位置直接获取"></a>根据参数位置直接获取</h2><ol>
+<li><p>先定义一个脚本test.sh，打印位置参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">echo $1</div><div class="line">echo $2</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行test.sh脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./test.sh haha hehehe</div></pre></td></tr></table></figure>
+<p>执行的结果就是打印了两个参数，这个种方式的弊端就是，如果参数的位置传错了，那么$1 的值就不是haha了，当然可以使用这种方式写，就是可读性不太高 哈。</p>
+        
+          <a class="article-more-a" href="/2017/05/25/shell 脚本中读取参数值/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/25/shell 脚本中读取参数值/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-ffmpeg简易介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/22/ffmpeg简易介绍/">ffmpeg简易介绍</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/22/ffmpeg简易介绍/" class="archive-article-date">
+  	<time datetime="2017-05-22T06:34:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="媒体文件结构"><a href="#媒体文件结构" class="headerlink" title="媒体文件结构"></a>媒体文件结构</h2><p>一个媒体文件并不像许多人想象的那样，是将媒体内容编码起来直接作为文件的。实际上，它通常是由多个不同种类的媒体流（ Stream ）组成，再以特定的封装格式封装起来的。</p>
+<p>比较常见的媒体流就是视频流跟音频流了，顾名思义，视频流存储的就是视频信息，音频流存储的就是音频信息。一个视频流或者音频流的内容，就是以特定的编码格式所存储的视频或音频信息。</p>
+<p><strong>一个文件的里面的媒体流所采用的编码格式跟这个文件的后缀名并没有完全的必然联系。</strong> <strong>文件的后缀名通常就代表这个文件的封装格式。</strong></p>
+<h2 id="ffmpeg-安装"><a href="#ffmpeg-安装" class="headerlink" title="ffmpeg 安装"></a>ffmpeg 安装</h2><p>自行下载使用系统安装对应的安装包<a href="https://ffmpeg.org/download.html" target="_blank" rel="external">官网下载</a></p>
+<p>以下使用的平台都为Mac系统下</p>
+        
+          <a class="article-more-a" href="/2017/05/22/ffmpeg简易介绍/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/22/ffmpeg简易介绍/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-Linux下打RPM包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -393,6 +516,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">开发随笔</a>
               </li>
             
             <div class="clearfix"></div>
