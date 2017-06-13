@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/5 | cocoon-break的博客</title>
+  <title>各个平台上传图片 | cocoon-break的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Linux RN android 博客">
-<meta name="keywords" content="Linux RN android 博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="cocoon-break的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2017/05/index.html">
+  <meta name="description" content="开发时常遇到的一些上传图片操作，这里记录一下。包括android，iOS，和java后端，后面还遇到的其他语言或平台时，会进行补充 android AsyncHttpClient 上传图片,要使用android-async-http 1234567891011121314151617181920212223242526272829303132public void uploadImg(String">
+<meta name="keywords" content="开发随笔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="各个平台上传图片">
+<meta property="og:url" content="http://yoursite.com/2017/06/13/各个平台上传图片/index.html">
 <meta property="og:site_name" content="cocoon-break的博客">
-<meta property="og:description" content="Linux RN android 博客">
+<meta property="og:description" content="开发时常遇到的一些上传图片操作，这里记录一下。包括android，iOS，和java后端，后面还遇到的其他语言或平台时，会进行补充 android AsyncHttpClient 上传图片,要使用android-async-http 1234567891011121314151617181920212223242526272829303132public void uploadImg(String">
+<meta property="og:updated_time" content="2017-06-13T05:40:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cocoon-break的博客">
-<meta name="twitter:description" content="Linux RN android 博客">
+<meta name="twitter:title" content="各个平台上传图片">
+<meta name="twitter:description" content="开发时常遇到的一些上传图片操作，这里记录一下。包括android，iOS，和java后端，后面还遇到的其他语言或平台时，会进行补充 android AsyncHttpClient 上传图片,要使用android-async-http 1234567891011121314151617181920212223242526272829303132public void uploadImg(String">
   
     <link rel="alternative" href="/atom.xml" title="cocoon-break的博客" type="application/atom+xml">
   
@@ -149,174 +150,178 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-各个平台上传图片" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      各个平台上传图片
+    </h1>
+  
+
+        
+        <a href="/2017/06/13/各个平台上传图片/" class="archive-article-date">
+  	<time datetime="2017-06-13T02:47:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-13</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>开发时常遇到的一些上传图片操作，这里记录一下。包括android，iOS，和java后端，后面还遇到的其他语言或平台时，会进行补充</p>
+<p>android AsyncHttpClient 上传图片,要使用<a href="https://github.com/loopj/android-async-http" target="_blank" rel="external">android-async-http</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uploadImg</span><span class="params">(String filePath)</span> </span>&#123;</div><div class="line">        AsyncHttpClient asyncHttpclient = <span class="keyword">new</span> AsyncHttpClient();</div><div class="line">        RequestParams params = <span class="keyword">new</span> RequestParams();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            params.put(<span class="string">"liveness"</span>, <span class="string">"1"</span>);</div><div class="line">            params.put(<span class="string">"img"</span>, <span class="keyword">new</span> File(filePath));<span class="comment">// 传入照片路径</span></div><div class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        String url = <span class="string">""</span>;</div><div class="line">        asyncHttpclient.post(url, params, <span class="keyword">new</span> AsyncHttpResponseHandler() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(<span class="keyword">int</span> statusCode, Header[] headers,</span></span></div><div class="line">                                  <span class="keyword">byte</span>[] responseByte) &#123;</div><div class="line">                String successStr = <span class="keyword">new</span> String(responseByte);</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line"></div><div class="line">                    JSONObject jObject = <span class="keyword">new</span> JSONObject(successStr)</div><div class="line">                            .getJSONArray(<span class="string">"faces"</span>).getJSONObject(<span class="number">0</span>);</div><div class="line">                  <span class="comment">//其他省略</span></div><div class="line">                &#125; <span class="keyword">catch</span> (JSONException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(<span class="keyword">int</span> statusCode, Header[] headers,</span></span></div><div class="line">                                  <span class="keyword">byte</span>[] responseBody, Throwable error) &#123;</div><div class="line">                <span class="comment">// 上传失败</span></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>iOS NSMutableURLRequest上传图片，NSMutableURLRequest是oc自带库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line">- (void) uploadImage:(NSData *)imageData&#123;</div><div class="line">    //字典里面装的是你要上传的内容</div><div class="line">    NSDictionary *parameters = @&#123;@&quot;liveness&quot;: @&quot;1&quot;&#125;;</div><div class="line">    //上传的接口</div><div class="line">    NSString* urlstring = @&quot;http://132.121.1.213:9000/faceid/v1/extract&quot;;</div><div class="line">    //分界线的标识符</div><div class="line">    NSString *TWITTERFON_FORM_BOUNDARY = @&quot;AaB03x&quot;;</div><div class="line">    //根据url初始化request</div><div class="line">    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]</div><div class="line">                                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData</div><div class="line">                                                        timeoutInterval:10];</div><div class="line">    //分界线 --AaB03x</div><div class="line">    NSString *MPboundary=[[NSString alloc]initWithFormat:@&quot;--%@&quot;,TWITTERFON_FORM_BOUNDARY];</div><div class="line">    //结束符 AaB03x--</div><div class="line">    NSString *endMPboundary=[[NSString alloc]initWithFormat:@&quot;%@--&quot;,MPboundary];</div><div class="line">    //	//要上传的图片</div><div class="line">    //	UIImage *image=[params objectForKey:@&quot;pic&quot;];</div><div class="line">    //得到图片的data</div><div class="line">    //    NSData *data = UIImagePNGRepresentation(self.image);</div><div class="line">    //http body的字符串</div><div class="line">    NSMutableString *body=[[NSMutableString alloc]init];</div><div class="line">    //参数的集合的所有key的集合</div><div class="line">    NSArray *keys= [parameters allKeys];</div><div class="line">    //遍历keys</div><div class="line">    for(int i=0;i&lt;[keys count];i++)</div><div class="line">    &#123;</div><div class="line">        //得到当前key</div><div class="line">        NSString *key=[keys objectAtIndex:i];</div><div class="line">        //如果key不是img，说明value是字符类型，比如name：Boris</div><div class="line">        if(![key isEqualToString:@&quot;img&quot;])</div><div class="line">        &#123;</div><div class="line">            //添加分界线，换行</div><div class="line">            [body appendFormat:@&quot;%@\r\n&quot;,MPboundary];</div><div class="line">            //添加字段名称，换2行</div><div class="line">            [body appendFormat:@&quot;Content-Disposition: form-data; name=\&quot;%@\&quot;\r\n\r\n&quot;,key];</div><div class="line">            //添加字段的值</div><div class="line">            [body appendFormat:@&quot;%@\r\n&quot;,[parameters objectForKey:key]];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    ////添加分界线，换行</div><div class="line">    [body appendFormat:@&quot;%@\r\n&quot;,MPboundary];</div><div class="line">    //声明img字段，文件名为boris.png</div><div class="line">    [body appendFormat:@&quot;Content-Disposition: form-data; name=\&quot;img\&quot;; filename=\&quot;boris.png\&quot;\r\n&quot;];</div><div class="line">    //声明上传文件的格式</div><div class="line">    [body appendFormat:@&quot;Content-Type: image/png\r\n\r\n&quot;];</div><div class="line">    //声明结束符：--AaB03x--</div><div class="line">    NSString *end=[[NSString alloc]initWithFormat:@&quot;\r\n%@&quot;,endMPboundary];</div><div class="line">    //声明myRequestData，用来放入http body</div><div class="line">    NSMutableData *myRequestData=[NSMutableData data];</div><div class="line">    //将body字符串转化为UTF8格式的二进制</div><div class="line">    [myRequestData appendData:[body dataUsingEncoding:NSUTF8StringEncoding]];</div><div class="line">    //将image的data加入</div><div class="line">    [myRequestData appendData:imageData];</div><div class="line">    //加入结束符--AaB03x--</div><div class="line">    [myRequestData appendData:[end dataUsingEncoding:NSUTF8StringEncoding]];</div><div class="line">    //设置HTTPHeader中Content-Type的值</div><div class="line">    NSString *content=[[NSString alloc]initWithFormat:@&quot;multipart/form-data; boundary=%@&quot;,TWITTERFON_FORM_BOUNDARY];</div><div class="line">    //设置HTTPHeader</div><div class="line">    [request setValue:content forHTTPHeaderField:@&quot;Content-Type&quot;];</div><div class="line">    //设置Content-Length</div><div class="line">    [request setValue:[NSString stringWithFormat:@&quot;%d&quot;, (int)[myRequestData length]] forHTTPHeaderField:@&quot;Content-Length&quot;];</div><div class="line">    //设置http body</div><div class="line">    [request setHTTPBody:myRequestData];</div><div class="line">    //http method</div><div class="line">    [request setHTTPMethod:@&quot;POST&quot;];</div><div class="line">    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) &#123;</div><div class="line">        if(data.length &gt; 0)</div><div class="line">        &#123;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>java中使用httpClient 上传文件</p>
+<p>pom.xml 中添加 httpclient</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-httpclient<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-httpclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">postWithFormData</span><span class="params">(String url, Map map)</span> </span>&#123;</div><div class="line">       HttpClient client = <span class="keyword">new</span> HttpClient();</div><div class="line">       PostMethod postMethod = <span class="keyword">new</span> PostMethod(url);</div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">			String imgPath = (String) map.get(<span class="string">"img"</span>);</div><div class="line">           FilePart imgpart = <span class="keyword">null</span>;</div><div class="line">           <span class="keyword">if</span> (imgPath != <span class="keyword">null</span> &amp;&amp; !imgPath.equals(<span class="string">""</span>)) &#123;</div><div class="line">              imgpart = <span class="keyword">new</span> FilePart(<span class="string">"img"</span>, <span class="keyword">new</span> File(imgPath));</div><div class="line">           &#125;</div><div class="line">           StringPart stringPart = <span class="keyword">new</span> StringPart(<span class="string">"liveness"</span>, <span class="string">"1"</span>);</div><div class="line">           Part[] parts = &#123;imgpart, stringPart&#125;;</div><div class="line">         </div><div class="line">           MultipartRequestEntity multipartRequestEntity = <span class="keyword">new</span> MultipartRequestEntity(parts, <span class="keyword">new</span> HttpMethodParams());</div><div class="line">           postMethod.setRequestEntity(multipartRequestEntity);</div><div class="line">           <span class="keyword">int</span> statusCode = client.executeMethod(postMethod);</div><div class="line">           <span class="keyword">if</span> (statusCode != <span class="number">200</span>) &#123;</div><div class="line">               Map map1 = <span class="keyword">new</span> HashMap();</div><div class="line">               map1.put(<span class="string">"msg"</span>, <span class="string">"http 请求错误"</span>);</div><div class="line">               <span class="keyword">return</span> <span class="keyword">new</span> JSONObject(map1).toString();</div><div class="line">           &#125;</div><div class="line">           InputStream inputStream = postMethod.getResponseBodyAsStream();</div><div class="line">           BufferedReader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(inputStream));</div><div class="line">           String line = <span class="string">""</span>;</div><div class="line">           StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">           <span class="keyword">while</span> ((line = reader.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">               sb.append(line + <span class="string">"\n"</span>);</div><div class="line">           &#125;</div><div class="line">           inputStream.close();</div><div class="line">           <span class="keyword">return</span> sb.toString();</div><div class="line">       &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">           e.printStackTrace();</div><div class="line">           <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/ali_pay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/images/wechat_pay.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/27/Mac下打造流畅的终端使用环境/" class="archive-article-date">
-  	<time datetime="2017-05-27T09:02:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/27/Mac下打造流畅的终端使用环境/">Mac下打造流畅的终端使用环境</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技巧</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">开发随笔</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/13/各个平台上传图片/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/25/shell 脚本中读取参数值/" class="archive-article-date">
-  	<time datetime="2017-05-25T03:14:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-25</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/25/shell 脚本中读取参数值/">shell 脚本中读取参数值</a>
-    </h1>
+    <a href="/2017/06/13/RN中使用mobx来进行状态管理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          RN 中使用mobx来进行状态管理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/02/iterm,tmux,vim的常用快捷键/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iterm,tmux,vim 的常用快捷键</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/22/ffmpeg简易介绍/" class="archive-article-date">
-  	<time datetime="2017-05-22T06:34:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/22/ffmpeg简易介绍/">ffmpeg简易介绍</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">扩展</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/15/Linux下打RPM包/" class="archive-article-date">
-  	<time datetime="2017-05-15T06:34:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/15/Linux下打RPM包/">Linux下打RPM包</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -339,8 +344,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
