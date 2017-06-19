@@ -179,7 +179,8 @@
                 <div class="article-entry" itemprop="articleBody">
 
                   <p>最新在开发微信公众号，选择了python做为后端开发的语言。之所以选择python作为开发语言，是因为python开发起来比较快，而且也容易上手。选用的python版本是python2.7.13</p>
-                  <h2>先了解下python的一些基本知识</h2>
+                  <h2 id="先了解下python的一些基本知识">
+                    <a href="#先了解下python的一些基本知识" class="headerlink" title="先了解下python的一些基本知识"></a>先了解下python的一些基本知识</h2>
                   <ul>
                     <li>
                       <p>在mac 上执行
@@ -195,77 +196,69 @@
                       <ul>
                         <li>
                           <p>安装virtualenv</p>
-                          <p>
-                            <figure class="highlight sh">
-                              <table>
-                                <tr>
-                                  <td class="gutter">
-                                    <pre><div class="line">1</div></pre>
-                                  </td>
-                                  <td class="code">
-                                    <pre><div class="line">pip install virtualenv</div></pre>
-                                  </td>
-                                </tr>
-                              </table>
-                            </figure>
-                          </p>
+                          <figure class="highlight sh">
+                            <table>
+                              <tr>
+                                <td class="gutter">
+                                  <pre><div class="line">1</div></pre>
+                                </td>
+                                <td class="code">
+                                  <pre><div class="line">pip install virtualenv</div></pre>
+                                </td>
+                              </tr>
+                            </table>
+                          </figure>
                         </li>
                         <li>
                           <p>创建一个目录并创建一个独立的Python环境venv</p>
-                          <p>
-                            <figure class="highlight sh">
-                              <table>
-                                <tr>
-                                  <td class="gutter">
-                                    <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre>
-                                  </td>
-                                  <td class="code">
-                                    <pre><div class="line">mkdir <span class="built_in">test</span>Python</div><div class="line"><span class="built_in">cd</span> <span class="built_in">test</span>Python</div><div class="line">virtualenv --no-site-packages venv</div></pre>
-                                  </td>
-                                </tr>
-                              </table>
-                            </figure>
-                          </p>
+                          <figure class="highlight sh">
+                            <table>
+                              <tr>
+                                <td class="gutter">
+                                  <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre>
+                                </td>
+                                <td class="code">
+                                  <pre><div class="line">mkdir <span class="built_in">test</span>Python</div><div class="line"><span class="built_in">cd</span> <span class="built_in">test</span>Python</div><div class="line">virtualenv --no-site-packages venv</div></pre>
+                                </td>
+                              </tr>
+                            </table>
+                          </figure>
                           <p>
                             <strong>注：</strong> 参数
                             <code>--no-site-packages</code>，不会将系统已安装的第三方包复制过来，这样我们就得到一个干净的Python开发环境</p>
                         </li>
                         <li>
                           <p>使用这个venv环境</p>
-                          <p>
-                            <figure class="highlight sh">
-                              <table>
-                                <tr>
-                                  <td class="gutter">
-                                    <pre><div class="line">1</div></pre>
-                                  </td>
-                                  <td class="code">
-                                    <pre><div class="line"><span class="built_in">source</span> venv/bin/activate</div></pre>
-                                  </td>
-                                </tr>
-                              </table>
-                            </figure>
-                          </p>
+                          <figure class="highlight sh">
+                            <table>
+                              <tr>
+                                <td class="gutter">
+                                  <pre><div class="line">1</div></pre>
+                                </td>
+                                <td class="code">
+                                  <pre><div class="line"><span class="built_in">source</span> venv/bin/activate</div></pre>
+                                </td>
+                              </tr>
+                            </table>
+                          </figure>
                           <p>接下来
                             <code>pip install xxx</code> 都会把Python包放在
                             <code>testPython/venv/lib/python2.7/site-packages</code>目录下</p>
                         </li>
                         <li>
                           <p>离开venv 环境</p>
-                          <p>
-                            <figure class="highlight sh">
-                              <table>
-                                <tr>
-                                  <td class="gutter">
-                                    <pre><div class="line">1</div></pre>
-                                  </td>
-                                  <td class="code">
-                                    <pre><div class="line">deactivte</div></pre>
-                                  </td>
-                                </tr>
-                              </table>
-                            </figure>
-                          </p>
+                          <figure class="highlight sh">
+                            <table>
+                              <tr>
+                                <td class="gutter">
+                                  <pre><div class="line">1</div></pre>
+                                </td>
+                                <td class="code">
+                                  <pre><div class="line">deactivte</div></pre>
+                                </td>
+                              </tr>
+                            </table>
+                          </figure>
                         </li>
                       </ul>
                       <p>virtualenv是如何创建“独立”的Python运行环境的呢？原理很简单，就是把系统Python复制一份到virtualenv的环境，用命令
@@ -283,109 +276,24 @@
                       <p>依赖第三方库的统一配置文件
                         <strong>requirements.txt</strong>
                       </p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">Flask==0.12</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">Flask==0.12</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                       <p>通过
                         <code>pip install -r requirements.txt</code>来安装文件中依赖的一些第三方库</p>
                     </li>
                   </ul>
-                  <p>&lt;!-- more --&gt;</p>
-                  <h2>项目开发</h2>
-                  <p>flask是python的一个轻量级Web应用框架，对于一些小的站点来说flask，已经能够满足需求了。执行
-                    <code>pip install flask</code>安装。
-                    <a href="http://flask.pocoo.org/" target="_blank" rel="external">flask 官网</a>
-                  </p>
-                  <p>创建一个run.py文件，写如以下代码。然后执行python run.py，一个简易的web服务就OK了。访问localhost:8080端口</p>
-                  <p>
-                    <figure class="highlight python">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request</div><div class="line"></div><div class="line">app = Flask(__name__)</div><div class="line"></div><div class="line"><span class="meta">@app.route('/test', methods=['GET', 'POST'])</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">return</span> jsonify(&#123;<span class="string">'msg'</span>:<span class="string">'hello world'</span>&#125;)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    app.run(host=<span class="string">'0.0.0.0'</span>, port=<span class="number">8080</span>)</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
-                  </p>
-                  <p>链接数据库使用的sqlalchemy, sqlalchemy 是Python SQL工具包和对象关系映射器，为应用程序开发人员提供了SQL的全部功能和灵活性。
-                    <a href="http://www.sqlalchemy.org/" target="_blank" rel="external">SQLAlchemy官网</a>
-                  </p>
-                  <ul>
-                    <li>
-                      <p>本地机器已经安装了mysql，但是在使用sqlalchemy 报No module named mysql。</p>
-                      <p>
-                        <figure class="highlight python">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">pip install pymysql</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                    <li>
-                      <p>链接数据库样例</p>
-                      <p>
-                        <figure class="highlight python">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, String, create_engine</div><div class="line"></div><div class="line"><span class="comment"># 初始化数据库连接:</span></div><div class="line">engine = create_engine(<span class="string">'mysql+pymysql://'</span>+username+<span class="string">':'</span>+password+<span class="string">'@localhost:3306/doudouSpace'</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_user_table</span><span class="params">()</span>:</span></div><div class="line">    connect = engine.connect()</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        result = connect.execute(<span class="string">'xxxx'</span>) <span class="comment">#xxx 表示sql语句</span></div><div class="line">        result.close()</div><div class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</div><div class="line">        <span class="keyword">print</span> e</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>**注：**更多详细文档请参考官网</p>
-                    </li>
-                  </ul>
-                  <p>日志模块也是开发工作中的一个重要部分，可以方便我们调试开发。我们使用python自带的logging模块，我们要将日志信息输出到文件中，而不是只输出到控制台中。</p>
-                  <ul>
-                    <li>
-                      <p>封装下日志模块</p>
-                      <p>
-                        <figure class="highlight python">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="keyword">import</span> logging</div><div class="line"><span class="keyword">from</span> logging.handlers <span class="keyword">import</span> RotatingFileHandler</div><div class="line"><span class="keyword">from</span> . <span class="keyword">import</span> config</div><div class="line"></div><div class="line">log_filename = <span class="string">'output.log'</span></div><div class="line">logging.basicConfig(level=logging.DEBUG,</div><div class="line">                    format=<span class="string">'%(filename)s:%(lineno)s - %(asctime)s %(levelname)s %(message)s'</span>,</div><div class="line">                    filename=log_filename,</div><div class="line">                    filemode=<span class="string">'a'</span>)</div><div class="line"></div><div class="line">logger = logging.getLogger()</div><div class="line">log_handler = logging.handlers.WatchedFileHandler(log_filename)</div><div class="line">logger.addHandler(log_handler)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">debug</span><span class="params">(msg)</span>:</span></div><div class="line">    <span class="comment"># logging.debug(msg)</span></div><div class="line">    logger.debug(msg)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">info</span><span class="params">(msg)</span>:</span></div><div class="line">    <span class="comment"># logging.info(msg)</span></div><div class="line">    logger.info(msg)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">warning</span><span class="params">(msg)</span>:</span></div><div class="line">    <span class="comment"># logging.warning(msg)</span></div><div class="line">    logger.warning(msg)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">error</span><span class="params">(msg)</span>:</span></div><div class="line">    <span class="comment"># logging.error(msg)</span></div><div class="line">    logger.error(msg)</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>​</p>
-                    </li>
-                  </ul>
-                  <p>其他的一些在这里就不在过多的介绍了，我做了一个python开发后端rest接口的模版工程，放在GitHub上，有兴趣的话可以看看
-                    <a href="https://github.com/Cocoon-break/python_tmplate" target="_blank" rel="external">python_tmplate</a>
-                  </p>
+
+                  <a class="article-more-a" href="/2017/06/19/python 开发服务端/#more">more >></a>
 
                 </div>
                 <div class="article-info article-info-index">
@@ -438,86 +346,8 @@
                     <a href="http://cn.mobx.js.org/" target="_blank" rel="external">mobx中文文档</a>
                   </p>
                   <p>接下来就是在实际开发中使用mobx了</p>
-                  <p>&lt;!-- more --&gt;</p>
-                  <ul>
-                    <li>
-                      <p>在package.json 引入</p>
-                      <p>
-                        <figure class="highlight js">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="string">"dependencies"</span>: &#123;</div><div class="line">    <span class="string">"mobx"</span>: <span class="string">"^2.6.1"</span>,</div><div class="line">    <span class="string">"mobx-react"</span>: <span class="string">"^3.5.8"</span>,</div><div class="line">    <span class="comment">//其他库</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//不加这个装饰器使用不了，如@action   </span></div><div class="line"><span class="string">"devDependencies"</span>: &#123;</div><div class="line">  <span class="string">"babel-plugin-transform-decorators-legacy"</span>: <span class="string">"^1.3.4"</span></div><div class="line">&#125;</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                    <li>
-                      <p>.babelrc 中添加</p>
-                      <p>
-                        <figure class="highlight js">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">&#123;</div><div class="line">  <span class="string">"presets"</span>: [<span class="string">"react-native"</span>],</div><div class="line">  <span class="string">"plugins"</span>: [<span class="string">"transform-decorators-legacy"</span>] <span class="comment">//在babel转义的时候能够将装饰器转义</span></div><div class="line">&#125;</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                  </ul>
-                  <h3>创建一个简易的计数器</h3>
-                  <ul>
-                    <li>
-                      <p>创建一个一个store</p>
-                      <p>
-                        <figure class="highlight js">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="keyword">import</span> &#123;observable, action, computed, toJS&#125; <span class="keyword">from</span> <span class="string">'mobx'</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">mobxStore</span> </span>&#123;</div><div class="line">    @observable count = <span class="number">0</span></div><div class="line"></div><div class="line">    @action addCount() &#123;</div><div class="line">        <span class="keyword">this</span>.count = <span class="keyword">this</span>.count + <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @action reduceCount() &#123;</div><div class="line">        <span class="keyword">this</span>.count = <span class="keyword">this</span>.count - <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> mobxStore()</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                    <li>
-                      <p>在界面中和store 关联</p>
-                      <p>
-                        <figure class="highlight javascript">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    Text,</div><div class="line">    StyleSheet,</div><div class="line">    TouchableHighlight,</div><div class="line">    View</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"><span class="keyword">import</span> &#123;observer&#125; <span class="keyword">from</span> <span class="string">'mobx-react/custom'</span></div><div class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">'./mobxStore'</span></div><div class="line"></div><div class="line">@observer</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Root</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;View style=&#123;styles.container&#125;&gt;</div><div class="line">                &lt;Text style=&#123;styles.welcome&#125;&gt;</div><div class="line">                    Mobx 的简易使用demo</div><div class="line">                &lt;/Text&gt;</div><div class="line">                &lt;Text style=&#123;styles.instructions&#125;&gt;</div><div class="line">                    store中的计数器：&#123;store.count&#125;</div><div class="line">                &lt;/Text&gt;</div><div class="line">                &lt;TouchableHighlight style=&#123;&#123;marginTop: 8&#125;&#125; onPress=&#123;() =&gt; store.addCount()&#125;&gt;</div><div class="line">                    &lt;Text style=&#123;styles.instructions&#125;&gt;</div><div class="line">                        点击计数+1</div><div class="line">                    &lt;/Text&gt;</div><div class="line">                &lt;/TouchableHighlight&gt;</div><div class="line">                &lt;TouchableHighlight style=&#123;&#123;marginTop: 8&#125;&#125; onPress=&#123;() =&gt; store.reduceCount()&#125;&gt;</div><div class="line">                    &lt;Text style=&#123;styles.instructions&#125;&gt;</div><div class="line">                        点击计数-1</div><div class="line">                    &lt;/Text&gt;</div><div class="line">                &lt;/TouchableHighlight&gt;</div><div class="line">            &lt;/View&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> styles = StyleSheet.create(&#123;</div><div class="line">    <span class="attr">container</span>: &#123;</div><div class="line">        <span class="attr">flex</span>: <span class="number">1</span>,</div><div class="line">        <span class="attr">justifyContent</span>: <span class="string">'center'</span>,</div><div class="line">        <span class="attr">alignItems</span>: <span class="string">'center'</span>,</div><div class="line">        <span class="attr">backgroundColor</span>: <span class="string">'#F5FCFF'</span>,</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">welcome</span>: &#123;</div><div class="line">        <span class="attr">fontSize</span>: <span class="number">20</span>,</div><div class="line">        <span class="attr">textAlign</span>: <span class="string">'center'</span>,</div><div class="line">        <span class="attr">margin</span>: <span class="number">10</span>,</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">instructions</span>: &#123;</div><div class="line">        <span class="attr">textAlign</span>: <span class="string">'center'</span>,</div><div class="line">        <span class="attr">color</span>: <span class="string">'red'</span>,</div><div class="line">        <span class="attr">marginBottom</span>: <span class="number">5</span>,</div><div class="line">    &#125;,</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Root</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                  </ul>
-                  <p>导入
-                    <code>import {observer} from 'mobx-react/custom'</code> 和刚才创建的store，
-                    <code>import store from './mobxStore'</code>
-                  </p>
-                  <p>demo 的源码已经放到github上
-                    <a href="https://github.com/Cocoon-break/mobxDemo" target="_blank" rel="external">mobxDemo</a>，如有疑问请在该仓库中提issue</p>
+
+                  <a class="article-more-a" href="/2017/06/13/RN中使用mobx来进行状态管理/#more">more >></a>
 
                 </div>
                 <div class="article-info article-info-index">
@@ -564,66 +394,20 @@
                   <p>android AsyncHttpClient 上传图片,要使用
                     <a href="https://github.com/loopj/android-async-http" target="_blank" rel="external">android-async-http</a>
                   </p>
-                  <p>
-                    <figure class="highlight java">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uploadImg</span><span class="params">(String filePath)</span> </span>&#123;</div><div class="line">        AsyncHttpClient asyncHttpclient = <span class="keyword">new</span> AsyncHttpClient();</div><div class="line">        RequestParams params = <span class="keyword">new</span> RequestParams();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            params.put(<span class="string">"liveness"</span>, <span class="string">"1"</span>);</div><div class="line">            params.put(<span class="string">"img"</span>, <span class="keyword">new</span> File(filePath));<span class="comment">// 传入照片路径</span></div><div class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        String url = <span class="string">""</span>;</div><div class="line">        asyncHttpclient.post(url, params, <span class="keyword">new</span> AsyncHttpResponseHandler() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(<span class="keyword">int</span> statusCode, Header[] headers,</span></span></div><div class="line">                                  <span class="keyword">byte</span>[] responseByte) &#123;</div><div class="line">                String successStr = <span class="keyword">new</span> String(responseByte);</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line"></div><div class="line">                    JSONObject jObject = <span class="keyword">new</span> JSONObject(successStr)</div><div class="line">                            .getJSONArray(<span class="string">"faces"</span>).getJSONObject(<span class="number">0</span>);</div><div class="line">                  <span class="comment">//其他省略</span></div><div class="line">                &#125; <span class="keyword">catch</span> (JSONException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(<span class="keyword">int</span> statusCode, Header[] headers,</span></span></div><div class="line">                                  <span class="keyword">byte</span>[] responseBody, Throwable error) &#123;</div><div class="line">                <span class="comment">// 上传失败</span></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
-                  </p>
-                  <p>&lt;!-- more --&gt;</p>
-                  <p>iOS NSMutableURLRequest上传图片，NSMutableURLRequest是oc自带库</p>
-                  <p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">- (void) uploadImage:(NSData *)imageData&#123;</div><div class="line">    //字典里面装的是你要上传的内容</div><div class="line">    NSDictionary *parameters = @&#123;@&quot;liveness&quot;: @&quot;1&quot;&#125;;</div><div class="line">    //上传的接口</div><div class="line">    NSString* urlstring = @&quot;http://132.121.1.213:9000/faceid/v1/extract&quot;;</div><div class="line">    //分界线的标识符</div><div class="line">    NSString *TWITTERFON_FORM_BOUNDARY = @&quot;AaB03x&quot;;</div><div class="line">    //根据url初始化request</div><div class="line">    NSMutableURLRequest * request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlstring]</div><div class="line">                                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData</div><div class="line">                                                        timeoutInterval:10];</div><div class="line">    //分界线 --AaB03x</div><div class="line">    NSString *MPboundary=[[NSString alloc]initWithFormat:@&quot;--%@&quot;,TWITTERFON_FORM_BOUNDARY];</div><div class="line">    //结束符 AaB03x--</div><div class="line">    NSString *endMPboundary=[[NSString alloc]initWithFormat:@&quot;%@--&quot;,MPboundary];</div><div class="line">    //	//要上传的图片</div><div class="line">    //	UIImage *image=[params objectForKey:@&quot;pic&quot;];</div><div class="line">    //得到图片的data</div><div class="line">    //    NSData *data = UIImagePNGRepresentation(self.image);</div><div class="line">    //http body的字符串</div><div class="line">    NSMutableString *body=[[NSMutableString alloc]init];</div><div class="line">    //参数的集合的所有key的集合</div><div class="line">    NSArray *keys= [parameters allKeys];</div><div class="line">    //遍历keys</div><div class="line">    for(int i=0;i&lt;[keys count];i++)</div><div class="line">    &#123;</div><div class="line">        //得到当前key</div><div class="line">        NSString *key=[keys objectAtIndex:i];</div><div class="line">        //如果key不是img，说明value是字符类型，比如name：Boris</div><div class="line">        if(![key isEqualToString:@&quot;img&quot;])</div><div class="line">        &#123;</div><div class="line">            //添加分界线，换行</div><div class="line">            [body appendFormat:@&quot;%@\r\n&quot;,MPboundary];</div><div class="line">            //添加字段名称，换2行</div><div class="line">            [body appendFormat:@&quot;Content-Disposition: form-data; name=\&quot;%@\&quot;\r\n\r\n&quot;,key];</div><div class="line">            //添加字段的值</div><div class="line">            [body appendFormat:@&quot;%@\r\n&quot;,[parameters objectForKey:key]];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    ////添加分界线，换行</div><div class="line">    [body appendFormat:@&quot;%@\r\n&quot;,MPboundary];</div><div class="line">    //声明img字段，文件名为boris.png</div><div class="line">    [body appendFormat:@&quot;Content-Disposition: form-data; name=\&quot;img\&quot;; filename=\&quot;boris.png\&quot;\r\n&quot;];</div><div class="line">    //声明上传文件的格式</div><div class="line">    [body appendFormat:@&quot;Content-Type: image/png\r\n\r\n&quot;];</div><div class="line">    //声明结束符：--AaB03x--</div><div class="line">    NSString *end=[[NSString alloc]initWithFormat:@&quot;\r\n%@&quot;,endMPboundary];</div><div class="line">    //声明myRequestData，用来放入http body</div><div class="line">    NSMutableData *myRequestData=[NSMutableData data];</div><div class="line">    //将body字符串转化为UTF8格式的二进制</div><div class="line">    [myRequestData appendData:[body dataUsingEncoding:NSUTF8StringEncoding]];</div><div class="line">    //将image的data加入</div><div class="line">    [myRequestData appendData:imageData];</div><div class="line">    //加入结束符--AaB03x--</div><div class="line">    [myRequestData appendData:[end dataUsingEncoding:NSUTF8StringEncoding]];</div><div class="line">    //设置HTTPHeader中Content-Type的值</div><div class="line">    NSString *content=[[NSString alloc]initWithFormat:@&quot;multipart/form-data; boundary=%@&quot;,TWITTERFON_FORM_BOUNDARY];</div><div class="line">    //设置HTTPHeader</div><div class="line">    [request setValue:content forHTTPHeaderField:@&quot;Content-Type&quot;];</div><div class="line">    //设置Content-Length</div><div class="line">    [request setValue:[NSString stringWithFormat:@&quot;%d&quot;, (int)[myRequestData length]] forHTTPHeaderField:@&quot;Content-Length&quot;];</div><div class="line">    //设置http body</div><div class="line">    [request setHTTPBody:myRequestData];</div><div class="line">    //http method</div><div class="line">    [request setHTTPMethod:@&quot;POST&quot;];</div><div class="line">    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) &#123;</div><div class="line">        if(data.length &gt; 0)</div><div class="line">        &#123;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
-                  </p>
-                  <p>java中使用httpClient 上传文件</p>
-                  <p>pom.xml 中添加 httpclient</p>
-                  <p>
-                    <figure class="highlight xml">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-httpclient<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-httpclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
-                  </p>
-                  <p>
-                    <figure class="highlight java">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">postWithFormData</span><span class="params">(String url, Map map)</span> </span>&#123;</div><div class="line">       HttpClient client = <span class="keyword">new</span> HttpClient();</div><div class="line">       PostMethod postMethod = <span class="keyword">new</span> PostMethod(url);</div><div class="line">       <span class="keyword">try</span> &#123;</div><div class="line">			String imgPath = (String) map.get(<span class="string">"img"</span>);</div><div class="line">           FilePart imgpart = <span class="keyword">null</span>;</div><div class="line">           <span class="keyword">if</span> (imgPath != <span class="keyword">null</span> &amp;&amp; !imgPath.equals(<span class="string">""</span>)) &#123;</div><div class="line">              imgpart = <span class="keyword">new</span> FilePart(<span class="string">"img"</span>, <span class="keyword">new</span> File(imgPath));</div><div class="line">           &#125;</div><div class="line">           StringPart stringPart = <span class="keyword">new</span> StringPart(<span class="string">"liveness"</span>, <span class="string">"1"</span>);</div><div class="line">           Part[] parts = &#123;imgpart, stringPart&#125;;</div><div class="line">         </div><div class="line">           MultipartRequestEntity multipartRequestEntity = <span class="keyword">new</span> MultipartRequestEntity(parts, <span class="keyword">new</span> HttpMethodParams());</div><div class="line">           postMethod.setRequestEntity(multipartRequestEntity);</div><div class="line">           <span class="keyword">int</span> statusCode = client.executeMethod(postMethod);</div><div class="line">           <span class="keyword">if</span> (statusCode != <span class="number">200</span>) &#123;</div><div class="line">               Map map1 = <span class="keyword">new</span> HashMap();</div><div class="line">               map1.put(<span class="string">"msg"</span>, <span class="string">"http 请求错误"</span>);</div><div class="line">               <span class="keyword">return</span> <span class="keyword">new</span> JSONObject(map1).toString();</div><div class="line">           &#125;</div><div class="line">           InputStream inputStream = postMethod.getResponseBodyAsStream();</div><div class="line">           BufferedReader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(inputStream));</div><div class="line">           String line = <span class="string">""</span>;</div><div class="line">           StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">           <span class="keyword">while</span> ((line = reader.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">               sb.append(line + <span class="string">"\n"</span>);</div><div class="line">           &#125;</div><div class="line">           inputStream.close();</div><div class="line">           <span class="keyword">return</span> sb.toString();</div><div class="line">       &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">           e.printStackTrace();</div><div class="line">           <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
-                  </p>
+                  <figure class="highlight java">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre>
+                        </td>
+                        <td class="code">
+                          <pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uploadImg</span><span class="params">(String filePath)</span> </span>&#123;</div><div class="line">        AsyncHttpClient asyncHttpclient = <span class="keyword">new</span> AsyncHttpClient();</div><div class="line">        RequestParams params = <span class="keyword">new</span> RequestParams();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            params.put(<span class="string">"liveness"</span>, <span class="string">"1"</span>);</div><div class="line">            params.put(<span class="string">"img"</span>, <span class="keyword">new</span> File(filePath));<span class="comment">// 传入照片路径</span></div><div class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        String url = <span class="string">""</span>;</div><div class="line">        asyncHttpclient.post(url, params, <span class="keyword">new</span> AsyncHttpResponseHandler() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(<span class="keyword">int</span> statusCode, Header[] headers,</span></span></div><div class="line">                                  <span class="keyword">byte</span>[] responseByte) &#123;</div><div class="line">                String successStr = <span class="keyword">new</span> String(responseByte);</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line"></div><div class="line">                    JSONObject jObject = <span class="keyword">new</span> JSONObject(successStr)</div><div class="line">                            .getJSONArray(<span class="string">"faces"</span>).getJSONObject(<span class="number">0</span>);</div><div class="line">                  <span class="comment">//其他省略</span></div><div class="line">                &#125; <span class="keyword">catch</span> (JSONException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(<span class="keyword">int</span> statusCode, Header[] headers,</span></span></div><div class="line">                                  <span class="keyword">byte</span>[] responseBody, Throwable error) &#123;</div><div class="line">                <span class="comment">// 上传失败</span></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+
+                  <a class="article-more-a" href="/2017/06/13/各个平台上传图片/#more">more >></a>
 
                 </div>
                 <div class="article-info article-info-index">
@@ -654,81 +438,76 @@
 
                 <div class="article-entry" itemprop="articleBody">
 
-                  <h1>公众号web开发过程记录</h1>
-                  <h2>常规问题</h2>
+                  <h1 id="公众号web开发过程记录">
+                    <a href="#公众号web开发过程记录" class="headerlink" title="公众号web开发过程记录"></a>公众号web开发过程记录</h1>
+                  <h2 id="常规问题">
+                    <a href="#常规问题" class="headerlink" title="常规问题"></a>常规问题</h2>
                   <ul>
                     <li>
                       <p>网页无法适应全屏？</p>
                       <p>在开发过程中发现body标签高度始终无法全屏，及时设置高度为100%，也无法生效。</p>
-                      <p>
-                        <figure class="highlight html">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="comment">&lt;!--1.添加移动适配设置 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span></span></div><div class="line">          <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"</span>/&gt;</div><div class="line"></div><div class="line"><span class="comment">&lt;!--2.添加js动态的把body高度设置为，设备屏高--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">setHeight</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">document</span>.body.style.height = screen.height + <span class="string">'px'</span>;</div><div class="line">        &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--3.在body onload 时执行js--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"width: 100%;"</span> <span class="attr">onload</span>=<span class="string">"setHeight()"</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight html">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line"><span class="comment">&lt;!--1.添加移动适配设置 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span></span></div><div class="line">          <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"</span>/&gt;</div><div class="line"></div><div class="line"><span class="comment">&lt;!--2.添加js动态的把body高度设置为，设备屏高--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">setHeight</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">document</span>.body.style.height = screen.height + <span class="string">'px'</span>;</div><div class="line">        &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--3.在body onload 时执行js--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"width: 100%;"</span> <span class="attr">onload</span>=<span class="string">"setHeight()"</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                       <p>​</p>
                     </li>
                   </ul>
-                  <h2>开源库使用时遇到的问题</h2>
+                  <h2 id="开源库使用时遇到的问题">
+                    <a href="#开源库使用时遇到的问题" class="headerlink" title="开源库使用时遇到的问题"></a>开源库使用时遇到的问题</h2>
                   <ul>
                     <li>
                       <p>在使用react-weui 发现样式无法生效</p>
-                      <p>
-                        <figure class="highlight js">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="keyword">import</span> <span class="string">'react-weui/lib/react-weui.min.css'</span>;<span class="comment">//导入对应样式文件</span></div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight js">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line"><span class="keyword">import</span> <span class="string">'react-weui/lib/react-weui.min.css'</span>;<span class="comment">//导入对应样式文件</span></div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                     <li>
                       <p>在使用fontawesome 时，发现图标无法显示</p>
-                      <p>
-                        <figure class="highlight html">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="comment">&lt;!--在html中把样式文件加上--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"src/css/fontAwesome/css/font-awesome.min.css"</span>&gt;</span></div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight html">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line"><span class="comment">&lt;!--在html中把样式文件加上--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"src/css/fontAwesome/css/font-awesome.min.css"</span>&gt;</span></div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                     <li>
                       <p>开发时想通过fetch直接请求服务端接口，解决跨域问题</p>
-                      <p>
-                        <figure class="highlight js">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="comment">//package.json 使用webpack-dev-server 启动开发环境，重点是-d</span></div><div class="line"><span class="string">"scripts"</span>:&#123;</div><div class="line">  <span class="string">"start"</span>: <span class="string">"webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080"</span>,</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//webpack.config.js 配置代理</span></div><div class="line">  <span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="comment">//其他配置省略</span></div><div class="line">    devServer:&#123;</div><div class="line">        <span class="attr">proxy</span>:&#123;</div><div class="line">            <span class="string">'/api'</span>:&#123;</div><div class="line">                <span class="attr">target</span>:<span class="string">'http://localhost:5000'</span>,</div><div class="line">                <span class="attr">secure</span>: <span class="literal">false</span>,</div><div class="line">                <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</div><div class="line">                <span class="attr">pathRewrite</span>: &#123;<span class="string">'^/api'</span>: <span class="string">''</span>&#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">    &#125;,</div><div class="line">  &#125;</div><div class="line">  </div><div class="line"><span class="comment">//使用时代码</span></div><div class="line">  fetch(<span class="string">'/api/show_operation/1'</span>)</div><div class="line">            .then(<span class="function"><span class="params">response</span>=&gt;</span>response.json())</div><div class="line">            .then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</div><div class="line">  </div><div class="line"><span class="comment">//说明：通过proxy配置可以最终发出的请求路径为http://localhost:500/show_operation/1</span></div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight js">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line"><span class="comment">//package.json 使用webpack-dev-server 启动开发环境，重点是-d</span></div><div class="line"><span class="string">"scripts"</span>:&#123;</div><div class="line">  <span class="string">"start"</span>: <span class="string">"webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080"</span>,</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//webpack.config.js 配置代理</span></div><div class="line">  <span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="comment">//其他配置省略</span></div><div class="line">    devServer:&#123;</div><div class="line">        <span class="attr">proxy</span>:&#123;</div><div class="line">            <span class="string">'/api'</span>:&#123;</div><div class="line">                <span class="attr">target</span>:<span class="string">'http://localhost:5000'</span>,</div><div class="line">                <span class="attr">secure</span>: <span class="literal">false</span>,</div><div class="line">                <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</div><div class="line">                <span class="attr">pathRewrite</span>: &#123;<span class="string">'^/api'</span>: <span class="string">''</span>&#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">    &#125;,</div><div class="line">  &#125;</div><div class="line">  </div><div class="line"><span class="comment">//使用时代码</span></div><div class="line">  fetch(<span class="string">'/api/show_operation/1'</span>)</div><div class="line">            .then(<span class="function"><span class="params">response</span>=&gt;</span>response.json())</div><div class="line">            .then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</div><div class="line">  </div><div class="line"><span class="comment">//说明：通过proxy配置可以最终发出的请求路径为http://localhost:500/show_operation/1</span></div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                       <p>​</p>
                     </li>
                   </ul>
@@ -7343,10 +7122,6 @@
             <ul class="article-tag-list" q-show="showTags">
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
-              </li>
-
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
 
@@ -7356,6 +7131,10 @@
 
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">react-native</a>
+              </li>
+
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
               </li>
 
               <li class="article-tag-list-item">

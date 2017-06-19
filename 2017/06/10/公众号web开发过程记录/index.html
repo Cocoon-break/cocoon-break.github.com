@@ -9,17 +9,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>cocoon-break的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="公众号web开发过程记录 常规问题         网页无法适应全屏？     在开发过程中发现body标签高度始终无法全屏，及时设置高度为100%，也无法生效。                                                            12345678910111213                                         &amp;">
+  <meta name="description" content="公众号web开发过程记录    常规问题         网页无法适应全屏？     在开发过程中发现body标签高度始终无法全屏，及时设置高度为100%，也无法生效。                                             12345678910111213                                   &amp;lt;!--1.添加移动适配设">
   <meta name="keywords" content="Linux RN android 博客">
   <meta property="og:type" content="article">
   <meta property="og:title" content="cocoon-break的博客">
   <meta property="og:url" content="http://yoursite.com/2017/06/10/公众号web开发过程记录/index.html">
   <meta property="og:site_name" content="cocoon-break的博客">
-  <meta property="og:description" content="公众号web开发过程记录 常规问题         网页无法适应全屏？     在开发过程中发现body标签高度始终无法全屏，及时设置高度为100%，也无法生效。                                                            12345678910111213                                         &amp;">
+  <meta property="og:description" content="公众号web开发过程记录    常规问题         网页无法适应全屏？     在开发过程中发现body标签高度始终无法全屏，及时设置高度为100%，也无法生效。                                             12345678910111213                                   &amp;lt;!--1.添加移动适配设">
   <meta property="og:updated_time" content="2017-06-19T03:21:27.000Z">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="cocoon-break的博客">
-  <meta name="twitter:description" content="公众号web开发过程记录 常规问题         网页无法适应全屏？     在开发过程中发现body标签高度始终无法全屏，及时设置高度为100%，也无法生效。                                                            12345678910111213                                         &amp;">
+  <meta name="twitter:description" content="公众号web开发过程记录    常规问题         网页无法适应全屏？     在开发过程中发现body标签高度始终无法全屏，及时设置高度为100%，也无法生效。                                             12345678910111213                                   &amp;lt;!--1.添加移动适配设">
 
   <link rel="alternative" href="/atom.xml" title="cocoon-break的博客" type="application/atom+xml">
 
@@ -166,81 +166,76 @@
 
                 <div class="article-entry" itemprop="articleBody">
 
-                  <h1>公众号web开发过程记录</h1>
-                  <h2>常规问题</h2>
+                  <h1 id="公众号web开发过程记录">
+                    <a href="#公众号web开发过程记录" class="headerlink" title="公众号web开发过程记录"></a>公众号web开发过程记录</h1>
+                  <h2 id="常规问题">
+                    <a href="#常规问题" class="headerlink" title="常规问题"></a>常规问题</h2>
                   <ul>
                     <li>
                       <p>网页无法适应全屏？</p>
                       <p>在开发过程中发现body标签高度始终无法全屏，及时设置高度为100%，也无法生效。</p>
-                      <p>
-                        <figure class="highlight html">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="comment">&lt;!--1.添加移动适配设置 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span></span></div><div class="line">          <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"</span>/&gt;</div><div class="line"></div><div class="line"><span class="comment">&lt;!--2.添加js动态的把body高度设置为，设备屏高--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">setHeight</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">document</span>.body.style.height = screen.height + <span class="string">'px'</span>;</div><div class="line">        &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--3.在body onload 时执行js--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"width: 100%;"</span> <span class="attr">onload</span>=<span class="string">"setHeight()"</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight html">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line"><span class="comment">&lt;!--1.添加移动适配设置 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span></span></div><div class="line">          <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"</span>/&gt;</div><div class="line"></div><div class="line"><span class="comment">&lt;!--2.添加js动态的把body高度设置为，设备屏高--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">setHeight</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">document</span>.body.style.height = screen.height + <span class="string">'px'</span>;</div><div class="line">        &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--3.在body onload 时执行js--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"width: 100%;"</span> <span class="attr">onload</span>=<span class="string">"setHeight()"</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                       <p>​</p>
                     </li>
                   </ul>
-                  <h2>开源库使用时遇到的问题</h2>
+                  <h2 id="开源库使用时遇到的问题">
+                    <a href="#开源库使用时遇到的问题" class="headerlink" title="开源库使用时遇到的问题"></a>开源库使用时遇到的问题</h2>
                   <ul>
                     <li>
                       <p>在使用react-weui 发现样式无法生效</p>
-                      <p>
-                        <figure class="highlight js">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="keyword">import</span> <span class="string">'react-weui/lib/react-weui.min.css'</span>;<span class="comment">//导入对应样式文件</span></div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight js">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line"><span class="keyword">import</span> <span class="string">'react-weui/lib/react-weui.min.css'</span>;<span class="comment">//导入对应样式文件</span></div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                     <li>
                       <p>在使用fontawesome 时，发现图标无法显示</p>
-                      <p>
-                        <figure class="highlight html">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="comment">&lt;!--在html中把样式文件加上--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"src/css/fontAwesome/css/font-awesome.min.css"</span>&gt;</span></div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight html">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line"><span class="comment">&lt;!--在html中把样式文件加上--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"src/css/fontAwesome/css/font-awesome.min.css"</span>&gt;</span></div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                     <li>
                       <p>开发时想通过fetch直接请求服务端接口，解决跨域问题</p>
-                      <p>
-                        <figure class="highlight js">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line"><span class="comment">//package.json 使用webpack-dev-server 启动开发环境，重点是-d</span></div><div class="line"><span class="string">"scripts"</span>:&#123;</div><div class="line">  <span class="string">"start"</span>: <span class="string">"webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080"</span>,</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//webpack.config.js 配置代理</span></div><div class="line">  <span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="comment">//其他配置省略</span></div><div class="line">    devServer:&#123;</div><div class="line">        <span class="attr">proxy</span>:&#123;</div><div class="line">            <span class="string">'/api'</span>:&#123;</div><div class="line">                <span class="attr">target</span>:<span class="string">'http://localhost:5000'</span>,</div><div class="line">                <span class="attr">secure</span>: <span class="literal">false</span>,</div><div class="line">                <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</div><div class="line">                <span class="attr">pathRewrite</span>: &#123;<span class="string">'^/api'</span>: <span class="string">''</span>&#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">    &#125;,</div><div class="line">  &#125;</div><div class="line">  </div><div class="line"><span class="comment">//使用时代码</span></div><div class="line">  fetch(<span class="string">'/api/show_operation/1'</span>)</div><div class="line">            .then(<span class="function"><span class="params">response</span>=&gt;</span>response.json())</div><div class="line">            .then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</div><div class="line">  </div><div class="line"><span class="comment">//说明：通过proxy配置可以最终发出的请求路径为http://localhost:500/show_operation/1</span></div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight js">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line"><span class="comment">//package.json 使用webpack-dev-server 启动开发环境，重点是-d</span></div><div class="line"><span class="string">"scripts"</span>:&#123;</div><div class="line">  <span class="string">"start"</span>: <span class="string">"webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080"</span>,</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//webpack.config.js 配置代理</span></div><div class="line">  <span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="comment">//其他配置省略</span></div><div class="line">    devServer:&#123;</div><div class="line">        <span class="attr">proxy</span>:&#123;</div><div class="line">            <span class="string">'/api'</span>:&#123;</div><div class="line">                <span class="attr">target</span>:<span class="string">'http://localhost:5000'</span>,</div><div class="line">                <span class="attr">secure</span>: <span class="literal">false</span>,</div><div class="line">                <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</div><div class="line">                <span class="attr">pathRewrite</span>: &#123;<span class="string">'^/api'</span>: <span class="string">''</span>&#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">    &#125;,</div><div class="line">  &#125;</div><div class="line">  </div><div class="line"><span class="comment">//使用时代码</span></div><div class="line">  fetch(<span class="string">'/api/show_operation/1'</span>)</div><div class="line">            .then(<span class="function"><span class="params">response</span>=&gt;</span>response.json())</div><div class="line">            .then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</div><div class="line">  </div><div class="line"><span class="comment">//说明：通过proxy配置可以最终发出的请求路径为http://localhost:500/show_operation/1</span></div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                       <p>​</p>
                     </li>
                   </ul>
@@ -6948,10 +6943,6 @@
             <ul class="article-tag-list" q-show="showTags">
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
-              </li>
-
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
 
@@ -6961,6 +6952,10 @@
 
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">react-native</a>
+              </li>
+
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
               </li>
 
               <li class="article-tag-list-item">

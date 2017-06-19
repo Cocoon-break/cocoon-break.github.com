@@ -179,7 +179,8 @@
                 <div class="article-entry" itemprop="articleBody">
 
                   <p>上一篇博客我们搭建了Mac下流畅的终端使用环境，这篇博客我们讲一些常用的快捷键来提高开发效率。废话不多说我们开始吧</p>
-                  <h2>iterm2 快捷</h2>
+                  <h2 id="iterm2-快捷">
+                    <a href="#iterm2-快捷" class="headerlink" title="iterm2 快捷"></a>iterm2 快捷</h2>
                   <p>通常我们在使用时，一个窗口总是感觉不够用，这时我们就需要多窗口，或者一个窗口需要多个屏。打开Iterm2，我们按下
                     <code>command + t</code>，来新建窗口，通过
                     <code>commmand + w</code>来关闭当前窗口，如果我们想要切换不同的窗口时，我们可以通过
@@ -198,106 +199,8 @@
                     <code>command + shift +d</code>，关闭当前分屏的快捷键也是使用
                     <code>command + w</code>，切换各个分屏使用的是
                     <code>command + option + 方向键</code>，以下是效果图</p>
-                  <p>&lt;!-- more --&gt;</p>
-                  <p>
-                    <img src="https://cocoon-break.github.io/images/screenShot/iterm2_keymap.jpg" alt="">
-                  </p>
-                  <p>接下来就是在输入的时候，我们需要快速回到行首使用
-                    <code>ctrl + a</code>，快速回到行末使用
-                    <code>ctrl + e</code>，输入失误就需要删除错误了，
-                    <code>ctrl + u</code>是将当前行清空，使用
-                    <code>ctrl + w</code>,删除光标之前的单词，使用
-                    <code>ctrl + h</code>删除光标之前所有字符，使用
-                    <code>ctrl + k</code> 删除光标之后的所有字符。</p>
-                  <p>总结下 ：</p>
-                  <ul>
-                    <li>窗口和屏相关
-                      <ul>
-                        <li>新建窗口：command + t</li>
-                        <li>关闭窗口或者分屏：command + w</li>
-                        <li>切换标签：command + 左右方向键</li>
-                        <li>切换全屏：command + enter</li>
-                        <li>水平分屏：command + shift + d</li>
-                        <li>垂直分屏：command + d</li>
-                        <li>切换分屏：command + option + 方向键</li>
-                      </ul>
-                    </li>
-                    <li>编辑相关
-                      <ul>
-                        <li>清除当前行：ctrl + u</li>
-                        <li>删除光标之前的字符：ctrl + h</li>
-                        <li>删除光标之前的单词：ctrl + w</li>
-                        <li>删除光标到文本末尾：ctrl + k</li>
-                        <li>到行首： ctrl + a</li>
-                        <li>到行末：ctrl + e</li>
-                      </ul>
-                    </li>
-                  </ul>
-                  <h2>tmux 快捷键</h2>
-                  <p>打开iterm2 输入
-                    <code>tmux</code> 就进入了tmux的交互模式了，tmux 也有窗口和屏的概念这里就不再说明了。直接进入主题，快捷键的使用。</p>
-                  <p>在使用任何功能时我们都得先按下
-                    <code>ctrl + b</code> 然后
-                    <strong>松开</strong>，接着按下其他的键，比如我要新建一个窗口，先按下
-                    <code>ctrl + b</code> 然后在按下
-                    <code>c</code>, 这就完成了窗口的新建。</p>
-                  <ul>
-                    <li>快捷键都是先按下
-                      <code>ctrl + b</code>然后在按一下键
-                      <ul>
-                        <li>c 新建窗口</li>
-                        <li>&amp; 关闭当前窗口</li>
-                        <li>p 切换至上一个窗口</li>
-                        <li>n 切换至下一个窗口</li>
-                        <li>% 将当前窗口纵向分屏</li>
-                        <li>&quot; 将当前窗口横向分屏</li>
-                        <li>方向键 在多个分屏中切换</li>
-                        <li>d 脱离当前tmux，在输入tmux attach 就能重新进入</li>
-                        <li>z 使当前屏占满全屏，在次按下则恢复之前屏样式</li>
-                        <li>x 关闭当前屏</li>
-                        <li>alt + 方向键 调整当前屏大小</li>
-                      </ul>
-                    </li>
-                  </ul>
-                  <p>这里只将一些基础的快捷键，更多快捷键和配置，请自行谷歌，百度，以下为tmux 分屏之后的效果图</p>
-                  <p>
-                    <img src="https://cocoon-break.github.io/images/screenShot/iterm2_tmux_keymap.jpg"
-                                                                                                    alt="">
-                  </p>
-                  <h2>vim 快捷键</h2>
-                  <p>vim 的功能很强大，这里也不会深入讲解介绍，只是收集了一些快捷键，以便提供一些效率。</p>
-                  <ul>
-                    <li>查找
-                      <ul>
-                        <li>从光标处向下搜索：/ + 要查找的词</li>
-                        <li>从光标处向上搜索：? + 要查找的词</li>
-                        <li>快速回到页首：{</li>
-                        <li>去页尾：}</li>
-                        <li>回行首：shift + ^</li>
-                        <li>回行末：shift + $</li>
-                      </ul>
-                    </li>
-                    <li>编辑
-                      <ul>
-                        <li>删除光标出的字母：x</li>
-                        <li>删除光标所在行：dd</li>
-                        <li>删除单词包括空格：dw</li>
-                        <li>回撤上一次编辑：u</li>
-                        <li>取消撤回功能(对u功取消)：control + r</li>
-                        <li>复制光标所在行：yy</li>
-                        <li>复制n(数字)行：nyy</li>
-                        <li>复制单词：yw</li>
-                        <li>复制n个单词：nyw</li>
-                        <li>复制光标所在位置到行末：y$</li>
-                        <li>复制光标所在位置到行首：y^</li>
-                        <li>粘贴：p</li>
-                      </ul>
-                    </li>
-                  </ul>
-                  <p>更多vim 操作快捷键：
-                    <a href="http://www.lcode.cc/2017/04/10/vim-shortcut-key.html" target="_blank" rel="external">vim快捷键</a>
-                  </p>
-                  <p>这篇博客只是收集和介绍一些基础简单的快捷键，并没有很深入的去使用iterm2 ，tmux，vim，这些功能都很强大，想继续深入的同学可以去查查资料。</p>
+
+                  <a class="article-more-a" href="/2017/06/02/iterm,tmux,vim的常用快捷键/#more">more >></a>
 
                 </div>
                 <div class="article-info article-info-index">
@@ -343,7 +246,8 @@
                   <p>作为程序员Mac上自带的终端是远远满足不了我们的，这时我们就要自己手动搭一个我们顺手的终端环境。下面我们就来搭建iterm2+
                     oh my zsh + tmux 的终端工具
                   </p>
-                  <h2>ITerm2 安装</h2>
+                  <h2 id="ITerm2-安装">
+                    <a href="#ITerm2-安装" class="headerlink" title="ITerm2 安装"></a>ITerm2 安装</h2>
                   <ol>
                     <li>
                       <p>上Iterm2的官网下载iterm2,
@@ -354,163 +258,23 @@
                       <p>下载完成之后，发现iterm2 自带的配色我不太喜欢，安装完成之后进行item2的配色，这个纯属看个人喜好了。</p>
                       <ul>
                         <li>
-                          <p>要进行配色，我们当然得要有配色的方案啦！什么你要自己配一个，嗯...... 这也是可以的，不过有很多现成的方案你要不要啊。github
-                            上有超多的配色方案，我们先把这个库给clone下来。
-                          </p>
-                          <p>
-                            <figure class="highlight sh">
-                              <table>
-                                <tr>
-                                  <td class="gutter">
-                                    <pre><div class="line">1</div></pre>
-                                  </td>
-                                  <td class="code">
-                                    <pre><div class="line">git <span class="built_in">clone</span> git@github.com:mbadolato/iTerm2-Color-Schemes.git</div></pre>
-                                  </td>
-                                </tr>
-                              </table>
-                            </figure>
-                          </p>
+                          <p>要进行配色，我们当然得要有配色的方案啦！什么你要自己配一个，嗯…… 这也是可以的，不过有很多现成的方案你要不要啊。github
+                            上有超多的配色方案，我们先把这个库给clone下来。</p>
+                          <figure class="highlight sh">
+                            <table>
+                              <tr>
+                                <td class="gutter">
+                                  <pre><div class="line">1</div></pre>
+                                </td>
+                                <td class="code">
+                                  <pre><div class="line">git <span class="built_in">clone</span> git@github.com:mbadolato/iTerm2-Color-Schemes.git</div></pre>
+                                </td>
+                              </tr>
+                            </table>
+                          </figure>
                           <p>要是你没有git，那我觉得你没太必要继续下去了。当然你还想继续的话，你就上GitHub手动download 下来。</p>
-                          <p>&lt;!-- more --&gt;</p>
-                        </li>
-                        <li>
-                          <p>好了配色方案是有了接下来我们就是进行配色了,这个也是比较简单，打开iterm2的偏好设置，找到Profiles下的Colors，选中import，这里选择刚才git
-                            克隆下来文件中的schemes文件夹下的文件，这些文件就是各种各样的配色方案，这就看个人喜好了哈，这样你的iterm2配色方案就完成了
-                          </p>
-                          <p>
-                            <img src="https://cocoon-break.github.io/images/screenShot/iterm2_color.jpg" alt="">
-                          </p>
-                        </li>
-                      </ul>
-                    </li>
-                  </ol>
-                  <h2>Mac下shell介绍</h2>
-                  <p>Shell 是LInux/Unix的一个外壳，你理解成衣服也行。它负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后在把结果返回给用户或应用程序。</p>
-                  <p>Linux/Unix 提供了很多种shell，常用的shell有这么几种，sh、bash、csh等。想知道系统有几种shell，可以通过以下命令查看。</p>
-                  <p>
-                    <figure class="highlight sh">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">cat /etc/shells</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
-                  </p>
-                  <p>在 Linux 里执行这个命令和 Mac 略有不同，你会发现 Mac 多了一个 zsh，也就是说 OS X 系统预装了个 zsh，目前常用的
-                    Linux 系统和 OS X 系统的默认 Shell 都是 bash，但是真正强大的 Shell 是深藏不露的 zsh，这货绝对是马车中的跑车，跑车中的飞行车，史称『终极
-                    Shell』，但是由于配置过于复杂，所以初期无人问津，很多人跑过来看看 zsh 的配置指南，什么都不说转身就走了。直到有一天，国外有个穷极无聊的程序员开发出了一个能够让你快速上手的zsh项目，叫做「oh
-                    my zsh」</p>
-                  <h3>安装使用on-my-zsh</h3>
-                  <ol>
-                    <li>
-                      <p>通过git 把oh-my-zsh 下载下来</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">git <span class="built_in">clone</span> git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                    <li>
-                      <p>添加配置文件并设置为默认的shell</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div><div class="line">chsh <span class="_">-s</span> /bin/zsh</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>
-                        <strong>注:</strong> .zshrc 就相当于.bashrc了以后配置环境就在.zshrc中配置就行</p>
-                    </li>
-                    <li>
-                      <p>配置oh-my-zsh 的主题</p>
-                      <p>oh-my-zsh 提供了很多的主题，可以选择自己喜欢的风格。具体的主题效果可以参考
-                        <a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes" target="_blank" rel="external">主题预览</a>，选好主题了，接下来就是配置了。编辑~/.zshrc 文件</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">vim ~/.zshrc</div><div class="line"><span class="comment">#编辑主题，af-magic是我机器上的主题风格，具体可以设置为刚才主题预览中的</span></div><div class="line">ZSH_THEME=<span class="string">"af-magic"</span></div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                    <li>
-                      <p>oh-my-zsh 就配置完了。这里只是简单的介绍oh-my-zsh。oh-my-zsh 功能还是很丰富的，更多oh-my-zsh请移步
-                        <a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">oh-my-zsh GitHub地址</a>
-                      </p>
-                    </li>
-                  </ol>
-                  <h2>安装tmux</h2>
-                  <p>Tmux 是一个工具，用于在一个终端窗口中运行多个终端会话。不仅如此，你还可以通过 Tmux 使终端会话运行于后台或是按需接入、断开会话，这个功能非常实用。</p>
-                  <ol>
-                    <li>
-                      <p>先安装Homebrew，这个是Mac平台的包管理器。用来安装一些开发工具还是很方便。Mac系统自带了ruby的环境，我们通过ruby来安装Homebrew</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">/usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                    <li>
-                      <p>通过homebrew 安装tmux</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">brew install tmux</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                    <li>
-                      <p>就是这么简单tmux就装完了</p>
-                    </li>
-                  </ol>
-                  <p>下一篇会讲具体的使用方法，包括iterm快捷键，tmux的使用</p>
+
+                          <a class="article-more-a" href="/2017/05/27/Mac下打造流畅的终端使用环境/#more">more >></a>
 
                 </div>
                 <div class="article-info article-info-index">
@@ -555,88 +319,43 @@
 
                   <p>shell 脚本中读取参数值</p>
                   <p>通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了</p>
-                  <h2>根据参数位置直接获取</h2>
+                  <h2 id="根据参数位置直接获取">
+                    <a href="#根据参数位置直接获取" class="headerlink" title="根据参数位置直接获取"></a>根据参数位置直接获取</h2>
                   <ol>
                     <li>
                       <p>先定义一个脚本test.sh，打印位置参数</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">echo $1</div><div class="line">echo $2</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">echo $1</div><div class="line">echo $2</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                     <li>
                       <p>执行test.sh脚本</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">./test.sh haha hehehe</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">./test.sh haha hehehe</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                       <p>执行的结果就是打印了两个参数，这个种方式的弊端就是，如果参数的位置传错了，那么$1 的值就不是haha了，当然可以使用这种方式写，就是可读性不太高
                         哈。
                       </p>
-                      <p>&lt;!-- more --&gt;</p>
-                    </li>
-                  </ol>
-                  <h2>指定key 获取参数</h2>
-                  <ol>
-                    <li>
-                      <p>一样的我们先定义脚本test.sh，一会儿我们在解读shell脚本中的含义</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">#先定义接收各个参数值的变量</div><div class="line">IP_VALUE=&quot;&quot;; NODE_VALUE=&quot;&quot;;VIP_VALUE=&quot;&quot;;</div><div class="line"></div><div class="line">while true;do </div><div class="line">	if [ ! $2 ]; then break; fi</div><div class="line">	case $1 in</div><div class="line">		-i|--ip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)IP_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)IP_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-n|--node)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-v|--vip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		 --) shift ;break ;;</div><div class="line">		 *) break;;</div><div class="line">		esac</div><div class="line">done</div><div class="line"></div><div class="line">if [ -z &quot;$&#123;IP_VALUE&#125;&quot; ];    then echo &quot;error: ip is not found.&quot;;             exit 1; fi</div><div class="line">if [ -z &quot;$&#123;NODE_VALUE&#125;&quot; ];  then echo &quot;error: node is not found.&quot;;           exit 1; fi</div><div class="line">if [ -z &quot;$&#123;VIP_VALUE&#125;&quot; ];   then echo &quot;error: vip is not found.&quot;;            exit 1; fi</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <ul>
-                        <li>通过while 循环参数的$1 和$2 取key 和 value。</li>
-                        <li>case $1取参数的key，case $2取其中的值，如果取到了，就通过shift 2，把最前面的两个位置给移除了比如:
-                          <code>./test.sh -v kkk -n bbbb</code> 读取到如果执行了 shift 2,它就会把-v
-                          kkk 给扔了</li>
-                        <li>底下的if 是判断有没有读取到想要的值</li>
-                      </ul>
-                    </li>
-                    <li>
-                      <p>其他的方式去根据key获取参数</p>
-                      <ul>
-                        <li>一个是getopts 但是getopts不支持长选项，具体可以参考
-                          <a href="http://www.cnblogs.com/xiangzi888/archive/2012/04/03/2430736.html" target="_blank"
-                                                                                                          rel="external">getopts命令行参数处理</a>
-                        </li>
-                        <li>另一个是getopt，
-                          <a href="http://blog.csdn.net/wh211212/article/details/53750366" target="_blank"
-                                                                                                          rel="external">shell中使用getopts 和 getopt</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ol>
-                  <p>个人建议使用第一种方式去处理shell参数，不会有太多的局限性，唯一的问题就是代码会多一些哈！</p>
+
+                      <a class="article-more-a" href="/2017/05/25/shell 脚本中读取参数值/#more">more >></a>
 
                 </div>
                 <div class="article-info article-info-index">
@@ -679,7 +398,8 @@
 
                 <div class="article-entry" itemprop="articleBody">
 
-                  <h2>媒体文件结构</h2>
+                  <h2 id="媒体文件结构">
+                    <a href="#媒体文件结构" class="headerlink" title="媒体文件结构"></a>媒体文件结构</h2>
                   <p>一个媒体文件并不像许多人想象的那样，是将媒体内容编码起来直接作为文件的。实际上，它通常是由多个不同种类的媒体流（ Stream
                     ）组成，再以特定的封装格式封装起来的。</p>
                   <p>比较常见的媒体流就是视频流跟音频流了，顾名思义，视频流存储的就是视频信息，音频流存储的就是音频信息。一个视频流或者音频流的内容，就是以特定的编码格式所存储的视频或音频信息。</p>
@@ -687,176 +407,14 @@
                     <strong>一个文件的里面的媒体流所采用的编码格式跟这个文件的后缀名并没有完全的必然联系。</strong>
                     <strong>文件的后缀名通常就代表这个文件的封装格式。</strong>
                   </p>
-                  <h2>ffmpeg 安装</h2>
+                  <h2 id="ffmpeg-安装">
+                    <a href="#ffmpeg-安装" class="headerlink" title="ffmpeg 安装"></a>ffmpeg 安装</h2>
                   <p>自行下载使用系统安装对应的安装包
                     <a href="https://ffmpeg.org/download.html" target="_blank" rel="external">官网下载</a>
                   </p>
                   <p>以下使用的平台都为Mac系统下</p>
-                  <p>&lt;!-- more --&gt;</p>
-                  <h2>开始使用</h2>
-                  <ol>
-                    <li>
-                      <p>打开终端，查看ffmpeg帮助文档，简要了解ffmpeg的使用</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">ffmpeg -help</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">ffmpeg version 3.3 Copyright (c) 2000-2017 the FFmpeg developers</div><div class="line">  built with Apple LLVM version 8.1.0 (clang-802.0.41)</div><div class="line">  configuration: --prefix=/usr/local/Cellar/ffmpeg/3.3 --enable-shared --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --cc=clang --host-cflags= --host-ldflags= --enable-libmp3lame --enable-libx264 --enable-libxvid --enable-opencl --disable-lzma --enable-vda</div><div class="line">  libavutil      55. 58.100 / 55. 58.100</div><div class="line">  libavcodec     57. 89.100 / 57. 89.100</div><div class="line">  libavformat    57. 71.100 / 57. 71.100</div><div class="line">  libavdevice    57.  6.100 / 57.  6.100</div><div class="line">  libavfilter     6. 82.100 /  6. 82.100</div><div class="line">  libavresample   3.  5.  0 /  3.  5.  0</div><div class="line">  libswscale      4.  6.100 /  4.  6.100</div><div class="line">  libswresample   2.  7.100 /  2.  7.100</div><div class="line">  libpostproc    54.  5.100 / 54.  5.100</div><div class="line">Hyper fast Audio and Video encoder</div><div class="line">usage: ffmpeg [options] [[infile options] -i infile]... &#123;[outfile options] outfile&#125;...</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>重点是关注 usage: ffmpeg [options][[infile options] -i infile]...
-                        {[outfile options] outfile}… 这句是说ffmpeg 的主要用法</p>
-                      <p>​</p>
-                    </li>
-                    <li>
-                      <p>查看ffmpeg 支持的格式</p>
-                      <p>查看封装格式，包括音频，视频等封装格式</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">ffmpeg -formats</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>查看编解码器包括音频，视频等封装格式</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">ffmpeg -codecs</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                    <li>
-                      <p>进行格式转换</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">ffmpeg -i a.mp4 b.mkv</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>这里是将mp4格式的视频转换成mkv格式。</p>
-                      <p>
-                        <strong>注：</strong> 查看默认编码格式，以下的Matroska也就是指 mkv</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">ffmpeg -help muxer=Matroska</div><div class="line"></div><div class="line">#以下为摘要信息，从中可以看出默认的视频编码为h264,音频编码为ac3,字幕流编码为ass，部分格式视频不支持字幕流</div><div class="line">Muxer matroska [Matroska]:</div><div class="line">    Common extensions: mkv.</div><div class="line">    Mime type: video/x-matroska.</div><div class="line">    Default video codec: h264.</div><div class="line">    Default audio codec: ac3.</div><div class="line">    Default subtitle codec: ass.</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                    <li>
-                      <p>指定编码器进行转换</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">ffmpeg -i a.mp4 -c:v hevc -c:a aac b.mkv</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>
-                        <strong>注：</strong>
-                        <code>-c:v</code> 可以用
-                        <code>-vcodec</code>替换，当它们的值为copy时，就表示编码格式不进行转换</p>
-                    </li>
-                    <li>
-                      <p>在转换时可以进行的调整</p>
-                      <p>在
-                        <code>ffmpeg -help</code> 时可以看到有一些和音频，视频，字幕相关的选项</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">Video options:</div><div class="line">-vframes number     set the number of video frames to output</div><div class="line">-r rate             set frame rate (Hz value, fraction or abbreviation)</div><div class="line">-s size             set frame size (WxH or abbreviation)</div><div class="line">-aspect aspect      set aspect ratio (4:3, 16:9 or 1.3333, 1.7777)</div><div class="line">-bits_per_raw_sample number  set the number of bits per raw sample</div><div class="line">-vn                 disable video</div><div class="line">-vcodec codec       force video codec (&apos;copy&apos; to copy stream)</div><div class="line">-timecode hh:mm:ss[:;.]ff  set initial TimeCode value.</div><div class="line">-pass n             select the pass number (1 to 3)</div><div class="line">-vf filter_graph    set video filters</div><div class="line">-ab bitrate         audio bitrate (please use -b:a)</div><div class="line">-b bitrate          video bitrate (please use -b:v)</div><div class="line">-dn                 disable data</div><div class="line"></div><div class="line">Audio options:</div><div class="line">-aframes number     set the number of audio frames to output</div><div class="line">-aq quality         set audio quality (codec-specific)</div><div class="line">-ar rate            set audio sampling rate (in Hz)</div><div class="line">-ac channels        set number of audio channels</div><div class="line">-an                 disable audio</div><div class="line">-acodec codec       force audio codec (&apos;copy&apos; to copy stream)</div><div class="line">-vol volume         change audio volume (256=normal)</div><div class="line">-af filter_graph    set audio filters</div><div class="line"></div><div class="line">Subtitle options:</div><div class="line">-s size             set frame size (WxH or abbreviation)</div><div class="line">-sn                 disable subtitle</div><div class="line">-scodec codec       force subtitle codec (&apos;copy&apos; to copy stream)</div><div class="line">-stag fourcc/tag    force subtitle tag/fourcc</div><div class="line">-fix_sub_duration   fix subtitles duration</div><div class="line">-canvas_size size   set canvas size (WxH or abbreviation)</div><div class="line">-spre preset        set the subtitle options to the indicated preset</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>当然还有对整个文件进行调整的参数</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">Per-file main options:</div><div class="line">-f fmt              force format</div><div class="line">-c codec            codec name</div><div class="line">-codec codec        codec name</div><div class="line">-pre preset         preset name</div><div class="line">-map_metadata outfile[,metadata]:infile[,metadata]  set metadata information of outfile from infile</div><div class="line">-t duration         record or transcode &quot;duration&quot; seconds of audio/video</div><div class="line">-to time_stop       record or transcode stop time</div><div class="line">-fs limit_size      set the limit file size in bytes</div><div class="line">-ss time_off        set the start time offset</div><div class="line">-sseof time_off     set the start time offset relative to EOF</div><div class="line">-seek_timestamp     enable/disable seeking by timestamp with -ss</div><div class="line">-timestamp time     set the recording timestamp (&apos;now&apos; to set the current time)</div><div class="line">-metadata string=string  add metadata</div><div class="line">-program title=string:st=number...  add program with specified streams</div><div class="line">-target type        specify target file type (&quot;vcd&quot;, &quot;svcd&quot;, &quot;dvd&quot;, &quot;dv&quot; or &quot;dv50&quot; with optional prefixes &quot;pal-&quot;, &quot;ntsc-&quot; or &quot;film-&quot;)</div><div class="line">-apad               audio pad</div><div class="line">-frames number      set the number of frames to output</div><div class="line">-filter filter_graph  set stream filtergraph</div><div class="line">-filter_script filename  read stream filtergraph description from a file</div><div class="line">-reinit_filter      reinit filtergraph on input parameter changes</div><div class="line">-discard            discard</div><div class="line">-disposition        disposition</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>
-                        <a href="https://github.com/FiveYellowMice/how-to-convert-videos-with-ffmpeg-zh"
-                                                                                                        target="_blank" rel="external">文章参考</a>
-                      </p>
-                      <p>​</p>
-                    </li>
-                  </ol>
+
+                  <a class="article-more-a" href="/2017/05/22/ffmpeg简易介绍/#more">more >></a>
 
                 </div>
                 <div class="article-info article-info-index">
@@ -7480,10 +7038,6 @@
             <ul class="article-tag-list" q-show="showTags">
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
-              </li>
-
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
 
@@ -7493,6 +7047,10 @@
 
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">react-native</a>
+              </li>
+
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
               </li>
 
               <li class="article-tag-list-item">

@@ -178,121 +178,59 @@
 
                 <div class="article-entry" itemprop="articleBody">
 
-                  <h2>工具准备</h2>
+                  <h2 id="工具准备">
+                    <a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h2>
                   <ol>
                     <li>
                       <p>安装rpmtools工具</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">yum install rpmdevtools</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight sh">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">yum install rpmdevtools</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                     <li>
                       <p>创建文件夹</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">mkdir -pv ~/rpmbuild/&#123;BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS&#125;</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight sh">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">mkdir -pv ~/rpmbuild/&#123;BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS&#125;</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                   </ol>
-                  <h2>配置文件及源码准备</h2>
+                  <h2 id="配置文件及源码准备">
+                    <a href="#配置文件及源码准备" class="headerlink" title="配置文件及源码准备"></a>配置文件及源码准备</h2>
                   <ol>
                     <li>
                       <p>spec脚本文件创建，在SPECS文件夹下创建一个.spec文件 如h5-megvii.spec</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">Name:           h5-megvii</div><div class="line">License:        copyright</div><div class="line">Version:        1.0</div><div class="line">Release:        1%&#123;?dist&#125;</div><div class="line">Summary:        HTML FaceID Server</div><div class="line">AutoReqProv:    no</div><div class="line"></div><div class="line">Group:          Megvii</div><div class="line">URL:            http://www.megvii.com</div><div class="line">Source:         %&#123;name&#125;-%&#123;version&#125;.tar.gz</div><div class="line">BuildRoot:      %&#123;_tmppath&#125;/%&#123;name&#125;-%&#123;version&#125;-%&#123;release&#125;-root</div><div class="line"></div><div class="line">%description</div><div class="line">The rpm version of html-megvii package</div><div class="line"></div><div class="line">%prep</div><div class="line">%setup -q</div><div class="line"></div><div class="line">%build</div><div class="line">%install</div><div class="line">rm -rf <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line">mkdir -p <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line">cp <span class="_">-a</span> * <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line"></div><div class="line">%clean</div><div class="line">rm -rf <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line"></div><div class="line">%files</div><div class="line">%defattr(-,root,root,-)</div><div class="line">/opt/megvii</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>&lt;!-- more --&gt;</p>
-                      <p>spec脚本中各个配置项说明</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">Name: 软件包的名称，后面可使用%&#123;name&#125;的方式引用</div><div class="line">License: 软件授权方式</div><div class="line">Version: 软件的实际版本号,后面可使用%&#123;version&#125;引用</div><div class="line">Release: 发布序列号,标明第几次打包，后面可使用%&#123;release&#125;引用</div><div class="line">Summary: 软件包的内容概要</div><div class="line">AutoReqProv: 此域用于指示RPM是否自动查找软件所需的共享库与其提供的共享库</div><div class="line"></div><div class="line">Group: 软件分组</div><div class="line">URL: 软件的主页</div><div class="line">Source: 源代码包，可以带多个用Source1、Source2等源，后面也可以用%&#123;<span class="built_in">source</span>1&#125;、%&#123;<span class="built_in">source</span>2&#125;引用</div><div class="line">BuildRoot: 这个是安装或编译时使用的“虚拟目录”,一般定义为:%&#123;_tmppath&#125;/%&#123;name&#125;-%&#123;version&#125;-%&#123;release&#125;-root</div><div class="line"></div><div class="line">%description 软件的详细说明</div><div class="line"></div><div class="line">%prep 预处理脚本</div><div class="line">%setup 把源码包解压并放好,将SOURCES下的tar.gz 文件解压至BUILD文件夹下</div><div class="line"></div><div class="line">%build 开始构建包</div><div class="line">%install 开始把软件安装到虚拟的根目录中</div><div class="line"></div><div class="line">%clean 清理临时文件</div><div class="line"></div><div class="line">%files 定义那些文件或目录会放入rpm中,files下的文件，必须是tar包解压开存在的文件</div><div class="line">%defattr (-,root,root) 指定包装文件的属性，分别是(mode,owner,group)，-表示默认值，对文本文件是0644，可执行文件是0755</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>
-                        <strong>注1:</strong> SOURCES下的tar.gz包的文件名必须和SPECS下 xxx.specs 文件中的Source
-                        保持一致。</p>
-                      <p>
-                        <strong>注2:</strong> SOURCES下的tar.gz包
-                        <strong>解压开的文件夹</strong>名称也应为SPECS下 xxx.specs 文件中的Source 对应的名称(无须tar.gz)。</p>
-                      <p>
-                        <strong>注3:</strong> %files标签下的文件路径必须存在，如/opt/megvii ,在tar.gz 解压开的文件路径是存在的</p>
-                    </li>
-                    <li>
-                      <p>添加源码文件</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">tar czvf h5-megvii-1.0.tar.gz h5-megvii-1.0</div><div class="line">cp h5-megvii-1.0.tar.gz rpmbuild/SOURCES/</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                  </ol>
-                  <h2>执行打包命令</h2>
-                  <p>
-                    <figure class="highlight sh">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">rpmbuild --nodeps -ba rpmbuild/SPECS/h5-megvii.spec</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
-                  </p>
-                  <p>打完包之后的rpm包文件位置在
-                    <code>rpmbuild/RPMS</code>文件夹中</p>
+                      <figure class="highlight sh">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">Name:           h5-megvii</div><div class="line">License:        copyright</div><div class="line">Version:        1.0</div><div class="line">Release:        1%&#123;?dist&#125;</div><div class="line">Summary:        HTML FaceID Server</div><div class="line">AutoReqProv:    no</div><div class="line"></div><div class="line">Group:          Megvii</div><div class="line">URL:            http://www.megvii.com</div><div class="line">Source:         %&#123;name&#125;-%&#123;version&#125;.tar.gz</div><div class="line">BuildRoot:      %&#123;_tmppath&#125;/%&#123;name&#125;-%&#123;version&#125;-%&#123;release&#125;-root</div><div class="line"></div><div class="line">%description</div><div class="line">The rpm version of html-megvii package</div><div class="line"></div><div class="line">%prep</div><div class="line">%setup -q</div><div class="line"></div><div class="line">%build</div><div class="line">%install</div><div class="line">rm -rf <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line">mkdir -p <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line">cp <span class="_">-a</span> * <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line"></div><div class="line">%clean</div><div class="line">rm -rf <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line"></div><div class="line">%files</div><div class="line">%defattr(-,root,root,-)</div><div class="line">/opt/megvii</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+
+                      <a class="article-more-a" href="/2017/05/15/Linux下打RPM包/#more">more >></a>
 
                 </div>
                 <div class="article-info article-info-index">
@@ -336,15 +274,18 @@
                 <div class="article-entry" itemprop="articleBody">
 
                   <p>supervisor 是基于python的进程管理工具</p>
-                  <h2>install online</h2>
+                  <h2 id="install-online">
+                    <a href="#install-online" class="headerlink" title="install online"></a>install online</h2>
                   <ul>
                     <li>ubuntu 系统安装 apt-get install supervisor</li>
-                    <li>也可以通过pip install supervisor 但是需要手动启动</li>
-                  </ul>
-                  <h2>install offline</h2>
-                  <ul>
                     <li>
-                      <p>下载安装包和依赖包详见官网 [https://pypi.python.org/pypi/supervisor] 3.3.1版本</p>
+                      <p>也可以通过pip install supervisor 但是需要手动启动</p>
+                      <h2 id="install-offline">
+                        <a href="#install-offline" class="headerlink" title="install offline"></a>install offline</h2>
+                    </li>
+                    <li>
+                      <p>下载安装包和依赖包详见官网 [
+                        <a href="https://pypi.python.org/pypi/supervisor" target="_blank" rel="external">https://pypi.python.org/pypi/supervisor</a>] 3.3.1版本</p>
                     </li>
                     <li>
                       <p>解压安装tar.gz 然后cd 到目录中执行 python setup.py install</p>
@@ -359,152 +300,8 @@
                     <li>
                       <p>创建supervisord 放在 init.d目录 下
                         <strong>注：</strong> prog_bin 为supervisors 可执行文件位置</p>
-                      <p>&lt;!-- more --&gt;</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">#!/bin/sh</div><div class="line">#</div><div class="line"># /etc/rc.d/init.d/supervisord</div><div class="line">#</div><div class="line"># Supervisor is a client/server system that</div><div class="line"># allows its users to monitor and control a</div><div class="line"># number of processes on UNIX-like operating</div><div class="line"># systems.</div><div class="line">#</div><div class="line"># chkconfig: - 64 36</div><div class="line"># description: Supervisor Server</div><div class="line"># processname: supervisord</div><div class="line"></div><div class="line"># Source init functions</div><div class="line">. /etc/rc.d/init.d/functions</div><div class="line"></div><div class="line">prog=&quot;supervisord&quot;</div><div class="line"></div><div class="line">prefix=&quot;/usr&quot;</div><div class="line">exec_prefix=&quot;$&#123;prefix&#125;&quot;</div><div class="line">prog_bin=&quot;$&#123;exec_prefix&#125;/bin/supervisord&quot;</div><div class="line">PIDFILE=&quot;/var/run/$prog.pid&quot;</div><div class="line"></div><div class="line">start()</div><div class="line">&#123;</div><div class="line">       echo -n $&quot;Starting $prog: &quot;</div><div class="line">       touch $PIDFILE</div><div class="line">       daemon $prog_bin -c /etc/supervisord.conf --pidfile $PIDFILE</div><div class="line">       sleep 1</div><div class="line">       [ -f $PIDFILE ] &amp;&amp; success $&quot;$prog startup&quot; || failure $&quot;$prog startup&quot;</div><div class="line">       echo</div><div class="line">&#125;</div><div class="line">stop()</div><div class="line">&#123;</div><div class="line">       echo -n $&quot;Shutting down $prog: &quot;</div><div class="line">       [ -f $PIDFILE ] &amp;&amp; killproc $prog || success $&quot;$prog shutdown&quot;</div><div class="line">       echo</div><div class="line">&#125;</div><div class="line"></div><div class="line">case &quot;$1&quot; in</div><div class="line"></div><div class="line"> start)</div><div class="line">   start</div><div class="line"> ;;</div><div class="line"></div><div class="line"> stop)</div><div class="line">   stop</div><div class="line"> ;;</div><div class="line"></div><div class="line"> status)</div><div class="line">       status $prog</div><div class="line"> ;;</div><div class="line"></div><div class="line"> restart)</div><div class="line">   stop</div><div class="line">   start</div><div class="line"> ;;</div><div class="line"></div><div class="line"> *)</div><div class="line">   echo &quot;Usage: $0 &#123;start|stop|restart|status&#125;&quot;</div><div class="line"> ;;</div><div class="line"></div><div class="line">esac</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                    <li>
-                      <p>修改指定要运行程序配置文件</p>
-                      <p>编辑supervisor.conf文件中的</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">[include]</div><div class="line">files = /etc/supervisord.conf.d/*.conf</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                  </ul>
-                  <p>​</p>
-                  <h2>how to use</h2>
-                  <p>在etc/supervisor.conf.d 目录下创建每个进程对应的配置文件 如：work.conf 具体配置 directory=
-                    /opt/faceid/worker //工程文件目录 command= /opt/faceid/worker/start.sh
-                    //启动命令 autostart=true //是否自启 autorestart=true //是否自动重启 startretries=
-                    10000 //重试时间 startsecs=1 //启动时间 stopasgroup=true killasgroup=true``
-                    stdout_logfile_maxbytes = 50MB stdout_logfile_backups = 10 stdout_logfile
-                    = /var/log/megvii/%(program_name)s.log</p>
-                  <h2>common command</h2>
-                  <ul>
-                    <li>supervisorctl status 查看各个进程的状态</li>
-                    <li>supervisorctl reload 重启supervisor 下的所有进程</li>
-                    <li>supervisorctl stop name 停止指定进程</li>
-                    <li>supervisorctl start name 启动指定进程</li>
-                    <li>supervisorctl restart all 重启supervisor 下的所有进程</li>
-                  </ul>
-                  <h2>FAQ</h2>
-                  <ul>
-                    <li>
-                      <p>Error: Another program is already listening on a port</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">find / -name supervisor.sock</div><div class="line">unlink /***/supervisor.sock</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                    <li>
-                      <p>文件找不到</p>
-                      <p>
-                        <code>unix:///tmp/supervisor.sock no such file</code>
-                      </p>
-                      <p>编辑文件/etc/supervisord.conf 中的</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">file = /tmp/supervisor.sock ;改成file = /var/run/supervisor.sock</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                  </ul>
-                  <p>​ 然后执行</p>
-                  <p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">touch /var/run/supervisor.sock</div><div class="line">service supervisord restart</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
-                  </p>
-                  <ul>
-                    <li>ERROR (spawn error)</li>
-                  </ul>
-                  <p>确认脚本文件能够正常使用</p>
-                  <ul>
-                    <li>
-                      <p>error while loading shared libraries: libpython2.7.so.1.0</p>
-                      <p>找到libpython2.7.so.10点位置</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">[root@testlm01v ~]# locate libpython2.7.so.1.0</div><div class="line">/usr/local/Python-2.7.11/libpython2.7.so.1.0</div><div class="line">/usr/local/lib/libpython2.7.so.1.0</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>把找到的位置复制到/etc/ld.so.conf.d/python.conf中如</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">[root@testlm01v /etc/ld.so.conf.d]# cat python.conf </div><div class="line">/usr/local/lib</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                    </li>
-                  </ul>
+
+                      <a class="article-more-a" href="/2017/04/28/supervisor 是基于python的进程管理工具/#more">more >></a>
 
                 </div>
                 <div class="article-info article-info-index">
@@ -7127,10 +6924,6 @@
             <ul class="article-tag-list" q-show="showTags">
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
-              </li>
-
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
 
@@ -7140,6 +6933,10 @@
 
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">react-native</a>
+              </li>
+
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
               </li>
 
               <li class="article-tag-list-item">

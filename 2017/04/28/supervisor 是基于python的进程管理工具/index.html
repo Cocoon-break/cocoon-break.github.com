@@ -9,17 +9,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>supervisor linux后台进程管理利器 | cocoon-break的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="supervisor 是基于python的进程管理工具 install online    ubuntu 系统安装 apt-get install supervisor   也可以通过pip install supervisor 但是需要手动启动  install offline         下载安装包和依赖包详见官网 [https://pypi.python.org/pypi/supervi">
+  <meta name="description" content="supervisor 是基于python的进程管理工具    install online    ubuntu 系统安装 apt-get install supervisor        也可以通过pip install supervisor 但是需要手动启动            install offline           下载安装包和依赖包详见官网 [       https://p">
   <meta name="keywords" content="Linux">
   <meta property="og:type" content="article">
   <meta property="og:title" content="supervisor linux后台进程管理利器">
   <meta property="og:url" content="http://yoursite.com/2017/04/28/supervisor 是基于python的进程管理工具/index.html">
   <meta property="og:site_name" content="cocoon-break的博客">
-  <meta property="og:description" content="supervisor 是基于python的进程管理工具 install online    ubuntu 系统安装 apt-get install supervisor   也可以通过pip install supervisor 但是需要手动启动  install offline         下载安装包和依赖包详见官网 [https://pypi.python.org/pypi/supervi">
+  <meta property="og:description" content="supervisor 是基于python的进程管理工具    install online    ubuntu 系统安装 apt-get install supervisor        也可以通过pip install supervisor 但是需要手动启动            install offline           下载安装包和依赖包详见官网 [       https://p">
   <meta property="og:updated_time" content="2017-05-27T15:02:05.000Z">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="supervisor linux后台进程管理利器">
-  <meta name="twitter:description" content="supervisor 是基于python的进程管理工具 install online    ubuntu 系统安装 apt-get install supervisor   也可以通过pip install supervisor 但是需要手动启动  install offline         下载安装包和依赖包详见官网 [https://pypi.python.org/pypi/supervi">
+  <meta name="twitter:description" content="supervisor 是基于python的进程管理工具    install online    ubuntu 系统安装 apt-get install supervisor        也可以通过pip install supervisor 但是需要手动启动            install offline           下载安装包和依赖包详见官网 [       https://p">
 
   <link rel="alternative" href="/atom.xml" title="cocoon-break的博客" type="application/atom+xml">
 
@@ -180,15 +180,18 @@
                 <div class="article-entry" itemprop="articleBody">
 
                   <p>supervisor 是基于python的进程管理工具</p>
-                  <h2>install online</h2>
+                  <h2 id="install-online">
+                    <a href="#install-online" class="headerlink" title="install online"></a>install online</h2>
                   <ul>
                     <li>ubuntu 系统安装 apt-get install supervisor</li>
-                    <li>也可以通过pip install supervisor 但是需要手动启动</li>
-                  </ul>
-                  <h2>install offline</h2>
-                  <ul>
                     <li>
-                      <p>下载安装包和依赖包详见官网 [https://pypi.python.org/pypi/supervisor] 3.3.1版本</p>
+                      <p>也可以通过pip install supervisor 但是需要手动启动</p>
+                      <h2 id="install-offline">
+                        <a href="#install-offline" class="headerlink" title="install offline"></a>install offline</h2>
+                    </li>
+                    <li>
+                      <p>下载安装包和依赖包详见官网 [
+                        <a href="https://pypi.python.org/pypi/supervisor" target="_blank" rel="external">https://pypi.python.org/pypi/supervisor</a>] 3.3.1版本</p>
                     </li>
                     <li>
                       <p>解压安装tar.gz 然后cd 到目录中执行 python setup.py install</p>
@@ -203,50 +206,55 @@
                     <li>
                       <p>创建supervisord 放在 init.d目录 下
                         <strong>注：</strong> prog_bin 为supervisors 可执行文件位置</p>
-                      <p>&lt;!-- more --&gt;</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">#!/bin/sh</div><div class="line">#</div><div class="line"># /etc/rc.d/init.d/supervisord</div><div class="line">#</div><div class="line"># Supervisor is a client/server system that</div><div class="line"># allows its users to monitor and control a</div><div class="line"># number of processes on UNIX-like operating</div><div class="line"># systems.</div><div class="line">#</div><div class="line"># chkconfig: - 64 36</div><div class="line"># description: Supervisor Server</div><div class="line"># processname: supervisord</div><div class="line"></div><div class="line"># Source init functions</div><div class="line">. /etc/rc.d/init.d/functions</div><div class="line"></div><div class="line">prog=&quot;supervisord&quot;</div><div class="line"></div><div class="line">prefix=&quot;/usr&quot;</div><div class="line">exec_prefix=&quot;$&#123;prefix&#125;&quot;</div><div class="line">prog_bin=&quot;$&#123;exec_prefix&#125;/bin/supervisord&quot;</div><div class="line">PIDFILE=&quot;/var/run/$prog.pid&quot;</div><div class="line"></div><div class="line">start()</div><div class="line">&#123;</div><div class="line">       echo -n $&quot;Starting $prog: &quot;</div><div class="line">       touch $PIDFILE</div><div class="line">       daemon $prog_bin -c /etc/supervisord.conf --pidfile $PIDFILE</div><div class="line">       sleep 1</div><div class="line">       [ -f $PIDFILE ] &amp;&amp; success $&quot;$prog startup&quot; || failure $&quot;$prog startup&quot;</div><div class="line">       echo</div><div class="line">&#125;</div><div class="line">stop()</div><div class="line">&#123;</div><div class="line">       echo -n $&quot;Shutting down $prog: &quot;</div><div class="line">       [ -f $PIDFILE ] &amp;&amp; killproc $prog || success $&quot;$prog shutdown&quot;</div><div class="line">       echo</div><div class="line">&#125;</div><div class="line"></div><div class="line">case &quot;$1&quot; in</div><div class="line"></div><div class="line"> start)</div><div class="line">   start</div><div class="line"> ;;</div><div class="line"></div><div class="line"> stop)</div><div class="line">   stop</div><div class="line"> ;;</div><div class="line"></div><div class="line"> status)</div><div class="line">       status $prog</div><div class="line"> ;;</div><div class="line"></div><div class="line"> restart)</div><div class="line">   stop</div><div class="line">   start</div><div class="line"> ;;</div><div class="line"></div><div class="line"> *)</div><div class="line">   echo &quot;Usage: $0 &#123;start|stop|restart|status&#125;&quot;</div><div class="line"> ;;</div><div class="line"></div><div class="line">esac</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <a id="more"></a>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">#!/bin/sh</div><div class="line">#</div><div class="line"># /etc/rc.d/init.d/supervisord</div><div class="line">#</div><div class="line"># Supervisor is a client/server system that</div><div class="line"># allows its users to monitor and control a</div><div class="line"># number of processes on UNIX-like operating</div><div class="line"># systems.</div><div class="line">#</div><div class="line"># chkconfig: - 64 36</div><div class="line"># description: Supervisor Server</div><div class="line"># processname: supervisord</div><div class="line"></div><div class="line"># Source init functions</div><div class="line">. /etc/rc.d/init.d/functions</div><div class="line"></div><div class="line">prog=&quot;supervisord&quot;</div><div class="line"></div><div class="line">prefix=&quot;/usr&quot;</div><div class="line">exec_prefix=&quot;$&#123;prefix&#125;&quot;</div><div class="line">prog_bin=&quot;$&#123;exec_prefix&#125;/bin/supervisord&quot;</div><div class="line">PIDFILE=&quot;/var/run/$prog.pid&quot;</div><div class="line"></div><div class="line">start()</div><div class="line">&#123;</div><div class="line">       echo -n $&quot;Starting $prog: &quot;</div><div class="line">       touch $PIDFILE</div><div class="line">       daemon $prog_bin -c /etc/supervisord.conf --pidfile $PIDFILE</div><div class="line">       sleep 1</div><div class="line">       [ -f $PIDFILE ] &amp;&amp; success $&quot;$prog startup&quot; || failure $&quot;$prog startup&quot;</div><div class="line">       echo</div><div class="line">&#125;</div><div class="line">stop()</div><div class="line">&#123;</div><div class="line">       echo -n $&quot;Shutting down $prog: &quot;</div><div class="line">       [ -f $PIDFILE ] &amp;&amp; killproc $prog || success $&quot;$prog shutdown&quot;</div><div class="line">       echo</div><div class="line">&#125;</div><div class="line"></div><div class="line">case &quot;$1&quot; in</div><div class="line"></div><div class="line"> start)</div><div class="line">   start</div><div class="line"> ;;</div><div class="line"></div><div class="line"> stop)</div><div class="line">   stop</div><div class="line"> ;;</div><div class="line"></div><div class="line"> status)</div><div class="line">       status $prog</div><div class="line"> ;;</div><div class="line"></div><div class="line"> restart)</div><div class="line">   stop</div><div class="line">   start</div><div class="line"> ;;</div><div class="line"></div><div class="line"> *)</div><div class="line">   echo &quot;Usage: $0 &#123;start|stop|restart|status&#125;&quot;</div><div class="line"> ;;</div><div class="line"></div><div class="line">esac</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                     <li>
                       <p>修改指定要运行程序配置文件</p>
-                      <p>编辑supervisor.conf文件中的</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">[include]</div><div class="line">files = /etc/supervisord.conf.d/*.conf</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <p> 编辑supervisor.conf文件中的</p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">[include]</div><div class="line">files = /etc/supervisord.conf.d/*.conf</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                      <p>​</p>
                     </li>
                   </ul>
-                  <p>​</p>
-                  <h2>how to use</h2>
-                  <p>在etc/supervisor.conf.d 目录下创建每个进程对应的配置文件 如：work.conf 具体配置 directory=
-                    /opt/faceid/worker //工程文件目录 command= /opt/faceid/worker/start.sh
-                    //启动命令 autostart=true //是否自启 autorestart=true //是否自动重启 startretries=
-                    10000 //重试时间 startsecs=1 //启动时间 stopasgroup=true killasgroup=true``
-                    stdout_logfile_maxbytes = 50MB stdout_logfile_backups = 10 stdout_logfile
-                    = /var/log/megvii/%(program_name)s.log</p>
-                  <h2>common command</h2>
+                  <h2 id="how-to-use">
+                    <a href="#how-to-use" class="headerlink" title="how to use"></a>how to use</h2>
+                  <p>在etc/supervisor.conf.d 目录下创建每个进程对应的配置文件 如：work.conf
+                    <br>具体配置
+                    <br> directory= /opt/faceid/worker //工程文件目录
+                    <br> command= /opt/faceid/worker/start.sh //启动命令
+                    <br> autostart=true //是否自启
+                    <br> autorestart=true //是否自动重启
+                    <br> startretries= 10000 //重试时间
+                    <br> startsecs=1 //启动时间
+                    <br> stopasgroup=true
+                    <br> killasgroup=true``
+                    <br> stdout_logfile_maxbytes = 50MB
+                    <br> stdout_logfile_backups = 10
+                    <br> stdout_logfile = /var/log/megvii/%(program_name)s.log</p>
+                  <h2 id="common-command">
+                    <a href="#common-command" class="headerlink" title="common command"></a>common command</h2>
                   <ul>
                     <li>supervisorctl status 查看各个进程的状态</li>
                     <li>supervisorctl reload 重启supervisor 下的所有进程</li>
@@ -254,24 +262,23 @@
                     <li>supervisorctl start name 启动指定进程</li>
                     <li>supervisorctl restart all 重启supervisor 下的所有进程</li>
                   </ul>
-                  <h2>FAQ</h2>
+                  <h2 id="FAQ">
+                    <a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2>
                   <ul>
                     <li>
                       <p>Error: Another program is already listening on a port</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">find / -name supervisor.sock</div><div class="line">unlink /***/supervisor.sock</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">find / -name supervisor.sock</div><div class="line">unlink /***/supervisor.sock</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                     <li>
                       <p>文件找不到</p>
@@ -279,74 +286,66 @@
                         <code>unix:///tmp/supervisor.sock no such file</code>
                       </p>
                       <p>编辑文件/etc/supervisord.conf 中的</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">file = /tmp/supervisor.sock ;改成file = /var/run/supervisor.sock</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">file = /tmp/supervisor.sock ;改成file = /var/run/supervisor.sock</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                   </ul>
                   <p>​ 然后执行</p>
-                  <p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">touch /var/run/supervisor.sock</div><div class="line">service supervisord restart</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
-                  </p>
+                  <figure class="highlight plain">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div><div class="line">2</div></pre>
+                        </td>
+                        <td class="code">
+                          <pre><div class="line">touch /var/run/supervisor.sock</div><div class="line">service supervisord restart</div></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
                   <ul>
-                    <li>ERROR (spawn error)</li>
-                  </ul>
-                  <p>确认脚本文件能够正常使用</p>
-                  <ul>
+                    <li>
+                      <p>ERROR (spawn error)</p>
+                      <p>确认脚本文件能够正常使用</p>
+                    </li>
                     <li>
                       <p>error while loading shared libraries: libpython2.7.so.1.0</p>
                       <p>找到libpython2.7.so.10点位置</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">[root@testlm01v ~]# locate libpython2.7.so.1.0</div><div class="line">/usr/local/Python-2.7.11/libpython2.7.so.1.0</div><div class="line">/usr/local/lib/libpython2.7.so.1.0</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">[root@testlm01v ~]# locate libpython2.7.so.1.0</div><div class="line">/usr/local/Python-2.7.11/libpython2.7.so.1.0</div><div class="line">/usr/local/lib/libpython2.7.so.1.0</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                       <p>把找到的位置复制到/etc/ld.so.conf.d/python.conf中如</p>
-                      <p>
-                        <figure class="highlight plain">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">[root@testlm01v /etc/ld.so.conf.d]# cat python.conf </div><div class="line">/usr/local/lib</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">[root@testlm01v /etc/ld.so.conf.d]# cat python.conf </div><div class="line">/usr/local/lib</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                   </ul>
 
@@ -7059,10 +7058,6 @@
             <ul class="article-tag-list" q-show="showTags">
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
-              </li>
-
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
 
@@ -7072,6 +7067,10 @@
 
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">react-native</a>
+              </li>
+
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
               </li>
 
               <li class="article-tag-list-item">

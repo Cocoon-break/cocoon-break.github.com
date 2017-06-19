@@ -9,17 +9,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Linux下打RPM包 | cocoon-break的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="工具准备         安装rpmtools工具                                                            1                                         yum install rpmdevtools">
+  <meta name="description" content="工具准备         安装rpmtools工具                                             1                                   yum install rpmdevtools                                           创建文件夹">
   <meta name="keywords" content="Linux">
   <meta property="og:type" content="article">
   <meta property="og:title" content="Linux下打RPM包">
   <meta property="og:url" content="http://yoursite.com/2017/05/15/Linux下打RPM包/index.html">
   <meta property="og:site_name" content="cocoon-break的博客">
-  <meta property="og:description" content="工具准备         安装rpmtools工具                                                            1                                         yum install rpmdevtools">
+  <meta property="og:description" content="工具准备         安装rpmtools工具                                             1                                   yum install rpmdevtools                                           创建文件夹">
   <meta property="og:updated_time" content="2017-05-27T15:01:33.000Z">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Linux下打RPM包">
-  <meta name="twitter:description" content="工具准备         安装rpmtools工具                                                            1                                         yum install rpmdevtools">
+  <meta name="twitter:description" content="工具准备         安装rpmtools工具                                             1                                   yum install rpmdevtools                                           创建文件夹">
 
   <link rel="alternative" href="/atom.xml" title="cocoon-break的博客" type="application/atom+xml">
 
@@ -178,77 +178,71 @@
 
                 <div class="article-entry" itemprop="articleBody">
 
-                  <h2>工具准备</h2>
+                  <h2 id="工具准备">
+                    <a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备</h2>
                   <ol>
                     <li>
                       <p>安装rpmtools工具</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">yum install rpmdevtools</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight sh">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">yum install rpmdevtools</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                     <li>
                       <p>创建文件夹</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">mkdir -pv ~/rpmbuild/&#123;BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS&#125;</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight sh">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">mkdir -pv ~/rpmbuild/&#123;BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS&#125;</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                   </ol>
-                  <h2>配置文件及源码准备</h2>
+                  <h2 id="配置文件及源码准备">
+                    <a href="#配置文件及源码准备" class="headerlink" title="配置文件及源码准备"></a>配置文件及源码准备</h2>
                   <ol>
                     <li>
                       <p>spec脚本文件创建，在SPECS文件夹下创建一个.spec文件 如h5-megvii.spec</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">Name:           h5-megvii</div><div class="line">License:        copyright</div><div class="line">Version:        1.0</div><div class="line">Release:        1%&#123;?dist&#125;</div><div class="line">Summary:        HTML FaceID Server</div><div class="line">AutoReqProv:    no</div><div class="line"></div><div class="line">Group:          Megvii</div><div class="line">URL:            http://www.megvii.com</div><div class="line">Source:         %&#123;name&#125;-%&#123;version&#125;.tar.gz</div><div class="line">BuildRoot:      %&#123;_tmppath&#125;/%&#123;name&#125;-%&#123;version&#125;-%&#123;release&#125;-root</div><div class="line"></div><div class="line">%description</div><div class="line">The rpm version of html-megvii package</div><div class="line"></div><div class="line">%prep</div><div class="line">%setup -q</div><div class="line"></div><div class="line">%build</div><div class="line">%install</div><div class="line">rm -rf <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line">mkdir -p <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line">cp <span class="_">-a</span> * <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line"></div><div class="line">%clean</div><div class="line">rm -rf <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line"></div><div class="line">%files</div><div class="line">%defattr(-,root,root,-)</div><div class="line">/opt/megvii</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
-                      <p>&lt;!-- more --&gt;</p>
+                      <figure class="highlight sh">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">Name:           h5-megvii</div><div class="line">License:        copyright</div><div class="line">Version:        1.0</div><div class="line">Release:        1%&#123;?dist&#125;</div><div class="line">Summary:        HTML FaceID Server</div><div class="line">AutoReqProv:    no</div><div class="line"></div><div class="line">Group:          Megvii</div><div class="line">URL:            http://www.megvii.com</div><div class="line">Source:         %&#123;name&#125;-%&#123;version&#125;.tar.gz</div><div class="line">BuildRoot:      %&#123;_tmppath&#125;/%&#123;name&#125;-%&#123;version&#125;-%&#123;release&#125;-root</div><div class="line"></div><div class="line">%description</div><div class="line">The rpm version of html-megvii package</div><div class="line"></div><div class="line">%prep</div><div class="line">%setup -q</div><div class="line"></div><div class="line">%build</div><div class="line">%install</div><div class="line">rm -rf <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line">mkdir -p <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line">cp <span class="_">-a</span> * <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line"></div><div class="line">%clean</div><div class="line">rm -rf <span class="variable">$RPM_BUILD_ROOT</span></div><div class="line"></div><div class="line">%files</div><div class="line">%defattr(-,root,root,-)</div><div class="line">/opt/megvii</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                      <a id="more"></a>
                       <p>spec脚本中各个配置项说明</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">Name: 软件包的名称，后面可使用%&#123;name&#125;的方式引用</div><div class="line">License: 软件授权方式</div><div class="line">Version: 软件的实际版本号,后面可使用%&#123;version&#125;引用</div><div class="line">Release: 发布序列号,标明第几次打包，后面可使用%&#123;release&#125;引用</div><div class="line">Summary: 软件包的内容概要</div><div class="line">AutoReqProv: 此域用于指示RPM是否自动查找软件所需的共享库与其提供的共享库</div><div class="line"></div><div class="line">Group: 软件分组</div><div class="line">URL: 软件的主页</div><div class="line">Source: 源代码包，可以带多个用Source1、Source2等源，后面也可以用%&#123;<span class="built_in">source</span>1&#125;、%&#123;<span class="built_in">source</span>2&#125;引用</div><div class="line">BuildRoot: 这个是安装或编译时使用的“虚拟目录”,一般定义为:%&#123;_tmppath&#125;/%&#123;name&#125;-%&#123;version&#125;-%&#123;release&#125;-root</div><div class="line"></div><div class="line">%description 软件的详细说明</div><div class="line"></div><div class="line">%prep 预处理脚本</div><div class="line">%setup 把源码包解压并放好,将SOURCES下的tar.gz 文件解压至BUILD文件夹下</div><div class="line"></div><div class="line">%build 开始构建包</div><div class="line">%install 开始把软件安装到虚拟的根目录中</div><div class="line"></div><div class="line">%clean 清理临时文件</div><div class="line"></div><div class="line">%files 定义那些文件或目录会放入rpm中,files下的文件，必须是tar包解压开存在的文件</div><div class="line">%defattr (-,root,root) 指定包装文件的属性，分别是(mode,owner,group)，-表示默认值，对文本文件是0644，可执行文件是0755</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight sh">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">Name: 软件包的名称，后面可使用%&#123;name&#125;的方式引用</div><div class="line">License: 软件授权方式</div><div class="line">Version: 软件的实际版本号,后面可使用%&#123;version&#125;引用</div><div class="line">Release: 发布序列号,标明第几次打包，后面可使用%&#123;release&#125;引用</div><div class="line">Summary: 软件包的内容概要</div><div class="line">AutoReqProv: 此域用于指示RPM是否自动查找软件所需的共享库与其提供的共享库</div><div class="line"></div><div class="line">Group: 软件分组</div><div class="line">URL: 软件的主页</div><div class="line">Source: 源代码包，可以带多个用Source1、Source2等源，后面也可以用%&#123;<span class="built_in">source</span>1&#125;、%&#123;<span class="built_in">source</span>2&#125;引用</div><div class="line">BuildRoot: 这个是安装或编译时使用的“虚拟目录”,一般定义为:%&#123;_tmppath&#125;/%&#123;name&#125;-%&#123;version&#125;-%&#123;release&#125;-root</div><div class="line"></div><div class="line">%description 软件的详细说明</div><div class="line"></div><div class="line">%prep 预处理脚本</div><div class="line">%setup 把源码包解压并放好,将SOURCES下的tar.gz 文件解压至BUILD文件夹下</div><div class="line"></div><div class="line">%build 开始构建包</div><div class="line">%install 开始把软件安装到虚拟的根目录中</div><div class="line"></div><div class="line">%clean 清理临时文件</div><div class="line"></div><div class="line">%files 定义那些文件或目录会放入rpm中,files下的文件，必须是tar包解压开存在的文件</div><div class="line">%defattr (-,root,root) 指定包装文件的属性，分别是(mode,owner,group)，-表示默认值，对文本文件是0644，可执行文件是0755</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                       <p>
                         <strong>注1:</strong> SOURCES下的tar.gz包的文件名必须和SPECS下 xxx.specs 文件中的Source
                         保持一致。</p>
@@ -260,37 +254,34 @@
                     </li>
                     <li>
                       <p>添加源码文件</p>
-                      <p>
-                        <figure class="highlight sh">
-                          <table>
-                            <tr>
-                              <td class="gutter">
-                                <pre><div class="line">1</div><div class="line">2</div></pre>
-                              </td>
-                              <td class="code">
-                                <pre><div class="line">tar czvf h5-megvii-1.0.tar.gz h5-megvii-1.0</div><div class="line">cp h5-megvii-1.0.tar.gz rpmbuild/SOURCES/</div></pre>
-                              </td>
-                            </tr>
-                          </table>
-                        </figure>
-                      </p>
+                      <figure class="highlight sh">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">tar czvf h5-megvii-1.0.tar.gz h5-megvii-1.0</div><div class="line">cp h5-megvii-1.0.tar.gz rpmbuild/SOURCES/</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
                     </li>
                   </ol>
-                  <h2>执行打包命令</h2>
-                  <p>
-                    <figure class="highlight sh">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">rpmbuild --nodeps -ba rpmbuild/SPECS/h5-megvii.spec</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
-                  </p>
+                  <h2 id="执行打包命令">
+                    <a href="#执行打包命令" class="headerlink" title="执行打包命令"></a>执行打包命令</h2>
+                  <figure class="highlight sh">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div></pre>
+                        </td>
+                        <td class="code">
+                          <pre><div class="line">rpmbuild --nodeps -ba rpmbuild/SPECS/h5-megvii.spec</div></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
                   <p>打完包之后的rpm包文件位置在
                     <code>rpmbuild/RPMS</code>文件夹中</p>
 
@@ -7008,10 +6999,6 @@
             <ul class="article-tag-list" q-show="showTags">
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
-              </li>
-
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
 
@@ -7021,6 +7008,10 @@
 
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">react-native</a>
+              </li>
+
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">扩展</a>
               </li>
 
               <li class="article-tag-list-item">
