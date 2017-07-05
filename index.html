@@ -221,84 +221,8 @@
                   </figure>
                   <p>前面都是一些简易的操作，感觉不到xargs 到底是怎么处理管道出来的文件。现在我的一个需求是将所有的log文件复制到指定目录下。普通复制命令
                     <code>cp xxx.log /var/log</code>。我们先忽略cp 命令有-r参数。先看看以下写法是否正确</p>
-                  <figure class="highlight sh">
-                    <table>
-                      <tr>
-                        <td class="gutter">
-                          <pre><div class="line">1</div></pre>
-                        </td>
-                        <td class="code">
-                          <pre><div class="line">ls *.log | xargs cp /var/<span class="built_in">log</span></div></pre>
-                        </td>
-                      </tr>
-                    </table>
-                  </figure>
-                  <p>你一看立马就觉得不对，cp 不是接受两个参数吗？一个文件，一个目标文件或路径。可是又不知道怎么去解决这个事。在我们上面的例子都真正没有去理解xargs，如
-                    <code>ls *.log | xargs rm -rf</code> 为什么能好使？ls出来的文件通过管道传递给xargs 过滤，然后xargs
-                    过滤出的文件默认追加到命令行的最后。但是在这个例子中，我们不想将xargs吐出来的放到命令行的最后。xargs的占位符就发挥作用了，将上面的命令修改</p>
-                  <figure class="highlight sh">
-                    <table>
-                      <tr>
-                        <td class="gutter">
-                          <pre><div class="line">1</div></pre>
-                        </td>
-                        <td class="code">
-                          <pre><div class="line">ls *.log | xargs -I &#123;&#125; cp &#123;&#125;  /var/<span class="built_in">log</span>/</div></pre>
-                        </td>
-                      </tr>
-                    </table>
-                  </figure>
-                  <p>通过
-                    <code>-I</code>参数指定大括号为占位符，cp后的大括号就是xargs 吐出来的文件名。这里不一定使用大括号，也可指定其他的符号。
-                    <code>-i</code>默认的占位符就是大括号</p>
-                  <figure class="highlight sh">
-                    <table>
-                      <tr>
-                        <td class="gutter">
-                          <pre><div class="line">1</div></pre>
-                        </td>
-                        <td class="code">
-                          <pre><div class="line">ls *.log | xargs -i cp &#123;&#125; /var/<span class="built_in">log</span>/</div></pre>
-                        </td>
-                      </tr>
-                    </table>
-                  </figure>
-                  <p>xargs还有一个-P的参数，是指定xargs同时处理多少个命令。但是感觉没什么效果。例子
-                    <code>ls *.log | xargs -P 8 -i cp {} /var/log/</code>
-                  </p>
-                  <p>xargs 的使用就讲到这里</p>
-                  <h2 id="jq">
-                    <a href="#jq" class="headerlink" title="jq"></a>jq</h2>
-                  <p>jq 命令并不是Linux系统自带的，所以我们需要格外安装。
-                    <a href="https://stedolan.github.io/jq/download/" target="_blank" rel="external">下载的地址</a>
-                  </p>
-                  <p>jq 的官方说法是jq is like
-                    <code>sed</code> for JSON data - you can use it to slice and filter
-                    and map and transform structured data with the same ease that
-                    <code>sed</code>,
-                    <code>awk</code>,
-                    <code>grep</code> and friends let you play with text。使用jq在Linux系统上去处理json是非常方便的。比如在终端上curl一个接口，返回一个json，这个json可能很长，我只想看其中部分数据，就可以用上jq了。</p>
-                  <p>jq的用法也很简单，而且官方的例子也很全。这里主要是记录下有这么一个好用的东西。哈哈哈</p>
-                  <p>
-                    <a href="https://stedolan.github.io/jq/tutorial/" target="_blank" rel="external">
-                      官方教程</a>
-                  </p>
-                  <h2 id="自己实践的例子">
-                    <a href="#自己实践的例子" class="headerlink" title="自己实践的例子"></a>自己实践的例子</h2>
-                  <p>前段时间有需要将两万张的照片去发起请求，然后处理curl返回的结果。利用了xargs和jq。将命令贴出来记录一下。</p>
-                  <figure class="highlight sh">
-                    <table>
-                      <tr>
-                        <td class="gutter">
-                          <pre><div class="line">1</div></pre>
-                        </td>
-                        <td class="code">
-                          <pre><div class="line">ls TP | xargs -i -n1 curl <span class="_">-s</span> -F img=@TP/&#123;&#125; http://127.0.0.1:9001/faceid/v1/liveness_cfg                                                                 | jq -c -r <span class="string">'[.liveness.mask,.liveness.replay,.liveness.graphics]'</span> &gt; TP.txt &amp;</div></pre>
-                        </td>
-                      </tr>
-                    </table>
-                  </figure>
-                  <p>TP就是有两万张照片的文件夹，将请求的结果通过jq处理，然后输出到TP.txt文件 中</p>
+
+                  <a class="article-more-a" href="/2017/07/05/xargs和jq/#more">more >></a>
 
                 </div>
                 <div class="article-info article-info-index">
@@ -7231,11 +7155,11 @@
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">开发随笔</a>
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">开发随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
 
               <div class="clearfix"></div>
