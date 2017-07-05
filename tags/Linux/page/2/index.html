@@ -7,19 +7,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>shell 脚本中读取参数值 | cocoon-break的博客</title>
+  <title>Tag: Linux | cocoon-break的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="shell 脚本中读取参数值 通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了    根据参数位置直接获取         先定义一个脚本test.sh，打印位置参数">
-  <meta name="keywords" content="Linux">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="shell 脚本中读取参数值">
-  <meta property="og:url" content="http://yoursite.com/2017/05/25/shell 脚本中读取参数值/index.html">
+  <meta name="description" content="Linux RN android 博客">
+  <meta name="keywords" content="Linux RN android 博客">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="cocoon-break的博客">
+  <meta property="og:url" content="http://yoursite.com/tags/Linux/page/2/index.html">
   <meta property="og:site_name" content="cocoon-break的博客">
-  <meta property="og:description" content="shell 脚本中读取参数值 通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了    根据参数位置直接获取         先定义一个脚本test.sh，打印位置参数">
-  <meta property="og:updated_time" content="2017-05-27T15:01:47.000Z">
+  <meta property="og:description" content="Linux RN android 博客">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="shell 脚本中读取参数值">
-  <meta name="twitter:description" content="shell 脚本中读取参数值 通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了    根据参数位置直接获取         先定义一个脚本test.sh，打印位置参数">
+  <meta name="twitter:title" content="cocoon-break的博客">
+  <meta name="twitter:description" content="Linux RN android 博客">
 
   <link rel="alternative" href="/atom.xml" title="cocoon-break的博客" type="application/atom+xml">
 
@@ -161,225 +160,51 @@
                                                                                             id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-shell 脚本中读取参数值" class="article article-type-post " itemscope itemprop="blogPost">
-              <div class="article-inner">
-
-                <header class="article-header">
-                  <h1 class="article-title" itemprop="name">
-                    shell 脚本中读取参数值
-                  </h1>
-
-                  <a href="/2017/05/25/shell 脚本中读取参数值/" class="archive-article-date">
-                    <time datetime="2017-05-25T03:14:12.000Z" itemprop="datePublished">
-                      <i class="icon-calendar icon"></i>2017-05-25</time>
-                  </a>
-
-                </header>
-
-                <div class="article-entry" itemprop="articleBody">
-
-                  <p>shell 脚本中读取参数值</p>
-                  <p>通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了</p>
-                  <h2 id="根据参数位置直接获取">
-                    <a href="#根据参数位置直接获取" class="headerlink" title="根据参数位置直接获取"></a>根据参数位置直接获取</h2>
-                  <ol>
-                    <li>
-                      <p>先定义一个脚本test.sh，打印位置参数</p>
-                      <figure class="highlight plain">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
-                            </td>
-                            <td class="code">
-                              <pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">echo $1</div><div class="line">echo $2</div></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                    </li>
-                    <li>
-                      <p>执行test.sh脚本</p>
-                      <figure class="highlight plain">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><div class="line">1</div></pre>
-                            </td>
-                            <td class="code">
-                              <pre><div class="line">./test.sh haha hehehe</div></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                      <p>执行的结果就是打印了两个参数，这个种方式的弊端就是，如果参数的位置传错了，那么$1 的值就不是haha了，当然可以使用这种方式写，就是可读性不太高
-                        哈。
-                      </p>
-                      <a id="more"></a>
-                    </li>
-                  </ol>
-                  <h2 id="指定key-获取参数">
-                    <a href="#指定key-获取参数" class="headerlink" title="指定key 获取参数"></a>指定key 获取参数</h2>
-                  <ol>
-                    <li>
-                      <p>一样的我们先定义脚本test.sh，一会儿我们在解读shell脚本中的含义</p>
-                      <figure class="highlight plain">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre>
-                            </td>
-                            <td class="code">
-                              <pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">#先定义接收各个参数值的变量</div><div class="line">IP_VALUE=&quot;&quot;; NODE_VALUE=&quot;&quot;;VIP_VALUE=&quot;&quot;;</div><div class="line"></div><div class="line">while true;do </div><div class="line">	if [ ! $2 ]; then break; fi</div><div class="line">	case $1 in</div><div class="line">		-i|--ip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)IP_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)IP_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-n|--node)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-v|--vip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		 --) shift ;break ;;</div><div class="line">		 *) break;;</div><div class="line">		esac</div><div class="line">done</div><div class="line"></div><div class="line">if [ -z &quot;$&#123;IP_VALUE&#125;&quot; ];    then echo &quot;error: ip is not found.&quot;;             exit 1; fi</div><div class="line">if [ -z &quot;$&#123;NODE_VALUE&#125;&quot; ];  then echo &quot;error: node is not found.&quot;;           exit 1; fi</div><div class="line">if [ -z &quot;$&#123;VIP_VALUE&#125;&quot; ];   then echo &quot;error: vip is not found.&quot;;            exit 1; fi</div></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                      <ul>
-                        <li>通过while 循环参数的$1 和$2 取key 和 value。</li>
-                        <li>case $1取参数的key，case $2取其中的值，如果取到了，就通过shift 2，把最前面的两个位置给移除了比如:
-                          <code>./test.sh -v kkk -n bbbb</code> 读取到如果执行了 shift 2,它就会把-v
-                          kkk 给扔了</li>
-                        <li>底下的if 是判断有没有读取到想要的值</li>
-                      </ul>
-                    </li>
-                    <li>
-                      <p>其他的方式去根据key获取参数</p>
-                      <ul>
-                        <li>一个是getopts 但是getopts不支持长选项，具体可以参考
-                          <a href="http://www.cnblogs.com/xiangzi888/archive/2012/04/03/2430736.html" target="_blank"
-                                                                                                          rel="external">getopts命令行参数处理</a>
-                        </li>
-                        <li>另一个是getopt，
-                          <a href="http://blog.csdn.net/wh211212/article/details/53750366" target="_blank"
-                                                                                                          rel="external">shell中使用getopts 和 getopt</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ol>
-                  <p>个人建议使用第一种方式去处理shell参数，不会有太多的局限性，唯一的问题就是代码会多一些哈！</p>
-
-                  <div class="page-reward">
-                    <a href="javascript:;" class="page-reward-btn tooltip-top">
-                      <div class="tooltip tooltip-east">
-                        <span class="tooltip-item">
-                          赏
-                        </span>
-                        <span class="tooltip-content">
-                          <span class="tooltip-text">
-                            <span class="tooltip-inner">
-                              <p class="reward-p">
-                                <i class="icon icon-quo-left"></i>谢谢你请我吃糖果
-                                <i class="icon icon-quo-right"></i>
-                              </p>
-                              <div class="reward-box">
-
-                                <div class="reward-box-item">
-                                  <img class="reward-img" src="/images/ali_pay.jpg">
-                                  <span class="reward-type">支付宝</span>
-                                </div>
-
-                                <div class="reward-box-item">
-                                  <img class="reward-img" src="/images/wechat_pay.jpg">
-                                  <span class="reward-type">微信</span>
-                                </div>
-
-                              </div>
-                            </span>
-                          </span>
-                        </span>
-                      </div>
-                    </a>
-                  </div>
-
-                </div>
-                <div class="article-info article-info-index">
-
-                  <div class="article-tag tagcloud">
-                    <i class="icon-price-tags icon"></i>
-                    <ul class="article-tag-list">
-
-                      <li class="article-tag-list-item">
-                        <a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-                      </li>
-
-                    </ul>
-                  </div>
-
-                  <div class="share-btn share-icons tooltip-left">
-                    <div class="tooltip tooltip-east">
-                      <span class="tooltip-item">
-                        <a href="javascript:;" class="share-sns share-outer">
-                          <i class="icon icon-share"></i>
-                        </a>
-                      </span>
-                      <span class="tooltip-content">
-                        <div class="share-wrap">
-                          <div class="share-icons">
-                            <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-                              <i class="icon icon-weibo"></i>
-                            </a>
-                            <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-                              <i class="icon icon-weixin"></i>
-                            </a>
-                            <a class="qq share-sns" href="javascript:;" data-type="qq">
-                              <i class="icon icon-qq"></i>
-                            </a>
-                            <a class="douban share-sns" href="javascript:;" data-type="douban">
-                              <i class="icon icon-douban"></i>
-                            </a>
-                            <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-                              <i class="icon icon-qzone"></i>
-                            </a>
-                            <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-                              <i class="icon icon-facebook"></i>
-                            </a>
-                            <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-                              <i class="icon icon-twitter"></i>
-                            </a>
-                            <a class="google share-sns" href="javascript:;" data-type="google">
-                              <i class="icon icon-google"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="page-modal wx-share js-wx-box">
-                    <a class="close js-modal-close" href="javascript:;">
-                      <i class="icon icon-close"></i>
-                    </a>
-                    <p>扫一扫，分享到微信</p>
-                    <div class="wx-qrcode">
-                      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/25/shell 脚本中读取参数值/"
-                                                                                                      alt="微信分享二维码">
-                    </div>
-                  </div>
-
-                  <div class="mask js-mask"></div>
-
-                  <div class="clearfix"></div>
-                </div>
+            <section class="archives-wrap">
+              <div class="archive-year-wrap">
+                <a href="/archives/2017" class="archive-year">2017</a>
               </div>
-            </article>
+              <div class="archives">
 
-            <nav id="article-nav">
+                <article class="archive-article archive-type-post">
+                  <div class="archive-article-inner">
+                    <header class="archive-article-header">
+                      <div class="article-meta">
+                        <a href="/2017/04/28/supervisor 是基于python的进程管理工具/" class="archive-article-date">
+                          <time datetime="2017-04-28T03:24:12.000Z" itemprop="datePublished">
+                            <i class="icon-calendar icon"></i>2017-04-28</time>
+                        </a>
 
-              <a href="/2017/05/27/Mac下打造流畅的终端使用环境/" id="article-nav-newer" class="article-nav-link-wrap">
-                <i class="icon-circle-left"></i>
-                <div class="article-nav-title">
+                      </div>
+                      <h1 itemprop="name">
+                        <a class="archive-article-title" href="/2017/04/28/supervisor 是基于python的进程管理工具/">supervisor linux后台进程管理利器</a>
+                      </h1>
 
-                  Mac下打造流畅的终端使用环境
+                      <div class="article-info info-on-right">
+                        <div class="article-tag tagcloud">
+                          <i class="icon-price-tags icon"></i>
+                          <ul class="article-tag-list">
 
-                </div>
-              </a>
+                            <li class="article-tag-list-item">
+                              <a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+                            </li>
 
-              <a href="/2017/05/22/ffmpeg简易介绍/" id="article-nav-older" class="article-nav-link-wrap">
-                <div class="article-nav-title">ffmpeg简易介绍</div>
-                <i class="icon-circle-right"></i>
-              </a>
+                          </ul>
+                        </div>
 
+                      </div>
+                      <div class="clearfix"></div>
+                    </header>
+                  </div>
+                </article>
+
+              </div>
+            </section>
+
+            <nav id="page-nav">
+              <a class="extend prev" rel="prev" href="/tags/Linux/">&laquo; Prev</a>
+              <a class="page-number" href="/tags/Linux/">1</a>
+              <span class="page-number current">2</span>
             </nav>
 
           </div>
@@ -404,9 +229,9 @@
       var yiliaConfig = {
         mathjax: false,
         isHome: false,
-        isPost: true,
+        isPost: false,
         isArchive: false,
-        isTag: false,
+        isTag: true,
         isCategory: false,
         open_in_new: false,
         root: "/",

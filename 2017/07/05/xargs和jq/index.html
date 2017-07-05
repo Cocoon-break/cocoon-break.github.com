@@ -7,19 +7,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>shell 脚本中读取参数值 | cocoon-break的博客</title>
+  <title>xargs 和 jq | cocoon-break的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="shell 脚本中读取参数值 通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了    根据参数位置直接获取         先定义一个脚本test.sh，打印位置参数">
+  <meta name="description" content="​ xargs是Linux系统上自带的命令，xargs命令是给其他命令传递参数的一个过滤器，也是组合多个命令的一个工具。jq 不是Linux系统自带的命令，需要自行安装。jq主要在Linux上解析json。    xargs ​ 举一个例子，我们常用的一个命令   rm -rf *.log 如果文件log文件太多我们会得到一个异常的信/bin/rm Argument list too long，也">
   <meta name="keywords" content="Linux">
   <meta property="og:type" content="article">
-  <meta property="og:title" content="shell 脚本中读取参数值">
-  <meta property="og:url" content="http://yoursite.com/2017/05/25/shell 脚本中读取参数值/index.html">
+  <meta property="og:title" content="xargs 和 jq">
+  <meta property="og:url" content="http://yoursite.com/2017/07/05/xargs和jq/index.html">
   <meta property="og:site_name" content="cocoon-break的博客">
-  <meta property="og:description" content="shell 脚本中读取参数值 通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了    根据参数位置直接获取         先定义一个脚本test.sh，打印位置参数">
-  <meta property="og:updated_time" content="2017-05-27T15:01:47.000Z">
+  <meta property="og:description" content="​ xargs是Linux系统上自带的命令，xargs命令是给其他命令传递参数的一个过滤器，也是组合多个命令的一个工具。jq 不是Linux系统自带的命令，需要自行安装。jq主要在Linux上解析json。    xargs ​ 举一个例子，我们常用的一个命令   rm -rf *.log 如果文件log文件太多我们会得到一个异常的信/bin/rm Argument list too long，也">
+  <meta property="og:updated_time" content="2017-07-05T07:47:26.000Z">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="shell 脚本中读取参数值">
-  <meta name="twitter:description" content="shell 脚本中读取参数值 通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了    根据参数位置直接获取         先定义一个脚本test.sh，打印位置参数">
+  <meta name="twitter:title" content="xargs 和 jq">
+  <meta name="twitter:description" content="​ xargs是Linux系统上自带的命令，xargs命令是给其他命令传递参数的一个过滤器，也是组合多个命令的一个工具。jq 不是Linux系统自带的命令，需要自行安装。jq主要在Linux上解析json。    xargs ​ 举一个例子，我们常用的一个命令   rm -rf *.log 如果文件log文件太多我们会得到一个异常的信/bin/rm Argument list too long，也">
 
   <link rel="alternative" href="/atom.xml" title="cocoon-break的博客" type="application/atom+xml">
 
@@ -161,103 +161,144 @@
                                                                                             id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-shell 脚本中读取参数值" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-xargs和jq" class="article article-type-post " itemscope itemprop="blogPost">
               <div class="article-inner">
 
                 <header class="article-header">
                   <h1 class="article-title" itemprop="name">
-                    shell 脚本中读取参数值
+                    xargs 和 jq
                   </h1>
 
-                  <a href="/2017/05/25/shell 脚本中读取参数值/" class="archive-article-date">
-                    <time datetime="2017-05-25T03:14:12.000Z" itemprop="datePublished">
-                      <i class="icon-calendar icon"></i>2017-05-25</time>
+                  <a href="/2017/07/05/xargs和jq/" class="archive-article-date">
+                    <time datetime="2017-07-05T05:45:12.000Z" itemprop="datePublished">
+                      <i class="icon-calendar icon"></i>2017-07-05</time>
                   </a>
 
                 </header>
 
                 <div class="article-entry" itemprop="articleBody">
 
-                  <p>shell 脚本中读取参数值</p>
-                  <p>通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了</p>
-                  <h2 id="根据参数位置直接获取">
-                    <a href="#根据参数位置直接获取" class="headerlink" title="根据参数位置直接获取"></a>根据参数位置直接获取</h2>
-                  <ol>
-                    <li>
-                      <p>先定义一个脚本test.sh，打印位置参数</p>
-                      <figure class="highlight plain">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
-                            </td>
-                            <td class="code">
-                              <pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">echo $1</div><div class="line">echo $2</div></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                    </li>
-                    <li>
-                      <p>执行test.sh脚本</p>
-                      <figure class="highlight plain">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><div class="line">1</div></pre>
-                            </td>
-                            <td class="code">
-                              <pre><div class="line">./test.sh haha hehehe</div></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                      <p>执行的结果就是打印了两个参数，这个种方式的弊端就是，如果参数的位置传错了，那么$1 的值就不是haha了，当然可以使用这种方式写，就是可读性不太高
-                        哈。
-                      </p>
-                      <a id="more"></a>
-                    </li>
-                  </ol>
-                  <h2 id="指定key-获取参数">
-                    <a href="#指定key-获取参数" class="headerlink" title="指定key 获取参数"></a>指定key 获取参数</h2>
-                  <ol>
-                    <li>
-                      <p>一样的我们先定义脚本test.sh，一会儿我们在解读shell脚本中的含义</p>
-                      <figure class="highlight plain">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre>
-                            </td>
-                            <td class="code">
-                              <pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">#先定义接收各个参数值的变量</div><div class="line">IP_VALUE=&quot;&quot;; NODE_VALUE=&quot;&quot;;VIP_VALUE=&quot;&quot;;</div><div class="line"></div><div class="line">while true;do </div><div class="line">	if [ ! $2 ]; then break; fi</div><div class="line">	case $1 in</div><div class="line">		-i|--ip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)IP_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)IP_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-n|--node)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-v|--vip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		 --) shift ;break ;;</div><div class="line">		 *) break;;</div><div class="line">		esac</div><div class="line">done</div><div class="line"></div><div class="line">if [ -z &quot;$&#123;IP_VALUE&#125;&quot; ];    then echo &quot;error: ip is not found.&quot;;             exit 1; fi</div><div class="line">if [ -z &quot;$&#123;NODE_VALUE&#125;&quot; ];  then echo &quot;error: node is not found.&quot;;           exit 1; fi</div><div class="line">if [ -z &quot;$&#123;VIP_VALUE&#125;&quot; ];   then echo &quot;error: vip is not found.&quot;;            exit 1; fi</div></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                      <ul>
-                        <li>通过while 循环参数的$1 和$2 取key 和 value。</li>
-                        <li>case $1取参数的key，case $2取其中的值，如果取到了，就通过shift 2，把最前面的两个位置给移除了比如:
-                          <code>./test.sh -v kkk -n bbbb</code> 读取到如果执行了 shift 2,它就会把-v
-                          kkk 给扔了</li>
-                        <li>底下的if 是判断有没有读取到想要的值</li>
-                      </ul>
-                    </li>
-                    <li>
-                      <p>其他的方式去根据key获取参数</p>
-                      <ul>
-                        <li>一个是getopts 但是getopts不支持长选项，具体可以参考
-                          <a href="http://www.cnblogs.com/xiangzi888/archive/2012/04/03/2430736.html" target="_blank"
-                                                                                                          rel="external">getopts命令行参数处理</a>
-                        </li>
-                        <li>另一个是getopt，
-                          <a href="http://blog.csdn.net/wh211212/article/details/53750366" target="_blank"
-                                                                                                          rel="external">shell中使用getopts 和 getopt</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ol>
-                  <p>个人建议使用第一种方式去处理shell参数，不会有太多的局限性，唯一的问题就是代码会多一些哈！</p>
+                  <p>​ xargs是Linux系统上自带的命令，xargs命令是给其他命令传递参数的一个过滤器，也是组合多个命令的一个工具。jq
+                    不是Linux系统自带的命令，需要自行安装。jq主要在Linux上解析json。</p>
+                  <h2 id="xargs">
+                    <a href="#xargs" class="headerlink" title="xargs"></a>xargs</h2>
+                  <p>​ 举一个例子，我们常用的一个命令
+                    <code>rm -rf *.log</code> 如果文件log文件太多我们会得到一个异常的信/bin/rm Argument list
+                    too long，也就是说rm能接受的参数是有限的。这时我们就可以利用xargs 过滤。
+                  </p>
+                  <figure class="highlight sh">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div></pre>
+                        </td>
+                        <td class="code">
+                          <pre><div class="line">ls *.log | xargs rm -rf</div></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p>ls 将当前目录下的log文件名标准输出，通过管道传递给xargs 过滤，然后进行删除。</p>
+                  <p>
+                    <strong>题外话：</strong> Linux上一些以减号开头的文件，会将这个文件认为是一个参数，如：
+                    <code>rm -rf -xxxx.log</code>是无法执行的，无论是其他的什么命令去处理类似文件名的文件，都会有这个问题。可以通过在文件名前加两个减号解决。</p>
+                  <p>如
+                    <code>rm -rf -- -xxxx.log</code>
+                  </p>
+                  <p>​ xargs 的具体用法，还是一个文件夹中有一大堆文件，通过
+                    <code>ls</code>可以将文件多行输出。但是我想单行或者指定行数输出呢！通过给xargs指定-n 参数。</p>
+                  <figure class="highlight sh">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div></pre>
+                        </td>
+                        <td class="code">
+                          <pre><div class="line">ls *.log | xargs -n2 <span class="comment">#-n2 就是指定两行输出，-n3就是三行输出，以此类推</span></div></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p>前面都是一些简易的操作，感觉不到xargs 到底是怎么处理管道出来的文件。现在我的一个需求是将所有的log文件复制到指定目录下。普通复制命令
+                    <code>cp xxx.log /var/log</code>。我们先忽略cp 命令有-r参数。先看看以下写法是否正确</p>
+                  <figure class="highlight sh">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div></pre>
+                        </td>
+                        <td class="code">
+                          <pre><div class="line">ls *.log | xargs cp /var/<span class="built_in">log</span></div></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p>你一看立马就觉得不对，cp 不是接受两个参数吗？一个文件，一个目标文件或路径。可是又不知道怎么去解决这个事。在我们上面的例子都真正没有去理解xargs，如
+                    <code>ls *.log | xargs rm -rf</code> 为什么能好使？ls出来的文件通过管道传递给xargs 过滤，然后xargs
+                    过滤出的文件默认追加到命令行的最后。但是在这个例子中，我们不想将xargs吐出来的放到命令行的最后。xargs的占位符就发挥作用了，将上面的命令修改</p>
+                  <figure class="highlight sh">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div></pre>
+                        </td>
+                        <td class="code">
+                          <pre><div class="line">ls *.log | xargs -I &#123;&#125; cp &#123;&#125;  /var/<span class="built_in">log</span>/</div></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p>通过
+                    <code>-I</code>参数指定大括号为占位符，cp后的大括号就是xargs 吐出来的文件名。这里不一定使用大括号，也可指定其他的符号。
+                    <code>-i</code>默认的占位符就是大括号</p>
+                  <figure class="highlight sh">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div></pre>
+                        </td>
+                        <td class="code">
+                          <pre><div class="line">ls *.log | xargs -i cp &#123;&#125; /var/<span class="built_in">log</span>/</div></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p>xargs还有一个-P的参数，是指定xargs同时处理多少个命令。但是感觉没什么效果。例子
+                    <code>ls *.log | xargs -P 8 -i cp {} /var/log/</code>
+                  </p>
+                  <p>xargs 的使用就讲到这里</p>
+                  <h2 id="jq">
+                    <a href="#jq" class="headerlink" title="jq"></a>jq</h2>
+                  <p>jq 命令并不是Linux系统自带的，所以我们需要格外安装。
+                    <a href="https://stedolan.github.io/jq/download/" target="_blank" rel="external">下载的地址</a>
+                  </p>
+                  <p>jq 的官方说法是jq is like
+                    <code>sed</code> for JSON data - you can use it to slice and filter
+                    and map and transform structured data with the same ease that
+                    <code>sed</code>,
+                    <code>awk</code>,
+                    <code>grep</code> and friends let you play with text。使用jq在Linux系统上去处理json是非常方便的。比如在终端上curl一个接口，返回一个json，这个json可能很长，我只想看其中部分数据，就可以用上jq了。</p>
+                  <p>jq的用法也很简单，而且官方的例子也很全。这里主要是记录下有这么一个好用的东西。哈哈哈</p>
+                  <p>
+                    <a href="https://stedolan.github.io/jq/tutorial/" target="_blank" rel="external">
+                      官方教程</a>
+                  </p>
+                  <h2 id="自己实践的例子">
+                    <a href="#自己实践的例子" class="headerlink" title="自己实践的例子"></a>自己实践的例子</h2>
+                  <p>前段时间有需要将两万张的照片去发起请求，然后处理curl返回的结果。利用了xargs和jq。将命令贴出来记录一下。</p>
+                  <figure class="highlight sh">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div></pre>
+                        </td>
+                        <td class="code">
+                          <pre><div class="line">ls TP | xargs -i -n1 curl <span class="_">-s</span> -F img=@TP/&#123;&#125; http://127.0.0.1:9001/faceid/v1/liveness_cfg                                                                 | jq -c -r <span class="string">'[.liveness.mask,.liveness.replay,.liveness.graphics]'</span> &gt; TP.txt &amp;</div></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p>TP就是有两万张照片的文件夹，将请求的结果通过jq处理，然后输出到TP.txt文件 中</p>
 
                   <div class="page-reward">
                     <a href="javascript:;" class="page-reward-btn tooltip-top">
@@ -352,7 +393,7 @@
                     </a>
                     <p>扫一扫，分享到微信</p>
                     <div class="wx-qrcode">
-                      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/25/shell 脚本中读取参数值/"
+                      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/07/05/xargs和jq/"
                                                                                                       alt="微信分享二维码">
                     </div>
                   </div>
@@ -366,17 +407,8 @@
 
             <nav id="article-nav">
 
-              <a href="/2017/05/27/Mac下打造流畅的终端使用环境/" id="article-nav-newer" class="article-nav-link-wrap">
-                <i class="icon-circle-left"></i>
-                <div class="article-nav-title">
-
-                  Mac下打造流畅的终端使用环境
-
-                </div>
-              </a>
-
-              <a href="/2017/05/22/ffmpeg简易介绍/" id="article-nav-older" class="article-nav-link-wrap">
-                <div class="article-nav-title">ffmpeg简易介绍</div>
+              <a href="/2017/06/30/caddy的简易使用/" id="article-nav-older" class="article-nav-link-wrap">
+                <div class="article-nav-title">caddy的简易使用</div>
                 <i class="icon-circle-right"></i>
               </a>
 
