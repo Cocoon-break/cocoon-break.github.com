@@ -160,6 +160,164 @@
                                                                                             id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
+            <article id="post-python 开发服务端" class="article article-type-post  article-index"
+                                                                                            itemscope itemprop="blogPost">
+              <div class="article-inner">
+
+                <header class="article-header">
+                  <h1 itemprop="name">
+                    <a class="article-title" href="/2017/06/19/python 开发服务端/">python 开发服务端</a>
+                  </h1>
+
+                  <a href="/2017/06/19/python 开发服务端/" class="archive-article-date">
+                    <time datetime="2017-06-19T02:19:31.000Z" itemprop="datePublished">
+                      <i class="icon-calendar icon"></i>2017-06-19</time>
+                  </a>
+
+                  0
+                </header>
+
+                <div class="article-entry" itemprop="articleBody">
+
+                  <p>最新在开发微信公众号，选择了python做为后端开发的语言。之所以选择python作为开发语言，是因为python开发起来比较快，而且也容易上手。选用的python版本是python2.7.13</p>
+                  <h2 id="先了解下python的一些基本知识">
+                    <a href="#先了解下python的一些基本知识" class="headerlink" title="先了解下python的一些基本知识"></a>先了解下python的一些基本知识</h2>
+                  <ul>
+                    <li>
+                      <p>在mac 上执行
+                        <code>pip install xxx</code>会把包安装到哪里？</p>
+                      <p>如果Mac上装了多个版本的Python，可以同过
+                        <code>python --version</code>查看，然后会将包安装到
+                        <code>/usr/local/lib/pythonxxx/site-packages</code>下</p>
+                    </li>
+                    <li>
+                      <p>创建虚拟开发环境</p>
+                      <p>在使用Python开发的时候，各个应用所需的Python版本可能不同，这时我们就需要一个独立的Python开发环境。virtualenv就是用来为一个应用创建一套“隔离”的Python运行环境。</p>
+                      <ul>
+                        <li>
+                          <p>安装virtualenv</p>
+                          <figure class="highlight sh">
+                            <table>
+                              <tr>
+                                <td class="gutter">
+                                  <pre><div class="line">1</div></pre>
+                                </td>
+                                <td class="code">
+                                  <pre><div class="line">pip install virtualenv</div></pre>
+                                </td>
+                              </tr>
+                            </table>
+                          </figure>
+                        </li>
+                        <li>
+                          <p>创建一个目录并创建一个独立的Python环境venv</p>
+                          <figure class="highlight sh">
+                            <table>
+                              <tr>
+                                <td class="gutter">
+                                  <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre>
+                                </td>
+                                <td class="code">
+                                  <pre><div class="line">mkdir <span class="built_in">test</span>Python</div><div class="line"><span class="built_in">cd</span> <span class="built_in">test</span>Python</div><div class="line">virtualenv --no-site-packages venv</div></pre>
+                                </td>
+                              </tr>
+                            </table>
+                          </figure>
+                          <p>
+                            <strong>注：</strong> 参数
+                            <code>--no-site-packages</code>，不会将系统已安装的第三方包复制过来，这样我们就得到一个干净的Python开发环境</p>
+                        </li>
+                        <li>
+                          <p>使用这个venv环境</p>
+                          <figure class="highlight sh">
+                            <table>
+                              <tr>
+                                <td class="gutter">
+                                  <pre><div class="line">1</div></pre>
+                                </td>
+                                <td class="code">
+                                  <pre><div class="line"><span class="built_in">source</span> venv/bin/activate</div></pre>
+                                </td>
+                              </tr>
+                            </table>
+                          </figure>
+                          <p>接下来
+                            <code>pip install xxx</code> 都会把Python包放在
+                            <code>testPython/venv/lib/python2.7/site-packages</code>目录下</p>
+                        </li>
+                        <li>
+                          <p>离开venv 环境</p>
+                          <figure class="highlight sh">
+                            <table>
+                              <tr>
+                                <td class="gutter">
+                                  <pre><div class="line">1</div></pre>
+                                </td>
+                                <td class="code">
+                                  <pre><div class="line">deactivte</div></pre>
+                                </td>
+                              </tr>
+                            </table>
+                          </figure>
+                        </li>
+                      </ul>
+                      <p>virtualenv是如何创建“独立”的Python运行环境的呢？原理很简单，就是把系统Python复制一份到virtualenv的环境，用命令
+                        <code>source venv/bin/activate</code>进入一个virtualenv环境时，virtualenv会修改相关环境变量，让命令
+                        <code>python</code>和
+                        <code>pip</code>均指向当前的virtualenv环境。</p>
+                    </li>
+                  </ul>
+                  <p>​
+                    <strong>注：</strong> 使用venv 环境之后，执行
+                    <code>pip install xxxx</code> ，它会把这些依赖包安装在
+                    <code>venv/lib/python2.7/site-packages</code>目录下</p>
+                  <ul>
+                    <li>
+                      <p>依赖第三方库的统一配置文件
+                        <strong>requirements.txt</strong>
+                      </p>
+                      <figure class="highlight plain">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">Flask==0.12</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                      <p>通过
+                        <code>pip install -r requirements.txt</code>来安装文件中依赖的一些第三方库</p>
+                    </li>
+                  </ul>
+
+                  <a class="article-more-a" href="/2017/06/19/python 开发服务端/#more">more >></a>
+
+                </div>
+                <div class="article-info article-info-index">
+
+                  <div class="article-tag tagcloud">
+                    <i class="icon-price-tags icon"></i>
+                    <ul class="article-tag-list">
+
+                      <li class="article-tag-list-item">
+                        <a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+                      </li>
+
+                    </ul>
+                  </div>
+
+                  <p class="article-more-link">
+                    <a class="article-more-a" href="/2017/06/19/python 开发服务端/">展开全文 >></a>
+                  </p>
+
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </article>
+
             <article id="post-RN中使用mobx来进行状态管理" class="article article-type-post  article-index"
                                                                                             itemscope itemprop="blogPost">
               <div class="article-inner">
@@ -174,6 +332,7 @@
                       <i class="icon-calendar icon"></i>2017-06-13</time>
                   </a>
 
+                  0
                 </header>
 
                 <div class="article-entry" itemprop="articleBody">
@@ -228,6 +387,7 @@
                       <i class="icon-calendar icon"></i>2017-06-13</time>
                   </a>
 
+                  0
                 </header>
 
                 <div class="article-entry" itemprop="articleBody">
@@ -288,6 +448,7 @@
                       <i class="icon-calendar icon"></i>2017-06-02</time>
                   </a>
 
+                  0
                 </header>
 
                 <div class="article-entry" itemprop="articleBody">
@@ -339,85 +500,12 @@
               </div>
             </article>
 
-            <article id="post-Mac下打造流畅的终端使用环境" class="article article-type-post  article-index"
-                                                                                            itemscope itemprop="blogPost">
-              <div class="article-inner">
-
-                <header class="article-header">
-                  <h1 itemprop="name">
-                    <a class="article-title" href="/2017/05/27/Mac下打造流畅的终端使用环境/">Mac下打造流畅的终端使用环境</a>
-                  </h1>
-
-                  <a href="/2017/05/27/Mac下打造流畅的终端使用环境/" class="archive-article-date">
-                    <time datetime="2017-05-27T09:02:12.000Z" itemprop="datePublished">
-                      <i class="icon-calendar icon"></i>2017-05-27</time>
-                  </a>
-
-                </header>
-
-                <div class="article-entry" itemprop="articleBody">
-
-                  <p>作为程序员Mac上自带的终端是远远满足不了我们的，这时我们就要自己手动搭一个我们顺手的终端环境。下面我们就来搭建iterm2+
-                    oh my zsh + tmux 的终端工具
-                  </p>
-                  <h2 id="ITerm2-安装">
-                    <a href="#ITerm2-安装" class="headerlink" title="ITerm2 安装"></a>ITerm2 安装</h2>
-                  <ol>
-                    <li>
-                      <p>上Iterm2的官网下载iterm2,
-                        <a href="http://www.iterm2.com/" target="_blank" rel="external">iterm2下载</a>
-                      </p>
-                    </li>
-                    <li>
-                      <p>下载完成之后，发现iterm2 自带的配色我不太喜欢，安装完成之后进行item2的配色，这个纯属看个人喜好了。</p>
-                      <ul>
-                        <li>
-                          <p>要进行配色，我们当然得要有配色的方案啦！什么你要自己配一个，嗯…… 这也是可以的，不过有很多现成的方案你要不要啊。github
-                            上有超多的配色方案，我们先把这个库给clone下来。</p>
-                          <figure class="highlight sh">
-                            <table>
-                              <tr>
-                                <td class="gutter">
-                                  <pre><div class="line">1</div></pre>
-                                </td>
-                                <td class="code">
-                                  <pre><div class="line">git <span class="built_in">clone</span> git@github.com:mbadolato/iTerm2-Color-Schemes.git</div></pre>
-                                </td>
-                              </tr>
-                            </table>
-                          </figure>
-                          <p>要是你没有git，那我觉得你没太必要继续下去了。当然你还想继续的话，你就上GitHub手动download 下来。</p>
-
-                          <a class="article-more-a" href="/2017/05/27/Mac下打造流畅的终端使用环境/#more">more >></a>
-
-                </div>
-                <div class="article-info article-info-index">
-
-                  <div class="article-tag tagcloud">
-                    <i class="icon-price-tags icon"></i>
-                    <ul class="article-tag-list">
-
-                      <li class="article-tag-list-item">
-                        <a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技巧</a>
-                      </li>
-
-                    </ul>
-                  </div>
-
-                  <p class="article-more-link">
-                    <a class="article-more-a" href="/2017/05/27/Mac下打造流畅的终端使用环境/">展开全文 >></a>
-                  </p>
-
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </article>
-
             <nav id="page-nav">
               <a class="extend prev" rel="prev" href="/">&laquo; Prev</a>
               <a class="page-number" href="/">1</a>
               <span class="page-number current">2</span>
               <a class="page-number" href="/page/3/">3</a>
+              <a class="page-number" href="/page/4/">4</a>
               <a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
             </nav>
 
@@ -7012,15 +7100,15 @@
             <ul class="article-tag-list" q-show="showTags">
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
-              </li>
-
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
 
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">react-native</a>
+              </li>
+
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
               </li>
 
               <li class="article-tag-list-item">
@@ -7032,11 +7120,11 @@
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">开发随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">开发随笔</a>
               </li>
 
               <div class="clearfix"></div>
