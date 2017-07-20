@@ -188,93 +188,8 @@
                   <p>​ 在尝试方案一的过程中，我发现原来把一个Linux系统弄崩其实很简单，崩了之后各种无法使用，你只能去重装系统。你只要执行
                     <code>mv /lib64/libc.so.6 /lib64/libc.so.6.bak</code>,你会发现接下来无论你输入什么命令都不好使了。这是因为
                     <code>/lib64/libc.so.6</code>是最底层的库，系统上的程序基本是依赖这个库的。所以/lib64下的so库不要轻易去动。</p>
-                  <p>​ 于是我去尝试了第二种方案，弄一个统一的环境，那要怎么弄呢？so 库是依赖系统的libc.so.6，我要怎么让我的这个工程的so不去依赖/lib64
-                    下的so而是去依赖我指定的一个路径的so呢？
-                  </p>
-                  <ol>
-                    <li>
-                      <p>我先用docker搭建一个可以运行工程的环境，使用docker弄了一个ubuntu的系统。以下是一些使用的命令</p>
-                      <figure class="highlight sh">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre>
-                            </td>
-                            <td class="code">
-                              <pre><div class="line">docker pull ubuntu <span class="comment">#获取ubuntu的镜像</span></div><div class="line">docker run -it --name kas -v /Users/wushengping/dockerUbuntu:/go -p 9001:9001 ubuntu bash <span class="comment">#第一次以交互模式启动ubuntu，并命名为kas，同时将ubuntu系统端口9001映射到本机上</span></div><div class="line">docker ps <span class="_">-a</span> <span class="comment">#查看docker 下所有container状态</span></div><div class="line">docker start kas <span class="comment"># 启动kas,kas是ubuntu系统镜像，只是启动并为进入交互模式</span></div><div class="line">docker <span class="built_in">exec</span> -it kas bash <span class="comment">#进入ubuntu 交互模式</span></div></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                    </li>
-                    <li>
-                      <p>在ubuntu上可以正常运行之后，通过ldd 的命令将so依赖的系统相关的so 导出来,同时将/lib64/ld-linux-x86-64.so.2
-                        也导出来
-                      </p>
-                      <figure class="highlight sh">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><div class="line">1</div><div class="line">2</div></pre>
-                            </td>
-                            <td class="code">
-                              <pre><div class="line">cp `ldd xxxx.so | awk <span class="string">'&#123;print $3&#125;'</span> | grep <span class="string">'^[^(]'</span>` ~/libs</div><div class="line">cp /lib64/ld-linux-x86-64.so.2  ~</div></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                    </li>
-                    <li>
-                      <p>将刚才的导出的库，传到redhats6.4系统上，然后指定工程运行所需的依赖库。</p>
-                      <figure class="highlight sh">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><div class="line">1</div></pre>
-                            </td>
-                            <td class="code">
-                              <pre><div class="line">ld-linux-x86-64.so.2 --library-path ./libs python xxxx <span class="comment">#xxx表示工程的入口文件</span></div></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                      <p> 这时你会发现这个工程起都起不来了，并报了core dump 的错误，这时因为指定路径之后，只能通过二进制的方式去启动这个工程。而python
-                        只是一个命令，并不是二进制的文件，无法执行。这里需要注意的是ld-linux-x86-64.so.2 只能是刚才从ubuntu导出来的文件，否则也会报core
-                        dump
-                      </p>
-                    </li>
-                    <li>
-                      <p>在第三步我们没有成功运行起来，是因为我们还缺少将python工程编译成一个二进制可执行的文件。
-                        <strong>pyInstaller</strong> 这个工具可以将python工程打成一个二进制的包，同时会将工程依赖的库也打进这个二进制。</p>
-                      <figure class="highlight sh">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><div class="line">1</div></pre>
-                            </td>
-                            <td class="code">
-                              <pre><div class="line">pyinstall <span class="_">-f</span> entry.py <span class="comment">#entry.py 是你整个工程的入口文件</span></div></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                      <p> 执行完成之后会生成一个dist目录，目录下有整个工程的二进制文件</p>
-                    </li>
-                    <li>
-                      <p>整个私有化的流程算是完成了交付给客户的时候包括一下文件</p>
-                      <ul>
-                        <li>ld-linux-x86-64.so.2</li>
-                        <li>libs </li>
-                        <li>
-                          <p>可执行的二进制文件</p>
-                          <p>当然实际交付的工程中有更多的文件，看工程是怎么规划的。这里不过多解释</p>
-                        </li>
-                      </ul>
-                    </li>
-                  </ol>
-                  <p>本篇文章主要是记录私有化工程的一些思路，过程中遇到的很多坑。很多细节这里也不去体现了。大家自行领会。其中关于的docker的使用和pyinstaller
-                    的安装使用，不是本篇文章的重点。可以自行谷歌
-                  </p>
+
+                  <a class="article-more-a" href="/2017/07/20/私有化的坑/#more">more >></a>
 
                 </div>
                 <div class="article-info article-info-index">
@@ -7125,11 +7040,11 @@
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">react-native</a>
+                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
+                <a href="javascript:void(0)" class="js-tag color3">react-native</a>
               </li>
 
               <li class="article-tag-list-item">
