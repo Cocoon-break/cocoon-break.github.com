@@ -160,6 +160,208 @@
                                                                                             id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
+            <article id="post-构建干净可移植Python包" class="article article-type-post  article-index"
+                                                                                            itemscope itemprop="blogPost">
+              <div class="article-inner">
+
+                <header class="article-header">
+                  <h1 itemprop="name">
+                    <a class="article-title" href="/2017/11/28/构建干净可移植Python包/">Linux下构建干净可移植Python包</a>
+                  </h1>
+
+                  <a href="/2017/11/28/构建干净可移植Python包/" class="archive-article-date">
+                    <time datetime="2017-11-28T06:27:00.000Z" itemprop="datePublished">
+                      <i class="icon-calendar icon"></i>2017-11-28</time>
+                  </a>
+
+                </header>
+
+                <div class="article-entry" itemprop="articleBody">
+
+                  <h2 id="Linux下构建干净可移植Python包">
+                    <a href="#Linux下构建干净可移植Python包" class="headerlink" title="Linux下构建干净可移植Python包"></a>Linux下构建干净可移植Python包</h2>
+                  <h3 id="指定目录安装Python">
+                    <a href="#指定目录安装Python" class="headerlink" title="指定目录安装Python"></a>指定目录安装Python</h3>
+                  <ol>
+                    <li>
+                      <p>从python官网下载python源码包,根据自己需要的版本下载
+                        <a href="https://www.python.org/downloads/" target="_blank" rel="external">下载地址</a>
+                      </p>
+                    </li>
+                    <li>
+                      <p>我下载的是python2.7.13的版本，下载之后解压</p>
+                      <figure class="highlight shell">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">tar xzvf Python-2.7.13.tgz</div><div class="line">cd Python-2.7.13</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                    </li>
+                    <li>
+                      <p>编译与安装</p>
+                      <p>在解压开的目录中，查看编译支持的选项，编译支持的选项有很多这么不一一介绍。</p>
+                      <figure class="highlight shell">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">./configure --help</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                      <p>我们主要使用的配置项是 —prefix 是用来指定python编译之后生成的一些文件具体要存放在哪个目录下，比如我要放到
+                        <code>/root/python27</code>下</p>
+                      <figure class="highlight shell">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">./configure --prefix=/root/python27</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                      <p>通过执行configure脚本来生成之后编译使用的Makefile,make命令读取Makefile里的信息来编译。</p>
+                      <figure class="highlight shell">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">make #make实际上编译源代码，并生成执行文件。</div><div class="line">make install #是把生成的执行文件复制到，刚才第一步指定的/root/python27/bin下。</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                      <p>总结下编译的三个步骤的命令</p>
+                      <ul>
+                        <li>
+                          <code>./configure --prefix=/root/python27</code>
+                        </li>
+                        <li>
+                          <code>make</code>
+                        </li>
+                        <li>
+                          <code>make install</code>
+                        </li>
+                      </ul>
+                      <p>最终/root/python27下的目录结构是</p>
+                      <figure class="highlight shell">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">bin  include  lib  share</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+
+                      <a class="article-more-a" href="/2017/11/28/构建干净可移植Python包/#more">more >></a>
+
+                </div>
+                <div class="article-info article-info-index">
+
+                  <div class="article-tag tagcloud">
+                    <i class="icon-price-tags icon"></i>
+                    <ul class="article-tag-list">
+
+                      <li class="article-tag-list-item">
+                        <a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+                      </li>
+
+                    </ul>
+                  </div>
+
+                  <p class="article-more-link">
+                    <a class="article-more-a" href="/2017/11/28/构建干净可移植Python包/">展开全文 >></a>
+                  </p>
+
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </article>
+
+            <article id="post-加密算法简介" class="article article-type-post  article-index" itemscope
+                                                                                            itemprop="blogPost">
+              <div class="article-inner">
+
+                <header class="article-header">
+                  <h1 itemprop="name">
+                    <a class="article-title" href="/2017/08/28/加密算法简介/">加密算法简介</a>
+                  </h1>
+
+                  <a href="/2017/08/28/加密算法简介/" class="archive-article-date">
+                    <time datetime="2017-08-28T07:47:00.000Z" itemprop="datePublished">
+                      <i class="icon-calendar icon"></i>2017-08-28</time>
+                  </a>
+
+                </header>
+
+                <div class="article-entry" itemprop="articleBody">
+
+                  <p>​ 对于加密算法我也不是很熟，只能是单纯去使用，但是最近做项目时涉及到国密算法，由于个人对算法差不多是七窍通了六窍，一窍不通啊。于是同事给我科普了一下。</p>
+                  <p>​ 先将加密算法分两个大方向：1. 不可逆的加密算法 2. 不可逆的加密算法</p>
+                  <h2 id="不可逆的加密算法">
+                    <a href="#不可逆的加密算法" class="headerlink" title="不可逆的加密算法"></a>不可逆的加密算法</h2>
+                  <p>​ 不可以逆的意思就是说，加密之后，你也不知道加密前的明文。如果要确认加密前的明文，你只能重新将明文加密一遍，看两次得出来的密文是否一致。不可逆加密算法的特征是加密过程中不需要使用密钥，直接输入明文通过算法处理后得到密文。</p>
+                  <p>​ 典型的不可逆的加密算法是
+                    <strong>MD5</strong> : MD5对要加密的对象没有大小限制，加密之后的密文长度为
+                    <strong>128bit</strong>,这里是128bit和字节是不一样的，转换成字节的话也就是16Byte。</p>
+                  <figure class="highlight sh">
+                    <table>
+                      <tr>
+                        <td class="gutter">
+                          <pre><div class="line">1</div><div class="line">2</div></pre>
+                        </td>
+                        <td class="code">
+                          <pre><div class="line">~/tmp » md5 test.jpg</div><div class="line">MD5 (test.jpg) = f368d709b8652bf78f9ce61d9fd70d7a</div></pre>
+                        </td>
+                      </tr>
+                    </table>
+                  </figure>
+                  <p>上面的例子通过md5加密了一张图片, MD5加密之后得到值是128bit，按4位二进制组合成一个十六进制，所以得出来的十六进制字符串是32个。</p>
+                  <p>一般来说不可逆的加密算法得出来的密文是定长的，无论要加密的内容大小是多少，如md5是32，sha256是64，sha512是128</p>
+
+                  <a class="article-more-a" href="/2017/08/28/加密算法简介/#more">more >></a>
+
+                </div>
+                <div class="article-info article-info-index">
+
+                  <div class="article-tag tagcloud">
+                    <i class="icon-price-tags icon"></i>
+                    <ul class="article-tag-list">
+
+                      <li class="article-tag-list-item">
+                        <a href="javascript:void(0)" class="js-tag article-tag-list-link color3">扩展</a>
+                      </li>
+
+                    </ul>
+                  </div>
+
+                  <p class="article-more-link">
+                    <a class="article-more-a" href="/2017/08/28/加密算法简介/">展开全文 >></a>
+                  </p>
+
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </article>
+
             <article id="post-内网端口映射到外网" class="article article-type-post  article-index" itemscope
                                                                                             itemprop="blogPost">
               <div class="article-inner">
@@ -255,174 +457,6 @@
 
                   <p class="article-more-link">
                     <a class="article-more-a" href="/2017/07/20/私有化的坑/">展开全文 >></a>
-                  </p>
-
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </article>
-
-            <article id="post-xargs和jq" class="article article-type-post  article-index" itemscope
-                                                                                            itemprop="blogPost">
-              <div class="article-inner">
-
-                <header class="article-header">
-                  <h1 itemprop="name">
-                    <a class="article-title" href="/2017/07/05/xargs和jq/">xargs 和 jq</a>
-                  </h1>
-
-                  <a href="/2017/07/05/xargs和jq/" class="archive-article-date">
-                    <time datetime="2017-07-05T05:45:12.000Z" itemprop="datePublished">
-                      <i class="icon-calendar icon"></i>2017-07-05</time>
-                  </a>
-
-                </header>
-
-                <div class="article-entry" itemprop="articleBody">
-
-                  <p>​ xargs是Linux系统上自带的命令，xargs命令是给其他命令传递参数的一个过滤器，也是组合多个命令的一个工具。jq
-                    不是Linux系统自带的命令，需要自行安装。jq主要在Linux上解析json。</p>
-                  <h2 id="xargs">
-                    <a href="#xargs" class="headerlink" title="xargs"></a>xargs</h2>
-                  <p>​ 举一个例子，我们常用的一个命令
-                    <code>rm -rf *.log</code> 如果文件log文件太多我们会得到一个异常的信/bin/rm Argument list
-                    too long，也就是说rm能接受的参数是有限的。这时我们就可以利用xargs 过滤。
-                  </p>
-                  <figure class="highlight sh">
-                    <table>
-                      <tr>
-                        <td class="gutter">
-                          <pre><div class="line">1</div></pre>
-                        </td>
-                        <td class="code">
-                          <pre><div class="line">ls *.log | xargs rm -rf</div></pre>
-                        </td>
-                      </tr>
-                    </table>
-                  </figure>
-                  <p>ls 将当前目录下的log文件名标准输出，通过管道传递给xargs 过滤，然后进行删除。</p>
-                  <p>
-                    <strong>题外话：</strong> Linux上一些以减号开头的文件，会将这个文件认为是一个参数，如：
-                    <code>rm -rf -xxxx.log</code>是无法执行的，无论是其他的什么命令去处理类似文件名的文件，都会有这个问题。可以通过在文件名前加两个减号解决。</p>
-                  <p>如
-                    <code>rm -rf -- -xxxx.log</code>
-                  </p>
-                  <p>​ xargs 的具体用法，还是一个文件夹中有一大堆文件，通过
-                    <code>ls</code>可以将文件多行输出。但是我想单行或者指定行数输出呢！通过给xargs指定-n 参数。</p>
-                  <figure class="highlight sh">
-                    <table>
-                      <tr>
-                        <td class="gutter">
-                          <pre><div class="line">1</div></pre>
-                        </td>
-                        <td class="code">
-                          <pre><div class="line">ls *.log | xargs -n2 <span class="comment">#-n2 就是指定两行输出，-n3就是三行输出，以此类推</span></div></pre>
-                        </td>
-                      </tr>
-                    </table>
-                  </figure>
-                  <p>前面都是一些简易的操作，感觉不到xargs 到底是怎么处理管道出来的文件。现在我的一个需求是将所有的log文件复制到指定目录下。普通复制命令
-                    <code>cp xxx.log /var/log</code>。我们先忽略cp 命令有-r参数。先看看以下写法是否正确</p>
-
-                  <a class="article-more-a" href="/2017/07/05/xargs和jq/#more">more >></a>
-
-                </div>
-                <div class="article-info article-info-index">
-
-                  <div class="article-tag tagcloud">
-                    <i class="icon-price-tags icon"></i>
-                    <ul class="article-tag-list">
-
-                      <li class="article-tag-list-item">
-                        <a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-                      </li>
-
-                    </ul>
-                  </div>
-
-                  <p class="article-more-link">
-                    <a class="article-more-a" href="/2017/07/05/xargs和jq/">展开全文 >></a>
-                  </p>
-
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </article>
-
-            <article id="post-caddy的简易使用" class="article article-type-post  article-index" itemscope
-                                                                                            itemprop="blogPost">
-              <div class="article-inner">
-
-                <header class="article-header">
-                  <h1 itemprop="name">
-                    <a class="article-title" href="/2017/06/30/caddy的简易使用/">caddy的简易使用</a>
-                  </h1>
-
-                  <a href="/2017/06/30/caddy的简易使用/" class="archive-article-date">
-                    <time datetime="2017-06-30T07:47:20.000Z" itemprop="datePublished">
-                      <i class="icon-calendar icon"></i>2017-06-30</time>
-                  </a>
-
-                </header>
-
-                <div class="article-entry" itemprop="articleBody">
-
-                  <p>​ caddy是一个开源的，使用golang 编写，支持HTTPS的web服务器，同时也可以作为负载均衡器使用，caddy的使用非常简单，只要一个二进制包就可以执行，不用像apache
-                    或者nginx 配置起来那么麻烦。</p>
-                  <p>​
-                    <a href="https://caddyserver.com/download" target="_blank" rel="external">caddy下载</a>
-                  </p>
-                  <p>​ caddy可以使用命令行参数的方式去执行，也可以指定配置文件去执行。使用命令行去执行，具体的参数名称参考
-                    <a href="https://caddyserver.com/docs/cli" target="_blank" rel="external">caddy 接收参数</a>
-                  </p>
-                  <p>​ caddy在某个文件夹下直接执行，通过访问
-                    <a href="http://localhost:2015访问文件下的所有内容。使用起来非常简单。" target="_blank" rel="external">http://localhost:2015访问文件下的所有内容。使用起来非常简单。</a>
-                  </p>
-                  <h3 id="使用">
-                    <a href="#使用" class="headerlink" title="使用"></a>使用</h3>
-                  <p> 通过配置文件来使用caddy，执行是
-                    <code>caddy -conf caddyfile</code>, 给caddy 配置不同的caddyfile如下</p>
-                  <ul>
-                    <li>
-                      <p>使用caddy 负载均衡，配置caddyfile</p>
-                      <figure class="highlight sh">
-                        <table>
-                          <tr>
-                            <td class="gutter">
-                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre>
-                            </td>
-                            <td class="code">
-                              <pre><div class="line">:1234</div><div class="line">proxy / ip1:port1,ip2:port2,ip3:port3&#123;</div><div class="line">  policy random</div><div class="line">  health_check /version</div><div class="line">  health_check_interval 30s</div><div class="line">  health_check_timeout 30s</div><div class="line">&#125;</div><div class="line"><span class="built_in">log</span> ／ /var/<span class="built_in">log</span>/caddy.log &#123;</div><div class="line">	rotate_size    100</div><div class="line">	rotate_age      7</div><div class="line">	rotate_keep     5</div><div class="line">&#125;</div></pre>
-                            </td>
-                          </tr>
-                        </table>
-                      </figure>
-                      <p>注：caddy监听本机
-                        <code>1234</code>端口，分别将请求转发给
-                        <code>ip1:port1,ip2:port2,ip3:port3</code> 三台机器，policy为负载均衡的策略，random表示从三台机器上随机选择负载，也有其他选项least_conn,
-                        round_robin, first, ip_hash, or uri_hash。
-                        <code>health_check</code>是对三台机器提供的服务进行健康检查，/version 为进行健康检查的接口。每30秒进行一次健康检查，每次检查超过30秒表示失败。如果发现这个接口不能正常返回，则回被caddy标识为不健康的服务，则后续的负载不会到不健康的服务上。配置log记录caddy日志信息</p>
-                    </li>
-                  </ul>
-
-                  <a class="article-more-a" href="/2017/06/30/caddy的简易使用/#more">more >></a>
-
-                </div>
-                <div class="article-info article-info-index">
-
-                  <div class="article-tag tagcloud">
-                    <i class="icon-price-tags icon"></i>
-                    <ul class="article-tag-list">
-
-                      <li class="article-tag-list-item">
-                        <a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-                      </li>
-
-                    </ul>
-                  </div>
-
-                  <p class="article-more-link">
-                    <a class="article-more-a" href="/2017/06/30/caddy的简易使用/">展开全文 >></a>
                   </p>
 
                   <div class="clearfix"></div>
@@ -7033,11 +7067,11 @@
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
+                <a href="javascript:void(0)" class="js-tag color3">react-native</a>
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">react-native</a>
+                <a href="javascript:void(0)" class="js-tag color3">技巧</a>
               </li>
 
               <li class="article-tag-list-item">
@@ -7049,11 +7083,11 @@
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">开发随笔</a>
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">开发随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
 
               <div class="clearfix"></div>
