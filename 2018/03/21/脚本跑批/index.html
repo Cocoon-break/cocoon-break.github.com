@@ -7,18 +7,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/11 | cocoon-break的博客</title>
+  <title>身份证识别跑批脚本 | cocoon-break的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Linux RN android 博客">
-  <meta name="keywords" content="Linux RN android 博客">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="cocoon-break的博客">
-  <meta property="og:url" content="http://yoursite.com/archives/2017/11/index.html">
+  <meta name="description" content="很久没写了，做下记录吧！         shell脚本遍历子目录及子目录下的文件，并将文件去发请求，把接口返回回来的json写入到文件中                                             12345678910111213141516171819202122232425262728293031">
+  <meta name="keywords" content="Linux">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="身份证识别跑批脚本">
+  <meta property="og:url" content="http://yoursite.com/2018/03/21/脚本跑批/index.html">
   <meta property="og:site_name" content="cocoon-break的博客">
-  <meta property="og:description" content="Linux RN android 博客">
+  <meta property="og:description" content="很久没写了，做下记录吧！         shell脚本遍历子目录及子目录下的文件，并将文件去发请求，把接口返回回来的json写入到文件中                                             12345678910111213141516171819202122232425262728293031">
+  <meta property="og:updated_time" content="2018-03-21T09:14:51.256Z">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="cocoon-break的博客">
-  <meta name="twitter:description" content="Linux RN android 博客">
+  <meta name="twitter:title" content="身份证识别跑批脚本">
+  <meta name="twitter:description" content="很久没写了，做下记录吧！         shell脚本遍历子目录及子目录下的文件，并将文件去发请求，把接口返回回来的json写入到文件中                                             12345678910111213141516171819202122232425262728293031">
 
   <link rel="alternative" href="/atom.xml" title="cocoon-break的博客" type="application/atom+xml">
 
@@ -160,46 +161,211 @@
                                                                                             id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <section class="archives-wrap">
-              <div class="archive-year-wrap">
-                <a href="/archives/2017" class="archive-year">2017</a>
-              </div>
-              <div class="archives">
+            <article id="post-脚本跑批" class="article article-type-post " itemscope itemprop="blogPost">
+              <div class="article-inner">
 
-                <article class="archive-article archive-type-post">
-                  <div class="archive-article-inner">
-                    <header class="archive-article-header">
-                      <div class="article-meta">
-                        <a href="/2017/11/28/构建干净可移植Python包/" class="archive-article-date">
-                          <time datetime="2017-11-28T06:27:00.000Z" itemprop="datePublished">
-                            <i class="icon-calendar icon"></i>2017-11-28</time>
-                        </a>
+                <header class="article-header">
+                  <h1 class="article-title" itemprop="name">
+                    身份证识别跑批脚本
+                  </h1>
 
+                  <a href="/2018/03/21/脚本跑批/" class="archive-article-date">
+                    <time datetime="2018-03-21T04:53:30.000Z" itemprop="datePublished">
+                      <i class="icon-calendar icon"></i>2018-03-21</time>
+                  </a>
+
+                </header>
+
+                <div class="article-entry" itemprop="articleBody">
+
+                  <p>很久没写了，做下记录吧！</p>
+                  <ul>
+                    <li>
+                      <p>shell脚本遍历子目录及子目录下的文件，并将文件去发请求，把接口返回回来的json写入到文件中</p>
+                      <figure class="highlight shell">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></div><div class="line">function getdir()&#123;</div><div class="line">	url = $2</div><div class="line">    for element in `ls $1`</div><div class="line">    do  </div><div class="line">        dir_or_file=$1"/"$element</div><div class="line">        if [ -d $dir_or_file ]</div><div class="line">        then </div><div class="line">            getdir $dir_or_file</div><div class="line">        else</div><div class="line">	    	filepath=$&#123;dir_or_file%.*&#125;</div><div class="line">	    	#不带文件后缀的文件路径</div><div class="line">	    	filename=$&#123;filepath//\//\_&#125;</div><div class="line">	    	#把文件路径中的反斜线换成下划线</div><div class="line">	    	</div><div class="line">		    if [ -e $&#123;dir_or_file%.*&#125;.jpg ]</div><div class="line">		    then</div><div class="line">	     	    curl -F img=@$&#123;dir_or_file%.*&#125;.jpg $url &gt; idcard_result/$&#123;filename&#125;.json	</div><div class="line">		    elif [ -e $&#123;dir_or_file%.*&#125;.png ]</div><div class="line">	   	    then</div><div class="line">				curl -F img=@$&#123;dir_or_file%.*&#125;.png $url &gt; idcard_result/$&#123;filename&#125;.json</div><div class="line">            fi</div><div class="line">        fi  </div><div class="line">    done</div><div class="line">&#125;</div><div class="line">parentpath=$1</div><div class="line">mkdir idcard_result</div><div class="line">url=http://10.201.102.163:9002/faceid/v1/idcard</div><div class="line"><span class="meta">#</span><span class="bash"><span class="built_in">echo</span> <span class="variable">$parentpath</span> http://10.201.102.163:9002/faceid/v1/idcard</span></div><div class="line">echo $url</div><div class="line">getdir $parentpath $url</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                    </li>
+                    <li>
+                      <p>python 比较身份证正确答案的json文件和ocr识别结果的文件进行核对，统计是否识别正确。python版本为2.7.13。以下为check.py的源码,因为在python2.7里json.load出来的json
+                        是unicode编码的，所以比较的时候在自己的中文中添加U。如：std[U’姓名’]
+                      </p>
+                      <figure class="highlight python">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> json</div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(<span class="string">'utf-8'</span>)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">startcheck</span><span class="params">(originfile, ocrfile)</span>:</span></div><div class="line">    <span class="keyword">with</span> open(originfile, <span class="string">'r'</span>) <span class="keyword">as</span> f:</div><div class="line">        std = json.load(f, encoding=<span class="string">'utf-8'</span>)</div><div class="line"></div><div class="line">    <span class="keyword">with</span> open(ocrfile, <span class="string">'r'</span>) <span class="keyword">as</span> f:</div><div class="line">        rst = json.load(f, encoding=<span class="string">'utf-8'</span>)</div><div class="line"></div><div class="line">    result = <span class="keyword">True</span></div><div class="line">    <span class="keyword">if</span> rst[<span class="string">'side'</span>] == <span class="string">'front'</span>:</div><div class="line">        bd = rst[<span class="string">'birthday'</span>]</div><div class="line">        bd_date = bd[<span class="string">'year'</span>] + <span class="string">'年'</span> + bd[<span class="string">'month'</span>] + <span class="string">'月'</span> + bd[<span class="string">'day'</span>] + <span class="string">'日'</span></div><div class="line">        <span class="keyword">if</span> rst[<span class="string">'name'</span>] != std[U<span class="string">'姓名'</span>]:</div><div class="line">            result = <span class="keyword">False</span></div><div class="line">        <span class="keyword">if</span> rst[<span class="string">'gender'</span>] != std[U<span class="string">'性别'</span>]:</div><div class="line">            result = <span class="keyword">False</span></div><div class="line">        <span class="keyword">if</span> rst[<span class="string">'race'</span>] != std[U<span class="string">'民族'</span>]:</div><div class="line">            result = <span class="keyword">False</span></div><div class="line">        <span class="keyword">if</span> bd_date != std[U<span class="string">'出生'</span>]:</div><div class="line">            result = <span class="keyword">False</span></div><div class="line">        <span class="keyword">if</span> rst[<span class="string">'address'</span>] != std[U<span class="string">'住址'</span>]:</div><div class="line">            result = <span class="keyword">False</span></div><div class="line">        <span class="keyword">if</span> rst[<span class="string">'id_card_number'</span>] != std[U<span class="string">'公民身份号码'</span>]:</div><div class="line">            result = <span class="keyword">False</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">if</span> rst[<span class="string">'issued_by'</span>] != std[U<span class="string">'签发机关'</span>]:</div><div class="line">            result = <span class="keyword">False</span></div><div class="line">        <span class="keyword">if</span> rst[<span class="string">'valid_date'</span>] != std[U<span class="string">'有效期'</span>]:</div><div class="line">            result = <span class="keyword">False</span></div><div class="line">    strResult = str(result)</div><div class="line">    content = <span class="string">'%s,%s,%s,\n'</span> % (originfile, ocrfile, strResult)</div><div class="line">    <span class="keyword">with</span> open(<span class="string">'./check_result.csv'</span>, <span class="string">'a'</span>) <span class="keyword">as</span> f:</div><div class="line">        f.write(content)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    originfile_path = sys.argv[<span class="number">1</span>]</div><div class="line">    <span class="keyword">print</span> <span class="string">'originfile_path:::'</span>, originfile_path</div><div class="line">    ocrfile_path = sys.argv[<span class="number">2</span>]</div><div class="line">    <span class="keyword">print</span> <span class="string">'ocrfile_path:::'</span>, ocrfile_path</div><div class="line">    startcheck(originfile_path, ocrfile_path)</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                      <figure class="highlight shell">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">python check.py real.json ocr.json</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                      <p>real.json</p>
+                      <figure class="highlight json">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">&#123;</div><div class="line">  <span class="attr">"住址"</span>: <span class="string">"山东省招远市温泉路309号"</span>,</div><div class="line">  <span class="attr">"姓名"</span>: <span class="string">"杜英"</span>,</div><div class="line">  <span class="attr">"民族"</span>: <span class="string">"汉"</span>,</div><div class="line">  <span class="attr">"性别"</span>: <span class="string">"女"</span>,</div><div class="line">  <span class="attr">"公民身份号码"</span>: <span class="string">"230122198807160367"</span>,</div><div class="line">  <span class="attr">"出生"</span>: <span class="string">"1988年7月16日"</span></div><div class="line">&#125;</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                      <p>ocr.json</p>
+                      <figure class="highlight json">
+                        <table>
+                          <tr>
+                            <td class="gutter">
+                              <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre>
+                            </td>
+                            <td class="code">
+                              <pre><div class="line">&#123;</div><div class="line">  <span class="attr">"address"</span>: <span class="string">"湖南省长沙县安沙镇泗洲村龙口组377号"</span>,</div><div class="line">  <span class="attr">"address_confidence"</span>: [],</div><div class="line">  <span class="attr">"birthday"</span>: &#123;</div><div class="line">    <span class="attr">"day"</span>: <span class="string">"11"</span>,</div><div class="line">    <span class="attr">"day_confidence"</span>: [],</div><div class="line">    <span class="attr">"month"</span>: <span class="string">"2"</span>,</div><div class="line">    <span class="attr">"month_confidence"</span>: [],</div><div class="line">    <span class="attr">"year"</span>: <span class="string">"1994"</span>,</div><div class="line">    <span class="attr">"year_confidence"</span>: []</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"card_bound"</span>: &#123;&#125;,</div><div class="line">  <span class="attr">"gender"</span>: <span class="string">"男"</span>,</div><div class="line">  <span class="attr">"gender_confidence"</span>: [],</div><div class="line">  <span class="attr">"head_rect"</span>: &#123;&#125;,</div><div class="line">  <span class="attr">"id_card_number"</span>: <span class="string">"430121199402117331"</span>,</div><div class="line">  <span class="attr">"idnumber_confidence"</span>: [],</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"王威"</span>,</div><div class="line">  <span class="attr">"name_confidence"</span>: [],</div><div class="line">  <span class="attr">"race"</span>: <span class="string">"汉"</span>,</div><div class="line">  <span class="attr">"race_confidence"</span>: [],</div><div class="line">  <span class="attr">"request_id"</span>: <span class="string">"1521613434,cdc90cd4-ea2e-4bf9-b112-bce711ba2e90"</span>,</div><div class="line">  <span class="attr">"side"</span>: <span class="string">"front"</span>,</div><div class="line">  <span class="attr">"time_used"</span>: <span class="number">346</span></div><div class="line">&#125;</div></pre>
+                            </td>
+                          </tr>
+                        </table>
+                      </figure>
+                      <p>​</p>
+                    </li>
+                  </ul>
+
+                  <div class="page-reward">
+                    <a href="javascript:;" class="page-reward-btn tooltip-top">
+                      <div class="tooltip tooltip-east">
+                        <span class="tooltip-item">
+                          赏
+                        </span>
+                        <span class="tooltip-content">
+                          <span class="tooltip-text">
+                            <span class="tooltip-inner">
+                              <p class="reward-p">
+                                <i class="icon icon-quo-left"></i>谢谢你请我吃糖果
+                                <i class="icon icon-quo-right"></i>
+                              </p>
+                              <div class="reward-box">
+
+                                <div class="reward-box-item">
+                                  <img class="reward-img" src="/images/ali_pay.jpg">
+                                  <span class="reward-type">支付宝</span>
+                                </div>
+
+                                <div class="reward-box-item">
+                                  <img class="reward-img" src="/images/wechat_pay.jpg">
+                                  <span class="reward-type">微信</span>
+                                </div>
+
+                              </div>
+                            </span>
+                          </span>
+                        </span>
                       </div>
-                      <h1 itemprop="name">
-                        <a class="archive-article-title" href="/2017/11/28/构建干净可移植Python包/">Linux下构建干净可移植Python包</a>
-                      </h1>
-
-                      <div class="article-info info-on-right">
-                        <div class="article-tag tagcloud">
-                          <i class="icon-price-tags icon"></i>
-                          <ul class="article-tag-list">
-
-                            <li class="article-tag-list-item">
-                              <a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-                            </li>
-
-                          </ul>
-                        </div>
-
-                      </div>
-                      <div class="clearfix"></div>
-                    </header>
+                    </a>
                   </div>
-                </article>
 
+                </div>
+                <div class="article-info article-info-index">
+
+                  <div class="article-tag tagcloud">
+                    <i class="icon-price-tags icon"></i>
+                    <ul class="article-tag-list">
+
+                      <li class="article-tag-list-item">
+                        <a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+                      </li>
+
+                    </ul>
+                  </div>
+
+                  <div class="share-btn share-icons tooltip-left">
+                    <div class="tooltip tooltip-east">
+                      <span class="tooltip-item">
+                        <a href="javascript:;" class="share-sns share-outer">
+                          <i class="icon icon-share"></i>
+                        </a>
+                      </span>
+                      <span class="tooltip-content">
+                        <div class="share-wrap">
+                          <div class="share-icons">
+                            <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+                              <i class="icon icon-weibo"></i>
+                            </a>
+                            <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+                              <i class="icon icon-weixin"></i>
+                            </a>
+                            <a class="qq share-sns" href="javascript:;" data-type="qq">
+                              <i class="icon icon-qq"></i>
+                            </a>
+                            <a class="douban share-sns" href="javascript:;" data-type="douban">
+                              <i class="icon icon-douban"></i>
+                            </a>
+                            <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+                              <i class="icon icon-qzone"></i>
+                            </a>
+                            <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+                              <i class="icon icon-facebook"></i>
+                            </a>
+                            <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+                              <i class="icon icon-twitter"></i>
+                            </a>
+                            <a class="google share-sns" href="javascript:;" data-type="google">
+                              <i class="icon icon-google"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="page-modal wx-share js-wx-box">
+                    <a class="close js-modal-close" href="javascript:;">
+                      <i class="icon icon-close"></i>
+                    </a>
+                    <p>扫一扫，分享到微信</p>
+                    <div class="wx-qrcode">
+                      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/03/21/脚本跑批/"
+                                                                                                      alt="微信分享二维码">
+                    </div>
+                  </div>
+
+                  <div class="mask js-mask"></div>
+
+                  <div class="clearfix"></div>
+                </div>
               </div>
-            </section>
+            </article>
+
+            <nav id="article-nav">
+
+              <a href="/2017/08/28/加密算法简介/" id="article-nav-older" class="article-nav-link-wrap">
+                <div class="article-nav-title">加密算法简介</div>
+                <i class="icon-circle-right"></i>
+              </a>
+
+            </nav>
 
           </div>
         </div>
@@ -208,7 +374,7 @@
         <div class="outer">
           <div id="footer-info">
             <div class="footer-left">
-              &copy; 2017 cocoon-break
+              &copy; 2018 cocoon-break
             </div>
             <div class="footer-right">
               <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
@@ -223,8 +389,8 @@
       var yiliaConfig = {
         mathjax: false,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         open_in_new: false,
@@ -6812,11 +6978,11 @@
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">开发随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">开发随笔</a>
               </li>
 
               <div class="clearfix"></div>
