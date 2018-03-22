@@ -16,7 +16,7 @@
   <meta property="og:url" content="http://yoursite.com/2018/03/21/脚本跑批/index.html">
   <meta property="og:site_name" content="cocoon-break的博客">
   <meta property="og:description" content="很久没写了，做下记录吧！         shell脚本遍历子目录及子目录下的文件，并将文件去发请求，把接口返回回来的json写入到文件中                                             12345678910111213141516171819202122232425262728293031">
-  <meta property="og:updated_time" content="2018-03-21T09:14:51.256Z">
+  <meta property="og:updated_time" content="2018-03-22T04:06:44.944Z">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="身份证识别跑批脚本">
   <meta name="twitter:description" content="很久没写了，做下记录吧！         shell脚本遍历子目录及子目录下的文件，并将文件去发请求，把接口返回回来的json写入到文件中                                             12345678910111213141516171819202122232425262728293031">
@@ -199,6 +199,7 @@
                       <p>python 比较身份证正确答案的json文件和ocr识别结果的文件进行核对，统计是否识别正确。python版本为2.7.13。以下为check.py的源码,因为在python2.7里json.load出来的json
                         是unicode编码的，所以比较的时候在自己的中文中添加U。如：std[U’姓名’]
                       </p>
+                      <a id="more"></a>
                       <figure class="highlight python">
                         <table>
                           <tr>
@@ -231,7 +232,7 @@
                               <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre>
                             </td>
                             <td class="code">
-                              <pre><div class="line">&#123;</div><div class="line">  <span class="attr">"住址"</span>: <span class="string">"山东省招远市温泉路309号"</span>,</div><div class="line">  <span class="attr">"姓名"</span>: <span class="string">"杜英"</span>,</div><div class="line">  <span class="attr">"民族"</span>: <span class="string">"汉"</span>,</div><div class="line">  <span class="attr">"性别"</span>: <span class="string">"女"</span>,</div><div class="line">  <span class="attr">"公民身份号码"</span>: <span class="string">"230122198807160367"</span>,</div><div class="line">  <span class="attr">"出生"</span>: <span class="string">"1988年7月16日"</span></div><div class="line">&#125;</div></pre>
+                              <pre><div class="line">&#123;</div><div class="line">  <span class="attr">"住址"</span>: <span class="string">"山东省招远市温泉路309号"</span>,</div><div class="line">  <span class="attr">"姓名"</span>: <span class="string">"杜英男"</span>,</div><div class="line">  <span class="attr">"民族"</span>: <span class="string">"汉"</span>,</div><div class="line">  <span class="attr">"性别"</span>: <span class="string">"女"</span>,</div><div class="line">  <span class="attr">"公民身份号码"</span>: <span class="string">"230122195807160467"</span>,</div><div class="line">  <span class="attr">"出生"</span>: <span class="string">"1988年7月16日"</span></div><div class="line">&#125;</div></pre>
                             </td>
                           </tr>
                         </table>
@@ -244,7 +245,7 @@
                               <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre>
                             </td>
                             <td class="code">
-                              <pre><div class="line">&#123;</div><div class="line">  <span class="attr">"address"</span>: <span class="string">"湖南省长沙县安沙镇泗洲村龙口组377号"</span>,</div><div class="line">  <span class="attr">"address_confidence"</span>: [],</div><div class="line">  <span class="attr">"birthday"</span>: &#123;</div><div class="line">    <span class="attr">"day"</span>: <span class="string">"11"</span>,</div><div class="line">    <span class="attr">"day_confidence"</span>: [],</div><div class="line">    <span class="attr">"month"</span>: <span class="string">"2"</span>,</div><div class="line">    <span class="attr">"month_confidence"</span>: [],</div><div class="line">    <span class="attr">"year"</span>: <span class="string">"1994"</span>,</div><div class="line">    <span class="attr">"year_confidence"</span>: []</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"card_bound"</span>: &#123;&#125;,</div><div class="line">  <span class="attr">"gender"</span>: <span class="string">"男"</span>,</div><div class="line">  <span class="attr">"gender_confidence"</span>: [],</div><div class="line">  <span class="attr">"head_rect"</span>: &#123;&#125;,</div><div class="line">  <span class="attr">"id_card_number"</span>: <span class="string">"430121199402117331"</span>,</div><div class="line">  <span class="attr">"idnumber_confidence"</span>: [],</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"王威"</span>,</div><div class="line">  <span class="attr">"name_confidence"</span>: [],</div><div class="line">  <span class="attr">"race"</span>: <span class="string">"汉"</span>,</div><div class="line">  <span class="attr">"race_confidence"</span>: [],</div><div class="line">  <span class="attr">"request_id"</span>: <span class="string">"1521613434,cdc90cd4-ea2e-4bf9-b112-bce711ba2e90"</span>,</div><div class="line">  <span class="attr">"side"</span>: <span class="string">"front"</span>,</div><div class="line">  <span class="attr">"time_used"</span>: <span class="number">346</span></div><div class="line">&#125;</div></pre>
+                              <pre><div class="line">&#123;</div><div class="line">  <span class="attr">"address"</span>: <span class="string">"湖南省长沙县安沙镇泗洲村龙口组337号"</span>,</div><div class="line">  <span class="attr">"address_confidence"</span>: [],</div><div class="line">  <span class="attr">"birthday"</span>: &#123;</div><div class="line">    <span class="attr">"day"</span>: <span class="string">"11"</span>,</div><div class="line">    <span class="attr">"day_confidence"</span>: [],</div><div class="line">    <span class="attr">"month"</span>: <span class="string">"2"</span>,</div><div class="line">    <span class="attr">"month_confidence"</span>: [],</div><div class="line">    <span class="attr">"year"</span>: <span class="string">"1994"</span>,</div><div class="line">    <span class="attr">"year_confidence"</span>: []</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"card_bound"</span>: &#123;&#125;,</div><div class="line">  <span class="attr">"gender"</span>: <span class="string">"男"</span>,</div><div class="line">  <span class="attr">"gender_confidence"</span>: [],</div><div class="line">  <span class="attr">"head_rect"</span>: &#123;&#125;,</div><div class="line">  <span class="attr">"id_card_number"</span>: <span class="string">"430121198402117321"</span>,</div><div class="line">  <span class="attr">"idnumber_confidence"</span>: [],</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"王威一"</span>,</div><div class="line">  <span class="attr">"name_confidence"</span>: [],</div><div class="line">  <span class="attr">"race"</span>: <span class="string">"汉"</span>,</div><div class="line">  <span class="attr">"race_confidence"</span>: [],</div><div class="line">  <span class="attr">"request_id"</span>: <span class="string">"1521613434,cdc90cd4-ea2e-4bf9-b112-bce711ba2e90"</span>,</div><div class="line">  <span class="attr">"side"</span>: <span class="string">"front"</span>,</div><div class="line">  <span class="attr">"time_used"</span>: <span class="number">346</span></div><div class="line">&#125;</div></pre>
                             </td>
                           </tr>
                         </table>
@@ -6958,19 +6959,19 @@
             <ul class="article-tag-list" q-show="showTags">
 
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">react-native</a>
-              </li>
-
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">技巧</a>
               </li>
 
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">扩展</a>
+              </li>
+
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">react-native</a>
               </li>
 
               <li class="article-tag-list-item">
