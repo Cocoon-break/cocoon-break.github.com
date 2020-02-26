@@ -80,7 +80,7 @@
       </div>
     </nav>
 
-    <div class="view intro-2" id="background" parallax=true style="background: url('/img/default.png')no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true style="background: url('/img/coloradoablaze.jpg')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -150,22 +150,20 @@
 
                     <div class="index-excerpt" style="max-height: none;">
                       <div class="index-text mb-1">开发时常遇到的一些上传图片操作，这里记录一下。包括android，iOS，和java后端，后面还遇到的其他语言或平台时，会进行补充
-                        android AsyncHttpClient 上传图片,要使用 android-async-http 1234567891011121314151617181920212223242526272829303132
-                        public void uploadImg(String filePath) &#123; AsyncHttpClient
-                        asyncHttpclient = new AsyncHttpClient(); RequestParams params
-                        = new RequestParams(); try &#123; params.put("liveness",
-                        "1"); params.put("img", new File(filePath));// 传入照片路径 &#125;
-                        catch (FileNotFoundException e) &#123; e.printStackTrace();
-                        &#125; String url = ""; asyncHttpclient.post(url, params,
-                        new AsyncHttpResponseHandler() &#123; @Override public void
-                        onSuccess(int statusCode, Header[] headers, byte[] responseByte)
-                        &#123; String successStr = new String(responseByte); try
-                        &#123; JSONObject jObject = new JSONObject(successStr) .getJSONArray("faces").getJSONObject(0);
-                        //其他省略 &#125; catch (JSONException e) &#123; e.printStackTrace();
-                        &#125; &#125; @Override public void onFailure(int statusCode,
-                        Header[] headers, byte[] responseBody, Throwable error) &#123;
-                        // 上传失败 &#125; &#125;); &#125; ...
-
+                        android AsyncHttpClient 上传图片,要使用 android-async-http public
+                        void uploadImg(String filePath) { AsyncHttpClient asyncHttpclient
+                        = new AsyncHttpClient(); RequestParams params = new RequestParams();
+                        try { params.put(&quot;liveness&quot;, &quot;1&quot;); params.put(&quot;img&quot;,
+                        new File(filePath));// 传入照片路径 } catch (FileNotFoundException
+                        e) { e.printStackTrace(); } String url = &quot;&quot;; asyncHttpclient.post(url,
+                        params, new AsyncHttpResponseHandler() { @Override public
+                        void onSuccess(int statusCode, Header[] headers, byte[] responseByte)
+                        { String successStr = new String(responseByte); try { JSONObject
+                        jObject = new JSONObject(successStr) .getJSONArray(&quot;faces&quot;).getJSONObject(0);
+                        //其他省略 } catch (JSONException e) { e.printStackTrace(); }
+                        } @Override public void onFailure(int statusCode, Header[]
+                        headers, byte[] responseBody, Throwable error) { // 上传失败
+                        } }); } ...
                       </div>
                     </div>
                   </a>
@@ -231,7 +229,7 @@
                         oh my zsh + tmux 的终端工具 ITerm2 安装 上Iterm2的官网下载iterm2, iterm2下载
                         下载完成之后，发现iterm2 自带的配色我不太喜欢，安装完成之后进行item2的配色，这个纯属看个人喜好了。 要进行配色，我们当然得要有配色的方案啦！什么你要自己配一个，嗯……
                         这也是可以的，不过有很多现成的方案你要不要啊。github 上有超多的配色方案，我们先把这个库给clone下来。
-                        1 git clone git@github.com:mbadolato/iTerm2-Color-Schemes.git
+                        git clone git@github.com:mbadolato/iTerm2-Color-Schemes.git
                         要是你没有git，那我觉得你没太必要继续下去了。当然你还想继续的话，你就上GitHub手动download 下来。...
                       </div>
                     </div>

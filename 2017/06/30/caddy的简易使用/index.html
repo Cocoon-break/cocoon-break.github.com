@@ -80,7 +80,7 @@
       </div>
     </nav>
 
-    <div class="view intro-2" id="background" false style="background: url('/img/default.png')no-repeat center center;
+    <div class="view intro-2" id="background" false style="background: url('/img/coloradoablaze.jpg')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -100,7 +100,7 @@
               &nbsp;
               <i class="far fa-chart-bar"></i>
               <span class="post-count">
-                497 字
+                495 字
               </span>&nbsp; &nbsp;
 
               <i class="far fa-clock"></i>
@@ -137,13 +137,13 @@
                 <p>​ caddy是一个开源的，使用golang 编写，支持HTTPS的web服务器，同时也可以作为负载均衡器使用，caddy的使用非常简单，只要一个二进制包就可以执行，不用像apache
                   或者nginx 配置起来那么麻烦。</p>
                 <p>​
-                  <a href="https://caddyserver.com/download" target="_blank" rel="external">caddy下载</a>
+                  <a href="https://caddyserver.com/download" target="_blank" rel="noopener">caddy下载</a>
                 </p>
                 <p>​ caddy可以使用命令行参数的方式去执行，也可以指定配置文件去执行。使用命令行去执行，具体的参数名称参考
-                  <a href="https://caddyserver.com/docs/cli" target="_blank" rel="external">caddy 接收参数</a>
+                  <a href="https://caddyserver.com/docs/cli" target="_blank" rel="noopener">caddy 接收参数</a>
                 </p>
                 <p>​ caddy在某个文件夹下直接执行，通过访问
-                  <a href="http://localhost:2015访问文件下的所有内容。使用起来非常简单。" target="_blank" rel="external">http://localhost:2015访问文件下的所有内容。使用起来非常简单。</a>
+                  <a href="http://localhost:2015访问文件下的所有内容。使用起来非常简单。" target="_blank" rel="noopener">http://localhost:2015访问文件下的所有内容。使用起来非常简单。</a>
                 </p>
                 <h3 id="使用">
                   <a href="#使用" class="headerlink" title="使用"></a>使用</h3>
@@ -152,18 +152,19 @@
                 <ul>
                   <li>
                     <p>使用caddy 负载均衡，配置caddyfile</p>
-                    <figure class="highlight sh">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">:1234</div><div class="line">proxy / ip1:port1,ip2:port2,ip3:port3&#123;</div><div class="line">  policy random</div><div class="line">  health_check /version</div><div class="line">  health_check_interval 30s</div><div class="line">  health_check_timeout 30s</div><div class="line">&#125;</div><div class="line"><span class="built_in">log</span> ／ /var/<span class="built_in">log</span>/caddy.log &#123;</div><div class="line">	rotate_size    100</div><div class="line">	rotate_age      7</div><div class="line">	rotate_keep     5</div><div class="line">&#125;</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="sh">:1234
+proxy / ip1:port1,ip2:port2,ip3:port3{
+  policy random
+  health_check /version
+  health_check_interval 30s
+  health_check_timeout 30s
+}
+log ／ /var/log/caddy.log {
+    rotate_size    100
+    rotate_age      7
+    rotate_keep     5
+}
+</code></pre>
                     <p>注：caddy监听本机
                       <code>1234</code>端口，分别将请求转发给
                       <code>ip1:port1,ip2:port2,ip3:port3</code> 三台机器，policy为负载均衡的策略，random表示从三台机器上随机选择负载，也有其他选项least_conn,
@@ -175,18 +176,11 @@
                 <ul>
                   <li>
                     <p>使用caddy作为静态资源服务器，配置caddyfile</p>
-                    <figure class="highlight sh">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">:1234</div><div class="line">root /opt/<span class="built_in">test</span></div><div class="line">browse</div><div class="line">ext .pdf .html .htm</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="sh">:1234
+root /opt/test
+browse
+ext .pdf .html .htm
+</code></pre>
                     <p> 注：caddy监听本机的
                       <code>1234</code>端口，指定了访问的根目录为/opt/test,如果/opt/test 目录下没有index.html,那么访问
                       <code>http://ip:1234</code> 会将/opt/test目录结构展现到页面中。ext 表示可以忽略文件的后缀</p>
@@ -194,7 +188,7 @@
                   </li>
                 </ul>
                 <p>更多的配置可以访问
-                  <a href="https://caddyserver.com/docs/http-caddyfile" target="_blank" rel="external">caddy配置文件</a>
+                  <a href="https://caddyserver.com/docs/http-caddyfile" target="_blank" rel="noopener">caddy配置文件</a>
                 </p>
 
                 <hr>

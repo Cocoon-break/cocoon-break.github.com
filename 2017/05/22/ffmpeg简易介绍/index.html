@@ -80,7 +80,7 @@
       </div>
     </nav>
 
-    <div class="view intro-2" id="background" false style="background: url('/img/default.png')no-repeat center center;
+    <div class="view intro-2" id="background" false style="background: url('/img/coloradoablaze.jpg')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -145,7 +145,7 @@
                 <h2 id="ffmpeg-安装">
                   <a href="#ffmpeg-安装" class="headerlink" title="ffmpeg 安装"></a>ffmpeg 安装</h2>
                 <p>自行下载使用系统安装对应的安装包
-                  <a href="https://ffmpeg.org/download.html" target="_blank" rel="external">官网下载</a>
+                  <a href="https://ffmpeg.org/download.html" target="_blank" rel="noopener">官网下载</a>
                 </p>
                 <p>以下使用的平台都为Mac系统下</p>
                 <a id="more"></a>
@@ -154,30 +154,23 @@
                 <ol>
                   <li>
                     <p>打开终端，查看ffmpeg帮助文档，简要了解ffmpeg的使用</p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">ffmpeg -help</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">ffmpeg version 3.3 Copyright (c) 2000-2017 the FFmpeg developers</div><div class="line">  built with Apple LLVM version 8.1.0 (clang-802.0.41)</div><div class="line">  configuration: --prefix=/usr/local/Cellar/ffmpeg/3.3 --enable-shared --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --cc=clang --host-cflags= --host-ldflags= --enable-libmp3lame --enable-libx264 --enable-libxvid --enable-opencl --disable-lzma --enable-vda</div><div class="line">  libavutil      55. 58.100 / 55. 58.100</div><div class="line">  libavcodec     57. 89.100 / 57. 89.100</div><div class="line">  libavformat    57. 71.100 / 57. 71.100</div><div class="line">  libavdevice    57.  6.100 / 57.  6.100</div><div class="line">  libavfilter     6. 82.100 /  6. 82.100</div><div class="line">  libavresample   3.  5.  0 /  3.  5.  0</div><div class="line">  libswscale      4.  6.100 /  4.  6.100</div><div class="line">  libswresample   2.  7.100 /  2.  7.100</div><div class="line">  libpostproc    54.  5.100 / 54.  5.100</div><div class="line">Hyper fast Audio and Video encoder</div><div class="line">usage: ffmpeg [options] [[infile options] -i infile]... &#123;[outfile options] outfile&#125;...</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="ssh">ffmpeg -help
+</code></pre>
+                    <pre><code class="ssh">ffmpeg version 3.3 Copyright (c) 2000-2017 the FFmpeg developers
+  built with Apple LLVM version 8.1.0 (clang-802.0.41)
+  configuration: --prefix=/usr/local/Cellar/ffmpeg/3.3 --enable-shared --enable-pthreads --enable-gpl --enable-version3 --enable-hardcoded-tables --enable-avresample --cc=clang --host-cflags= --host-ldflags= --enable-libmp3lame --enable-libx264 --enable-libxvid --enable-opencl --disable-lzma --enable-vda
+  libavutil      55. 58.100 / 55. 58.100
+  libavcodec     57. 89.100 / 57. 89.100
+  libavformat    57. 71.100 / 57. 71.100
+  libavdevice    57.  6.100 / 57.  6.100
+  libavfilter     6. 82.100 /  6. 82.100
+  libavresample   3.  5.  0 /  3.  5.  0
+  libswscale      4.  6.100 /  4.  6.100
+  libswresample   2.  7.100 /  2.  7.100
+  libpostproc    54.  5.100 / 54.  5.100
+Hyper fast Audio and Video encoder
+usage: ffmpeg [options] [[infile options] -i infile]... {[outfile options] outfile}...
+</code></pre>
                     <p>重点是关注 usage: ffmpeg [options][[infile options] -i infile]… {[outfile
                       options] outfile}… 这句是说ffmpeg 的主要用法</p>
                     <p>​</p>
@@ -185,76 +178,34 @@
                   <li>
                     <p>查看ffmpeg 支持的格式</p>
                     <p>查看封装格式，包括音频，视频等封装格式</p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">ffmpeg -formats</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="ssh">ffmpeg -formats
+</code></pre>
                     <p>查看编解码器包括音频，视频等封装格式</p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">ffmpeg -codecs</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="ssh">ffmpeg -codecs
+</code></pre>
                   </li>
                   <li>
                     <p>进行格式转换</p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">ffmpeg -i a.mp4 b.mkv</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="ssh">ffmpeg -i a.mp4 b.mkv
+</code></pre>
                     <p>这里是将mp4格式的视频转换成mkv格式。</p>
                     <p>
                       <strong>注：</strong> 查看默认编码格式，以下的Matroska也就是指 mkv</p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">ffmpeg -help muxer=Matroska</div><div class="line"></div><div class="line">#以下为摘要信息，从中可以看出默认的视频编码为h264,音频编码为ac3,字幕流编码为ass，部分格式视频不支持字幕流</div><div class="line">Muxer matroska [Matroska]:</div><div class="line">    Common extensions: mkv.</div><div class="line">    Mime type: video/x-matroska.</div><div class="line">    Default video codec: h264.</div><div class="line">    Default audio codec: ac3.</div><div class="line">    Default subtitle codec: ass.</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="code">ffmpeg -help muxer=Matroska
+
+#以下为摘要信息，从中可以看出默认的视频编码为h264,音频编码为ac3,字幕流编码为ass，部分格式视频不支持字幕流
+Muxer matroska [Matroska]:
+    Common extensions: mkv.
+    Mime type: video/x-matroska.
+    Default video codec: h264.
+    Default audio codec: ac3.
+    Default subtitle codec: ass.
+</code></pre>
                   </li>
                   <li>
                     <p>指定编码器进行转换</p>
-                    <figure class="highlight sh">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">ffmpeg -i a.mp4 -c:v hevc -c:a aac b.mkv</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="sh">ffmpeg -i a.mp4 -c:v hevc -c:a aac b.mkv
+</code></pre>
                     <p>
                       <strong>注：</strong>
                       <code>-c:v</code> 可以用
@@ -264,34 +215,68 @@
                     <p>在转换时可以进行的调整</p>
                     <p>在
                       <code>ffmpeg -help</code> 时可以看到有一些和音频，视频，字幕相关的选项</p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">Video options:</div><div class="line">-vframes number     set the number of video frames to output</div><div class="line">-r rate             set frame rate (Hz value, fraction or abbreviation)</div><div class="line">-s size             set frame size (WxH or abbreviation)</div><div class="line">-aspect aspect      set aspect ratio (4:3, 16:9 or 1.3333, 1.7777)</div><div class="line">-bits_per_raw_sample number  set the number of bits per raw sample</div><div class="line">-vn                 disable video</div><div class="line">-vcodec codec       force video codec (&apos;copy&apos; to copy stream)</div><div class="line">-timecode hh:mm:ss[:;.]ff  set initial TimeCode value.</div><div class="line">-pass n             select the pass number (1 to 3)</div><div class="line">-vf filter_graph    set video filters</div><div class="line">-ab bitrate         audio bitrate (please use -b:a)</div><div class="line">-b bitrate          video bitrate (please use -b:v)</div><div class="line">-dn                 disable data</div><div class="line"></div><div class="line">Audio options:</div><div class="line">-aframes number     set the number of audio frames to output</div><div class="line">-aq quality         set audio quality (codec-specific)</div><div class="line">-ar rate            set audio sampling rate (in Hz)</div><div class="line">-ac channels        set number of audio channels</div><div class="line">-an                 disable audio</div><div class="line">-acodec codec       force audio codec (&apos;copy&apos; to copy stream)</div><div class="line">-vol volume         change audio volume (256=normal)</div><div class="line">-af filter_graph    set audio filters</div><div class="line"></div><div class="line">Subtitle options:</div><div class="line">-s size             set frame size (WxH or abbreviation)</div><div class="line">-sn                 disable subtitle</div><div class="line">-scodec codec       force subtitle codec (&apos;copy&apos; to copy stream)</div><div class="line">-stag fourcc/tag    force subtitle tag/fourcc</div><div class="line">-fix_sub_duration   fix subtitles duration</div><div class="line">-canvas_size size   set canvas size (WxH or abbreviation)</div><div class="line">-spre preset        set the subtitle options to the indicated preset</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="ssh">Video options:
+-vframes number     set the number of video frames to output
+-r rate             set frame rate (Hz value, fraction or abbreviation)
+-s size             set frame size (WxH or abbreviation)
+-aspect aspect      set aspect ratio (4:3, 16:9 or 1.3333, 1.7777)
+-bits_per_raw_sample number  set the number of bits per raw sample
+-vn                 disable video
+-vcodec codec       force video codec (&#39;copy&#39; to copy stream)
+-timecode hh:mm:ss[:;.]ff  set initial TimeCode value.
+-pass n             select the pass number (1 to 3)
+-vf filter_graph    set video filters
+-ab bitrate         audio bitrate (please use -b:a)
+-b bitrate          video bitrate (please use -b:v)
+-dn                 disable data
+
+Audio options:
+-aframes number     set the number of audio frames to output
+-aq quality         set audio quality (codec-specific)
+-ar rate            set audio sampling rate (in Hz)
+-ac channels        set number of audio channels
+-an                 disable audio
+-acodec codec       force audio codec (&#39;copy&#39; to copy stream)
+-vol volume         change audio volume (256=normal)
+-af filter_graph    set audio filters
+
+Subtitle options:
+-s size             set frame size (WxH or abbreviation)
+-sn                 disable subtitle
+-scodec codec       force subtitle codec (&#39;copy&#39; to copy stream)
+-stag fourcc/tag    force subtitle tag/fourcc
+-fix_sub_duration   fix subtitles duration
+-canvas_size size   set canvas size (WxH or abbreviation)
+-spre preset        set the subtitle options to the indicated preset
+</code></pre>
                     <p>当然还有对整个文件进行调整的参数</p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">Per-file main options:</div><div class="line">-f fmt              force format</div><div class="line">-c codec            codec name</div><div class="line">-codec codec        codec name</div><div class="line">-pre preset         preset name</div><div class="line">-map_metadata outfile[,metadata]:infile[,metadata]  set metadata information of outfile from infile</div><div class="line">-t duration         record or transcode &quot;duration&quot; seconds of audio/video</div><div class="line">-to time_stop       record or transcode stop time</div><div class="line">-fs limit_size      set the limit file size in bytes</div><div class="line">-ss time_off        set the start time offset</div><div class="line">-sseof time_off     set the start time offset relative to EOF</div><div class="line">-seek_timestamp     enable/disable seeking by timestamp with -ss</div><div class="line">-timestamp time     set the recording timestamp (&apos;now&apos; to set the current time)</div><div class="line">-metadata string=string  add metadata</div><div class="line">-program title=string:st=number...  add program with specified streams</div><div class="line">-target type        specify target file type (&quot;vcd&quot;, &quot;svcd&quot;, &quot;dvd&quot;, &quot;dv&quot; or &quot;dv50&quot; with optional prefixes &quot;pal-&quot;, &quot;ntsc-&quot; or &quot;film-&quot;)</div><div class="line">-apad               audio pad</div><div class="line">-frames number      set the number of frames to output</div><div class="line">-filter filter_graph  set stream filtergraph</div><div class="line">-filter_script filename  read stream filtergraph description from a file</div><div class="line">-reinit_filter      reinit filtergraph on input parameter changes</div><div class="line">-discard            discard</div><div class="line">-disposition        disposition</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="ssh">Per-file main options:
+-f fmt              force format
+-c codec            codec name
+-codec codec        codec name
+-pre preset         preset name
+-map_metadata outfile[,metadata]:infile[,metadata]  set metadata information of outfile from infile
+-t duration         record or transcode &quot;duration&quot; seconds of audio/video
+-to time_stop       record or transcode stop time
+-fs limit_size      set the limit file size in bytes
+-ss time_off        set the start time offset
+-sseof time_off     set the start time offset relative to EOF
+-seek_timestamp     enable/disable seeking by timestamp with -ss
+-timestamp time     set the recording timestamp (&#39;now&#39; to set the current time)
+-metadata string=string  add metadata
+-program title=string:st=number...  add program with specified streams
+-target type        specify target file type (&quot;vcd&quot;, &quot;svcd&quot;, &quot;dvd&quot;, &quot;dv&quot; or &quot;dv50&quot; with optional prefixes &quot;pal-&quot;, &quot;ntsc-&quot; or &quot;film-&quot;)
+-apad               audio pad
+-frames number      set the number of frames to output
+-filter filter_graph  set stream filtergraph
+-filter_script filename  read stream filtergraph description from a file
+-reinit_filter      reinit filtergraph on input parameter changes
+-discard            discard
+-disposition        disposition
+</code></pre>
                     <p>
                       <a href="https://github.com/FiveYellowMice/how-to-convert-videos-with-ffmpeg-zh"
-                                                                                                      target="_blank" rel="external">文章参考</a>
+                                                                                                      target="_blank" rel="noopener">文章参考</a>
                     </p>
                     <p>​</p>
                   </li>

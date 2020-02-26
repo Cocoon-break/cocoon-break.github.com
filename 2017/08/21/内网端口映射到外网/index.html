@@ -80,7 +80,7 @@
       </div>
     </nav>
 
-    <div class="view intro-2" id="background" false style="background: url('/img/default.png')no-repeat center center;
+    <div class="view intro-2" id="background" false style="background: url('/img/coloradoablaze.jpg')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -143,48 +143,36 @@
                 <ol>
                   <li>
                     <p>登录到服务B上</p>
-                    <figure class="highlight sh">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line"><span class="comment">#1.将autossh下载到服务器B上</span></div><div class="line">wget http://fossies.org/Linux/privat/autossh-1.4e.tgz</div><div class="line"><span class="comment">#2.解压</span></div><div class="line">tar xzvf autossh-1.4e.tgz</div><div class="line"><span class="comment">#3. 编译安装</span></div><div class="line"> <span class="built_in">cd</span> autossh-1.4e</div><div class="line"> ./configure</div><div class="line"> make</div><div class="line"> make install</div><div class="line"><span class="comment">#4. 生成服务器B的公钥，一会儿需要把服务器B的公钥添加到服务器A上</span></div><div class="line">ssh-keygen</div><div class="line"><span class="comment">#5. 执行ssh-keygen 一路回车即可，这个会在~/.ssh目录下生成id_rsa.pub,编辑这个文件，把内容复制到一个文本文件</span></div><div class="line">vim ~/.ssh/id_rsa.pub</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="sh">#1.将autossh下载到服务器B上
+wget http://fossies.org/Linux/privat/autossh-1.4e.tgz
+#2.解压
+tar xzvf autossh-1.4e.tgz
+#3. 编译安装
+ cd autossh-1.4e
+ ./configure
+ make
+ make install
+#4. 生成服务器B的公钥，一会儿需要把服务器B的公钥添加到服务器A上
+ssh-keygen
+#5. 执行ssh-keygen 一路回车即可，这个会在~/.ssh目录下生成id_rsa.pub,编辑这个文件，把内容复制到一个文本文件
+vim ~/.ssh/id_rsa.pub
+</code></pre>
                   </li>
+                </ol>
+                <ol>
                   <li>
                     <p>登录到服务器A上</p>
-                    <figure class="highlight sh">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line"><span class="comment">#1.在~/.ssh目录下创建authorized_keys文件</span></div><div class="line">touch ~/.ssh/authorized_keys</div><div class="line"><span class="comment">#2.编辑这个文件并将刚才从服务器A上复制的公钥粘贴到这个文件上，保存退出即可</span></div><div class="line">vim ~/.ssh/authorized_keys</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="sh">#1.在~/.ssh目录下创建authorized_keys文件
+touch ~/.ssh/authorized_keys
+#2.编辑这个文件并将刚才从服务器A上复制的公钥粘贴到这个文件上，保存退出即可
+vim ~/.ssh/authorized_keys
+</code></pre>
                   </li>
                   <li>
                     <p>登录到服务器B上</p>
-                    <figure class="highlight sh">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line"><span class="comment">#1.制定需要暴露到公网端口</span></div><div class="line">autossh -M 10000 -NR 9200:localhost:9200 -i ~/.ssh/id_rsa 服务器A的用户名@服务器A的IP地址</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="sh">#1.制定需要暴露到公网端口
+autossh -M 10000 -NR 9200:localhost:9200 -i ~/.ssh/id_rsa 服务器A的用户名@服务器A的IP地址
+</code></pre>
                     <p>参数说明：-M 参数指定监听这个反向链接的端口，如果断了会自动重连</p>
                     <p>后面的两个9200端口分别是指定公网上暴露的端口后内网暴露的端口</p>
                   </li>

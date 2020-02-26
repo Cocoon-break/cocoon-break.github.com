@@ -80,7 +80,7 @@
       </div>
     </nav>
 
-    <div class="view intro-2" id="background" false style="background: url('/img/default.png')no-repeat center center;
+    <div class="view intro-2" id="background" false style="background: url('/img/coloradoablaze.jpg')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -100,7 +100,7 @@
               &nbsp;
               <i class="far fa-chart-bar"></i>
               <span class="post-count">
-                567 字
+                564 字
               </span>&nbsp; &nbsp;
 
               <i class="far fa-clock"></i>
@@ -141,33 +141,16 @@
                 <ol>
                   <li>
                     <p>先定义一个脚本test.sh，打印位置参数</p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">echo $1</div><div class="line">echo $2</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="ssh">#!/bin/bash
+
+echo $1
+echo $2
+</code></pre>
                   </li>
                   <li>
                     <p>执行test.sh脚本</p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">./test.sh haha hehehe</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="ssh">./test.sh haha hehehe
+</code></pre>
                     <p>执行的结果就是打印了两个参数，这个种方式的弊端就是，如果参数的位置传错了，那么$1 的值就不是haha了，当然可以使用这种方式写，就是可读性不太高
                       哈。
                     </p>
@@ -179,18 +162,38 @@
                 <ol>
                   <li>
                     <p>一样的我们先定义脚本test.sh，一会儿我们在解读shell脚本中的含义</p>
-                    <figure class="highlight plain">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">#先定义接收各个参数值的变量</div><div class="line">IP_VALUE=&quot;&quot;; NODE_VALUE=&quot;&quot;;VIP_VALUE=&quot;&quot;;</div><div class="line"></div><div class="line">while true;do </div><div class="line">	if [ ! $2 ]; then break; fi</div><div class="line">	case $1 in</div><div class="line">		-i|--ip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)IP_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)IP_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-n|--node)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		-v|--vip)</div><div class="line">			case $2 in</div><div class="line">			&quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;</div><div class="line">			*)NODE_VALUE=$2;shift 2;;</div><div class="line">			esac;;</div><div class="line">		 --) shift ;break ;;</div><div class="line">		 *) break;;</div><div class="line">		esac</div><div class="line">done</div><div class="line"></div><div class="line">if [ -z &quot;$&#123;IP_VALUE&#125;&quot; ];    then echo &quot;error: ip is not found.&quot;;             exit 1; fi</div><div class="line">if [ -z &quot;$&#123;NODE_VALUE&#125;&quot; ];  then echo &quot;error: node is not found.&quot;;           exit 1; fi</div><div class="line">if [ -z &quot;$&#123;VIP_VALUE&#125;&quot; ];   then echo &quot;error: vip is not found.&quot;;            exit 1; fi</div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="ssh">#!/bin/bash
+
+#先定义接收各个参数值的变量
+IP_VALUE=&quot;&quot;; NODE_VALUE=&quot;&quot;;VIP_VALUE=&quot;&quot;;
+
+while true;do 
+    if [ ! $2 ]; then break; fi
+    case $1 in
+        -i|--ip)
+            case $2 in
+            &quot;&quot;)IP_VALUE=&quot;&quot;;shift 2;;
+            *)IP_VALUE=$2;shift 2;;
+            esac;;
+        -n|--node)
+            case $2 in
+            &quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;
+            *)NODE_VALUE=$2;shift 2;;
+            esac;;
+        -v|--vip)
+            case $2 in
+            &quot;&quot;)NODE_VALUE=&quot;&quot;;shift 2;;
+            *)NODE_VALUE=$2;shift 2;;
+            esac;;
+         --) shift ;break ;;
+         *) break;;
+        esac
+done
+
+if [ -z &quot;${IP_VALUE}&quot; ];    then echo &quot;error: ip is not found.&quot;;             exit 1; fi
+if [ -z &quot;${NODE_VALUE}&quot; ];  then echo &quot;error: node is not found.&quot;;           exit 1; fi
+if [ -z &quot;${VIP_VALUE}&quot; ];   then echo &quot;error: vip is not found.&quot;;            exit 1; fi
+</code></pre>
                     <ul>
                       <li>通过while 循环参数的$1 和$2 取key 和 value。</li>
                       <li>case $1取参数的key，case $2取其中的值，如果取到了，就通过shift 2，把最前面的两个位置给移除了比如:
@@ -204,11 +207,11 @@
                     <ul>
                       <li>一个是getopts 但是getopts不支持长选项，具体可以参考
                         <a href="http://www.cnblogs.com/xiangzi888/archive/2012/04/03/2430736.html" target="_blank"
-                                                                                                        rel="external">getopts命令行参数处理</a>
+                                                                                                        rel="noopener">getopts命令行参数处理</a>
                       </li>
                       <li>另一个是getopt，
                         <a href="http://blog.csdn.net/wh211212/article/details/53750366" target="_blank"
-                                                                                                        rel="external">shell中使用getopts 和 getopt</a>
+                                                                                                        rel="noopener">shell中使用getopts 和 getopt</a>
                       </li>
                     </ul>
                   </li>

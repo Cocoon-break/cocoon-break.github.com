@@ -80,7 +80,7 @@
       </div>
     </nav>
 
-    <div class="view intro-2" id="background" parallax=true style="background: url('/img/default.png')no-repeat center center;
+    <div class="view intro-2" id="background" parallax=true style="background: url('/img/coloradoablaze.jpg')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -119,8 +119,8 @@
 
                     <div class="index-excerpt" style="max-height: none;">
                       <div class="index-text mb-1">shell 脚本中读取参数值 通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了
-                        根据参数位置直接获取 先定义一个脚本test.sh，打印位置参数 1234 #!/bin/bashecho $1echo
-                        $2 执行test.sh脚本 1 ./test.sh haha hehehe 执行的结果就是打印了两个参数，这个种方式的弊端就是，如果参数的位置传错了，那么$1
+                        根据参数位置直接获取 先定义一个脚本test.sh，打印位置参数 #!/bin/bash echo $1 echo
+                        $2 执行test.sh脚本 ./test.sh haha hehehe 执行的结果就是打印了两个参数，这个种方式的弊端就是，如果参数的位置传错了，那么$1
                         的值就不是haha了，当然可以使用这种方式写，就是可读性不太高 哈。...
                       </div>
                     </div>
@@ -181,17 +181,16 @@
 
                     <div class="index-excerpt" style="max-height: none;">
                       <div class="index-text mb-1">
-                        工具准备 安装rpmtools工具 1 yum install rpmdevtools 创建文件夹 1 mkdir -pv ~/rpmbuild/&#123;BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS&#125;
+                        工具准备 安装rpmtools工具 yum install rpmdevtools 创建文件夹 mkdir -pv ~/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
                         配置文件及源码准备 spec脚本文件创建，在SPECS文件夹下创建一个.spec文件 如h5-megvii.spec
-                        123456789101112131415161718192021222324252627282930 Name:
-                        h5-megviiLicense: copyrightVersion: 1.0Release: 1%&#123;?dist&#125;Summary:
-                        HTML FaceID ServerAutoReqProv: noGroup: MegviiURL: http://www.megvii.comSource:
-                        %&#123;name&#125;-%&#123;version&#125;.tar.gzBuildRoot: %&#123;_tmppath&#125;/%&#123;name&#125;-%&#123;version&#125;-%&#123;release&#125;-root%descriptionThe
-                        rpm version of html-megvii package%prep%setup -q%build%installrm
-                        -rf $RPM_BUILD_ROOTmkdir -p $RPM_BUILD_ROOTcp -a * $RPM_BUILD_ROOT%cleanrm
-                        -rf $RPM_BUILD_ROOT%files%defattr(-,root,root,-)/opt/megvii
-                        ...
-
+                        Name: h5-megvii License: copyright Version: 1.0 Release:
+                        1%{?dist} Summary: HTML FaceID Server AutoReqProv: no Group:
+                        Megvii URL: http://www.megvii.com Source: %{name}-%{version}.tar.gz
+                        BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+                        %description The rpm version of html-megvii package %prep
+                        %setup -q %build %install rm -rf $RPM_BUILD_ROOT mkdir -p
+                        $RPM_BUILD_ROOT cp -a * $RPM_BUILD_ROOT %clean rm -rf $RPM_BUILD_ROOT
+                        %files %defattr(-,root,root,-) /opt/megvii ...
                       </div>
                     </div>
                   </a>

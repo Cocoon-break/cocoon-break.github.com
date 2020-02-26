@@ -80,7 +80,7 @@
       </div>
     </nav>
 
-    <div class="view intro-2" id="background" false style="background: url('/img/default.png')no-repeat center center;
+    <div class="view intro-2" id="background" false style="background: url('/img/coloradoablaze.jpg')no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
@@ -100,12 +100,12 @@
               &nbsp;
               <i class="far fa-chart-bar"></i>
               <span class="post-count">
-                1.3k 字
+                1.5k 字
               </span>&nbsp; &nbsp;
 
               <i class="far fa-clock"></i>
               <span class="post-count">
-                6 分钟
+                7 分钟
               </span>&nbsp;
 
               <!-- 不蒜子统计文章PV -->
@@ -143,77 +143,146 @@
                   文件是我修改过的，默认生成的文件和这个是有差异的。主要讲解几个字段，main:表示入口文件，scripts：主要是脚本命令，执行npm
                   start 的时候，它会执行scripts 下start 后的命令，dependencies：是工程依赖的一些库，devDependencies：主要是开发的时候使用的一些库，生产的时候不需要使用。</p>
                 <a id="more"></a>
-                <figure class="highlight json">
-                  <table>
-                    <tr>
-                      <td class="gutter">
-                        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre>
-                      </td>
-                      <td class="code">
-                        <pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"doudou-client"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</div><div class="line">  <span class="attr">"description"</span>: <span class="string">"wechat public"</span>,</div><div class="line">  <span class="attr">"main"</span>: <span class="string">"app.js"</span>,</div><div class="line">  <span class="attr">"scripts"</span>: &#123;</div><div class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,</div><div class="line">    <span class="attr">"start"</span>: <span class="string">"webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080"</span>,</div><div class="line">    <span class="attr">"dev"</span>: <span class="string">"webpack -d --watch"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"author"</span>: <span class="string">"cocoon"</span>,</div><div class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</div><div class="line">  <span class="attr">"dependencies"</span>: &#123;</div><div class="line">    </div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"devDependencies"</span>: &#123;</div><div class="line">    <span class="attr">"webpack"</span>: <span class="string">"^1.12.2"</span>,</div><div class="line">    <span class="attr">"webpack-dev-server"</span>: <span class="string">"^1.12.1"</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre>
-                      </td>
-                    </tr>
-                  </table>
-                </figure>
+                <pre><code class="json">{
+  &quot;name&quot;: &quot;doudou-client&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;wechat public&quot;,
+  &quot;main&quot;: &quot;app.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+    &quot;start&quot;: &quot;webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080&quot;,
+    &quot;dev&quot;: &quot;webpack -d --watch&quot;
+  },
+  &quot;author&quot;: &quot;cocoon&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;dependencies&quot;: {
+
+  },
+  &quot;devDependencies&quot;: {
+    &quot;webpack&quot;: &quot;^1.12.2&quot;,
+    &quot;webpack-dev-server&quot;: &quot;^1.12.1&quot;
+  }
+}
+</code></pre>
                 <p>​ 有一个package.json 文件还不能使用，接下来是编写app.js文件，也就是入口文件，我们就简易的写一个demo文件吧！我们要使用react进行开发我们就得安装reactjs
                   相关的依赖，执行以下命令来添加reactjs 依赖的库,和开发时使用的一些开发库。如：webpack</p>
-                <figure class="highlight sh">
-                  <table>
-                    <tr>
-                      <td class="gutter">
-                        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre>
-                      </td>
-                      <td class="code">
-                        <pre><div class="line">npm install --save react react-dom</div><div class="line">npm install --save-dev css-loader</div><div class="line">npm install --save-dev style-loader</div><div class="line">npm install --save-dev babel-loader babel-core babel-preset-es2015 babel-preset-react</div><div class="line">npm install --save-dev webpack webpack-dev-server</div></pre>
-                      </td>
-                    </tr>
-                  </table>
-                </figure>
+                <pre><code class="sh">npm install --save react react-dom
+npm install --save-dev css-loader
+npm install --save-dev style-loader
+npm install --save-dev babel-loader babel-core babel-preset-es2015 babel-preset-react
+npm install --save-dev webpack webpack-dev-server
+</code></pre>
                 <p>创建一个app.js文件</p>
-                <figure class="highlight jsx">
-                  <table>
-                    <tr>
-                      <td class="gutter">
-                        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
-                      </td>
-                      <td class="code">
-                        <pre><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">'react-dom'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">           <span class="keyword">return</span> (</div><div class="line">               &lt;div&gt;hello wechat test&lt;/div&gt;</div><div class="line">           );</div><div class="line">       &#125;</div><div class="line">&#125;</div><div class="line">ReactDOM.render((</div><div class="line">       &lt;App/&gt;</div><div class="line">), <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>));</div></pre>
-                      </td>
-                    </tr>
-                  </table>
-                </figure>
+                <pre><code class="jsx">import React, { Component } from &#39;react&#39;;
+import ReactDOM from &#39;react-dom&#39;;
+
+class App extends Component {
+    render() {
+           return (
+               &lt;div&gt;hello wechat test&lt;/div&gt;
+           );
+       }
+}
+ReactDOM.render((
+       &lt;App/&gt;
+), document.getElementById(&#39;container&#39;));
+</code></pre>
                 <p>​ 除了js文件之外，我们还需要一个 html文件，来加载这些js文件。</p>
-                <figure class="highlight html">
-                  <table>
-                    <tr>
-                      <td class="gutter">
-                        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre>
-                      </td>
-                      <td class="code">
-                        <pre><div class="line"><span class="meta">&lt;!doctype html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span></span></div><div class="line">          <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"</span>/&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"src/css/fontAwesome/css/font-awesome.min.css"</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"</span> /&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>微信公众号网页<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">setHeight</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(screen.height)</div><div class="line">            <span class="built_in">document</span>.body.style.height = screen.height + <span class="string">'px'</span>;</div><div class="line">        &#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"width: 100%;"</span> <span class="attr">onload</span>=<span class="string">"setHeight()"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span> <span class="attr">id</span>=<span class="string">"container"</span> <span class="attr">style</span>=<span class="string">"height: 100%"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./assets/vendor.bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./assets/bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre>
-                      </td>
-                    </tr>
-                  </table>
-                </figure>
+                <pre><code class="html">&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot;
+          content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;src/css/fontAwesome/css/font-awesome.min.css&quot;&gt;
+
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css&quot; /&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css&quot; /&gt;
+
+    &lt;title&gt;微信公众号网页&lt;/title&gt;
+    &lt;script&gt;
+        function setHeight() {
+            console.log(screen.height)
+            document.body.style.height = screen.height + &#39;px&#39;;
+        }
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body style=&quot;width: 100%;&quot; onload=&quot;setHeight()&quot;&gt;
+&lt;div id=&quot;container&quot; id=&quot;container&quot; style=&quot;height: 100%&quot;&gt;&lt;/div&gt;
+&lt;script src=&quot;./assets/vendor.bundle.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;./assets/bundle.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
                 <p>​ 发现我们的html页面中并没有加载app.js文件，是因为我们通过webpack 来打包js文件，css文件，图片等。html页面加载的是我们打包之后的文件。所以我们在工程目录下创建一个webpack.config.js文件，来配置webpack一些打包的配置项</p>
-                <figure class="highlight js">
-                  <table>
-                    <tr>
-                      <td class="gutter">
-                        <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre>
-                      </td>
-                      <td class="code">
-                        <pre><div class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</div><div class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">var</span> autoprefixer = <span class="built_in">require</span>(<span class="string">'autoprefixer'</span>);</div><div class="line"><span class="keyword">var</span> HtmlWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</div><div class="line"><span class="keyword">var</span> ExtractTextPlugin = <span class="built_in">require</span>(<span class="string">'extract-text-webpack-plugin'</span>);</div><div class="line"><span class="keyword">var</span> OpenBrowserPlugin = <span class="built_in">require</span>(<span class="string">'open-browser-webpack-plugin'</span>);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="attr">entry</span>: &#123;</div><div class="line">        <span class="attr">js</span>: [<span class="string">'./app.js'</span>],</div><div class="line">        <span class="attr">vendor</span>: [<span class="string">'react'</span>, <span class="string">'classnames'</span>, <span class="string">'react-router'</span>, <span class="string">'react-dom'</span>, <span class="string">'react-addons-css-transition-group'</span>]</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">output</span>: &#123;</div><div class="line">        <span class="attr">path</span>: path.resolve(__dirname, <span class="string">'dist'</span>),</div><div class="line">        <span class="attr">filename</span>: <span class="string">'./bundle.js'</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">devServer</span>:&#123;</div><div class="line">        <span class="attr">proxy</span>:&#123;</div><div class="line">            <span class="string">'/api'</span>:&#123;</div><div class="line">                <span class="attr">target</span>:<span class="string">'http://localhost:5000'</span>,</div><div class="line">                <span class="attr">secure</span>: <span class="literal">false</span>,</div><div class="line">                <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</div><div class="line">                <span class="attr">pathRewrite</span>: &#123;<span class="string">'^/api'</span>: <span class="string">''</span>&#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">module</span>: &#123;</div><div class="line">        <span class="attr">loaders</span>: [</div><div class="line">            &#123;</div><div class="line">                <span class="attr">test</span>: <span class="regexp">/\.js[x]?$/</span>,</div><div class="line">                <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>,</div><div class="line">                <span class="attr">loader</span>: <span class="string">'babel'</span>,</div><div class="line">                <span class="attr">query</span>: &#123;</div><div class="line">                    <span class="attr">cacheDirectory</span>: <span class="literal">true</span>,</div><div class="line">                    <span class="attr">presets</span>: [<span class="string">'es2015'</span>, <span class="string">'react'</span>]</div><div class="line">                &#125;</div><div class="line">            &#125;, &#123;</div><div class="line">                <span class="attr">test</span>: <span class="regexp">/\.less$/</span>,</div><div class="line">                <span class="attr">loader</span>: <span class="string">'style!css!postcss!less'</span></div><div class="line">            &#125;, &#123;</div><div class="line">                <span class="attr">test</span>: <span class="regexp">/\.css/</span>,</div><div class="line">                <span class="attr">loader</span>: ExtractTextPlugin.extract(<span class="string">'style'</span>, <span class="string">'css'</span>, <span class="string">'postcss'</span>)</div><div class="line">            &#125;, &#123;</div><div class="line">                <span class="attr">test</span>: <span class="regexp">/\.(png|jpg|svg)$/</span>,</div><div class="line">                <span class="attr">loader</span>: <span class="string">'url?limit=25000'</span></div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">postcss</span>: [autoprefixer],</div><div class="line">    <span class="attr">plugins</span>: [</div><div class="line">        <span class="keyword">new</span> webpack.DefinePlugin(&#123;</div><div class="line">            <span class="attr">DEBUG</span>: process.env.NODE_ENV !== <span class="string">'production'</span></div><div class="line">        &#125;),</div><div class="line">        <span class="keyword">new</span> ExtractTextPlugin(<span class="string">'weui.min.css'</span>),</div><div class="line">        <span class="keyword">new</span> webpack.optimize.CommonsChunkPlugin(<span class="string">'vendor'</span>, <span class="string">'vendor.bundle.js'</span>),</div><div class="line">        </div><div class="line">        <span class="keyword">new</span> HtmlWebpackPlugin(&#123;</div><div class="line">            <span class="attr">template</span>: path.join(__dirname, <span class="string">'./index.html'</span>)</div><div class="line">        &#125;),</div><div class="line">    ]</div><div class="line">&#125;;</div></pre>
-                      </td>
-                    </tr>
-                  </table>
-                </figure>
+                <pre><code class="js">var webpack = require(&#39;webpack&#39;);
+var path = require(&#39;path&#39;);
+var autoprefixer = require(&#39;autoprefixer&#39;);
+var HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;);
+var ExtractTextPlugin = require(&#39;extract-text-webpack-plugin&#39;);
+var OpenBrowserPlugin = require(&#39;open-browser-webpack-plugin&#39;);
+
+module.exports = {
+    entry: {
+        js: [&#39;./app.js&#39;],
+        vendor: [&#39;react&#39;, &#39;classnames&#39;, &#39;react-router&#39;, &#39;react-dom&#39;, &#39;react-addons-css-transition-group&#39;]
+    },
+    output: {
+        path: path.resolve(__dirname, &#39;dist&#39;),
+        filename: &#39;./bundle.js&#39;
+    },
+    devServer:{
+        proxy:{
+            &#39;/api&#39;:{
+                target:&#39;http://localhost:5000&#39;,
+                secure: false,
+                changeOrigin: true,
+                pathRewrite: {&#39;^/api&#39;: &#39;&#39;}
+            }
+        },
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.js[x]?$/,
+                exclude: /node_modules/,
+                loader: &#39;babel&#39;,
+                query: {
+                    cacheDirectory: true,
+                    presets: [&#39;es2015&#39;, &#39;react&#39;]
+                }
+            }, {
+                test: /\.less$/,
+                loader: &#39;style!css!postcss!less&#39;
+            }, {
+                test: /\.css/,
+                loader: ExtractTextPlugin.extract(&#39;style&#39;, &#39;css&#39;, &#39;postcss&#39;)
+            }, {
+                test: /\.(png|jpg|svg)$/,
+                loader: &#39;url?limit=25000&#39;
+            }
+        ]
+    },
+    postcss: [autoprefixer],
+    plugins: [
+        new webpack.DefinePlugin({
+            DEBUG: process.env.NODE_ENV !== &#39;production&#39;
+        }),
+        new ExtractTextPlugin(&#39;weui.min.css&#39;),
+        new webpack.optimize.CommonsChunkPlugin(&#39;vendor&#39;, &#39;vendor.bundle.js&#39;),
+
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname, &#39;./index.html&#39;)
+        }),
+    ]
+};
+</code></pre>
                 <p>​ 更多的webpack学习，请移步
-                  <a href="https://zhaoda.gitbooks.io/webpack/content/" target="_blank" rel="external">webpack学习入门</a>
+                  <a href="https://zhaoda.gitbooks.io/webpack/content/" target="_blank" rel="noopener">webpack学习入门</a>
                 </p>
                 <p>整个工程demo在GitHub上
                   <a href="https://github.com/Cocoon-break/wechat_public_template" target="_blank"
-                                                                                                  rel="external">wechat_public_template</a>
+                                                                                                  rel="noopener">wechat_public_template</a>
                 </p>
                 <h2 id="常规问题">
                   <a href="#常规问题" class="headerlink" title="常规问题"></a>常规问题</h2>
@@ -221,18 +290,20 @@
                   <li>
                     <p>网页无法适应全屏？</p>
                     <p>在开发过程中发现body标签高度始终无法全屏，及时设置高度为100%，也无法生效。</p>
-                    <figure class="highlight html">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line"><span class="comment">&lt;!--1.添加移动适配设置 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span></span></div><div class="line">          <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"</span>/&gt;</div><div class="line"></div><div class="line"><span class="comment">&lt;!--2.添加js动态的把body高度设置为，设备屏高--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">setHeight</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">document</span>.body.style.height = screen.height + <span class="string">'px'</span>;</div><div class="line">        &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!--3.在body onload 时执行js--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">style</span>=<span class="string">"width: 100%;"</span> <span class="attr">onload</span>=<span class="string">"setHeight()"</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="html">&lt;!--1.添加移动适配设置 --&gt;
+&lt;meta name=&quot;viewport&quot;
+          content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no&quot;/&gt;
+
+&lt;!--2.添加js动态的把body高度设置为，设备屏高--&gt;
+&lt;script&gt;
+        function setHeight() {
+            document.body.style.height = screen.height + &#39;px&#39;;
+        }
+&lt;/script&gt;
+
+&lt;!--3.在body onload 时执行js--&gt;
+&lt;body style=&quot;width: 100%;&quot; onload=&quot;setHeight()&quot;&gt;&lt;/body&gt;
+</code></pre>
                     <p>​</p>
                   </li>
                 </ul>
@@ -241,48 +312,44 @@
                 <ul>
                   <li>
                     <p>在使用react-weui 发现样式无法生效</p>
-                    <figure class="highlight js">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line"><span class="keyword">import</span> <span class="string">'react-weui/lib/react-weui.min.css'</span>;<span class="comment">//导入对应样式文件</span></div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="js">import &#39;react-weui/lib/react-weui.min.css&#39;;//导入对应样式文件
+</code></pre>
                   </li>
                   <li>
                     <p>在使用fontawesome 时，发现图标无法显示</p>
-                    <figure class="highlight html">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line"><span class="comment">&lt;!--在html中把样式文件加上--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"src/css/fontAwesome/css/font-awesome.min.css"</span>&gt;</span></div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="html"> &lt;!--在html中把样式文件加上--&gt;
+ &lt;link rel=&quot;stylesheet&quot; href=&quot;src/css/fontAwesome/css/font-awesome.min.css&quot;&gt;
+</code></pre>
                   </li>
                   <li>
                     <p>开发时想通过fetch直接请求服务端接口，解决跨域问题</p>
-                    <figure class="highlight js">
-                      <table>
-                        <tr>
-                          <td class="gutter">
-                            <pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre>
-                          </td>
-                          <td class="code">
-                            <pre><div class="line"><span class="comment">//package.json 使用webpack-dev-server 启动开发环境，重点是-d</span></div><div class="line"><span class="string">"scripts"</span>:&#123;</div><div class="line">  <span class="string">"start"</span>: <span class="string">"webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080"</span>,</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//webpack.config.js 配置代理</span></div><div class="line">  <span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="comment">//其他配置省略</span></div><div class="line">    devServer:&#123;</div><div class="line">        <span class="attr">proxy</span>:&#123;</div><div class="line">            <span class="string">'/api'</span>:&#123;</div><div class="line">                <span class="attr">target</span>:<span class="string">'http://localhost:5000'</span>,</div><div class="line">                <span class="attr">secure</span>: <span class="literal">false</span>,</div><div class="line">                <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</div><div class="line">                <span class="attr">pathRewrite</span>: &#123;<span class="string">'^/api'</span>: <span class="string">''</span>&#125;</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">    &#125;,</div><div class="line">  &#125;</div><div class="line">  </div><div class="line"><span class="comment">//使用时代码</span></div><div class="line">  fetch(<span class="string">'/api/show_operation/1'</span>)</div><div class="line">            .then(<span class="function"><span class="params">response</span>=&gt;</span>response.json())</div><div class="line">            .then(<span class="function"><span class="params">result</span>=&gt;</span><span class="built_in">console</span>.log(result))</div><div class="line">  </div><div class="line"><span class="comment">//说明：通过proxy配置可以最终发出的请求路径为http://localhost:500/show_operation/1</span></div></pre>
-                          </td>
-                        </tr>
-                      </table>
-                    </figure>
+                    <pre><code class="js">//package.json 使用webpack-dev-server 启动开发环境，重点是-d
+&quot;scripts&quot;:{
+  &quot;start&quot;: &quot;webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080&quot;,
+}
+
+//webpack.config.js 配置代理
+  module.exports = {
+    //其他配置省略
+    devServer:{
+        proxy:{
+            &#39;/api&#39;:{
+                target:&#39;http://localhost:5000&#39;,
+                secure: false,
+                changeOrigin: true,
+                pathRewrite: {&#39;^/api&#39;: &#39;&#39;}
+            }
+        },
+    },
+  }
+
+//使用时代码
+  fetch(&#39;/api/show_operation/1&#39;)
+            .then(response=&gt;response.json())
+            .then(result=&gt;console.log(result))
+
+//说明：通过proxy配置可以最终发出的请求路径为http://localhost:500/show_operation/1
+</code></pre>
                     <p>​</p>
                   </li>
                 </ul>
