@@ -5,14 +5,14 @@
 
   <meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/lufei.jpg">
+  <link rel="icon" type="image/png" href="/img/lufei.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <meta name="description" content="Linux RN android 博客">
+  <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
   <meta name="author" content="cocoon-break">
-  <meta name="keywords" content="Linux RN android 博客">
+  <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
   <title>内网端口映射到外网 ~ cocoon-break的博客</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
@@ -100,7 +100,7 @@
               &nbsp;
               <i class="far fa-chart-bar"></i>
               <span class="post-count">
-                605 字
+                599 字
               </span>&nbsp; &nbsp;
 
               <i class="far fa-clock"></i>
@@ -134,7 +134,7 @@
           <div class="py-5 z-depth-3" id="board">
             <div class="post-content mx-auto" id="post">
               <div class="markdown-body">
-                <p>​ 最近有一个客户想要看我们的产品，想体验一下我们的产品，需要我们提供一个小程序，于是就弄了一个小程序给客户，小程序还好说我们有现成的东西，直接给客户，麻烦的是小程序背后的服务。由于我们背后的人脸识别服务都是私有化部署的，而且这个客户只是想零时体验一下，所以将整个服务部署到公有云完全是没有必要的。但是我们内部有已经部署好的，又不想在公有云上去搭建一套。于是去咨询了下同事，是不是有什么工具可以把内网的端口暴露到公网上。然后同事就介绍了一个工具
+                <p>​ 最近有一个客户想要看我们的产品，想体验一下我们的产品，需要我们提供一个小程序，于是就弄了一个小程序给客户，小程序还好说我们有现成的东西，直接给客户，麻烦的是小程序背后的服务。由于我们背后的人脸识别服务都是私有化部署的，而且这个客户只是想临时体验一下，所以将整个服务部署到公有云完全是没有必要的。但是我们内部有已经部署好的，又不想在公有云上去搭建一套。于是去咨询了下同事，是不是有什么工具可以把内网的端口暴露到公网上。然后同事就介绍了一个工具
                   <code>autossh</code>
                 </p>
                 <p>​ 好了背景介绍完了，接下来就是去实践了。</p>
@@ -177,13 +177,21 @@ autossh -M 10000 -NR 9200:localhost:9200 -i ~/.ssh/id_rsa 服务器A的用户名
                     <p>后面的两个9200端口分别是指定公网上暴露的端口后内网暴露的端口</p>
                   </li>
                 </ol>
-                <p>到了这个整个工作就完成了，这时访问公网IP的9200端口，就会访问内网中9200端口的服务。是不是很简单</p>
+                <p>到了这个整个工作就完成了，这时访问公网IP的9200端口，就会访问内网中9200端口的服务。</p>
 
                 <hr>
               </div>
               <br>
               <div>
                 <p>
+
+                  <span>
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a class="hover-with-bg" href="/categories/Linux">Linux</a>
+                    &nbsp;
+
+                  </span>&nbsp;&nbsp;
 
                   <span>
                     <i class="iconfont icon-tag"></i>
@@ -322,7 +330,7 @@ autossh -M 10000 -NR 9200:localhost:9200 -i ~/.ssh/id_rsa 服务器A的用户名
       ],
       cursorChar: "_",
       typeSpeed: 70,
-      loop: false,
+      loop: ture,
     });
     typed.stop();
     $(document).ready(function() {

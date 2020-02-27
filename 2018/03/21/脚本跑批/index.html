@@ -5,14 +5,14 @@
 
   <meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/lufei.jpg">
+  <link rel="icon" type="image/png" href="/img/lufei.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <meta name="description" content="Linux RN android 博客">
+  <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
   <meta name="author" content="cocoon-break">
-  <meta name="keywords" content="Linux RN android 博客">
+  <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
   <title>身份证识别跑批脚本 ~ cocoon-break的博客</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
@@ -100,7 +100,7 @@
               &nbsp;
               <i class="far fa-chart-bar"></i>
               <span class="post-count">
-                880 字
+                915 字
               </span>&nbsp; &nbsp;
 
               <i class="far fa-clock"></i>
@@ -134,7 +134,7 @@
           <div class="py-5 z-depth-3" id="board">
             <div class="post-content mx-auto" id="post">
               <div class="markdown-body">
-                <p>很久没写了，做下记录吧！</p>
+                <p>使用shell对文件夹进行遍历处理，最后通过markdown生成可视化的结果文件。比较适合对少量数据进行结果快速比对</p>
                 <ul>
                   <li>
                     <p>shell脚本遍历子目录及子目录下的文件，并将文件去发请求，把接口返回回来的json写入到文件中</p>
@@ -261,8 +261,9 @@ if __name__ == &#39;__main__&#39;:
   &quot;time_used&quot;: 346
 }
 </code></pre>
-                    <p>​</p>
                   </li>
+                </ul>
+                <ul>
                   <li>
                     <p>切分文件进行比对，同时生成md文件，通过typora导出pdf可视化文件</p>
                     <pre><code class="shell">#!/bin/bash
@@ -279,8 +280,6 @@ done
                     <p>cut -d _ -f 1 将文件按下划线切分取第一部分</p>
                     <p>uniq -c 显示重复的数量和cut -d _ -f 1的部分</p>
                     <p>awk ‘{print $2}’ 打印出cut -d _ -f 1部分</p>
-                    <p>​</p>
-                    <p>​</p>
                   </li>
                 </ul>
 
@@ -291,9 +290,19 @@ done
                 <p>
 
                   <span>
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a class="hover-with-bg" href="/categories/Linux">Linux</a>
+                    &nbsp;
+
+                  </span>&nbsp;&nbsp;
+
+                  <span>
                     <i class="iconfont icon-tag"></i>
 
                     <a class="hover-with-bg" href="/tags/Linux">Linux</a>
+
+                    <a class="hover-with-bg" href="/tags/shell">shell</a>
 
                   </span>
 
@@ -427,7 +436,7 @@ done
       ],
       cursorChar: "_",
       typeSpeed: 70,
-      loop: false,
+      loop: ture,
     });
     typed.stop();
     $(document).ready(function() {

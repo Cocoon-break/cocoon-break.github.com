@@ -5,14 +5,14 @@
 
   <meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/lufei.jpg">
+  <link rel="icon" type="image/png" href="/img/lufei.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <meta name="description" content="Linux RN android 博客">
+  <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
   <meta name="author" content="cocoon-break">
-  <meta name="keywords" content="Linux RN android 博客">
+  <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
   <title>python 开发服务端 ~ cocoon-break的博客</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
@@ -100,7 +100,7 @@
               &nbsp;
               <i class="far fa-chart-bar"></i>
               <span class="post-count">
-                932 字
+                933 字
               </span>&nbsp; &nbsp;
 
               <i class="far fa-clock"></i>
@@ -250,42 +250,41 @@ if __name__ == &#39;__main__&#39;:
                 <ul>
                   <li>
                     <p>封装下日志模块</p>
-                    <p>```python
-                      <br>import logging
-                      <br>from logging.handlers import RotatingFileHandler
-                      <br>from . import config</p>
-                    <p>log_filename = ‘output.log’
-                      <br>logging.basicConfig(level=logging.DEBUG,</p>
-                    <pre><code>                format=&#39;%(filename)s:%(lineno)s - %(asctime)s %(levelname)s %(message)s&#39;,
-                filename=log_filename,
-                filemode=&#39;a&#39;)
+                    <pre><code class="python">import logging
+from logging.handlers import RotatingFileHandler
+from . import config
+
+log_filename = &#39;output.log&#39;
+logging.basicConfig(level=logging.DEBUG,
+                    format=&#39;%(filename)s:%(lineno)s - %(asctime)s %(levelname)s %(message)s&#39;,
+                    filename=log_filename,
+                    filemode=&#39;a&#39;)
+
+logger = logging.getLogger()
+log_handler = logging.handlers.WatchedFileHandler(log_filename)
+logger.addHandler(log_handler)
+
+def debug(msg):
+    # logging.debug(msg)
+    logger.debug(msg)
+
+def info(msg):
+    # logging.info(msg)
+    logger.info(msg)
+
+def warning(msg):
+    # logging.warning(msg)
+    logger.warning(msg)
+
+def error(msg):
+    # logging.error(msg)
+    logger.error(msg)
 </code></pre>
-                    <p>logger = logging.getLogger()
-                      <br>log_handler = logging.handlers.WatchedFileHandler(log_filename)
-                      <br>logger.addHandler(log_handler)</p>
+                    <p>其他的一些在这里就不在过多的介绍了，我做了一个python开发后端rest接口的模版工程，放在GitHub上，有兴趣的话可以看看
+                      <a href="https://github.com/Cocoon-break/python_tmplate" target="_blank" rel="noopener">python_tmplate</a>
+                    </p>
                   </li>
                 </ul>
-                <p> def debug(msg):</p>
-                <pre><code>  # logging.debug(msg)
-  logger.debug(msg)
-</code></pre>
-                <p> def info(msg):</p>
-                <pre><code>  # logging.info(msg)
-  logger.info(msg)
-</code></pre>
-                <p> def warning(msg):</p>
-                <pre><code>  # logging.warning(msg)
-  logger.warning(msg)
-</code></pre>
-                <p> def error(msg):</p>
-                <pre><code>  # logging.error(msg)
-  logger.error(msg)
-</code></pre>
-                <p> ```</p>
-                <p> ​</p>
-                <p>其他的一些在这里就不在过多的介绍了，我做了一个python开发后端rest接口的模版工程，放在GitHub上，有兴趣的话可以看看
-                  <a href="https://github.com/Cocoon-break/python_tmplate" target="_blank" rel="noopener">python_tmplate</a>
-                </p>
 
                 <hr>
               </div>
@@ -294,9 +293,17 @@ if __name__ == &#39;__main__&#39;:
                 <p>
 
                   <span>
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a class="hover-with-bg" href="/categories/Python">Python</a>
+                    &nbsp;
+
+                  </span>&nbsp;&nbsp;
+
+                  <span>
                     <i class="iconfont icon-tag"></i>
 
-                    <a class="hover-with-bg" href="/tags/python">python</a>
+                    <a class="hover-with-bg" href="/tags/Python">Python</a>
 
                   </span>
 
@@ -430,7 +437,7 @@ if __name__ == &#39;__main__&#39;:
       ],
       cursorChar: "_",
       typeSpeed: 70,
-      loop: false,
+      loop: ture,
     });
     typed.stop();
     $(document).ready(function() {
