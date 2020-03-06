@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/lufei.jpg">
+  <link rel="icon" type="image/png" href="/img/lufei.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
+  <meta name="author" content="cocoon-break">
+  <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
+  <title>MySQL系列一之基础使用 ~ cocoon-break的博客</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css">
+
+</head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="/">&nbsp;
+          <strong>cocoon-break的博客</strong>&nbsp;</a>
+
+        <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+                                                                                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                                                                        aria-expanded="false" aria-label="Toggle navigation">
+          <div class="animated-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto text-center">
+
+            <li class="nav-item">
+              <a class="nav-link" href="/">首页</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">归档</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">分类</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">标签</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">关于</a>
+            </li>
+
+            <li class="nav-item" id="search-btn">
+              <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;
+                <i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="view intro-2" id="background" false style="background: url('/img/coloradoablaze.jpg')no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+
+            </span>
+
+            <br>
+
+            <p class="mt-3">
+              <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp; 星期日, 八月 12日 2018, 7:47 晚上
+            </p>
+
+            <p>
+
+              &nbsp;
+              <i class="far fa-chart-bar"></i>
+              <span class="post-count">
+                2.2k 字
+              </span>&nbsp; &nbsp;
+
+              <i class="far fa-clock"></i>
+              <span class="post-count">
+                9 分钟
+              </span>&nbsp;
+
+              <!-- 不蒜子统计文章PV -->
+
+              &nbsp;
+              <i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+              <span id="busuanzi_container_page_pv">
+                <span id="busuanzi_value_page_pv"></span> 次
+              </span>&nbsp;
+
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+        <div class="col-lg-8 nopadding-md">
+          <div class="py-5 z-depth-3" id="board">
+            <div class="post-content mx-auto" id="post">
+              <div class="markdown-body">
+                <p>MySQL是平常使用较多的数据，因项目需要发现自身对MySQL有所欠缺。所以复习了一下MySQL知识，做个总结归纳。本文介绍为基础知识，从数据库链接开始，包括一些常用SQL语句，和MySQL的一些数据类型。建议使用docker
+                  的MySQL 进行SQL练习。同时推荐个人比较喜欢使用的数据库可视化软件Table Plus。</p>
+                <h3 id="链接MySQL服务">
+                  <a href="#链接MySQL服务" class="headerlink" title="链接MySQL服务"></a>链接MySQL服务</h3>
+                <p>通过命令行建立链接</p>
+                <pre><code class="shell"># -u 参数指定用户名，-p指定密码，-P指定端口默认是3306，-h 是指定主机地址,-e 指定链接之后操作
+mysql -uroot -proot -P3306 -h 127.0.0.1
+mysql -uroot -proot -e&quot;show databases&quot; 
+# 建立链接的同时，执行提前写好的sql文件
+mysql -uroot -proot &lt; test.sql
+</code></pre>
+                <h3 id="数据库管理">
+                  <a href="#数据库管理" class="headerlink" title="数据库管理"></a>数据库管理</h3>
+                <p>数据库管理包括，数据库创建，数据库删除，数据库使用等操作</p>
+                <pre><code class="mysql">-- 创建数据库并指定字符集
+create database test charset utf8;
+-- 数据库查看
+show databases;
+-- 删除数据库
+drop database test;
+-- 一般为了删除不存在的数据库报错，可以通过if exits
+drop database if exits test;
+-- 使用数据库
+use test;
+</code></pre>
+                <h3 id="数据表管理">
+                  <a href="#数据表管理" class="headerlink" title="数据表管理"></a>数据表管理</h3>
+                <p>数据表管理包括，数据表创建，数据表删除，数据表记录增删改，数据表字段名修改</p>
+                <pre><code class="mysql">-- 创建class 表id 自增，同时指定表字符集
+create table class (id int primary key AUTO_INCREMENT,cname varchar(30) NOT NULL,description varchar(100) default NULL) charset utf8;
+-- 数据表插入单条数据，和多条数据
+INSERT INTO class set cname =&#39;golang&#39;,description=&#39;开发语言&#39;;
+INSERT INTO class (cname,description) VALUES(&#39;PHP&#39;,&#39;开发语言&#39;),(&#39;Mysql&#39;,&#39;数据库&#39;);
+-- 数据表删除单条记录
+delete from class where cname=&#39;golang&#39;;
+-- 数据表修改单条记录
+update class set cname = &quot;PHP2&quot; where id=2;
+-- 删除表
+drop table if exits class;
+</code></pre>
+                <p>创建数据模板表，后续可以根据模板表创建新的数据表</p>
+                <pre><code class="mysql">-- 复制表结构
+create table tcopy like class;
+-- 复制表同时复制数据
+create table tcopy select * from class;
+</code></pre>
+                <p>数据表字段名称修改以及字段增删</p>
+                <pre><code class="mysql">-- 数据表重命名
+alter table class rename classes;
+rename table classes to class;
+-- 数据表增加字段
+alter table class add school varchar(50);
+-- 数据表删除字段
+alter table class drop school;
+-- 修改字段名
+alter table class CHANGE description descriptions varchar(30);
+</code></pre>
+                <p>数据表相关主键操作，主键的增删</p>
+                <pre><code class="mysql">-- 主键为自增字段，需要删除自增属性后才可以删除主键
+alter table class MODIFY id int not null;-- 删除自增
+alter table class DROP PRIMARY key;-- 删除主键
+
+-- 添加表主键
+alter table class add PRIMARY KEY(id);-- 添加表主键
+alter table class MODIFY id int not null AUTO_INCREMENT;-- 添加自增列
+alter table class modify id int not null AUTO_INCREMENT ,add PRIMARY key(id);
+</code></pre>
+                <h3 id="数据类型">
+                  <a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3>
+                <p>MySQL数据类型包括字符串，数值类型，枚举类型</p>
+                <p>
+                  <strong>字符串数据类型</strong>
+                </p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="text-align:left">类型</th>
+                      <th style="text-align:left">大小</th>
+                      <th style="text-align:left">用途</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align:left">CHAR</td>
+                      <td style="text-align:left">0-255字节</td>
+                      <td style="text-align:left">定长字符串</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">VARCHAR</td>
+                      <td style="text-align:left">0-65535 字节</td>
+                      <td style="text-align:left">变长字符串</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">TINYBLOB</td>
+                      <td style="text-align:left">0-255字节</td>
+                      <td style="text-align:left">不超过 255 个字符的二进制字符串</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">TINYTEXT</td>
+                      <td style="text-align:left">0-255字节</td>
+                      <td style="text-align:left">短文本字符串</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">BLOB</td>
+                      <td style="text-align:left">0-65 535字节</td>
+                      <td style="text-align:left">二进制形式的长文本数据</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">TEXT</td>
+                      <td style="text-align:left">0-65 535字节</td>
+                      <td style="text-align:left">长文本数据</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">MEDIUMBLOB</td>
+                      <td style="text-align:left">0-16 777 215字节</td>
+                      <td style="text-align:left">二进制形式的中等长度文本数据</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">MEDIUMTEXT</td>
+                      <td style="text-align:left">0-16 777 215字节</td>
+                      <td style="text-align:left">中等长度文本数据</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">LONGBLOB</td>
+                      <td style="text-align:left">0-4 294 967 295字节</td>
+                      <td style="text-align:left">二进制形式的极大文本数据</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">LONGTEXT</td>
+                      <td style="text-align:left">0-4 294 967 295字节</td>
+                      <td style="text-align:left">极大文本数据</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>CHAR类型是定长的数据类型，比如定义20长度的
+                  <code>char</code>类型即使只存一个字符，也占20个长度，好处是处理速度快，缺点是占用空间大。</p>
+                <p>VARCHAR类型是变长数据类型，空间受内容长度影响。</p>
+                <p>
+                  <strong>字符串常用函数</strong>
+                </p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>函数名</th>
+                      <th>作用</th>
+                      <th>示例</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>UPPER()/LOWER()</td>
+                      <td>将内容全部改成大写/小写</td>
+                      <td>select UPPER(cname) from class;</td>
+                    </tr>
+                    <tr>
+                      <td>CONCAT()</td>
+                      <td>字符拼接</td>
+                      <td>select concat(cname,description) from class;</td>
+                    </tr>
+                    <tr>
+                      <td>Left()/Right()</td>
+                      <td>用于取左或右指定数量的字符</td>
+                      <td>select left(cname,3) from class;</td>
+                    </tr>
+                    <tr>
+                      <td>mid</td>
+                      <td>从中间取字符串</td>
+                      <td>select * from class where mid(cname,2,2) = ‘hp’;</td>
+                    </tr>
+                    <tr>
+                      <td>substring</td>
+                      <td>从指定位置开始向右截取字符串</td>
+                      <td>select * from class where SUBSTRING(cname,2) = ‘hp’;</td>
+                    </tr>
+                    <tr>
+                      <td>char_length</td>
+                      <td>获取字符串数量</td>
+                      <td>select char_length(cname) from class;</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>正则表达式和like的使用</p>
+                <pre><code class="mysql">-- 正则匹配php 或者MySQL
+SELECT * FROM class WHERE cname REGEXP &#39;php|mysql&#39;;
+-- _用于匹配一个字符，%用于匹配任意多个字符
+SELECT *  FROM class WHERE cname LIKE &#39;_h%&#39;;
+</code></pre>
+                <p>
+                  <strong>数值整型类型</strong>
+                </p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>MySQL数据类型</th>
+                      <th>含义（有符号）</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>tinyint(m)</td>
+                      <td>1个字节 范围(-128~127)</td>
+                    </tr>
+                    <tr>
+                      <td>smallint(m)</td>
+                      <td>2个字节 范围(-32768~32767)</td>
+                    </tr>
+                    <tr>
+                      <td>mediumint(m)</td>
+                      <td>3个字节 范围(-8388608~8388607)</td>
+                    </tr>
+                    <tr>
+                      <td>int(m)</td>
+                      <td>4个字节 范围(-2147483648~2147483647)</td>
+                    </tr>
+                    <tr>
+                      <td>bigint(m)</td>
+                      <td>8个字节 范围(+-9.22*10的18次方)</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>取值范围如果加了unsigned，则最大值翻倍，如tinyint unsigned的取值范围为(0~256)。</p>
+                <p>
+                  <strong>数值浮点型</strong>
+                </p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="text-align:left">类型</th>
+                      <th style="text-align:left">大小</th>
+                      <th style="text-align:left">范围（有符号）</th>
+                      <th style="text-align:left">范围（无符号）</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td style="text-align:left">FLOAT</td>
+                      <td style="text-align:left">4 字节</td>
+                      <td style="text-align:left">(-3.402 823 466 E+38，-1.175 494 351 E-38)，0，(1.175 494 351
+                        E-38，3.402 823 466 351 E+38)</td>
+                      <td style="text-align:left">0，(1.175 494 351 E-38，3.402 823 466 E+38)</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">DOUBLE</td>
+                      <td style="text-align:left">8 字节</td>
+                      <td style="text-align:left">(-1.797 693 134 862 315 7 E+308，-2.225 073 858 507 201 4 E-308)，0，(2.225
+                        073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
+                      <td style="text-align:left">0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
+                    </tr>
+                    <tr>
+                      <td style="text-align:left">DECIMAL</td>
+                      <td style="text-align:left">DECIMAL(M,D) ，m&lt;65 是总个数，d&lt;30</td>
+                      <td style="text-align:left">依赖于M和D的值</td>
+                      <td style="text-align:left">依赖于M和D的值</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>
+                  <strong>ENUM/SET</strong>
+                </p>
+                <p>ENUM 类型因为只允许在集合中取得一个值，有点类似于单选项。</p>
+                <p>SET 类型与 ENUM 类型相似但不相同。SET 类型可以从预定义的集合中取得任意数量的值。　一个 SET 类型最多可以包含 64
+                  项元素。</p>
+                <h3 id="日期时间">
+                  <a href="#日期时间" class="headerlink" title="日期时间"></a>日期时间</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>日期时间类型</th>
+                      <th>占用空间</th>
+                      <th>日期格式</th>
+                      <th>最小值</th>
+                      <th>最大值</th>
+                      <th>零值表示</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>DATETIME</td>
+                      <td>8 bytes</td>
+                      <td>YYYY-MM-DD HH:MM:SS</td>
+                      <td>1000-01-01 00:00:00</td>
+                      <td>9999-12-31 23:59:59</td>
+                      <td>0000-00-00 00:00:00</td>
+                    </tr>
+                    <tr>
+                      <td>TIMESTAMP</td>
+                      <td>4 bytes</td>
+                      <td>YYYY-MM-DD HH:MM:SS</td>
+                      <td>1970-01-01 08:00:01</td>
+                      <td>2038-01-19 03:14:07</td>
+                      <td>00000000000000</td>
+                    </tr>
+                    <tr>
+                      <td>DATE</td>
+                      <td>4 bytes</td>
+                      <td>YYYY-MM-DD</td>
+                      <td>1000-01-01</td>
+                      <td>9999-12-31</td>
+                      <td>0000-00-00</td>
+                    </tr>
+                    <tr>
+                      <td>TIME</td>
+                      <td>3 bytes</td>
+                      <td>HH:MM:SS</td>
+                      <td>-838:59:59</td>
+                      <td>838:59:59</td>
+                      <td>00:00:00</td>
+                    </tr>
+                    <tr>
+                      <td>YEAR</td>
+                      <td>1 bytes</td>
+                      <td>YYYY</td>
+                      <td>1901</td>
+                      <td>2155</td>
+                      <td>0000</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>Mysql保存日期格式使用 YYYY-MM-DD HH:MM:SS的ISO 8601标准,</p>
+                <p>创建字段</p>
+                <pre><code class="sql">ALTER TABLE class ADD create_at datetime default null;
+</code></pre>
+                <p>对于时间有一些数据格式化表示，通常有一些格式化参数，常用的格式化参数如下：更多的查询官方文档</p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>参数</th>
+                      <th>描述</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>%Y</td>
+                      <td>年，4 位</td>
+                    </tr>
+                    <tr>
+                      <td>%y</td>
+                      <td>年，2位</td>
+                    </tr>
+                    <tr>
+                      <td>%M</td>
+                      <td>月名</td>
+                    </tr>
+                    <tr>
+                      <td>%m</td>
+                      <td>月，数值(00-12)</td>
+                    </tr>
+                    <tr>
+                      <td>%H</td>
+                      <td>小时 (00-23)</td>
+                    </tr>
+                    <tr>
+                      <td>%h</td>
+                      <td>小时 (01-12)</td>
+                    </tr>
+                    <tr>
+                      <td>%i</td>
+                      <td>分钟，数值(00-59)</td>
+                    </tr>
+                    <tr>
+                      <td>%s</td>
+                      <td>秒(00-59)</td>
+                    </tr>
+                    <tr>
+                      <td>%r</td>
+                      <td>时间，12-小时（hh:mm:ss AM 或 PM）</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>使用示例</p>
+                <pre><code class="mysql">select cname,DATE_FORMAT(create_at,&#39;%Y年%m月%d %H时%i分%s秒&#39;) as create_at from class;
+select cname,TIME_FORMAT(create_at,&#39;%r&#39;) as create_at from class;
+</code></pre>
+                <p>
+                  <strong>添加数据时自动更新时间</strong>
+                </p>
+                <pre><code class="mysql">alter table class add updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+</code></pre>
+                <p>只要该条记录有任何一个字段被修改，则自动更新update_at字段的值</p>
+                <p>
+                  <strong>常用函数</strong>
+                </p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>函数</th>
+                      <th>说明</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>HOUR</td>
+                      <td>小时</td>
+                    </tr>
+                    <tr>
+                      <td>MINUTE</td>
+                      <td>分</td>
+                    </tr>
+                    <tr>
+                      <td>SECOND</td>
+                      <td>秒</td>
+                    </tr>
+                    <tr>
+                      <td>YEAR</td>
+                      <td>年</td>
+                    </tr>
+                    <tr>
+                      <td>MONTH</td>
+                      <td>月</td>
+                    </tr>
+                    <tr>
+                      <td>DAY</td>
+                      <td>日</td>
+                    </tr>
+                    <tr>
+                      <td>TIME</td>
+                      <td>获取时间</td>
+                    </tr>
+                    <tr>
+                      <td>WEEK</td>
+                      <td>周</td>
+                    </tr>
+                    <tr>
+                      <td>QUARTER</td>
+                      <td>季</td>
+                    </tr>
+                    <tr>
+                      <td>CURRENT_DATE（CURDATE）</td>
+                      <td>当前日期</td>
+                    </tr>
+                    <tr>
+                      <td>CURRENT_TIME</td>
+                      <td>当前时间</td>
+                    </tr>
+                    <tr>
+                      <td>NOW</td>
+                      <td>当前时间</td>
+                    </tr>
+                    <tr>
+                      <td>DAYOFYEAR</td>
+                      <td>一年中的日数</td>
+                    </tr>
+                    <tr>
+                      <td>DAYOFMONTH</td>
+                      <td>月份中日数</td>
+                    </tr>
+                    <tr>
+                      <td>DAYOFWEEK</td>
+                      <td>星期天（1）到星期六（7）</td>
+                    </tr>
+                    <tr>
+                      <td>WEEKDAY</td>
+                      <td>星期一（0）到星期天（6）</td>
+                    </tr>
+                    <tr>
+                      <td>TO_DAYS</td>
+                      <td>从元年到现在的天数（忽略时间部分）</td>
+                    </tr>
+                    <tr>
+                      <td>FROM_DAYS</td>
+                      <td>根据天数得到日期（忽略时间部分）</td>
+                    </tr>
+                    <tr>
+                      <td>TIME_TO_SEC</td>
+                      <td>时间转为秒数（忽略日期部分）</td>
+                    </tr>
+                    <tr>
+                      <td>SEC_TO_TIME</td>
+                      <td>根据秒数转为时间（忽略日期部分）</td>
+                    </tr>
+                    <tr>
+                      <td>UNIX_TIMESTAMP</td>
+                      <td>根据日期返回秒数（包括日期与时间）</td>
+                    </tr>
+                    <tr>
+                      <td>FROM_UNIXTIME</td>
+                      <td>根据秒数返回日期与时间（包括日期与时间）</td>
+                    </tr>
+                    <tr>
+                      <td>DATEDIFF</td>
+                      <td>两个日期相差的天数（忽略时间部分）</td>
+                    </tr>
+                    <tr>
+                      <td>TIMEDIFF</td>
+                      <td>计算两个时间的间隔（忽略日期部分）</td>
+                    </tr>
+                    <tr>
+                      <td>TIMESTAMPDIFF</td>
+                      <td>根据指定单位计算两个日期时间的间隔（包括日期与时间）</td>
+                    </tr>
+                    <tr>
+                      <td>LAST_DAY</td>
+                      <td>该月的最后一天</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>使用示例</p>
+                <pre><code class="mysql">-- 使用函数分割时间
+select cname,YEAR(create_at),MONTH(create_at),DAY(create_at),HOUR(create_at),MINUTE(create_at),SECOND(create_at) from class;
+-- 当前时间
+SELECT now(),CURDATE(),CURRENT_DATE(),CURRENT_TIME(),NOW();
+-- 时间计算
+SELECT DAYOFYEAR(now()),DAYOFMONTH(now()),DAYOFWEEK(now()),WEEKDAY(now());
+</code></pre>
+                <p>
+                  <strong>时间计算 常用函数 </strong>
+                </p>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>函数</th>
+                      <th>说明</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>ADDTIME</td>
+                      <td>添加时间（负数为减少），只对时间有效</td>
+                    </tr>
+                    <tr>
+                      <td>TIMESTAMP</td>
+                      <td>添加时间（负数为减少），只对时间有效</td>
+                    </tr>
+                    <tr>
+                      <td>DATE_ADD</td>
+                      <td>根据单位添加时间，支持单位有YEAR/MONTH/DAY/HOUR/MINUTE/SECOND/HOUR_MINUTE（负数时等于DATE_SUB)</td>
+                    </tr>
+                    <tr>
+                      <td>DATE_SUB</td>
+                      <td>DATE_ADD的反函数</td>
+                    </tr>
+                    <tr>
+                      <td>LAST_DAY</td>
+                      <td>指定月最后一天日期</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p>使用示例</p>
+                <pre><code class="mysql">-- 获取七小时之前的时间
+select ADDTIME(now(),&#39;-7:00:00&#39;)
+-- 获取七天之后的时间，interval表示间隔
+SELECT DATE_ADD(now(),INTERVAL 7 DAY);
+-- 获取本月第一天的日期
+SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);
+</code></pre>
+                <p>本文参考链接
+                  <a href="[http://houdunren.gitee.io/note/mysql/2%20%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html](http://houdunren.gitee.io/note/mysql/2 基本操作.html">后盾人MySQL教程</a>)</p>
+
+                <hr>
+              </div>
+              <br>
+              <div>
+                <p>
+
+                  <span>
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a class="hover-with-bg" href="/categories/DB">DB</a>
+                    &nbsp;
+
+                  </span>&nbsp;&nbsp;
+
+                  <span>
+                    <i class="iconfont icon-tag"></i>
+
+                    <a class="hover-with-bg" href="/tags/mysql">mysql</a>
+
+                  </span>
+
+                </p>
+
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用
+                  <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC"
+                                                                                                  rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+          <div id="toc">
+            <p class="h4">
+              <i class="far fa-list-alt"></i>&nbsp;目录</p>
+            <div id="tocbot"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- custom -->
+
+    <!-- Comments -->
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container comments mx-auto" id="comments">
+
+      </div>
+    </div>
+
+  </main>
+
+  <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+    <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+  </a>
+
+  <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+                                                                                  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+          <button type="button" id="local-search-close" class="close" data-dismiss="modal"
+                                                                                          aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <input type="text" id="local-search-input" class="form-control validate">
+            <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          </div>
+          <div class="list-group" id="local-search-result"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-5">
+    <div class="text-center py-3">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener">
+        <b>Hexo</b>
+      </a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <b>Fluid</b>
+      </a>
+      <br>
+
+      <!-- 不蒜子统计PV -->
+
+      &nbsp;
+      <span id="busuanzi_container_site_pv"></span>总访问量
+      <span id="busuanzi_value_site_pv"></span> 次&nbsp;
+
+      <!-- 不蒜子统计UV -->
+
+      &nbsp;
+      <span id="busuanzi_container_site_uv"></span>总访客数
+      <span id="busuanzi_value_site_uv"></span> 人&nbsp;
+
+      <br>
+
+      <!-- cnzz Analytics icon -->
+
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/jquery/jquery.min.js"></script>
+  <script src="/lib/popper/popper.min.js"></script>
+  <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js"></script>
+  <script src="/js/main.js"></script>
+
+  <script src="/js/lazyload.js"></script>
+
+  <script src="/lib/tocbot/tocbot.min.js"></script>
+
+  <script src="/js/post.js"></script>
+
+  <script src="/lib/smoothscroll/SmoothScroll.min.js"></script>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- Plugins -->
+  <!-- cnzz Analytics -->
+
+  <script src="/lib/prettify/prettify.min.js">
+
+
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('pre').addClass('prettyprint  ');
+      prettyPrint();
+    })
+
+  </script>
+
+  <script src="/lib/typed/typed.min.js">
+  </script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "MySQL系列一之基础使用&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function() {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+
+  </script>
+
+  <script src="/lib/anchor/anchor.min.js">
+
+
+  </script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+
+  </script>
+
+  <script src="/js/local-search.js">
+
+
+  </script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function() {
+      getSearchFile(path);
+      this.onclick = null
+    }
+
+  </script>
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js">
+
+
+  </script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function() {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>

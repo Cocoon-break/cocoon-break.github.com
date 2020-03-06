@@ -111,66 +111,32 @@
               <div class="row mx-auto index-card">
 
                 <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2018/08/22/MySQL系列四/">
-                    <p class="h4 index-header">MySQL系列四之执行流程及架构</p>
+                  <a href="/2017/05/25/shell 脚本中读取参数值/">
+                    <p class="h4 index-header">shell 脚本中读取参数值</p>
                   </a>
 
-                  <a href="/2018/08/22/MySQL系列四/">
+                  <a href="/2017/05/25/shell 脚本中读取参数值/">
 
-                    <div class="index-excerpt">
-                      <div class="index-text mb-1">前面几篇主要讲了MySQL一些实际上的使用，但是对整个mysql架构上的一些还是不够了解，熟悉mysql的架构还是对于我们很有帮助的。MySQL体系结构描述了MySQL系统的不同组件之间如何相互联系。MySQL体系结构基本上是一个客户端-服务器系统。MySQL数据库服务器是服务器，连接到MySQL数据库服务器的应用程序是客户端。
-                        执行流程 我们执行一条sql语句的时候，MySQL的执行流程是怎么样的呢？ MySQL客户端通过协议将SQL语句发送给MySQL服务器。
-                        MySQL服务器先检查查询缓存，如果命中了缓存，则立刻返回存储在缓存中的结果。否则进入下一阶段。 MySQL服务器服务器端进行SQL解析、预处理，再由优化器生成对应的执行计划。(查询缓存默认不开启）
-                        MySQL根据优化器生成的执行计划，再调用存储引擎的API来执行查询。 将结果返回给客户端，如果开启查询缓存，则会备份一份到查询缓存中。
-                        知道执行流程之后，我们看下MySQL的架构图。 mysql 逻辑架构主要</div>
-                    </div>
-                  </a>
-
-                  <div class="index-btm">
-
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2018-08-22&nbsp;&nbsp;
-
-                    <i class="iconfont icon-inbox"></i>
-
-                    <a href="/categories/DB">DB</a>&nbsp; &nbsp;
-
-                    <i class="iconfont icon-tag"></i>
-
-                    <a href="/tags/mysql">mysql</a>&nbsp;
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="row mx-auto index-card">
-
-                <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2018/08/18/MySQL系列三/">
-                    <p class="h4 index-header">MySQL系列三之事务和锁</p>
-                  </a>
-
-                  <a href="/2018/08/18/MySQL系列三/">
-
-                    <div class="index-excerpt">
-                      <div class="index-text mb-1">本篇来讲讲MySQL的事务以及锁 事务 事务是保证多个SQL操作的一致性，如果有一条SQL语句操作失败，则全部的SQL语句都失效。简单的说事务就是一组原子性的SQL语句。可以将这组语句理解成一个工作单元，要么全部执行要么都不执行。
-                        至于支不支持事务是和MySQL的存储引擎相关的，我们这边使用的是MySQL8.0的版本，使用的默认引擎是InnoDB（MySQL5.5以后默认使用InnoDB存储引擎），而InnoDB是支持事务的。如果是其他版本的MySQL可以通过以下SQL语句查询。
-                        show engins; 事务的特性 事务具有以下的特性 原子性 事务中的所有操作要么全部提交成功，要么全部失败回滚。比如从取款机取钱，这个事务可以分成两个步骤:1划卡，2出钱。不可能划了卡，而钱却没出来，这两步必须同时完成，要么就不完成。
-                        一致性 数据库总是从一个一致性的状态转换到另一个一致性的状态。 隔离性 一个事务所做的修改在提交之前对其它事务是不可见的。两个以上的事务不会出现交错执行的状态，因为这样可能会导致
+                    <div class="index-excerpt" style="max-height: none;">
+                      <div class="index-text mb-1">shell 脚本中读取参数值 通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了
+                        根据参数位置直接获取 先定义一个脚本test.sh，打印位置参数 #!/bin/bash echo $1 echo
+                        $2 执行test.sh脚本 ./test.sh haha hehehe 执行的结果就是打印了两个参数，这个种方式的弊端就是，如果参数的位置传错了，那么$1
+                        的值就不是haha了，当然可以使用这种方式写，就是可读性不太高 哈。...
                       </div>
                     </div>
                   </a>
 
                   <div class="index-btm">
 
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2018-08-18&nbsp;&nbsp;
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-05-25&nbsp;&nbsp;
 
                     <i class="iconfont icon-inbox"></i>
 
-                    <a href="/categories/DB">DB</a>&nbsp; &nbsp;
+                    <a href="/categories/Linux">Linux</a>&nbsp; &nbsp;
 
                     <i class="iconfont icon-tag"></i>
 
-                    <a href="/tags/mysql">mysql</a>&nbsp;
+                    <a href="/tags/shell">shell</a>&nbsp;
 
                   </div>
                 </div>
@@ -179,35 +145,34 @@
               <div class="row mx-auto index-card">
 
                 <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2018/08/15/MySQL系列二/">
-                    <p class="h4 index-header">MySQL系列二之基础使用</p>
+                  <a href="/2017/05/22/ffmpeg简易介绍/">
+                    <p class="h4 index-header">ffmpeg简易介绍</p>
                   </a>
 
-                  <a href="/2018/08/15/MySQL系列二/">
+                  <a href="/2017/05/22/ffmpeg简易介绍/">
 
-                    <div class="index-excerpt">
-                      <div class="index-text mb-1">这个是MySQL系列的第二部分还是主要以基础使用为主，本篇主要介绍排序和多表操作相关的基础知识。所有讲解都是基于MySQL
-                        8.0以上版本。 摘要和排序 order by mysql 排序的关键字为 order by，默认排序是升序（ASC），降序的关键字是DESC，有一点需要留意的是，如果有SQL语句中有where子句，则order
-                        by 必须放在where 语句后面。多个条件排序则用逗号隔开。 -- 默认学生表，字段有id,class_id,name,birthday,sex
-                        -- 根据姓名进行降序排列 select * from stu order by name desc; -- 必须放在where语句后面
-                        select * from stu where id &gt;=2 order by name; -- 多条件排序
-                        select * from stu order by sex asc,birthday desc; 上面为通用的排序方式，MySQL同时也支持自定义排序通过
-                        filed()函数，field(value,str1,str2)，valu
+                    <div class="index-excerpt" style="max-height: none;">
+                      <div class="index-text mb-1">
+                        媒体文件结构 一个媒体文件并不像许多人想象的那样，是将媒体内容编码起来直接作为文件的。实际上，它通常是由多个不同种类的媒体流（ Stream ）组成，再以特定的封装格式封装起来的。
+                        比较常见的媒体流就是视频流跟音频流了，顾名思义，视频流存储的就是视频信息，音频流存储的就是音频信息。一个视频流或者音频流的内容，就是以特定的编码格式所存储的视频或音频信息。
+                        一个文件的里面的媒体流所采用的编码格式跟这个文件的后缀名并没有完全的必然联系。 文件的后缀名通常就代表这个文件的封装格式。
+                        ffmpeg 安装 自行下载使用系统安装对应的安装包 官网下载 以下使用的平台都为Mac系统下...
+
                       </div>
                     </div>
                   </a>
 
                   <div class="index-btm">
 
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2018-08-15&nbsp;&nbsp;
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-05-22&nbsp;&nbsp;
 
                     <i class="iconfont icon-inbox"></i>
 
-                    <a href="/categories/DB">DB</a>&nbsp; &nbsp;
+                    <a href="/categories/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7">开源工具</a>&nbsp; &nbsp;
 
                     <i class="iconfont icon-tag"></i>
 
-                    <a href="/tags/mysql">mysql</a>&nbsp;
+                    <a href="/tags/%E6%89%A9%E5%B1%95">扩展</a>&nbsp;
 
                   </div>
                 </div>
@@ -216,35 +181,76 @@
               <div class="row mx-auto index-card">
 
                 <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2018/08/12/MySQL系列一/">
-                    <p class="h4 index-header">MySQL系列一之基础使用</p>
+                  <a href="/2017/05/15/Linux下打RPM包/">
+                    <p class="h4 index-header">Linux下打RPM包</p>
                   </a>
 
-                  <a href="/2018/08/12/MySQL系列一/">
+                  <a href="/2017/05/15/Linux下打RPM包/">
 
-                    <div class="index-excerpt">
-                      <div class="index-text mb-1">MySQL是平常使用较多的数据，因项目需要发现自身对MySQL有所欠缺。所以复习了一下MySQL知识，做个总结归纳。本文介绍为基础知识，从数据库链接开始，包括一些常用SQL语句，和MySQL的一些数据类型。建议使用docker
-                        的MySQL 进行SQL练习。同时推荐个人比较喜欢使用的数据库可视化软件Table Plus。 链接MySQL服务
-                        通过命令行建立链接 # -u 参数指定用户名，-p指定密码，-P指定端口默认是3306，-h 是指定主机地址,-e
-                        指定链接之后操作 mysql -uroot -proot -P3306 -h 127.0.0.1 mysql -uroot
-                        -proot -e&quot;show databases&quot; # 建立链接的同时，执行提前写好的sql文件
-                        mysql -uroot -proot &lt; test.sql 数据库管理 数据库管理包括，数据库创建，数据库删除，数据库使用等操作
-                        -- 创建数据库并指定字符集 create database test charset utf8; -- 数据库查看
-                        show databa</div>
+                    <div class="index-excerpt" style="max-height: none;">
+                      <div class="index-text mb-1">centos 6.5下打rpm包 工具准备 安装rpmtools工具 yum install rpmdevtools
+                        创建文件夹 mkdir -pv ~/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
+                        配置文件及源码准备 spec脚本文件创建，在SPECS文件夹下创建一个.spec文件 如h5-megvii.spec
+                        Name: h5-megvii License: copyright Version: 1.0 Release:
+                        1%{?dist} Summary: HTML FaceID Server AutoReqProv: no Group:
+                        Megvii URL: http://www.megvii.com Source: %{name}-%{version}.tar.gz
+                        BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+                        %description The rpm version of html-megvii package %prep
+                        %setup -q %build %install rm -rf $RPM_BUILD_ROOT mkdir -p
+                        $RPM_BUILD_ROOT cp -a * $RPM_BUILD_ROOT %clean rm -rf $RPM_BUILD_ROOT
+                        %files %defattr(-,root,root,-) /opt/megvii ...
+                      </div>
                     </div>
                   </a>
 
                   <div class="index-btm">
 
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2018-08-12&nbsp;&nbsp;
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-05-15&nbsp;&nbsp;
 
                     <i class="iconfont icon-inbox"></i>
 
-                    <a href="/categories/DB">DB</a>&nbsp; &nbsp;
+                    <a href="/categories/Linux">Linux</a>&nbsp; &nbsp;
 
                     <i class="iconfont icon-tag"></i>
 
-                    <a href="/tags/mysql">mysql</a>&nbsp;
+                    <a href="/tags/Linux">Linux</a>&nbsp;
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mx-auto index-card">
+
+                <div class="col-12 col-md-8 mx-auto index-info">
+                  <a href="/2017/04/28/supervisor 是基于python的进程管理工具/">
+                    <p class="h4 index-header">supervisor linux后台进程管理利器</p>
+                  </a>
+
+                  <a href="/2017/04/28/supervisor 是基于python的进程管理工具/">
+
+                    <div class="index-excerpt" style="max-height: none;">
+                      <div class="index-text mb-1">supervisor 是基于python的进程管理工具 install online ubuntu 系统安装 apt-get
+                        install supervisor 也可以通过pip install supervisor 但是需要手动启动 install
+                        offline 下载安装包和依赖包详见官网 [ https://pypi.python.org/pypi/supervisor]
+                        3.3.1版本 解压安装tar.gz 然后cd 到目录中执行 python setup.py install 创建配置文件
+                        执行 echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf创建配置文件
+                        创建supervisord 放在 init.d目录 下 注： prog_bin 为supervisors 可执行文件位置...</div>
+                    </div>
+                  </a>
+
+                  <div class="index-btm">
+
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-04-28&nbsp;&nbsp;
+
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a href="/categories/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7">开源工具</a>&nbsp; &nbsp;
+
+                    <i class="iconfont icon-tag"></i>
+
+                    <a href="/tags/Linux">Linux</a>&nbsp;
+
+                    <a href="/tags/Python">Python</a>&nbsp;
 
                   </div>
                 </div>
@@ -252,14 +258,14 @@
 
               <nav aria-label="index posts navigation">
                 <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
-                  <span class="page-number current">1</span>
-                  <a class="page-number" href="/page/2/">2</a>
-                  <a class="page-number" href="/page/3/">3</a>
-                  <span class="space">&hellip;</span>
-                  <a class="page-number" href="/page/5/">5</a>
-                  <a class="extend next" rel="next" href="/page/2/">
-                    <i class="fas fa-angle-double-right"></i>
+                  <a class="extend prev" rel="prev" href="/page/4/">
+                    <i class="fas fa-angle-double-left"></i>
                   </a>
+                  <a class="page-number" href="/">1</a>
+                  <span class="space">&hellip;</span>
+                  <a class="page-number" href="/page/3/">3</a>
+                  <a class="page-number" href="/page/4/">4</a>
+                  <span class="page-number current">5</span>
                 </span>
               </nav>
 

@@ -111,36 +111,40 @@
               <div class="row mx-auto index-card">
 
                 <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2017/07/05/xargs和jq/">
-                    <p class="h4 index-header">xargs 和 jq</p>
+                  <a href="/2018/03/21/脚本跑批/">
+                    <p class="h4 index-header">身份证识别跑批脚本</p>
                   </a>
 
-                  <a href="/2017/07/05/xargs和jq/">
+                  <a href="/2018/03/21/脚本跑批/">
 
                     <div class="index-excerpt" style="max-height: none;">
-                      <div class="index-text mb-1">​ xargs是Linux系统上自带的命令，xargs命令是给其他命令传递参数的一个过滤器，也是组合多个命令的一个工具。jq
-                        不是Linux系统自带的命令，需要自行安装。jq主要在Linux上解析json。 xargs ​ 举一个例子，我们常用的一个命令
-                        rm -rf *.log 如果文件log文件太多我们会得到一个异常的信/bin/rm Argument list
-                        too long，也就是说rm能接受的参数是有限的。这时我们就可以利用xargs 过滤。 ls *.log | xargs
-                        rm -rf ls 将当前目录下的log文件名标准输出，通过管道传递给xargs 过滤，然后进行删除。 题外话：
-                        Linux上一些以减号开头的文件，会将这个文件认为是一个参数，如： rm -rf -xxxx.log是无法执行的，无论是其他的什么命令去处理类似文件名的文件，都会有这个问题。可以通过在文件名前加两个减号解决。
-                        如 rm -rf -- -xxxx.log ​ xargs 的具体用法，还是一个文件夹中有一大堆文件，通过 ls可以将文件多行输出。但是我想单行或者指定行数输出呢！通过给xargs指定-n
-                        参数。 ls *.log | xargs -n2 #-n2 就是指定两行输出，-n3就是三行输出，以此类推 前面都是一些简易的操作，感觉不到xargs
-                        到底是怎么处理管道出来的文件。现在我的一个需求是将所有的log文件复制到指定目录下。普通复制命令 cp xxx.log
-                        /var/log。我们先忽略cp 命令有-r参数。先看看以下写法是否正确...
+                      <div class="index-text mb-1">使用shell对文件夹进行遍历处理，最后通过markdown生成可视化的结果文件。比较适合对少量数据进行结果快速比对
+                        shell脚本遍历子目录及子目录下的文件，并将文件去发请求，把接口返回回来的json写入到文件中 #!/bin/bash
+                        function getdir(){ url = $2 for element in `ls $1` do dir_or_file=$1&quot;/&quot;$element
+                        if [ -d $dir_or_file ] then getdir $dir_or_file else filepath=${dir_or_file%.*}
+                        #不带文件后缀的文件路径 filename=${filepath//\//\_} #把文件路径中的反斜线换成下划线
+                        if [ -e ${dir_or_file%.*}.jpg ] then curl -F img=@${dir_or_file%.*}.jpg
+                        $url &gt; idcard_result/${filename}.json elif [ -e ${dir_or_file%.*}.png
+                        ] then curl -F img=@${dir_or_file%.*}.png $url &gt; idcard_result/${filename}.json
+                        fi fi done } parentpath=$1 mkdir idcard_result url=http://10.201.102.163:9002/faceid/v1/idcard
+                        #echo $parentpath http://10.201.102.163:9002/faceid/v1/idcard
+                        echo $url getdir $parentpath $url python 比较身份证正确答案的json文件和ocr识别结果的文件进行核对，统计是否识别正确。python版本为2.7.13。以下为check.py的源码,因为在python2.7里json.load出来的json
+                        是unicode编码的，所以比较的时候在自己的中文中添加U。如：std[U’姓名’]...
                       </div>
                     </div>
                   </a>
 
                   <div class="index-btm">
 
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-07-05&nbsp;&nbsp;
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2018-03-21&nbsp;&nbsp;
 
                     <i class="iconfont icon-inbox"></i>
 
                     <a href="/categories/Linux">Linux</a>&nbsp; &nbsp;
 
                     <i class="iconfont icon-tag"></i>
+
+                    <a href="/tags/Linux">Linux</a>&nbsp;
 
                     <a href="/tags/shell">shell</a>&nbsp;
 
@@ -151,37 +155,62 @@
               <div class="row mx-auto index-card">
 
                 <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2017/06/30/caddy的简易使用/">
-                    <p class="h4 index-header">caddy的简易使用</p>
+                  <a href="/2017/08/28/加密算法简介/">
+                    <p class="h4 index-header">加密算法简介</p>
                   </a>
 
-                  <a href="/2017/06/30/caddy的简易使用/">
+                  <a href="/2017/08/28/加密算法简介/">
 
                     <div class="index-excerpt" style="max-height: none;">
-                      <div class="index-text mb-1">​ caddy是一个开源的，使用golang 编写，支持HTTPS的web服务器，同时也可以作为负载均衡器使用，caddy的使用非常简单，只要一个二进制包就可以执行，不用像nginx
-                        配置起来那么麻烦。 ​ caddy下载 ​ caddy可以使用命令行参数的方式去执行，也可以指定配置文件去执行。使用命令行去执行，具体的参数名称参考
-                        caddy 接收参数 ​ caddy在某个文件夹下直接执行，通过访问 http://localhost:2015访问文件下的所有内容。使用起来非常简单。
-                        使用 通过配置文件来使用caddy，执行是 caddy -conf caddyfile, 给caddy 配置不同的caddyfile如下
-                        使用caddy 负载均衡，配置caddyfile :1234 proxy / ip1:port1,ip2:port2,ip3:port3{
-                        policy random health_check /version health_check_interval
-                        30s health_check_timeout 30s } log ／ /var/log/caddy.log {
-                        rotate_size 100 rotate_age 7 rotate_keep 5 } 注：caddy监听本机
-                        1234端口，分别将请求转发给 ip1:port1,ip2:port2,ip3:port3 三台机器，policy为负载均衡的策略，random表示从三台机器上随机选择负载，也有其他选项least_conn,
-                        round_robin, first, ip_hash, or uri_hash。 health_check是对三台机器提供的服务进行健康检查，/version
-                        为进行健康检查的接口。每30秒进行一次健康检查，每次检查超过30秒表示失败。如果发现这个接口不能正常返回，则回被caddy标识为不健康的服务，则后续的负载不会到不健康的服务上。配置log记录caddy日志信息
-                        ...
-
+                      <div class="index-text mb-1">​ 对于加密算法我也不是很熟，只能是单纯去使用，但是最近做项目时涉及到国密算法，由于个人对算法差不多是七窍通了六窍，一窍不通啊。于是同事给我科普了一下。
+                        ​ 先将加密算法分两个大方向：1. 不可逆的加密算法 2. 不可逆的加密算法 不可逆的加密算法 ​ 不可以逆的意思就是说，加密之后，你也不知道加密前的明文。如果要确认加密前的明文，你只能重新将明文加密一遍，看两次得出来的密文是否一致。不可逆加密算法的特征是加密过程中不需要使用密钥，直接输入明文通过算法处理后得到密文。
+                        ​ 典型的不可逆的加密算法是 MD5 : MD5对要加密的对象没有大小限制，加密之后的密文长度为 128bit,这里是128bit和字节是不一样的，转换成字节的话也就是16Byte。
+                        ~/tmp » md5 test.jpg MD5 (test.jpg) = f368d709b8652bf78f9ce61d9fd70d7a
+                        上面的例子通过md5加密了一张图片, MD5加密之后得到值是128bit，按4位二进制组合成一个十六进制，所以得出来的十六进制字符串是32个。
+                        一般来说不可逆的加密算法得出来的密文是定长的，无论要加密的内容大小是多少，如md5是32，sha256是64，sha512是128...
                       </div>
                     </div>
                   </a>
 
                   <div class="index-btm">
 
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-06-30&nbsp;&nbsp;
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-08-28&nbsp;&nbsp;
 
                     <i class="iconfont icon-inbox"></i>
 
-                    <a href="/categories/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7">开源工具</a>&nbsp; &nbsp;
+                    <a href="/categories/%E7%AE%97%E6%B3%95">算法</a>&nbsp; &nbsp;
+
+                    <i class="iconfont icon-tag"></i>
+
+                    <a href="/tags/%E6%89%A9%E5%B1%95">扩展</a>&nbsp;
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mx-auto index-card">
+
+                <div class="col-12 col-md-8 mx-auto index-info">
+                  <a href="/2017/08/21/内网端口映射到外网/">
+                    <p class="h4 index-header">内网端口映射到外网</p>
+                  </a>
+
+                  <a href="/2017/08/21/内网端口映射到外网/">
+
+                    <div class="index-excerpt" style="max-height: none;">
+                      <div class="index-text mb-1">​ 最近有一个客户想要看我们的产品，想体验一下我们的产品，需要我们提供一个小程序，于是就弄了一个小程序给客户，小程序还好说我们有现成的东西，直接给客户，麻烦的是小程序背后的服务。由于我们背后的人脸识别服务都是私有化部署的，而且这个客户只是想临时体验一下，所以将整个服务部署到公有云完全是没有必要的。但是我们内部有已经部署好的，又不想在公有云上去搭建一套。于是去咨询了下同事，是不是有什么工具可以把内网的端口暴露到公网上。然后同事就介绍了一个工具
+                        autossh ​ 好了背景介绍完了，接下来就是去实践了。 现有两台服务器：服务器A是阿里云上的一台机器，服务器B是公司内部的一台虚拟机，这个台虚拟机必须是可以连接公网的。...
+                      </div>
+                    </div>
+                  </a>
+
+                  <div class="index-btm">
+
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-08-21&nbsp;&nbsp;
+
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a href="/categories/Linux">Linux</a>&nbsp; &nbsp;
 
                     <i class="iconfont icon-tag"></i>
 
@@ -194,78 +223,35 @@
               <div class="row mx-auto index-card">
 
                 <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2017/06/19/公众号web开发过程记录/">
-                    <p class="h4 index-header">公众号开发前端</p>
+                  <a href="/2017/07/20/私有化的坑/">
+                    <p class="h4 index-header">私有化的坑</p>
                   </a>
 
-                  <a href="/2017/06/19/公众号web开发过程记录/">
+                  <a href="/2017/07/20/私有化的坑/">
 
                     <div class="index-excerpt" style="max-height: none;">
-                      <div class="index-text mb-1">上一篇讲了微信公众号后端的开发，这一篇是讲讲前端页面的开发。前端的技术栈用的是react。这里介绍了在开发过程中遇到的一些问题。以及一些知识点的介绍
-                        以下步骤的前提是你已经安装了node，才能继续往下走。 创建一个node工程 ​ 初始化一个工程，并进行一些基本信息填写。执行
-                        npm init，根据提示填写信息，最后会生成一个package.json 文件。这样一个node工程初始化完成了。以下package.json
-                        文件是我修改过的，默认生成的文件和这个是有差异的。主要讲解几个字段，main:表示入口文件，scripts：主要是脚本命令，执行npm
-                        start 的时候，它会执行scripts 下start 后的命令，dependencies：是工程依赖的一些库，devDependencies：主要是开发的时候使用的一些库，生产的时候不需要使用。...</div>
-                    </div>
-                  </a>
-
-                  <div class="index-btm">
-
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-06-19&nbsp;&nbsp;
-
-                    <i class="iconfont icon-inbox"></i>
-
-                    <a href="/categories/%E5%89%8D%E7%AB%AF">前端</a>&nbsp; &nbsp;
-
-                    <i class="iconfont icon-tag"></i>
-
-                    <a href="/tags/react%20web">react web</a>&nbsp;
-
-                  </div>
-                </div>
-              </div>
-
-              <div class="row mx-auto index-card">
-
-                <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2017/06/19/python 开发服务端/">
-                    <p class="h4 index-header">python 开发服务端</p>
-                  </a>
-
-                  <a href="/2017/06/19/python 开发服务端/">
-
-                    <div class="index-excerpt" style="max-height: none;">
-                      <div class="index-text mb-1">最新在开发微信公众号，选择了python做为后端开发的语言。之所以选择python作为开发语言，是因为python开发起来比较快，而且也容易上手。选用的python版本是python2.7.13
-                        先了解下python的一些基本知识 在mac 上执行 pip install xxx会把包安装到哪里？ 如果Mac上装了多个版本的Python，可以同过
-                        python --version查看，然后会将包安装到 /usr/local/lib/pythonxxx/site-packages下
-                        创建虚拟开发环境 在使用Python开发的时候，各个应用所需的Python版本可能不同，这时我们就需要一个独立的Python开发环境。virtualenv就是用来为一个应用创建一套“隔离”的Python运行环境。
-                        安装virtualenv pip install virtualenv 创建一个目录并创建一个独立的Python环境venv
-                        mkdir testPython cd testPython virtualenv --no-site-packages
-                        venv 注： 参数 --no-site-packages，不会将系统已安装的第三方包复制过来，这样我们就得到一个干净的Python开发环境
-                        使用这个venv环境 source venv/bin/activate 接下来 pip install xxx 都会把Python包放在
-                        testPython/venv/lib/python2.7/site-packages目录下 离开venv 环境
-                        deactivte virtualenv是如何创建“独立”的Python运行环境的呢？原理很简单，就是把系统Python复制一份到virtualenv的环境，用命令
-                        source venv/bin/activate进入一个virtualenv环境时，virtualenv会修改相关环境变量，让命令
-                        python和 pip均指向当前的virtualenv环境。 ​ 注： 使用venv 环境之后，执行 pip install
-                        xxxx ，它会把这些依赖包安装在 venv/lib/python2.7/site-packages目录下 依赖第三方库的统一配置文件
-                        requirements.txt Flask==0.12 通过 pip install -r requirements.txt来安装文件中依赖的一些第三方库
-                        ...
-
+                      <div class="index-text mb-1">​ 最近遇到的坑确实是有点多了，这里记录一下。事情开始是这样的，想将公有云的一套工程进行私有化，因为公有云的是自己的系统，不用考虑太多的因素，想统一环境还是比较容易的，只要能够在一套环境成功运行，其他的直接copy就行。但是私有云就不行了，各个客户使用的环境都有一定的差异。私有化就是将使这个工程能够在不同的环境运行。
+                        ​ 公有云的这套工程是python工程，python工程使用了一些so库。而这些so库又依赖系统的 /lib64/libc.so.6，然后工程就报
+                        version &quot;GLIBC_2.14&quot; not found,原因是系统libc不支持GLIBC_2.14这个版本，这时我就有两个解决方案，一个是我将系统的libc.so.6
+                        升级，还有一个我弄一个统一的环境。很显然方案一不是私有云，我总不能让我所有的客户去升级libc.so.6吧，着很显然不符合私有化。
+                        ​ 在尝试方案一的过程中，我发现原来把一个Linux系统弄崩其实很简单，崩了之后各种无法使用，你只能去重装系统。你只要执行
+                        mv /lib64/libc.so.6 /lib64/libc.so.6.bak,你会发现接下来无论你输入什么命令都不好使了。这是因为
+                        /lib64/libc.so.6是最底层的库，系统上的程序基本是依赖这个库的。所以/lib64下的so库不要轻易去动。...
                       </div>
                     </div>
                   </a>
 
                   <div class="index-btm">
 
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-06-19&nbsp;&nbsp;
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-07-20&nbsp;&nbsp;
 
                     <i class="iconfont icon-inbox"></i>
 
-                    <a href="/categories/Python">Python</a>&nbsp; &nbsp;
+                    <a href="/categories/Linux">Linux</a>&nbsp; &nbsp;
 
                     <i class="iconfont icon-tag"></i>
 
-                    <a href="/tags/Python">Python</a>&nbsp;
+                    <a href="/tags/Linux">Linux</a>&nbsp;
 
                   </div>
                 </div>
@@ -280,6 +266,7 @@
                   <span class="page-number current">2</span>
                   <a class="page-number" href="/page/3/">3</a>
                   <a class="page-number" href="/page/4/">4</a>
+                  <a class="page-number" href="/page/5/">5</a>
                   <a class="extend next" rel="next" href="/page/3/">
                     <i class="fas fa-angle-double-right"></i>
                   </a>

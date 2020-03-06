@@ -111,32 +111,33 @@
               <div class="row mx-auto index-card">
 
                 <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2017/05/25/shell 脚本中读取参数值/">
-                    <p class="h4 index-header">shell 脚本中读取参数值</p>
+                  <a href="/2017/06/13/RN中使用mobx来进行状态管理/">
+                    <p class="h4 index-header">RN 中使用mobx来进行状态管理</p>
                   </a>
 
-                  <a href="/2017/05/25/shell 脚本中读取参数值/">
+                  <a href="/2017/06/13/RN中使用mobx来进行状态管理/">
 
                     <div class="index-excerpt" style="max-height: none;">
-                      <div class="index-text mb-1">shell 脚本中读取参数值 通常读取命令行中带过来的参数有两种方式，一直是直接根据参数位置直接获取，还有一种根据指定的key，去获取指定的值。第一种方式可以说是根本没有可读性，使用的人如果参数位置写错了，传入的值就全错了
-                        根据参数位置直接获取 先定义一个脚本test.sh，打印位置参数 #!/bin/bash echo $1 echo
-                        $2 执行test.sh脚本 ./test.sh haha hehehe 执行的结果就是打印了两个参数，这个种方式的弊端就是，如果参数的位置传错了，那么$1
-                        的值就不是haha了，当然可以使用这种方式写，就是可读性不太高 哈。...
+                      <div class="index-text mb-1">在使用RN开发app过程中需要状态管理，也就是state 这个概念，由此衍生出来的两个状态管理的框架，一个是redux，另一个就是mobx了。这两个我都用过，今天就先来介绍下mobx
+                        在开发RN中的使用。实际上不使用状态管理的框架，你也是能够进行开发的，但是随着项目的开发以及项目的壮大，会发现没有状态管理，这个工程越来越难维护。当然redux和mobx也都是可以使用在react的web项目中。
+                        mobx核心的理念是 动作改变 状态，而状态的改变会更新所有受影响的 视图，通俗来讲，一个应用可以拥有一个大的state，而每一个页面都和这个这个state相关连，通过改变这个state来更新页面。当然一个应用可以拥有多个state不一定是一个，这个开每个开发者对项目的规划。举个例子：用户的state,在用户未登录时，页面的显示时登录界面，当用户点击登录时，通过更新这个state，来更新这个view。更多的mobx概念请移步
+                        mobx中文文档 接下来就是在实际开发中使用mobx了...
+
                       </div>
                     </div>
                   </a>
 
                   <div class="index-btm">
 
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-05-25&nbsp;&nbsp;
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-06-13&nbsp;&nbsp;
 
                     <i class="iconfont icon-inbox"></i>
 
-                    <a href="/categories/Linux">Linux</a>&nbsp; &nbsp;
+                    <a href="/categories/%E5%89%8D%E7%AB%AF">前端</a>&nbsp; &nbsp;
 
                     <i class="iconfont icon-tag"></i>
 
-                    <a href="/tags/shell">shell</a>&nbsp;
+                    <a href="/tags/react-native">react-native</a>&nbsp;
 
                   </div>
                 </div>
@@ -145,34 +146,43 @@
               <div class="row mx-auto index-card">
 
                 <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2017/05/22/ffmpeg简易介绍/">
-                    <p class="h4 index-header">ffmpeg简易介绍</p>
+                  <a href="/2017/06/13/各个平台上传图片/">
+                    <p class="h4 index-header">各个平台上传图片</p>
                   </a>
 
-                  <a href="/2017/05/22/ffmpeg简易介绍/">
+                  <a href="/2017/06/13/各个平台上传图片/">
 
                     <div class="index-excerpt" style="max-height: none;">
-                      <div class="index-text mb-1">
-                        媒体文件结构 一个媒体文件并不像许多人想象的那样，是将媒体内容编码起来直接作为文件的。实际上，它通常是由多个不同种类的媒体流（ Stream ）组成，再以特定的封装格式封装起来的。
-                        比较常见的媒体流就是视频流跟音频流了，顾名思义，视频流存储的就是视频信息，音频流存储的就是音频信息。一个视频流或者音频流的内容，就是以特定的编码格式所存储的视频或音频信息。
-                        一个文件的里面的媒体流所采用的编码格式跟这个文件的后缀名并没有完全的必然联系。 文件的后缀名通常就代表这个文件的封装格式。
-                        ffmpeg 安装 自行下载使用系统安装对应的安装包 官网下载 以下使用的平台都为Mac系统下...
-
+                      <div class="index-text mb-1">开发时常遇到的一些上传图片操作，这里记录一下。包括android，iOS，和java后端，后面还遇到的其他语言或平台时，会进行补充
+                        android AsyncHttpClient 上传图片,要使用 android-async-http public
+                        void uploadImg(String filePath) { AsyncHttpClient asyncHttpclient
+                        = new AsyncHttpClient(); RequestParams params = new RequestParams();
+                        try { params.put(&quot;liveness&quot;, &quot;1&quot;); params.put(&quot;img&quot;,
+                        new File(filePath));// 传入照片路径 } catch (FileNotFoundException
+                        e) { e.printStackTrace(); } String url = &quot;&quot;; asyncHttpclient.post(url,
+                        params, new AsyncHttpResponseHandler() { @Override public
+                        void onSuccess(int statusCode, Header[] headers, byte[] responseByte)
+                        { String successStr = new String(responseByte); try { JSONObject
+                        jObject = new JSONObject(successStr) .getJSONArray(&quot;faces&quot;).getJSONObject(0);
+                        //其他省略 } catch (JSONException e) { e.printStackTrace(); }
+                        } @Override public void onFailure(int statusCode, Header[]
+                        headers, byte[] responseBody, Throwable error) { // 上传失败
+                        } }); } ...
                       </div>
                     </div>
                   </a>
 
                   <div class="index-btm">
 
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-05-22&nbsp;&nbsp;
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-06-13&nbsp;&nbsp;
 
                     <i class="iconfont icon-inbox"></i>
 
-                    <a href="/categories/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7">开源工具</a>&nbsp; &nbsp;
+                    <a href="/categories/%E9%9A%8F%E7%AC%94">随笔</a>&nbsp; &nbsp;
 
                     <i class="iconfont icon-tag"></i>
 
-                    <a href="/tags/%E6%89%A9%E5%B1%95">扩展</a>&nbsp;
+                    <a href="/tags/%E9%9A%8F%E7%AC%94">随笔</a>&nbsp;
 
                   </div>
                 </div>
@@ -181,39 +191,37 @@
               <div class="row mx-auto index-card">
 
                 <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2017/05/15/Linux下打RPM包/">
-                    <p class="h4 index-header">Linux下打RPM包</p>
+                  <a href="/2017/06/02/iterm,tmux,vim的常用快捷键/">
+                    <p class="h4 index-header">iterm,tmux,vim 的常用快捷键</p>
                   </a>
 
-                  <a href="/2017/05/15/Linux下打RPM包/">
+                  <a href="/2017/06/02/iterm,tmux,vim的常用快捷键/">
 
                     <div class="index-excerpt" style="max-height: none;">
-                      <div class="index-text mb-1">centos 6.5下打rpm包 工具准备 安装rpmtools工具 yum install rpmdevtools
-                        创建文件夹 mkdir -pv ~/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
-                        配置文件及源码准备 spec脚本文件创建，在SPECS文件夹下创建一个.spec文件 如h5-megvii.spec
-                        Name: h5-megvii License: copyright Version: 1.0 Release:
-                        1%{?dist} Summary: HTML FaceID Server AutoReqProv: no Group:
-                        Megvii URL: http://www.megvii.com Source: %{name}-%{version}.tar.gz
-                        BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-                        %description The rpm version of html-megvii package %prep
-                        %setup -q %build %install rm -rf $RPM_BUILD_ROOT mkdir -p
-                        $RPM_BUILD_ROOT cp -a * $RPM_BUILD_ROOT %clean rm -rf $RPM_BUILD_ROOT
-                        %files %defattr(-,root,root,-) /opt/megvii ...
-                      </div>
+                      <div class="index-text mb-1">上一篇博客我们搭建了Mac下流畅的终端使用环境，这篇博客我们讲一些常用的快捷键来提高开发效率。废话不多说我们开始吧 iterm2
+                        快捷 通常我们在使用时，一个窗口总是感觉不够用，这时我们就需要多窗口，或者一个窗口需要多个屏。打开Iterm2，我们按下
+                        command + t，来新建窗口，通过 commmand + w来关闭当前窗口，如果我们想要切换不同的窗口时，我们可以通过
+                        command + 方向键 或者 command + 数字来切换窗口。 command + q 退出应用程序 注：
+                        command + t或者 command + w或者 command +q 在很多应用都是通用的,比如在chrom
+                        上，这几个快捷键，分别表示新建tab页，关闭tab页，推出chrom。但是chrom 切换tab是使用 command
+                        + option +方向键 这个就和iterm2有区别了。 在链接远程服务器时，我需要在同一窗口，查看不同服务器的状态，或者其他的一些信息。多窗口去查看就太麻烦
+                        了。iterm 的分屏就能满足你的需要了。iterm2在分屏时，可以进行横向分屏和纵向分屏。纵向分屏使用 command
+                        + d横向分屏使用 command + shift +d，关闭当前分屏的快捷键也是使用 command + w，切换各个分屏使用的是
+                        command + option + 方向键，以下是效果图...</div>
                     </div>
                   </a>
 
                   <div class="index-btm">
 
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-05-15&nbsp;&nbsp;
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-06-02&nbsp;&nbsp;
 
                     <i class="iconfont icon-inbox"></i>
 
-                    <a href="/categories/Linux">Linux</a>&nbsp; &nbsp;
+                    <a href="/categories/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87">开发效率</a>&nbsp; &nbsp;
 
                     <i class="iconfont icon-tag"></i>
 
-                    <a href="/tags/Linux">Linux</a>&nbsp;
+                    <a href="/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87">开发效率</a>&nbsp;
 
                   </div>
                 </div>
@@ -222,35 +230,34 @@
               <div class="row mx-auto index-card">
 
                 <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2017/04/28/supervisor 是基于python的进程管理工具/">
-                    <p class="h4 index-header">supervisor linux后台进程管理利器</p>
+                  <a href="/2017/05/27/Mac下打造流畅的终端使用环境/">
+                    <p class="h4 index-header">Mac下打造流畅的终端使用环境</p>
                   </a>
 
-                  <a href="/2017/04/28/supervisor 是基于python的进程管理工具/">
+                  <a href="/2017/05/27/Mac下打造流畅的终端使用环境/">
 
                     <div class="index-excerpt" style="max-height: none;">
-                      <div class="index-text mb-1">supervisor 是基于python的进程管理工具 install online ubuntu 系统安装 apt-get
-                        install supervisor 也可以通过pip install supervisor 但是需要手动启动 install
-                        offline 下载安装包和依赖包详见官网 [ https://pypi.python.org/pypi/supervisor]
-                        3.3.1版本 解压安装tar.gz 然后cd 到目录中执行 python setup.py install 创建配置文件
-                        执行 echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf创建配置文件
-                        创建supervisord 放在 init.d目录 下 注： prog_bin 为supervisors 可执行文件位置...</div>
+                      <div class="index-text mb-1">作为程序员Mac上自带的终端是远远满足不了我们的，这时我们就要自己手动搭一个我们顺手的终端环境。下面我们就来搭建iterm2+
+                        oh my zsh + tmux 的终端工具 ITerm2 安装 上Iterm2的官网下载iterm2, iterm2下载
+                        下载完成之后，发现iterm2 自带的配色我不太喜欢，安装完成之后进行item2的配色，这个纯属看个人喜好了。 要进行配色，我们当然得要有配色的方案啦！什么你要自己配一个，嗯……
+                        这也是可以的，不过有很多现成的方案你要不要啊。github 上有超多的配色方案，我们先把这个库给clone下来。
+                        git clone git@github.com:mbadolato/iTerm2-Color-Schemes.git
+                        要是你没有git，那我觉得你没太必要继续下去了。当然你还想继续的话，你就上GitHub手动download 下来。...
+                      </div>
                     </div>
                   </a>
 
                   <div class="index-btm">
 
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-04-28&nbsp;&nbsp;
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-05-27&nbsp;&nbsp;
 
                     <i class="iconfont icon-inbox"></i>
 
-                    <a href="/categories/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7">开源工具</a>&nbsp; &nbsp;
+                    <a href="/categories/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87">开发效率</a>&nbsp; &nbsp;
 
                     <i class="iconfont icon-tag"></i>
 
-                    <a href="/tags/Linux">Linux</a>&nbsp;
-
-                    <a href="/tags/Python">Python</a>&nbsp;
+                    <a href="/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87">开发效率</a>&nbsp;
 
                   </div>
                 </div>
@@ -265,6 +272,10 @@
                   <a class="page-number" href="/page/2/">2</a>
                   <a class="page-number" href="/page/3/">3</a>
                   <span class="page-number current">4</span>
+                  <a class="page-number" href="/page/5/">5</a>
+                  <a class="extend next" rel="next" href="/page/5/">
+                    <i class="fas fa-angle-double-right"></i>
+                  </a>
                 </span>
               </nav>
 
