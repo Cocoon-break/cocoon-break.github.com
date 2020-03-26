@@ -13,7 +13,7 @@
   <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
   <meta name="author" content="cocoon-break">
   <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
-  <title>supervisor linux后台进程管理利器 ~ cocoon-break的博客</title>
+  <title>supervisor linux后台进程管理利器 ~ Cocoon-break的博客</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -34,7 +34,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
       <div class="container">
         <a class="navbar-brand" href="/">&nbsp;
-          <strong>cocoon-break的博客</strong>&nbsp;</a>
+          <strong>Cocoon-break的博客</strong>&nbsp;</a>
 
         <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
                                                                                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -100,7 +100,7 @@
               &nbsp;
               <i class="far fa-chart-bar"></i>
               <span class="post-count">
-                604 字
+                718 字
               </span>&nbsp; &nbsp;
 
               <i class="far fa-clock"></i>
@@ -134,16 +134,20 @@
           <div class="py-5 z-depth-3" id="board">
             <div class="post-content mx-auto" id="post">
               <div class="markdown-body">
-                <p>supervisor 是基于python的进程管理工具</p>
+                <p>supervisor 是基于python的进程管理工具，比如进程意外退出了，可以自动将退出的进程拉起，重新运行。</p>
                 <h2 id="install-online">
                   <a href="#install-online" class="headerlink" title="install online"></a>install online</h2>
                 <ul>
-                  <li>ubuntu 系统安装 apt-get install supervisor</li>
+                  <li>
+                    <p>ubuntu 系统安装 apt-get install supervisor</p>
+                  </li>
                   <li>
                     <p>也可以通过pip install supervisor 但是需要手动启动</p>
-                    <h2 id="install-offline">
-                      <a href="#install-offline" class="headerlink" title="install offline"></a>install offline</h2>
                   </li>
+                </ul>
+                <h2 id="install-offline">
+                  <a href="#install-offline" class="headerlink" title="install offline"></a>install offline</h2>
+                <ul>
                   <li>
                     <p>下载安装包和依赖包详见官网 [
                       <a href="https://pypi.python.org/pypi/supervisor" target="_blank" rel="noopener">https://pypi.python.org/pypi/supervisor</a>] 3.3.1版本</p>
@@ -156,7 +160,7 @@
                   </li>
                   <li>
                     <p>执行
-                      <code>echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf</code>创建配置文件</p>
+                      <code>echo supervisord_conf &gt; /etc/supervisor/supervisord.conf</code>创建配置文件</p>
                   </li>
                   <li>
                     <p>创建supervisord 放在 init.d目录 下
@@ -239,18 +243,19 @@
                 <h2 id="how-to-use">
                   <a href="#how-to-use" class="headerlink" title="how to use"></a>how to use</h2>
                 <p>在etc/supervisor.conf.d 目录下创建每个进程对应的配置文件 如：work.conf
-                  <br>具体配置
-                  <br>​ directory= /opt/faceid/worker //工程文件目录
-                  <br>​ command= /opt/faceid/worker/start.sh //启动命令
-                  <br>​ autostart=true //是否自启
-                  <br>​ autorestart=true //是否自动重启
-                  <br>​ startretries= 10000 //重试次数
-                  <br>​ startsecs=1 //启动时间
-                  <br>​ stopasgroup=true
-                  <br>​ killasgroup=true``
-                  <br>​ stdout_logfile_maxbytes = 50MB
-                  <br>​ stdout_logfile_backups = 10
-                  <br>​ stdout_logfile = /var/log/megvii/%(program_name)s.log</p>
+                  <br>具体配置</p>
+                <pre><code class="shell">directory= /opt/faceid/worker#工程文件目录
+command= /opt/faceid/worker/start.sh#启动命令
+autostart=true#是否自启
+autorestart=true#是否自动重启
+startretries= 10000#重试次数
+startsecs=1#启动时间
+stopasgroup=true
+killasgroup=true
+stdout_logfile_maxbytes=50MB
+stdout_logfile_backups=10
+stdout_logfile=å/var/log/megvii/%(program_name)s.log
+</code></pre>
                 <h2 id="common-command">
                   <a href="#common-command" class="headerlink" title="common command"></a>common command</h2>
                 <ul>
@@ -265,7 +270,7 @@
                 <ul>
                   <li>
                     <p>Error: Another program is already listening on a port</p>
-                    <pre><code class="ssh">find / -name supervisor.sock
+                    <pre><code class="shell">find / -name supervisor.sock
 unlink /***/supervisor.sock
 </code></pre>
                   </li>
@@ -275,15 +280,13 @@ unlink /***/supervisor.sock
                       <code>unix:///tmp/supervisor.sock no such file</code>
                     </p>
                     <p>编辑文件/etc/supervisord.conf 中的</p>
-                    <pre><code>file = /tmp/supervisor.sock ;改成file = /var/run/supervisor.sock
+                    <pre><code class="shell">file = /tmp/supervisor.sock ;改成file = /var/run/supervisor.sock
 </code></pre>
-                  </li>
-                </ul>
-                <p>​ 然后执行</p>
-                <pre><code class="ssh">touch /var/run/supervisor.sock
+                    <p>然后执行</p>
+                    <pre><code class="shell">touch /var/run/supervisor.sock
 service supervisord restart
 </code></pre>
-                <ul>
+                  </li>
                   <li>
                     <p>ERROR (spawn error)</p>
                     <p>确认脚本文件能够正常使用</p>
@@ -299,6 +302,15 @@ service supervisord restart
                     <pre><code>[root@testlm01v /etc/ld.so.conf.d]# cat python.conf 
 /usr/local/lib
 </code></pre>
+                  </li>
+                  <li>
+                    <p>普通用户权限</p>
+                    <p>安装需要root用户，如果维护通过非root用户，可以如下修改 </p>
+                    <ul>
+                      <li>修改配置文件/etc/supervisord.conf中[unix_http_server] ;chown=nobody:nogroup
+                        去掉;，修改为相应的user:group （也可以改前面的chmod为777） </li>
+                      <li>修改/etc/supervisord.conf.d权限，让相应用户可以增删改相应的配置文件</li>
+                    </ul>
                   </li>
                 </ul>
 

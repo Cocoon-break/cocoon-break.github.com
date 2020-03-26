@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+  <meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/lufei.jpg">
+  <link rel="icon" type="image/png" href="/img/lufei.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+  <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
+  <meta name="author" content="cocoon-break">
+  <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
+  <title>golang 之 cgo ~ Cocoon-break的博客</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css">
+
+</head>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="/">&nbsp;
+          <strong>Cocoon-break的博客</strong>&nbsp;</a>
+
+        <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+                                                                                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                                                                        aria-expanded="false" aria-label="Toggle navigation">
+          <div class="animated-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto text-center">
+
+            <li class="nav-item">
+              <a class="nav-link" href="/">首页</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">归档</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">分类</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">标签</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">关于</a>
+            </li>
+
+            <li class="nav-item" id="search-btn">
+              <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;
+                <i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="view intro-2" id="background" false style="background: url('/img/coloradoablaze.jpg')no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+
+            </span>
+
+            <br>
+
+            <p class="mt-3">
+              <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp; 星期四, 八月 30日 2018, 6:00 晚上
+            </p>
+
+            <p>
+
+              &nbsp;
+              <i class="far fa-chart-bar"></i>
+              <span class="post-count">
+                2.8k 字
+              </span>&nbsp; &nbsp;
+
+              <i class="far fa-clock"></i>
+              <span class="post-count">
+                11 分钟
+              </span>&nbsp;
+
+              <!-- 不蒜子统计文章PV -->
+
+              &nbsp;
+              <i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+              <span id="busuanzi_container_page_pv">
+                <span id="busuanzi_value_page_pv"></span> 次
+              </span>&nbsp;
+
+            </p>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="d-none d-lg-block col-lg-2"></div>
+        <div class="col-lg-8 nopadding-md">
+          <div class="py-5 z-depth-3" id="board">
+            <div class="post-content mx-auto" id="post">
+              <div class="markdown-body">
+                <p>使用golang开发有段时间，公司内部很多产品都是用golang开发的，除了底层核心的算法层是用C++ 写的，其他基本都是利用go进行封装对外提供给客户。由于底层是使用的是c++，上层使用的go，所以避免不了使用的cgo了。那什么是cgo呢？简单来说cgo支持创建调用C代码的Go包。下面我们来一步一步介绍cgo。</p>
+                <h3 id="cgo-的简单例子">
+                  <a href="#cgo-的简单例子" class="headerlink" title="cgo 的简单例子"></a>cgo 的简单例子</h3>
+                <p>让我们从一个简单的cgo 例子说起</p>
+                <pre><code class="go">package main
+//#include &lt;stdio.h&gt;
+//#include &lt;stdlib.h&gt;
+import &quot;C&quot; //该语句要单独写一行
+
+import (
+   &quot;unsafe&quot;
+)
+
+func main() {
+   //C.CString将go string 转换成C string
+   s := C.CString(&quot;Hello, World\n&quot;)
+   // C.CString() 返回的 C 字符串是在堆上新创建的并且不受 GC 的管理，
+   // 使用完后需要自行调用 C.free() 释放，否则会造成内存泄露，
+   // 而且这种内存泄露pprof 也定位不出来
+   defer C.free(unsafe.Pointer(s))
+   //C.puts 函数向标准输出窗口打印，
+   C.puts(s)
+}
+</code></pre>
+                <p>虽然上面的代码有注释了，但是还是有一些需要特别注意的。</p>
+                <ol>
+                  <li>
+                    <p>第二行到第五行，需要注意的是#include 前面的//，不要认为是注释。这里的意思是引用了C的标准库。这个//的注释是叫preamble。必须和底下的import
+                      “C” 中间挨着不能有空行的。否则会导致后面的编译无法通过。当然除了//也可以使用/**/。同时这里的import “C”
+                      需要和其他的import 隔开，并不能放到同一个import中，否则程序无法检测是否包含cgo
+                    </p>
+                    <pre><code class="go">//#include &lt;stdio.h&gt;
+//#include &lt;stdlib.h&gt;
+import &quot;C&quot;
+</code></pre>
+                  </li>
+                  <li>
+                    <p>第二个是main 函数里面的内容</p>
+                    <pre><code class="go">func main() {
+   //C.CString将go string 转换成C string
+   s := C.CString(&quot;Hello, World\n&quot;)
+   // C.CString() 返回的 C 字符串是在堆上新创建的并且不受 GC 的管理，
+   // 使用完后需要自行调用 C.free() 释放，否则会造成内存泄露，
+   // 而且这种内存泄露pprof 也定位不出来
+   defer C.free(unsafe.Pointer(s))
+   //C.puts 函数向标准输出窗口打印，
+   C.puts(s)
+}
+</code></pre>
+                    <ul>
+                      <li>
+                        <p>Go代码中的
+                          <code>s</code>变量在传递给c代码使用完成之后，需要调用
+                          <code>C.free</code>进行释放。首先我们需要先看下golang的字符串和C中的字符串在底层中的内存模型。</p>
+                        <p>
+                          <img src="/images/golang/string.jpg" srcset="/img/loading.gif" alt>
+                        </p>
+                        <p>从上图中我们可以看出golang 和 C 字符串在底层中的内存模型是不一样的。golang 字串符串并没有用 ‘\0’
+                          终止符标识字符串的结束，因此直接将 golang 字符串底层数据指针传递给 C 函数是不行的。一种方案类似切片的传递一样将字符串数据指针和长度传递给
+                          C 函数后，C 函数实现中自行申请一段内存拷贝字符串数据然后加上未层终止符后再使用。更好的方案是使用标准库提供的
+                          C.CString()将 golang 的字符串转换成 C 字符串然后传递给 C 函数调用。</p>
+                        <p>我们看下官方文档对CString的说明。所以我们也就知道C.free的作用是什么了</p>
+                        <pre><code class="go">// Go string to C string
+// The C string is allocated in the C heap using malloc.
+// It is the caller&#39;s responsibility to arrange for it to be
+// freed, such as by calling C.free (be sure to include stdlib.h
+// if C.free is needed).
+func C.CString(string) *C.char
+
+// 这个文档上的大概意思是
+// C string在C的堆上使用malloc申请。调用者有责任在合适的时候对该字符串进行释放，释放方式可以是调用C.free（调用C.free需包含stdlib.h）
+</code></pre>
+                        <p>我们来看看其他几种C类型和Go类型相互转换的。可以看出CBytes 也是需要我们手动free的。</p>
+                        <pre><code class="go">// Go []byte slice to C array
+// The C array is allocated in the C heap using malloc.
+// It is the caller&#39;s responsibility to arrange for it to be
+// freed, such as by calling C.free (be sure to include stdlib.h
+// if C.free is needed).
+func C.CBytes([]byte) unsafe.Pointer
+
+// C string to Go string
+func C.GoString(*C.char) string
+
+// C data with explicit length to Go string
+func C.GoStringN(*C.char, C.int) string
+
+// C data with explicit length to Go []byte
+func C.GoBytes(unsafe.Pointer, C.int) []byte
+</code></pre>
+                        <p>一般来说，c语言里都是秉承哪个模块申请就由哪个模块释放的原则，因为跨库申请释放可能由于各自链接的内存管理库不一致导致出现难以排查的bug。并且换个角度来说，被调用模块也无法知道传入的内存是在堆上申请还是栈上申请的，是否需要释放。
+                          <br>所以Go传入c模块的内存，c模块也许会对这块内存再次进行拷贝，但是c模块肯定不会释放（即
+                          <code>free</code>）传入的这份内存。
+                          <br>所以，一般来说，Go在调用完c函数之后，Go需要释放拷贝生成的这块内存。</p>
+                      </li>
+                    </ul>
+                  </li>
+                </ol>
+                <ul>
+                  <li>其中需要留意的是unsafe.Pointer 这个函数。消除内存拷贝可以通过
+                    <code>unsafe.Pointer</code>获取原始指针进行传递。
+                    <code>unsafe.Pointer</code>是一种特殊意义的指针，它可以包含任意类型的地址，有点类似于C语言里的void*指针，全能型的。</li>
+                </ul>
+                <p>Go语言中数值类型和C语言数据类型基本上是相似的。但是还是有不同的。这里就不详细介绍了。更多的cgo 类型装换可以参考
+                  <a href="https://books.studygolang.com/advanced-go-programming-book/ch2-cgo/ch2-03-cgo-types.html"
+                                                                                                  target="_blank" rel="noopener">Go语言高级编程</a>
+                </p>
+                <h3 id="Go-和-C-之间的数组传递">
+                  <a href="#Go-和-C-之间的数组传递" class="headerlink" title="Go 和 C 之间的数组传递"></a>Go 和 C 之间的数组传递</h3>
+                <h4 id="Go数组到C">
+                  <a href="#Go数组到C" class="headerlink" title="Go数组到C"></a>Go数组到C</h4>
+                <p>我们还是直接来看下例子。我们在C 中遍历数组，并计算数组内值的和。</p>
+                <pre><code class="go">package main
+/*
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+int loop(int** list_data, int leng, char** data)
+{
+  int* m = (int*)list_data;
+  int sum = 0;
+  for(int i=0; i&lt;leng; i++)
+  {
+    sum += m[i];
+  }
+  *data = &quot;finised task&quot;;
+  return sum;
+}
+*/
+import &quot;C&quot; //该语句要单独写一行
+import (
+    &quot;unsafe&quot;
+    &quot;fmt&quot;
+)
+func GoSilence2CArray() {
+    var ids = []int32{1, 2, 3, 5}
+    var res *C.char
+    length := C.int(len(ids))
+    le := C.loop((**C.int)(unsafe.Pointer(&amp;ids[0])), length, &amp;res)
+    fmt.Println(le)
+    fmt.Println(C.GoString(res))
+    fmt.Println(ids)
+}
+func main() {
+    GoSilence2CArray()
+}
+</code></pre>
+                <p>整个例子需要注意的就是调用C.loop 函数的时候，将Go中的Slice传给C函数。其中最重要的loop的第一个参数，将数组转换的代码了。我们来看以下使用loop函数的写法。</p>
+                <pre><code class="go">//正确写法
+le := C.loop((**C.int)(unsafe.Pointer(&amp;ids[0])), length, &amp;res)
+//错误写法
+le := C.loop((**C.int)(unsafe.Pointer(&amp;ids)), length, &amp;res)
+</code></pre>
+                <p>Slice在Go中实际上不是一个完全意义上的数组，它只是一种数据结构，带有若干头部。如果直接&amp;ids，那相当于把ids这个数据结构的地址处的数据强制转换为
+                  <code>(**C.int)</code>。这样导致的后果完全不可期，运行时core掉是再正常不过的后果。所以正确的写法应该是
+                  <code>(**C.int)(unsafe.Pointer(&amp;ids[0]))</code>。从slice的第一个元素地址开始。对于slice的内部数据结构可以查看
+                  <a href="http://blog.golang.org/go-slices-usage-and-internals" target="_blank" rel="noopener">slice的使用和内部结构</a>
+                </p>
+                <h4 id="C数组到Go-slice">
+                  <a href="#C数组到Go-slice" class="headerlink" title="C数组到Go slice"></a>C数组到Go slice</h4>
+                <p>还是直接看例子</p>
+                <pre><code class="go">package main
+/*
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct{
+   char* name;
+}person;
+
+person* get_person(int n){
+   person* ret = (person*)malloc(sizeof(person) * n);
+   for(int i=0;i&lt;n;i++){
+      ret[i].name=&quot;wu&quot;;
+   }
+   return ret;
+}
+*/
+import &quot;C&quot; //该语句要单独写一行
+import (
+    &quot;unsafe&quot;
+    &quot;fmt&quot;
+)
+func CArray2GoSilence() {
+    size := 2
+    person := C.get_person(C.int(size))
+    person_array := (*[1 &lt;&lt; 30]C.person)(unsafe.Pointer(person))
+    var names []string
+    for i := 0; i &lt; size; i++ {
+        name := C.GoString(person_array[i].name)
+        names = append(names, name)
+    }
+    for _, name := range names {
+        fmt.Println(name)
+    }
+    C.free(unsafe.Pointer(person))
+}
+func main() {
+    CArray2GoSilence()
+}
+</code></pre>
+                <p>C语言中的数组与Go语言中的数组差异较大，后者是值类型，而前者与C中的指针大部分场合都可以随意转换。目前似乎无法直接显式的在两者之间进行转型，官方文档也没有说明。但我们可以通过编写转换函数，将C的数组转换为Go的Slice。
+                  <code>(*[1 &lt;&lt; 30]C.person)(unsafe.Pointer(person))</code> 是获取足够大的内存地址，然后通过遍历该数组的地址。获取数组的元素。可以在for中将元素添加到slice中。</p>
+                <h3 id="cgo利用pkg-config-使用第三方的so库">
+                  <a href="#cgo利用pkg-config-使用第三方的so库" class="headerlink" title="cgo利用pkg_config 使用第三方的so库"></a>cgo利用pkg_config 使用第三方的so库</h3>
+                <h4 id="pkg-config">
+                  <a href="#pkg-config" class="headerlink" title="pkg_config"></a>pkg_config</h4>
+                <p>我们在使用第三方库的时候就少不了使用第三方库的头文件和库文件。我们在编译、链接的时候，必须要指定这些头文件和库的位置。
+                  <strong>pkg-config</strong> 是一个在
+                  <a href="https://zh.wikipedia.org/wiki/源代码" target="_blank" rel="noopener">源代码</a>
+                  <a href="https://zh.wikipedia.org/wiki/编译" target="_blank" rel="noopener">编译</a>时查询已安装的
+                  <a href="https://zh.wikipedia.org/wiki/库" target="_blank" rel="noopener">库</a>的使用接口的计算机工具
+                  <a href="https://zh.wikipedia.org/wiki/软件" target="_blank" rel="noopener">软件</a>。pkg-config原本是设计用于
+                  <a href="https://zh.wikipedia.org/wiki/Linux" target="_blank" rel="noopener">Linux</a>的，但现在在各个版本的
+                  <a href="https://zh.wikipedia.org/wiki/BSD" target="_blank" rel="noopener">BSD</a>、
+                  <a href="https://zh.wikipedia.org/wiki/Windows" target="_blank" rel="noopener">windows</a>、
+                  <a href="https://zh.wikipedia.org/wiki/Mac_OS_X" target="_blank" rel="noopener">Mac OS X</a>和
+                  <a href="https://zh.wikipedia.org/wiki/Solaris" target="_blank" rel="noopener">Solaris</a>上都有着可用的版本。</p>
+                <p>那么pkg-config有什么作用呢？</p>
+                <ol>
+                  <li>检查库的版本号。如果所需要的库的版本不满足要求，它会打印出错误信息，避免链接错误版本的库文件。</li>
+                  <li>获得编译预处理参数，如宏定义，头文件的位置。</li>
+                  <li>得链接参数，如库及依赖的其它库的位置，文件名及其它一些连接参数。</li>
+                  <li>自动加入所依赖的其它库的设置。</li>
+                </ol>
+                <p>pkg-config是如和得到这些信息呢？为了让pkg-config可以得到这些信息，要求库的提供者，提供一个.pc文件。以下是这是一个用于
+                  <a href="https://zh.wikipedia.org/w/index.php?title=Libpng&amp;action=edit&amp;redlink=1"
+                                                                                                  target="_blank" rel="noopener">libpng</a>的.pc文件的样例:</p>
+                <pre><code class="shell">prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${exec_prefix}/include
+
+Name: libpng12
+Description: Loads and saves PNG files
+Version: 1.2.8
+Libs: -L${libdir} -lpng12 -lz
+Cflags: -I${includedir}/libpng12
+</code></pre>
+                <p>这个文件告诉我们这些库可以在/usr/local/lib找到，头文件可以在/usr/local/include里找到，库的名字是libpng12并且版本号是1.2.8。它也提供了用于编译依赖于libpng的源代码时需要的链接器参数。</p>
+                <p>pkg-config默认会去/usr/local/lib/pkgconfig目录下，寻找.pc文件。</p>
+                <h4 id="cgo-使用pkg-config">
+                  <a href="#cgo-使用pkg-config" class="headerlink" title="cgo 使用pkg-config"></a>cgo 使用pkg-config</h4>
+                <p>我们先来看下cgo 中使用pkg-config的例子。以下是我做餐盘识别项目中涉及到cgo部分</p>
+                <pre><code class="go">package cgo
+// #cgo pkg-config: megproduct
+// #cgo CXXFLAGS: -std=c++11
+// #include &quot;plate.h&quot;
+// #include &quot;stdlib.h&quot;
+import &quot;C&quot;
+//后续使用方法和go 调用C的方式一致了
+</code></pre>
+                <p>我们可以看到cgo有配置pkg-config的配置文件megproduct.pc，这个pc文件可以放在/usr/local/lib/pkgconfig目录下，也可以将其添加到环境变量PKG_CONFIG_PATH中。根据megproduct.pc
+                  查找库的头文件和so文件。
+                </p>
+                <p>我们来看下megproduct.pc 是咋样的</p>
+                <pre><code class="shell">prefix=/go/DATA/plate-sdk-190710
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: megproduct
+Description: megproduct, built in megproduct
+Version: 1.1
+Requires:
+Libs: ${libdir}/libmegproduct.so
+Libs.private: -Wl,--push-state,--as-needed,-lpthread,-lrt,-ldl,-lm,--pop-state
+Cflags: -I${includedir}
+</code></pre>
+                <p>使用pkg-config少了很多配置的文件。所以如果使用第三方库进行cgo 开发还是建议使用pkg-config</p>
+                <p>本篇文章更多讲的是cgo的使用，并没有涉及到底层cgo的内部实现，后续如果有时间会对cgo 底层的实现讲解。</p>
+                <p>参考：
+                  <a href="https://www.pengrl.com/p/29054/" target="_blank" rel="noopener">Go语言使用cgo时的内存管理笔记</a>
+                </p>
+                <p>​
+                  <a href="https://golang.org/cmd/cgo/" target="_blank" rel="noopener">官方文档</a>
+                </p>
+                <p>​
+                  <a href="http://blog.golang.org/go-slices-usage-and-internals" target="_blank" rel="noopener">slice的使用和内部结构</a>
+                </p>
+
+                <hr>
+              </div>
+              <br>
+              <div>
+                <p>
+
+                  <span>
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a class="hover-with-bg" href="/categories/golang">golang</a>
+                    &nbsp;
+
+                  </span>&nbsp;&nbsp;
+
+                  <span>
+                    <i class="iconfont icon-tag"></i>
+
+                    <a class="hover-with-bg" href="/tags/golang%20cgo">golang cgo</a>
+
+                  </span>
+
+                </p>
+
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用
+                  <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC"
+                                                                                                  rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-none d-lg-block col-lg-2 toc-container">
+          <div id="toc">
+            <p class="h4">
+              <i class="far fa-list-alt"></i>&nbsp;目录</p>
+            <div id="tocbot"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- custom -->
+
+    <!-- Comments -->
+    <div class="col-lg-7 mx-auto nopadding-md">
+      <div class="container comments mx-auto" id="comments">
+
+      </div>
+    </div>
+
+  </main>
+
+  <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+    <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+  </a>
+
+  <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+                                                                                  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+          <button type="button" id="local-search-close" class="close" data-dismiss="modal"
+                                                                                          aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <input type="text" id="local-search-input" class="form-control validate">
+            <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          </div>
+          <div class="list-group" id="local-search-result"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-5">
+    <div class="text-center py-3">
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener">
+        <b>Hexo</b>
+      </a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <b>Fluid</b>
+      </a>
+      <br>
+
+      <!-- 不蒜子统计PV -->
+
+      &nbsp;
+      <span id="busuanzi_container_site_pv"></span>总访问量
+      <span id="busuanzi_value_site_pv"></span> 次&nbsp;
+
+      <!-- 不蒜子统计UV -->
+
+      &nbsp;
+      <span id="busuanzi_container_site_uv"></span>总访客数
+      <span id="busuanzi_value_site_uv"></span> 人&nbsp;
+
+      <br>
+
+      <!-- cnzz Analytics icon -->
+
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="/lib/jquery/jquery.min.js"></script>
+  <script src="/lib/popper/popper.min.js"></script>
+  <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/lib/mdbootstrap/js/mdb.min.js"></script>
+  <script src="/js/main.js"></script>
+
+  <script src="/js/lazyload.js"></script>
+
+  <script src="/lib/tocbot/tocbot.min.js"></script>
+
+  <script src="/js/post.js"></script>
+
+  <script src="/lib/smoothscroll/SmoothScroll.min.js"></script>
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- Plugins -->
+  <!-- Tencent Analytics -->
+  <script>
+    var _mtac = {};
+    (function() {
+      var mta = document.createElement("script");
+      mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
+      mta.setAttribute("name", "MTAH5");
+      mta.setAttribute("sid", "500712823");
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(mta, s);
+    })();
+
+  </script>
+
+  <!-- cnzz Analytics -->
+
+  <script src="/lib/prettify/prettify.min.js">
+
+
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('pre').addClass('prettyprint  ');
+      prettyPrint();
+    })
+
+  </script>
+
+  <script src="/lib/typed/typed.min.js">
+  </script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "golang 之 cgo&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function() {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+
+  </script>
+
+  <script src="/lib/anchor/anchor.min.js">
+
+
+  </script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+
+  </script>
+
+  <script src="/js/local-search.js">
+
+
+  </script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function() {
+      getSearchFile(path);
+      this.onclick = null
+    }
+
+  </script>
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js">
+
+
+  </script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function() {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>

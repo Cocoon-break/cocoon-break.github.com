@@ -13,7 +13,7 @@
   <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
   <meta name="author" content="cocoon-break">
   <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
-  <title>cocoon-break的博客</title>
+  <title>Cocoon-break的博客</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -34,7 +34,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
       <div class="container">
         <a class="navbar-brand" href="/">&nbsp;
-          <strong>cocoon-break的博客</strong>&nbsp;</a>
+          <strong>Cocoon-break的博客</strong>&nbsp;</a>
 
         <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
                                                                                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -108,46 +108,6 @@
         <div class="container">
           <div class="row">
             <div class="col-12 col-md-10 m-auto">
-              <div class="row mx-auto index-card">
-
-                <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2017/07/05/xargs和jq/">
-                    <p class="h4 index-header">xargs 和 jq</p>
-                  </a>
-
-                  <a href="/2017/07/05/xargs和jq/">
-
-                    <div class="index-excerpt" style="max-height: none;">
-                      <div class="index-text mb-1">​ xargs是Linux系统上自带的命令，xargs命令是给其他命令传递参数的一个过滤器，也是组合多个命令的一个工具。jq
-                        不是Linux系统自带的命令，需要自行安装。jq主要在Linux上解析json。 xargs ​ 举一个例子，我们常用的一个命令
-                        rm -rf *.log 如果文件log文件太多我们会得到一个异常的信/bin/rm Argument list
-                        too long，也就是说rm能接受的参数是有限的。这时我们就可以利用xargs 过滤。 ls *.log | xargs
-                        rm -rf ls 将当前目录下的log文件名标准输出，通过管道传递给xargs 过滤，然后进行删除。 题外话：
-                        Linux上一些以减号开头的文件，会将这个文件认为是一个参数，如： rm -rf -xxxx.log是无法执行的，无论是其他的什么命令去处理类似文件名的文件，都会有这个问题。可以通过在文件名前加两个减号解决。
-                        如 rm -rf -- -xxxx.log ​ xargs 的具体用法，还是一个文件夹中有一大堆文件，通过 ls可以将文件多行输出。但是我想单行或者指定行数输出呢！通过给xargs指定-n
-                        参数。 ls *.log | xargs -n2 #-n2 就是指定两行输出，-n3就是三行输出，以此类推 前面都是一些简易的操作，感觉不到xargs
-                        到底是怎么处理管道出来的文件。现在我的一个需求是将所有的log文件复制到指定目录下。普通复制命令 cp xxx.log
-                        /var/log。我们先忽略cp 命令有-r参数。先看看以下写法是否正确...
-                      </div>
-                    </div>
-                  </a>
-
-                  <div class="index-btm">
-
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-07-05&nbsp;&nbsp;
-
-                    <i class="iconfont icon-inbox"></i>
-
-                    <a href="/categories/Linux">Linux</a>&nbsp; &nbsp;
-
-                    <i class="iconfont icon-tag"></i>
-
-                    <a href="/tags/shell">shell</a>&nbsp;
-
-                  </div>
-                </div>
-              </div>
-
               <div class="row mx-auto index-card">
 
                 <div class="col-12 col-md-8 mx-auto index-info">
@@ -271,6 +231,125 @@
                 </div>
               </div>
 
+              <div class="row mx-auto index-card">
+
+                <div class="col-12 col-md-8 mx-auto index-info">
+                  <a href="/2017/06/13/RN中使用mobx来进行状态管理/">
+                    <p class="h4 index-header">RN 中使用mobx来进行状态管理</p>
+                  </a>
+
+                  <a href="/2017/06/13/RN中使用mobx来进行状态管理/">
+
+                    <div class="index-excerpt" style="max-height: none;">
+                      <div class="index-text mb-1">在使用RN开发app过程中需要状态管理，也就是state 这个概念，由此衍生出来的两个状态管理的框架，一个是redux，另一个就是mobx了。这两个我都用过，今天就先来介绍下mobx
+                        在开发RN中的使用。实际上不使用状态管理的框架，你也是能够进行开发的，但是随着项目的开发以及项目的壮大，会发现没有状态管理，这个工程越来越难维护。当然redux和mobx也都是可以使用在react的web项目中。
+                        mobx核心的理念是 动作改变 状态，而状态的改变会更新所有受影响的 视图，通俗来讲，一个应用可以拥有一个大的state，而每一个页面都和这个这个state相关连，通过改变这个state来更新页面。当然一个应用可以拥有多个state不一定是一个，这个开每个开发者对项目的规划。举个例子：用户的state,在用户未登录时，页面的显示时登录界面，当用户点击登录时，通过更新这个state，来更新这个view。更多的mobx概念请移步
+                        mobx中文文档 接下来就是在实际开发中使用mobx了...
+
+                      </div>
+                    </div>
+                  </a>
+
+                  <div class="index-btm">
+
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-06-13&nbsp;&nbsp;
+
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a href="/categories/%E5%89%8D%E7%AB%AF">前端</a>&nbsp; &nbsp;
+
+                    <i class="iconfont icon-tag"></i>
+
+                    <a href="/tags/react-native">react-native</a>&nbsp;
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mx-auto index-card">
+
+                <div class="col-12 col-md-8 mx-auto index-info">
+                  <a href="/2017/06/13/各个平台上传图片/">
+                    <p class="h4 index-header">各个平台上传图片</p>
+                  </a>
+
+                  <a href="/2017/06/13/各个平台上传图片/">
+
+                    <div class="index-excerpt" style="max-height: none;">
+                      <div class="index-text mb-1">开发时常遇到的一些上传图片操作，这里记录一下。包括android，iOS，和java后端，后面还遇到的其他语言或平台时，会进行补充
+                        android AsyncHttpClient 上传图片,要使用 android-async-http public
+                        void uploadImg(String filePath) { AsyncHttpClient asyncHttpclient
+                        = new AsyncHttpClient(); RequestParams params = new RequestParams();
+                        try { params.put(&quot;liveness&quot;, &quot;1&quot;); params.put(&quot;img&quot;,
+                        new File(filePath));// 传入照片路径 } catch (FileNotFoundException
+                        e) { e.printStackTrace(); } String url = &quot;&quot;; asyncHttpclient.post(url,
+                        params, new AsyncHttpResponseHandler() { @Override public
+                        void onSuccess(int statusCode, Header[] headers, byte[] responseByte)
+                        { String successStr = new String(responseByte); try { JSONObject
+                        jObject = new JSONObject(successStr) .getJSONArray(&quot;faces&quot;).getJSONObject(0);
+                        //其他省略 } catch (JSONException e) { e.printStackTrace(); }
+                        } @Override public void onFailure(int statusCode, Header[]
+                        headers, byte[] responseBody, Throwable error) { // 上传失败
+                        } }); } ...
+                      </div>
+                    </div>
+                  </a>
+
+                  <div class="index-btm">
+
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-06-13&nbsp;&nbsp;
+
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a href="/categories/%E9%9A%8F%E7%AC%94">随笔</a>&nbsp; &nbsp;
+
+                    <i class="iconfont icon-tag"></i>
+
+                    <a href="/tags/%E9%9A%8F%E7%AC%94">随笔</a>&nbsp;
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mx-auto index-card">
+
+                <div class="col-12 col-md-8 mx-auto index-info">
+                  <a href="/2017/06/02/iterm,tmux,vim的常用快捷键/">
+                    <p class="h4 index-header">iterm,tmux,vim 的常用快捷键</p>
+                  </a>
+
+                  <a href="/2017/06/02/iterm,tmux,vim的常用快捷键/">
+
+                    <div class="index-excerpt" style="max-height: none;">
+                      <div class="index-text mb-1">上一篇博客我们搭建了Mac下流畅的终端使用环境，这篇博客我们讲一些常用的快捷键来提高开发效率。废话不多说我们开始吧 iterm2
+                        快捷 通常我们在使用时，一个窗口总是感觉不够用，这时我们就需要多窗口，或者一个窗口需要多个屏。打开Iterm2，我们按下
+                        command + t，来新建窗口，通过 commmand + w来关闭当前窗口，如果我们想要切换不同的窗口时，我们可以通过
+                        command + 方向键 或者 command + 数字来切换窗口。 command + q 退出应用程序 注：
+                        command + t或者 command + w或者 command +q 在很多应用都是通用的,比如在chrom
+                        上，这几个快捷键，分别表示新建tab页，关闭tab页，推出chrom。但是chrom 切换tab是使用 command
+                        + option +方向键 这个就和iterm2有区别了。 在链接远程服务器时，我需要在同一窗口，查看不同服务器的状态，或者其他的一些信息。多窗口去查看就太麻烦
+                        了。iterm 的分屏就能满足你的需要了。iterm2在分屏时，可以进行横向分屏和纵向分屏。纵向分屏使用 command
+                        + d横向分屏使用 command + shift +d，关闭当前分屏的快捷键也是使用 command + w，切换各个分屏使用的是
+                        command + option + 方向键，以下是效果图...</div>
+                    </div>
+                  </a>
+
+                  <div class="index-btm">
+
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2017-06-02&nbsp;&nbsp;
+
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a href="/categories/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87">开发效率</a>&nbsp; &nbsp;
+
+                    <i class="iconfont icon-tag"></i>
+
+                    <a href="/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87">开发效率</a>&nbsp;
+
+                  </div>
+                </div>
+              </div>
+
               <nav aria-label="index posts navigation">
                 <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
                   <a class="extend prev" rel="prev" href="/page/2/">
@@ -280,7 +359,6 @@
                   <a class="page-number" href="/page/2/">2</a>
                   <span class="page-number current">3</span>
                   <a class="page-number" href="/page/4/">4</a>
-                  <a class="page-number" href="/page/5/">5</a>
                   <a class="extend next" rel="next" href="/page/4/">
                     <i class="fas fa-angle-double-right"></i>
                   </a>

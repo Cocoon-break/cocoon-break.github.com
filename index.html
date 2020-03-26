@@ -13,7 +13,7 @@
   <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
   <meta name="author" content="cocoon-break">
   <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
-  <title>cocoon-break的博客</title>
+  <title>Cocoon-break的博客</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
   <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -34,7 +34,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
       <div class="container">
         <a class="navbar-brand" href="/">&nbsp;
-          <strong>cocoon-break的博客</strong>&nbsp;</a>
+          <strong>Cocoon-break的博客</strong>&nbsp;</a>
 
         <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
                                                                                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -110,6 +110,145 @@
             <div class="col-12 col-md-10 m-auto">
               <div class="row mx-auto index-card">
 
+                <div class="col-12 col-md-4 m-auto">
+                  <a href="/2018/09/10/golang之slice and map/" target="_self">
+                    <img src="/images/golang/logo.jpg" srcset="/img/loading.gif" alt="golang 之 slice &amp; defer 关键字"
+                                                                                                    class="index-img img-fluid rounded index-thumbnails">
+                  </a>
+                </div>
+
+                <div class="col-12 col-md-8 mx-auto index-info">
+                  <a href="/2018/09/10/golang之slice and map/">
+                    <p class="h4 index-header">golang 之 slice &amp; defer 关键字</p>
+                  </a>
+
+                  <a href="/2018/09/10/golang之slice and map/">
+
+                    <div class="index-excerpt">
+                      <div class="index-text mb-1">今天我们讲讲golang的slice和defer。 slice是go里面一个很重要的数据结构，使用这种结构来管理数据集合。slice
+                        类似其他语言中的数组，但是又有一些其他不同的属性。 在正式开始讲slice之前我们来说一说golang 中的 defer，原本觉得自己对defer有一定了解了。但是昨天看了一本书，才发现自己对defer
+                        的了解是这么浅，在没有运行以下代码前你能否得出正确答案呢？运行代码之后能否回答为什么？ package main
+                        import &quot;fmt&quot; func f() (result int) { defer func()
+                        { result++ }() return 0 } func f2() (r int) { t := 5 defer
+                        func() { t = t + 5 }() return t } func f3() (r int) { defer
+                        func(r int) { r = r + 5 }(r)
+                      </div>
+                    </div>
+                  </a>
+
+                  <div class="index-btm">
+
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2018-09-10&nbsp;&nbsp;
+
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a href="/categories/golang">golang</a>&nbsp; &nbsp;
+
+                    <i class="iconfont icon-tag"></i>
+
+                    <a href="/tags/golang">golang</a>&nbsp;
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mx-auto index-card">
+
+                <div class="col-12 col-md-4 m-auto">
+                  <a href="/2018/08/30/golang之cgo/" target="_self">
+                    <img src="/images/golang/string.jpg" srcset="/img/loading.gif" alt="golang 之 cgo"
+                                                                                                    class="index-img img-fluid rounded index-thumbnails">
+                  </a>
+                </div>
+
+                <div class="col-12 col-md-8 mx-auto index-info">
+                  <a href="/2018/08/30/golang之cgo/">
+                    <p class="h4 index-header">golang 之 cgo</p>
+                  </a>
+
+                  <a href="/2018/08/30/golang之cgo/">
+
+                    <div class="index-excerpt">
+                      <div class="index-text mb-1">使用golang开发有段时间，公司内部很多产品都是用golang开发的，除了底层核心的算法层是用C++ 写的，其他基本都是利用go进行封装对外提供给客户。由于底层是使用的是c++，上层使用的go，所以避免不了使用的cgo了。那什么是cgo呢？简单来说cgo支持创建调用C代码的Go包。下面我们来一步一步介绍cgo。
+                        cgo 的简单例子 让我们从一个简单的cgo 例子说起 package main //#include &lt;stdio.h&gt;
+                        //#include &lt;stdlib.h&gt; import &quot;C&quot; //该语句要单独写一行
+                        import ( &quot;unsafe&quot; ) func main() { //C.CString将go
+                        string 转换成C string s := C.CString(&quot;Hello, World\n&quot;)
+                        // C.CString() 返回的 C 字符串是在堆上新创建的并且不受 GC 的管理， // 使用完后需要自行调用
+                        C.free() 释放，否</div>
+                    </div>
+                  </a>
+
+                  <div class="index-btm">
+
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2018-08-30&nbsp;&nbsp;
+
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a href="/categories/golang">golang</a>&nbsp; &nbsp;
+
+                    <i class="iconfont icon-tag"></i>
+
+                    <a href="/tags/golang%20cgo">golang cgo</a>&nbsp;
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mx-auto index-card">
+
+                <div class="col-12 col-md-4 m-auto">
+                  <a href="/2018/08/25/MySQL系列五/" target="_self">
+                    <img src="/images/mysql/logo-mysql.png" srcset="/img/loading.gif" alt="MySQL系列五之原理及性能"
+                                                                                                    class="index-img img-fluid rounded index-thumbnails">
+                  </a>
+                </div>
+
+                <div class="col-12 col-md-8 mx-auto index-info">
+                  <a href="/2018/08/25/MySQL系列五/">
+                    <p class="h4 index-header">MySQL系列五之原理及性能</p>
+                  </a>
+
+                  <a href="/2018/08/25/MySQL系列五/">
+
+                    <div class="index-excerpt">
+                      <div class="index-text mb-1">
+                        索引原理分析 MySQL的索引是由 存储引擎来实现的。由于存储引擎不同，所以具有不同的索引类型，如BTree索引，B+Tree索引，哈希索引，全文索引等。MySQL的InnoDB引擎就是基于B+Tree索引的。
+                        聚簇索引和非聚簇索引： https://www.cnblogs.com/rjzheng/p/9915754.html
+                        B+tree 索引分类 主键索引：即主索引，根据主键pk_clolum（length）建立索引， 不允许重复，不允许空值
+                        ALTER TABLE &#39;table_name&#39; ADD PRIMARY KEY pk_index(&#39;col&#39;)；
+                        唯一索引：用来建立索引的列的值必须是 唯一的，允许空值 ALTER TABLE &#39;table_name&#39;
+                        ADD UNIQUE index_name(&#39;col&#39;)； 普通索引：用表中的普通列构建的索引，没有任何限制
+                        A
+                      </div>
+                    </div>
+                  </a>
+
+                  <div class="index-btm">
+
+                    <i class="iconfont icon-riqi2"></i>&nbsp;2018-08-25&nbsp;&nbsp;
+
+                    <i class="iconfont icon-inbox"></i>
+
+                    <a href="/categories/DB">DB</a>&nbsp; &nbsp;
+
+                    <i class="iconfont icon-tag"></i>
+
+                    <a href="/tags/mysql">mysql</a>&nbsp;
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mx-auto index-card">
+
+                <div class="col-12 col-md-4 m-auto">
+                  <a href="/2018/08/22/MySQL系列四/" target="_self">
+                    <img src="/images/mysql/MySQL_Architecture.jpg" srcset="/img/loading.gif" alt="MySQL系列四之执行流程及架构"
+                                                                                                    class="index-img img-fluid rounded index-thumbnails">
+                  </a>
+                </div>
+
                 <div class="col-12 col-md-8 mx-auto index-info">
                   <a href="/2018/08/22/MySQL系列四/">
                     <p class="h4 index-header">MySQL系列四之执行流程及架构</p>
@@ -144,6 +283,13 @@
 
               <div class="row mx-auto index-card">
 
+                <div class="col-12 col-md-4 m-auto">
+                  <a href="/2018/08/18/MySQL系列三/" target="_self">
+                    <img src="/images/mysql/logo-mysql.png" srcset="/img/loading.gif" alt="MySQL系列三之事务和锁"
+                                                                                                    class="index-img img-fluid rounded index-thumbnails">
+                  </a>
+                </div>
+
                 <div class="col-12 col-md-8 mx-auto index-info">
                   <a href="/2018/08/18/MySQL系列三/">
                     <p class="h4 index-header">MySQL系列三之事务和锁</p>
@@ -177,6 +323,12 @@
               </div>
 
               <div class="row mx-auto index-card">
+
+                <div class="col-12 col-md-4 m-auto">
+                  <a href="/2018/08/15/MySQL系列二/" target="_self">
+                    <img src="/images/mysql/join.jpg" srcset="/img/loading.gif" alt="MySQL系列二之基础使用" class="index-img img-fluid rounded index-thumbnails">
+                  </a>
+                </div>
 
                 <div class="col-12 col-md-8 mx-auto index-info">
                   <a href="/2018/08/15/MySQL系列二/">
@@ -213,50 +365,12 @@
                 </div>
               </div>
 
-              <div class="row mx-auto index-card">
-
-                <div class="col-12 col-md-8 mx-auto index-info">
-                  <a href="/2018/08/12/MySQL系列一/">
-                    <p class="h4 index-header">MySQL系列一之基础使用</p>
-                  </a>
-
-                  <a href="/2018/08/12/MySQL系列一/">
-
-                    <div class="index-excerpt">
-                      <div class="index-text mb-1">MySQL是平常使用较多的数据，因项目需要发现自身对MySQL有所欠缺。所以复习了一下MySQL知识，做个总结归纳。本文介绍为基础知识，从数据库链接开始，包括一些常用SQL语句，和MySQL的一些数据类型。建议使用docker
-                        的MySQL 进行SQL练习。同时推荐个人比较喜欢使用的数据库可视化软件Table Plus。 链接MySQL服务
-                        通过命令行建立链接 # -u 参数指定用户名，-p指定密码，-P指定端口默认是3306，-h 是指定主机地址,-e
-                        指定链接之后操作 mysql -uroot -proot -P3306 -h 127.0.0.1 mysql -uroot
-                        -proot -e&quot;show databases&quot; # 建立链接的同时，执行提前写好的sql文件
-                        mysql -uroot -proot &lt; test.sql 数据库管理 数据库管理包括，数据库创建，数据库删除，数据库使用等操作
-                        -- 创建数据库并指定字符集 create database test charset utf8; -- 数据库查看
-                        show databa</div>
-                    </div>
-                  </a>
-
-                  <div class="index-btm">
-
-                    <i class="iconfont icon-riqi2"></i>&nbsp;2018-08-12&nbsp;&nbsp;
-
-                    <i class="iconfont icon-inbox"></i>
-
-                    <a href="/categories/DB">DB</a>&nbsp; &nbsp;
-
-                    <i class="iconfont icon-tag"></i>
-
-                    <a href="/tags/mysql">mysql</a>&nbsp;
-
-                  </div>
-                </div>
-              </div>
-
               <nav aria-label="index posts navigation">
                 <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
                   <span class="page-number current">1</span>
                   <a class="page-number" href="/page/2/">2</a>
                   <a class="page-number" href="/page/3/">3</a>
-                  <span class="space">&hellip;</span>
-                  <a class="page-number" href="/page/5/">5</a>
+                  <a class="page-number" href="/page/4/">4</a>
                   <a class="extend next" rel="next" href="/page/2/">
                     <i class="fas fa-angle-double-right"></i>
                   </a>
