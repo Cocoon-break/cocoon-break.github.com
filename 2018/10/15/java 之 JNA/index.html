@@ -1,0 +1,765 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/lufei.jpg">
+  <link rel="icon" type="image/png" href="/img/lufei.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
+  <meta name="author" content="cocoon-break">
+  <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
+  <title>java 之 JNA - Cocoon-break的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吴生坪</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/coloradoablaze.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-10-15 19:00" pubdate>
+        2018年10月15日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">java 之 JNA</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>我们知道JAVA调用C和C++ 通常用是JNI，JNI虽然好用但是对于JAVA程序猿并不是很有友好，有更多的学习成本。对于java程序猿来说JNA的学习成本就低的多。在工程中只要引入一个jar包就可以非常方便的使用。对于官方的一些样例这里我也就不在重复了。主要还是从我自己这边使用遇到一些问题说起。官方入门的一些请移步<a target="_blank" rel="noopener" href="https://github.com/java-native-access/jna">官方文档</a>。</p>
+<p>不过在开始之前一定一定要了解的是类型映射关系。也就是在C或者C++ 中的类型在JAVA中对应的类型是什么？直接上表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">C基本类型</th>
+<th align="center">长度</th>
+<th align="center">Java类型</th>
+<th align="center">Windows类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">char</td>
+<td align="center">8位整型</td>
+<td align="center">byte</td>
+<td align="center">BYTE、TCHAR</td>
+</tr>
+<tr>
+<td align="center">short</td>
+<td align="center">16位整型</td>
+<td align="center">short</td>
+<td align="center">WORD</td>
+</tr>
+<tr>
+<td align="center">wchar_t</td>
+<td align="center">16/32位字符</td>
+<td align="center">char</td>
+<td align="center">TCHAR</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">32位整型</td>
+<td align="center">int</td>
+<td align="center">DWORD</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">布尔值</td>
+<td align="center">boolean</td>
+<td align="center">BOOL</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td align="center">32/64位整型</td>
+<td align="center">NativeLong</td>
+<td align="center">LONG</td>
+</tr>
+<tr>
+<td align="center">long long</td>
+<td align="center">64位整型</td>
+<td align="center">long</td>
+<td align="center">__int64</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">32位浮点型</td>
+<td align="center">float</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">64位浮点型</td>
+<td align="center">double</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">char*</td>
+<td align="center">C字符串</td>
+<td align="center">String</td>
+<td align="center">LPTCSTR</td>
+</tr>
+<tr>
+<td align="center">void*</td>
+<td align="center">指针</td>
+<td align="center">Pointer</td>
+<td align="center">LPVOID、HANDLE、LP<em>XXX</em></td>
+</tr>
+</tbody></table>
+<h4 id="开发过程"><a href="#开发过程" class="headerlink" title="开发过程"></a>开发过程</h4><p>我这边接到一个另外一个部门提供的一个dll库和头文件，需要使用JNA的方式进行开发使用。提供一个NVSSDK.dll 和其他的一些依赖的dll库和头文件。</p>
+<h5 id="定义一个接口和编写相应的结构体映射"><a href="#定义一个接口和编写相应的结构体映射" class="headerlink" title="定义一个接口和编写相应的结构体映射"></a>定义一个接口和编写相应的结构体映射</h5><p>定义一个类编写要使用dll库中的方法和对应的结构体，具体可参考相关的头文件。简易是和头文件对应着看。</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.megvii.camera.proxy;
+
+<span class="hljs-keyword">import</span> com.sun.jna.Library;
+<span class="hljs-keyword">import</span> com.sun.jna.Pointer;
+<span class="hljs-keyword">import</span> com.sun.jna.Structure;
+<span class="hljs-keyword">import</span> com.sun.jna.Structure.ByValue;
+<span class="hljs-keyword">import</span> com.sun.jna.ptr.IntByReference;
+<span class="hljs-keyword">import</span> com.sun.jna.win32.StdCallLibrary.StdCallCallback;
+<span class="hljs-keyword">import</span> com.sun.jna.Callback;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">NVSSDK</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Library</span> </span>&#123;
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PicTime</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Structure</span> </span>&#123;
+
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> uiYear;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> uiMonth;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> uiDay;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> uiWeek;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> uiHour;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> uiMinute;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> uiSecondsr;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> uiMilliseconds;
+    &#125;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PicData</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Structure</span> </span>&#123;
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PicData</span><span class="hljs-params">(Pointer pointer)</span> </span>&#123;
+            <span class="hljs-keyword">super</span>(pointer);
+            useMemory(pointer);
+            read();
+        &#125;
+
+        <span class="hljs-keyword">public</span> PicTime tPicTime;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> iDataLen;
+        <span class="hljs-keyword">public</span> Pointer pcPicData;
+    &#125;
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FacePicStream</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Structure</span> </span>&#123;
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FacePicStream</span><span class="hljs-params">(Pointer pointer)</span> </span>&#123;
+            <span class="hljs-keyword">super</span>(pointer);
+            useMemory(pointer);
+            read();
+        &#125;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> iStructLen;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> iSizeOfFull;        
+        <span class="hljs-keyword">public</span> Pointer tFullData;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> iFaceCount;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> iSizeOfFace;        
+        <span class="hljs-keyword">public</span> Pointer[] tPicData = <span class="hljs-keyword">new</span> Pointer[<span class="hljs-number">32</span>];
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> iFaceFrameId;       
+        <span class="hljs-keyword">public</span> PicTime tNewPicTime;
+    &#125;
+   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">NET_PICSTREAM_NOTIFY</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StdCallCallback</span> </span>&#123;
+        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">PicDataNotify</span><span class="hljs-params">(<span class="hljs-keyword">int</span> _ulID, <span class="hljs-keyword">int</span> _lCommand, Pointer _tInfo, <span class="hljs-keyword">int</span> _iLen,</span></span>
+<span class="hljs-function"><span class="hljs-params">                          Pointer _lpUserData)</span></span>;
+    &#125;
+	 <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NetPicPara</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Structure</span> </span>&#123;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> iStructLen;                <span class="hljs-comment">//Structure length</span>
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> iChannelNo;
+        <span class="hljs-keyword">public</span> NET_PICSTREAM_NOTIFY cbkPicStreamNotify;
+        <span class="hljs-keyword">public</span> Pointer pvUser;
+    &#125;
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">NetClient_StartRecvNetPicStream</span><span class="hljs-params">(<span class="hljs-keyword">int</span> _iLogonID, NetPicPara _ptPara, <span class="hljs-keyword">int</span> _iBufLen, IntByReference _puiRecvID)</span></span>;
+</code></pre>
+
+<p>上面继承Structure的是C中的结构体，继承StdCallCallback的是C中回调方法，NetClient_StartRecvNetPicStream是C中我们要调用的方法。</p>
+<p>在另外一个类中加载动态库</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.megvii.camera.proxy;
+
+<span class="hljs-keyword">import</span> com.sun.jna.Native;
+<span class="hljs-keyword">import</span> com.sun.jna.ptr.IntByReference;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NetClient</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> NVSSDK nvssdk;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> NetClient netClient;
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">NetClient</span><span class="hljs-params">()</span> </span>&#123;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> NetClient <span class="hljs-title">getInstance</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (netClient == <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">synchronized</span> (NetClient.class) &#123;
+                <span class="hljs-keyword">if</span> (netClient == <span class="hljs-keyword">null</span>) &#123;
+                    netClient = <span class="hljs-keyword">new</span> NetClient();
+                    nvssdk = (NVSSDK) Native.loadLibrary(<span class="hljs-string">&quot;NVSSDK&quot;</span>,
+                            NVSSDK.class);
+                &#125;
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> netClient;
+    &#125;
+   <span class="hljs-comment">//开始接收图片流</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">StartRecvNetPicStream</span><span class="hljs-params">(<span class="hljs-keyword">int</span> _iLogonID, NVSSDK.NetPicPara _ptPara, <span class="hljs-keyword">int</span> _iBufLen, IntByReference _puiRecvID)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> nvssdk.NetClient_StartRecvNetPicStream(_iLogonID, _ptPara, _iBufLen, _puiRecvID);
+    &#125;
+&#125;</code></pre>
+
+<h5 id="相关的头文件"><a href="#相关的头文件" class="headerlink" title="相关的头文件"></a>相关的头文件</h5><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tagFacePicStream</span></span>
+<span class="hljs-class">&#123;</span>
+	<span class="hljs-keyword">int</span> 			iStructLen;			<span class="hljs-comment">//Structure length</span>
+	<span class="hljs-keyword">int</span>				iSizeOfFull;		<span class="hljs-comment">//The size of strcut PicData</span>
+	PicData*		ptFullData;			<span class="hljs-comment">//The data of full screen</span>
+	<span class="hljs-keyword">int</span>				iFaceCount;			<span class="hljs-comment">//The current frame detects the number of face</span>
+	<span class="hljs-keyword">int</span>				iSizeOfFace;		<span class="hljs-comment">//The size of strcut FacePicData</span>
+	FacePicData*	ptFaceData[<span class="hljs-number">108</span>];
+	<span class="hljs-keyword">int</span>				iFaceFrameId;		<span class="hljs-comment">//The face jpeg frame no</span>
+	PicTime			tNewPicTime;		<span class="hljs-comment">//The picture capture time, ptFullData contain time is out of date</span>
+&#125; FacePicStream, *pFacePicStream;
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tagSnapPicData</span></span>
+<span class="hljs-class">&#123;</span>
+	<span class="hljs-keyword">int</span> 		iSnapType;		<span class="hljs-comment">//Snap type</span>
+	<span class="hljs-keyword">int</span> 		iWidth;			<span class="hljs-comment">//Picture wide</span>
+	<span class="hljs-keyword">int</span> 		iHeight;		<span class="hljs-comment">//Picture high</span>
+	<span class="hljs-keyword">int</span>			iSize;			<span class="hljs-comment">//The size of strcut PicData</span>
+	PicData*	ptPicData;
+&#125; SnapPicData, *pSnapPicData;
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tagPicTime</span></span>
+<span class="hljs-class">&#123;</span>
+	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> uiYear;
+	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> uiMonth;
+	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> uiDay;
+	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> uiWeek;
+	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> uiHour;
+	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> uiMinute;
+	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> uiSecondsr;
+	<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> uiMilliseconds;
+&#125; PicTime, *pPicTime;
+<span class="hljs-comment">//回调</span>
+<span class="hljs-function"><span class="hljs-keyword">typedef</span> <span class="hljs-title">int</span> <span class="hljs-params">(__stdcall *NET_PICSTREAM_NOTIFY)</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> _uiRecvID, <span class="hljs-keyword">long</span> _lCommand, <span class="hljs-keyword">void</span>* _pvBuf, <span class="hljs-keyword">int</span> _iBufLen, <span class="hljs-keyword">void</span>* _pvUser)</span></span>;
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">tagNetPicPara</span></span>
+<span class="hljs-class">&#123;</span>
+	<span class="hljs-keyword">int</span> 					iStructLen;				<span class="hljs-comment">//Structure length</span>
+	<span class="hljs-keyword">int</span>						iChannelNo;
+	NET_PICSTREAM_NOTIFY	cbkPicStreamNotify;
+	<span class="hljs-keyword">void</span>*					pvUser;
+	<span class="hljs-keyword">int</span>						iPicType;				<span class="hljs-comment">//Client request picture stream type.Structured proprietary(This field is not sent or sent 0: indicates that the server is adaptively sent and sent based on the current configuration.)</span>
+													<span class="hljs-comment">//bit0£ºFace picture stream </span>
+													<span class="hljs-comment">//bit1£ºpedestrian </span>
+													<span class="hljs-comment">//bit2:plate number</span>
+													<span class="hljs-comment">//bit3:motor vehicles</span>
+													<span class="hljs-comment">//bit4:Non-motor vehicle</span>
+&#125; NetPicPara, *pNetPicPara;
+<span class="hljs-comment">//方法</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> __stdcall <span class="hljs-title">NetClient_StartRecvNetPicStream</span><span class="hljs-params">(<span class="hljs-keyword">int</span> _iLogonID, NetPicPara* _ptPara, <span class="hljs-keyword">int</span> _iBufLen, <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span>* _puiRecvID)</span></span>;</code></pre>
+
+<h5 id="使用过程"><a href="#使用过程" class="headerlink" title="使用过程"></a>使用过程</h5><p>需要留意的是FacePicStream和PicData的构造方法，这个方法是和指针转换时使用的，如果没有这么写的话Java是无法获取到C中指针的值的。以下的回调方法中回调了一个指针，将<strong>指针转换成头文件中对应的结构体</strong>。</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SetPicQueue</span><span class="hljs-params">(<span class="hljs-keyword">final</span> C4SCamera camera)</span> </span>&#123;
+        NVSSDK.NetPicPara picPara = <span class="hljs-keyword">new</span> NVSSDK.NetPicPara();
+        picPara.iChannelNo = <span class="hljs-number">0</span>;
+        picPara.iStructLen = picPara.size();
+        picPara.cbkPicStreamNotify = <span class="hljs-keyword">new</span> NVSSDK.NET_PICSTREAM_NOTIFY() &#123;
+            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">PicDataNotify</span><span class="hljs-params">(<span class="hljs-keyword">int</span> _ulID, <span class="hljs-keyword">int</span> _lCommand, Pointer _tInfo, <span class="hljs-keyword">int</span> _iLen, Pointer _lpUserData)</span> </span>&#123;
+                <span class="hljs-keyword">if</span> (_tInfo == <span class="hljs-keyword">null</span> || NVSSDK.NET_PICSTREAM_CMD_FACE != _lCommand) &#123;
+                    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+                &#125;
+                <span class="hljs-keyword">if</span> (!camera.capture.get()) &#123;
+                    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+                &#125;
+                NVSSDK.FacePicStream picStream = <span class="hljs-keyword">new</span> NVSSDK.FacePicStream(_tInfo);
+                <span class="hljs-keyword">if</span> (picStream.tFullData != <span class="hljs-keyword">null</span>) &#123;
+                    NVSSDK.PicData fullData = <span class="hljs-keyword">new</span> NVSSDK.PicData(picStream.tFullData);
+                    <span class="hljs-keyword">if</span> (fullData != <span class="hljs-keyword">null</span> &amp;&amp; fullData.iDataLen &gt; <span class="hljs-number">0</span> &amp;&amp; camera.capture.get()) &#123;
+                        <span class="hljs-keyword">byte</span>[] data = fullData.pcPicData.getByteArray(<span class="hljs-number">0</span>, fullData.iDataLen);
+                        FaceInfo faceInfo = <span class="hljs-keyword">new</span> FaceInfo();
+                        faceInfo.faceData = data;
+                        faceInfo.cameraIP = camera.ip;
+                        faceInfo.cameraAlias = camera.alias;
+                        camera.captureQueue.offer(faceInfo);
+                    &#125;
+                &#125;
+                <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+            &#125;
+        &#125;;
+        IntByReference relsize = <span class="hljs-keyword">new</span> IntByReference();
+        <span class="hljs-keyword">int</span> iRet = NetClient.getInstance().StartRecvNetPicStream(camera.logonId, picPara, picPara.size(), relsize);
+    &#125;</code></pre>
+
+<h4 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h4><ol>
+<li><p><strong>java.lang.UnsatisfiedLinkError: Unable to load library ‘NVSSDK’:</strong></p>
+<p>这个错误是无法找到对应的dll库，也就是我前面提到的NVSSDK.dll。出现这个情况的有以下三种可能</p>
+<ul>
+<li><p>jdk版本的位数和dll库的位数不一致。比如你的jdk版本是32位的，但是你的dll库是64位，就会出现这个错误，反过来也一样。解决办法是更换同样位数的库或者jdk</p>
+</li>
+<li><p>还有一种你的环境变量中的path没有包含你要用的dll库路径。在JNA中查找动态库的顺序是，Java虚拟机中的jna.library.path，然后是Java虚机的java.library.path，最后才是系统环境变量下path。所以只要在这个三个路径只要有一个路径下有包含你的dll库路径就行。</p>
+<pre><code class="hljs java">System.setProperty(<span class="hljs-string">&quot;jna.library.path&quot;</span>, dllPath);</code></pre>
+</li>
+</ul>
+</li>
+<li><p>在使用过程中指针和结构体之间的相互转换，发现值没有复制到Java过来。</p>
+<ul>
+<li><p>结构体的构造方法,添加useMemory(pointer);和read();</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FacePicStream</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Structure</span></span>&#123;
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FacePicStream</span><span class="hljs-params">(Pointer pointer)</span> </span>&#123;
+          <span class="hljs-keyword">super</span>(pointer);
+          useMemory(pointer);
+          read();
+      &#125;    
+&#125;</code></pre>
+</li>
+<li><p>使用</p>
+<pre><code class="hljs java">Pointer _tInfo;
+NVSSDK.FacePicStream picStream = <span class="hljs-keyword">new</span> NVSSDK.FacePicStream(_tInfo);</code></pre>
+</li>
+</ul>
+</li>
+<li><p>Java中的Structure和C结构体中的顺序写错了。如果是同样类型的不会出现编译错误，但是取到的值准确，类型不同则出现编译错误。</p>
+</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/jna/">jna</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/10/19/%E4%BC%A0%E7%BB%9FPOS%E6%B5%81%E7%A8%8B%E5%8F%8A%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">传统POS流程及名词解释</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/09/10/golang%E4%B9%8Bslice%20and%20map/">
+                        <span class="hidden-mobile">golang 之 slice & defer 关键字</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "java 之 JNA&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

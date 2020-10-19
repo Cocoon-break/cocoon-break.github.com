@@ -1,331 +1,424 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
 
 <head>
-
-  <meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/lufei.jpg">
   <link rel="icon" type="image/png" href="/img/lufei.jpg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
+  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
   <meta name="author" content="cocoon-break">
   <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
-  <title>加密算法简介 ~ Cocoon-break的博客</title>
+  <title>加密算法简介 - Cocoon-break的博客</title>
 
-  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
-  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
-  <link rel="stylesheet" href="/css/main.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css">
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
 
-</head>
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
 
 <body>
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-      <div class="container">
-        <a class="navbar-brand" href="/">&nbsp;
-          <strong>Cocoon-break的博客</strong>&nbsp;</a>
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吴生坪</strong>&nbsp;</a>
 
-        <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-                                                                                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                                                                        aria-expanded="false" aria-label="Toggle navigation">
-          <div class="animated-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-        <!-- Collapsible content -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto text-center">
-
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
             <li class="nav-item">
-              <a class="nav-link" href="/">首页</a>
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
             </li>
-
+          
+        
+          
+          
+          
+          
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">归档</a>
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
             </li>
-
+          
+        
+          
+          
+          
+          
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">分类</a>
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
             </li>
-
+          
+        
+          
+          
+          
+          
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">标签</a>
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
             </li>
-
+          
+        
+          
+          
+          
+          
             <li class="nav-item">
-              <a class="nav-link" href="/about/">关于</a>
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
             </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
 
-            <li class="nav-item" id="search-btn">
-              <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;
-                <i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
-            </li>
-
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <div class="view intro-2" id="background" false style="background: url('/img/coloradoablaze.jpg')no-repeat center center;
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/coloradoablaze.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
-
+              
             </span>
 
-            <br>
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2017-08-28 15:47" pubdate>
+        2017年8月28日 下午
+      </time>
+    </span>
+  
+</div>
 
-            <p class="mt-3">
-              <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp; 星期一, 八月 28日 2017, 3:47 下午
-            </p>
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      654 字
+    </span>
+  
 
-            <p>
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6
+       分钟
+    </span>
+  
 
-              &nbsp;
-              <i class="far fa-chart-bar"></i>
-              <span class="post-count">
-                654 字
-              </span>&nbsp; &nbsp;
+  
+  
+</div>
 
-              <i class="far fa-clock"></i>
-              <span class="post-count">
-                2 分钟
-              </span>&nbsp;
-
-              <!-- 不蒜子统计文章PV -->
-
-              &nbsp;
-              <i class="far fa-eye" aria-hidden="true"></i>&nbsp;
-              <span id="busuanzi_container_page_pv">
-                <span id="busuanzi_value_page_pv"></span> 次
-              </span>&nbsp;
-
-            </p>
-
+            
           </div>
 
+          
         </div>
       </div>
     </div>
   </header>
 
   <main>
+    
+      
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="d-none d-lg-block col-lg-2"></div>
-        <div class="col-lg-8 nopadding-md">
-          <div class="py-5 z-depth-3" id="board">
-            <div class="post-content mx-auto" id="post">
-              <div class="markdown-body">
-                <p>​ 对于加密算法我也不是很熟，只能是单纯去使用，但是最近做项目时涉及到国密算法，由于个人对算法差不多是七窍通了六窍，一窍不通啊。于是同事给我科普了一下。</p>
-                <p>​ 先将加密算法分两个大方向：1. 不可逆的加密算法 2. 不可逆的加密算法</p>
-                <h2 id="不可逆的加密算法">
-                  <a href="#不可逆的加密算法" class="headerlink" title="不可逆的加密算法"></a>不可逆的加密算法</h2>
-                <p>​ 不可以逆的意思就是说，加密之后，你也不知道加密前的明文。如果要确认加密前的明文，你只能重新将明文加密一遍，看两次得出来的密文是否一致。不可逆加密算法的特征是加密过程中不需要使用密钥，直接输入明文通过算法处理后得到密文。</p>
-                <p>​ 典型的不可逆的加密算法是
-                  <strong>MD5</strong> : MD5对要加密的对象没有大小限制，加密之后的密文长度为
-                  <strong>128bit</strong>,这里是128bit和字节是不一样的，转换成字节的话也就是16Byte。</p>
-                <pre><code class="sh">~/tmp » md5 test.jpg
-MD5 (test.jpg) = f368d709b8652bf78f9ce61d9fd70d7a
-</code></pre>
-                <p>上面的例子通过md5加密了一张图片, MD5加密之后得到值是128bit，按4位二进制组合成一个十六进制，所以得出来的十六进制字符串是32个。</p>
-                <p>一般来说不可逆的加密算法得出来的密文是定长的，无论要加密的内容大小是多少，如md5是32，sha256是64，sha512是128</p>
-                <a id="more"></a>
-                <h2 id="可逆的加密算法">
-                  <a href="#可逆的加密算法" class="headerlink" title="可逆的加密算法"></a>可逆的加密算法</h2>
-                <p>​ 可逆的加密算法就是加密之后，还是有办法能够得到明文。可逆的加密算法又可分为对称加密和非对称加密。RSA就是典型的非对称的可逆加密算法。</p>
-                <ol>
-                  <li>
-                    <p>对称的可逆加密算法</p>
-                    <p>对称的加密算法，加密和解密用的都是同一个密钥，这个密钥既可以加密也用于解密，因而其安全性依赖于所持有密钥的安全性。对称加密算法的特点是算法公开、计算量小、加解密速度快、加解密效率高</p>
-                  </li>
-                  <li>
-                    <p>非对称的可逆加密算法</p>
-                    <p>非对称密钥算法是指一个加密算法的加密密钥和解密密钥是不一样的，或者说不能由其中一个密钥推导出另一个密钥。这两个密钥其中一个称为公钥，用于加密，是公开的，另一个称为私钥，用于解密，是保密的。其中由公钥计算私钥是计算上不可行的。</p>
-                  </li>
-                </ol>
-                <ul>
-                  <li>分组加密
-                    <ul>
-                      <li>向量加密</li>
-                    </ul>
-                  </li>
-                </ul>
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">加密算法简介</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>​    对于加密算法我也不是很熟，只能是单纯去使用，但是最近做项目时涉及到国密算法，由于个人对算法差不多是七窍通了六窍，一窍不通啊。于是同事给我科普了一下。</p>
+<p>​    先将加密算法分两个大方向：1. 不可逆的加密算法 2. 不可逆的加密算法</p>
+<h2 id="不可逆的加密算法"><a href="#不可逆的加密算法" class="headerlink" title="不可逆的加密算法"></a>不可逆的加密算法</h2><p>​    不可以逆的意思就是说，加密之后，你也不知道加密前的明文。如果要确认加密前的明文，你只能重新将明文加密一遍，看两次得出来的密文是否一致。不可逆加密算法的特征是加密过程中不需要使用密钥，直接输入明文通过算法处理后得到密文。</p>
+<p>​    典型的不可逆的加密算法是<strong>MD5</strong> : MD5对要加密的对象没有大小限制，加密之后的密文长度为<strong>128bit</strong>,这里是128bit和字节是不一样的，转换成字节的话也就是16Byte。</p>
+<pre><code class="hljs sh">~/tmp » md5 test.jpg
+MD5 (test.jpg) = f368d709b8652bf78f9ce61d9fd70d7a</code></pre>
 
-                <hr>
-              </div>
-              <br>
-              <div>
-                <p>
+<p>上面的例子通过md5加密了一张图片,  MD5加密之后得到值是128bit，按4位二进制组合成一个十六进制，所以得出来的十六进制字符串是32个。</p>
+<p>一般来说不可逆的加密算法得出来的密文是定长的，无论要加密的内容大小是多少，如md5是32，sha256是64，sha512是128</p>
+<a id="more"></a>
 
-                  <span>
-                    <i class="iconfont icon-inbox"></i>
+<h2 id="可逆的加密算法"><a href="#可逆的加密算法" class="headerlink" title="可逆的加密算法"></a>可逆的加密算法</h2><p>​    可逆的加密算法就是加密之后，还是有办法能够得到明文。可逆的加密算法又可分为对称加密和非对称加密。RSA就是典型的非对称的可逆加密算法。</p>
+<ol>
+<li><p>对称的可逆加密算法</p>
+<p>对称的加密算法，加密和解密用的都是同一个密钥，这个密钥既可以加密也用于解密，因而其安全性依赖于所持有密钥的安全性。对称加密算法的特点是算法公开、计算量小、加解密速度快、加解密效率高</p>
+</li>
+<li><p>非对称的可逆加密算法</p>
+<p>非对称密钥算法是指一个加密算法的加密密钥和解密密钥是不一样的，或者说不能由其中一个密钥推导出另一个密钥。这两个密钥其中一个称为公钥，用于加密，是公开的，另一个称为私钥，用于解密，是保密的。其中由公钥计算私钥是计算上不可行的。</p>
+</li>
+</ol>
+<ul>
+<li>分组加密<ul>
+<li>向量加密</li>
+</ul>
+</li>
+</ul>
 
-                    <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95">算法</a>
-                    &nbsp;
-
-                  </span>&nbsp;&nbsp;
-
-                  <span>
-                    <i class="iconfont icon-tag"></i>
-
-                    <a class="hover-with-bg" href="/tags/%E6%89%A9%E5%B1%95">扩展</a>
-
-                  </span>
-
-                </p>
-
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用
-                  <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC"
-                                                                                                  rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
-
-              </div>
             </div>
-          </div>
-        </div>
-        <div class="d-none d-lg-block col-lg-2 toc-container">
-          <div id="toc">
-            <p class="h4">
-              <i class="far fa-list-alt"></i>&nbsp;目录</p>
-            <div id="tocbot"></div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%89%A9%E5%B1%95/">扩展</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/03/21/%E8%84%9A%E6%9C%AC%E8%B7%91%E6%89%B9/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">身份证识别跑批脚本</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2017/08/21/%E5%86%85%E7%BD%91%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E5%88%B0%E5%A4%96%E7%BD%91/">
+                        <span class="hidden-mobile">内网端口映射到外网</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
+            
+          </article>
         </div>
       </div>
     </div>
-
-    <!-- custom -->
-
-    <!-- Comments -->
-    <div class="col-lg-7 mx-auto nopadding-md">
-      <div class="container comments mx-auto" id="comments">
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
 
       </div>
-    </div>
+    
+  </div>
+</div>
 
+<!-- Custom -->
+
+
+    
   </main>
 
-  <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-    <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
-  </a>
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
 
-  <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-                                                                                  aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header text-center">
-          <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-          <button type="button" id="local-search-close" class="close" data-dismiss="modal"
-                                                                                          aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
         </div>
-        <div class="modal-body mx-3">
-          <div class="md-form mb-5">
-            <input type="text" id="local-search-input" class="form-control validate">
-            <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-          </div>
-          <div class="list-group" id="local-search-result"></div>
-        </div>
+        <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
+</div>
+  
 
-  <footer class="mt-5">
-    <div class="text-center py-3">
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener">
-        <b>Hexo</b>
-      </a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <b>Fluid</b>
-      </a>
-      <br>
+  
 
-      <!-- 不蒜子统计PV -->
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
 
-      &nbsp;
-      <span id="busuanzi_container_site_pv"></span>总访问量
-      <span id="busuanzi_value_site_pv"></span> 次&nbsp;
+  
 
-      <!-- 不蒜子统计UV -->
+  
+</footer>
 
-      &nbsp;
-      <span id="busuanzi_container_site_uv"></span>总访客数
-      <span id="busuanzi_value_site_uv"></span> 人&nbsp;
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
 
-      <br>
+<!-- Plugins -->
 
-      <!-- cnzz Analytics icon -->
 
-    </div>
-  </footer>
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
-  <!-- SCRIPTS -->
-  <script src="/lib/jquery/jquery.min.js"></script>
-  <script src="/lib/popper/popper.min.js"></script>
-  <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/lib/mdbootstrap/js/mdb.min.js"></script>
-  <script src="/js/main.js"></script>
 
-  <script src="/js/lazyload.js"></script>
 
-  <script src="/lib/tocbot/tocbot.min.js"></script>
+  
 
-  <script src="/js/post.js"></script>
 
-  <script src="/lib/smoothscroll/SmoothScroll.min.js"></script>
 
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
 
-  <!-- Plugins -->
-  <!-- Tencent Analytics -->
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
-    var _mtac = {};
-    (function() {
-      var mta = document.createElement("script");
-      mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
-      mta.setAttribute("name", "MTAH5");
-      mta.setAttribute("sid", "500712823");
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(mta, s);
-    })();
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
   </script>
 
-  <!-- cnzz Analytics -->
-
-  <script src="/lib/prettify/prettify.min.js">
 
 
-  </script>
-  <script>
-    $(document).ready(function() {
-      $('pre').addClass('prettyprint  ');
-      prettyPrint();
-    })
-
-  </script>
-
-  <script src="/lib/typed/typed.min.js">
-  </script>
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
     var typed = new Typed('#subtitle', {
       strings: [
@@ -337,21 +430,20 @@ MD5 (test.jpg) = f368d709b8652bf78f9ce61d9fd70d7a
       loop: false,
     });
     typed.stop();
-    $(document).ready(function() {
+    $(document).ready(function () {
       $(".typed-cursor").addClass("h2");
       typed.start();
     });
-
   </script>
 
-  <script src="/lib/anchor/anchor.min.js">
 
 
-  </script>
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
   <script>
     anchors.options = {
       placement: "right",
-      visible: "false",
+      visible: "hover",
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -359,39 +451,56 @@ MD5 (test.jpg) = f368d709b8652bf78f9ce61d9fd70d7a
       res.push(".markdown-body > " + item)
     }
     anchors.add(res.join(", "))
-
   </script>
 
-  <script src="/js/local-search.js">
 
 
-  </script>
+  <script  src="/js/local-search.js" ></script>
   <script>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function() {
-      getSearchFile(path);
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
-
   </script>
 
-  <script src="/lib/fancybox/jquery.fancybox.min.js">
 
 
-  </script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
-      function() {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
-
   </script>
 
-</body>
 
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
 </html>

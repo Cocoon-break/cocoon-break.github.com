@@ -1,514 +1,600 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
 
 <head>
-
-  <meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/lufei.jpg">
   <link rel="icon" type="image/png" href="/img/lufei.jpg">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
+  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
   <meta name="author" content="cocoon-break">
   <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
-  <title>公众号开发前端 ~ Cocoon-break的博客</title>
+  <title>公众号开发前端 - Cocoon-break的博客</title>
 
-  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
-  <link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
-  <link rel="stylesheet" href="/css/main.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
-  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css">
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
 
-</head>
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
 
 <body>
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-      <div class="container">
-        <a class="navbar-brand" href="/">&nbsp;
-          <strong>Cocoon-break的博客</strong>&nbsp;</a>
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吴生坪</strong>&nbsp;</a>
 
-        <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-                                                                                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                                                                        aria-expanded="false" aria-label="Toggle navigation">
-          <div class="animated-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </button>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
 
-        <!-- Collapsible content -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto text-center">
-
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
             <li class="nav-item">
-              <a class="nav-link" href="/">首页</a>
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
             </li>
-
+          
+        
+          
+          
+          
+          
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">归档</a>
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
             </li>
-
+          
+        
+          
+          
+          
+          
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">分类</a>
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
             </li>
-
+          
+        
+          
+          
+          
+          
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">标签</a>
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
             </li>
-
+          
+        
+          
+          
+          
+          
             <li class="nav-item">
-              <a class="nav-link" href="/about/">关于</a>
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
             </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
 
-            <li class="nav-item" id="search-btn">
-              <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;
-                <i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
-            </li>
-
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <div class="view intro-2" id="background" false style="background: url('/img/coloradoablaze.jpg')no-repeat center center;
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/coloradoablaze.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
-
+              
             </span>
 
-            <br>
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2017-06-19 11:33" pubdate>
+        2017年6月19日 中午
+      </time>
+    </span>
+  
+</div>
 
-            <p class="mt-3">
-              <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp; 星期一, 六月 19日 2017, 11:33 中午
-            </p>
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
 
-            <p>
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
 
-              &nbsp;
-              <i class="far fa-chart-bar"></i>
-              <span class="post-count">
-                1.5k 字
-              </span>&nbsp; &nbsp;
+  
+  
+</div>
 
-              <i class="far fa-clock"></i>
-              <span class="post-count">
-                7 分钟
-              </span>&nbsp;
-
-              <!-- 不蒜子统计文章PV -->
-
-              &nbsp;
-              <i class="far fa-eye" aria-hidden="true"></i>&nbsp;
-              <span id="busuanzi_container_page_pv">
-                <span id="busuanzi_value_page_pv"></span> 次
-              </span>&nbsp;
-
-            </p>
-
+            
           </div>
 
+          
         </div>
       </div>
     </div>
   </header>
 
   <main>
+    
+      
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="d-none d-lg-block col-lg-2"></div>
-        <div class="col-lg-8 nopadding-md">
-          <div class="py-5 z-depth-3" id="board">
-            <div class="post-content mx-auto" id="post">
-              <div class="markdown-body">
-                <p>上一篇讲了微信公众号后端的开发，这一篇是讲讲前端页面的开发。前端的技术栈用的是react。这里介绍了在开发过程中遇到的一些问题。以及一些知识点的介绍</p>
-                <p>以下步骤的前提是你已经安装了node，才能继续往下走。</p>
-                <h2 id="创建一个node工程">
-                  <a href="#创建一个node工程" class="headerlink" title="创建一个node工程"></a>创建一个node工程</h2>
-                <p>​ 初始化一个工程，并进行一些基本信息填写。执行
-                  <code>npm init</code>，根据提示填写信息，最后会生成一个package.json 文件。这样一个node工程初始化完成了。以下package.json
-                  文件是我修改过的，默认生成的文件和这个是有差异的。主要讲解几个字段，main:表示入口文件，scripts：主要是脚本命令，执行npm
-                  start 的时候，它会执行scripts 下start 后的命令，dependencies：是工程依赖的一些库，devDependencies：主要是开发的时候使用的一些库，生产的时候不需要使用。</p>
-                <a id="more"></a>
-                <pre><code class="json">{
-  &quot;name&quot;: &quot;doudou-client&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;description&quot;: &quot;wechat public&quot;,
-  &quot;main&quot;: &quot;app.js&quot;,
-  &quot;scripts&quot;: {
-    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
-    &quot;start&quot;: &quot;webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080&quot;,
-    &quot;dev&quot;: &quot;webpack -d --watch&quot;
-  },
-  &quot;author&quot;: &quot;cocoon&quot;,
-  &quot;license&quot;: &quot;ISC&quot;,
-  &quot;dependencies&quot;: {
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">公众号开发前端</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>上一篇讲了微信公众号后端的开发，这一篇是讲讲前端页面的开发。前端的技术栈用的是react。这里介绍了在开发过程中遇到的一些问题。以及一些知识点的介绍</p>
+<p>以下步骤的前提是你已经安装了node，才能继续往下走。</p>
+<h2 id="创建一个node工程"><a href="#创建一个node工程" class="headerlink" title="创建一个node工程"></a>创建一个node工程</h2><p>​    初始化一个工程，并进行一些基本信息填写。执行<code>npm init</code>，根据提示填写信息，最后会生成一个package.json 文件。这样一个node工程初始化完成了。以下package.json 文件是我修改过的，默认生成的文件和这个是有差异的。主要讲解几个字段，main:表示入口文件，scripts：主要是脚本命令，执行npm start 的时候，它会执行scripts 下start 后的命令，dependencies：是工程依赖的一些库，devDependencies：主要是开发的时候使用的一些库，生产的时候不需要使用。</p>
+<a id="more"></a>
 
-  },
-  &quot;devDependencies&quot;: {
-    &quot;webpack&quot;: &quot;^1.12.2&quot;,
-    &quot;webpack-dev-server&quot;: &quot;^1.12.1&quot;
-  }
-}
-</code></pre>
-                <p>​ 有一个package.json 文件还不能使用，接下来是编写app.js文件，也就是入口文件，我们就简易的写一个demo文件吧！我们要使用react进行开发我们就得安装reactjs
-                  相关的依赖，执行以下命令来添加reactjs 依赖的库,和开发时使用的一些开发库。如：webpack</p>
-                <pre><code class="sh">npm install --save react react-dom
+<pre><code class="hljs json">&#123;
+  <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;doudou-client&quot;</span>,
+  <span class="hljs-attr">&quot;version&quot;</span>: <span class="hljs-string">&quot;1.0.0&quot;</span>,
+  <span class="hljs-attr">&quot;description&quot;</span>: <span class="hljs-string">&quot;wechat public&quot;</span>,
+  <span class="hljs-attr">&quot;main&quot;</span>: <span class="hljs-string">&quot;app.js&quot;</span>,
+  <span class="hljs-attr">&quot;scripts&quot;</span>: &#123;
+    <span class="hljs-attr">&quot;test&quot;</span>: <span class="hljs-string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>,
+    <span class="hljs-attr">&quot;start&quot;</span>: <span class="hljs-string">&quot;webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080&quot;</span>,
+    <span class="hljs-attr">&quot;dev&quot;</span>: <span class="hljs-string">&quot;webpack -d --watch&quot;</span>
+  &#125;,
+  <span class="hljs-attr">&quot;author&quot;</span>: <span class="hljs-string">&quot;cocoon&quot;</span>,
+  <span class="hljs-attr">&quot;license&quot;</span>: <span class="hljs-string">&quot;ISC&quot;</span>,
+  <span class="hljs-attr">&quot;dependencies&quot;</span>: &#123;
+    
+  &#125;,
+  <span class="hljs-attr">&quot;devDependencies&quot;</span>: &#123;
+    <span class="hljs-attr">&quot;webpack&quot;</span>: <span class="hljs-string">&quot;^1.12.2&quot;</span>,
+    <span class="hljs-attr">&quot;webpack-dev-server&quot;</span>: <span class="hljs-string">&quot;^1.12.1&quot;</span>
+  &#125;
+&#125;</code></pre>
+
+<p>​    有一个package.json  文件还不能使用，接下来是编写app.js文件，也就是入口文件，我们就简易的写一个demo文件吧！我们要使用react进行开发我们就得安装reactjs 相关的依赖，执行以下命令来添加reactjs 依赖的库,和开发时使用的一些开发库。如：webpack</p>
+ <pre><code class="hljs sh">npm install --save react react-dom
 npm install --save-dev css-loader
 npm install --save-dev style-loader
 npm install --save-dev babel-loader babel-core babel-preset-es2015 babel-preset-react
-npm install --save-dev webpack webpack-dev-server
-</code></pre>
-                <p>创建一个app.js文件</p>
-                <pre><code class="jsx">import React, { Component } from &#39;react&#39;;
-import ReactDOM from &#39;react-dom&#39;;
+npm install --save-dev webpack webpack-dev-server</code></pre>
 
-class App extends Component {
-    render() {
-           return (
+<p>创建一个app.js文件</p>
+<pre><code class="hljs jsx"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;
+<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-dom&#x27;</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-title">render</span>(<span class="hljs-params"></span>)</span> &#123;
+           <span class="hljs-keyword">return</span> (
                &lt;div&gt;hello wechat test&lt;/div&gt;
            );
-       }
-}
+       &#125;
+&#125;
 ReactDOM.render((
        &lt;App/&gt;
-), document.getElementById(&#39;container&#39;));
-</code></pre>
-                <p>​ 除了js文件之外，我们还需要一个 html文件，来加载这些js文件。</p>
-                <pre><code class="html">&lt;!doctype html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot;
-          content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no&quot;/&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;src/css/fontAwesome/css/font-awesome.min.css&quot;&gt;
+), <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;container&#x27;</span>));</code></pre>
 
-    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css&quot; /&gt;
-    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css&quot; /&gt;
+<p>​    除了js文件之外，我们还需要一个 html文件，来加载这些js文件。</p>
+<pre><code class="hljs html"><span class="hljs-meta">&lt;!doctype <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span></span>
+<span class="hljs-tag">          <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;src/css/fontAwesome/css/font-awesome.min.css&quot;</span>&gt;</span>
 
-    &lt;title&gt;微信公众号网页&lt;/title&gt;
-    &lt;script&gt;
-        function setHeight() {
-            console.log(screen.height)
-            document.body.style.height = screen.height + &#39;px&#39;;
-        }
-    &lt;/script&gt;
-&lt;/head&gt;
-&lt;body style=&quot;width: 100%;&quot; onload=&quot;setHeight()&quot;&gt;
-&lt;div id=&quot;container&quot; id=&quot;container&quot; style=&quot;height: 100%&quot;&gt;&lt;/div&gt;
-&lt;script src=&quot;./assets/vendor.bundle.js&quot;&gt;&lt;/script&gt;
-&lt;script src=&quot;./assets/bundle.js&quot;&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-                <p>​ 发现我们的html页面中并没有加载app.js文件，是因为我们通过webpack 来打包js文件，css文件，图片等。html页面加载的是我们打包之后的文件。所以我们在工程目录下创建一个webpack.config.js文件，来配置webpack一些打包的配置项</p>
-                <pre><code class="js">var webpack = require(&#39;webpack&#39;);
-var path = require(&#39;path&#39;);
-var autoprefixer = require(&#39;autoprefixer&#39;);
-var HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;);
-var ExtractTextPlugin = require(&#39;extract-text-webpack-plugin&#39;);
-var OpenBrowserPlugin = require(&#39;open-browser-webpack-plugin&#39;);
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/css&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/css&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css&quot;</span> /&gt;</span>
 
-module.exports = {
-    entry: {
-        js: [&#39;./app.js&#39;],
-        vendor: [&#39;react&#39;, &#39;classnames&#39;, &#39;react-router&#39;, &#39;react-dom&#39;, &#39;react-addons-css-transition-group&#39;]
-    },
-    output: {
-        path: path.resolve(__dirname, &#39;dist&#39;),
-        filename: &#39;./bundle.js&#39;
-    },
-    devServer:{
-        proxy:{
-            &#39;/api&#39;:{
-                target:&#39;http://localhost:5000&#39;,
-                secure: false,
-                changeOrigin: true,
-                pathRewrite: {&#39;^/api&#39;: &#39;&#39;}
-            }
-        },
-    },
-    module: {
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>微信公众号网页<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setHeight</span>(<span class="hljs-params"></span>) </span>&#123;</span>
+<span class="javascript">            <span class="hljs-built_in">console</span>.log(screen.height)</span>
+<span class="javascript">            <span class="hljs-built_in">document</span>.body.style.height = screen.height + <span class="hljs-string">&#x27;px&#x27;</span>;</span>
+        &#125;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 100%;&quot;</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">&quot;setHeight()&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;container&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;container&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;height: 100%&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./assets/vendor.bundle.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./assets/bundle.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+
+<p>​    发现我们的html页面中并没有加载app.js文件，是因为我们通过webpack 来打包js文件，css文件，图片等。html页面加载的是我们打包之后的文件。所以我们在工程目录下创建一个webpack.config.js文件，来配置webpack一些打包的配置项</p>
+<pre><code class="hljs js"><span class="hljs-keyword">var</span> webpack = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;webpack&#x27;</span>);
+<span class="hljs-keyword">var</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+<span class="hljs-keyword">var</span> autoprefixer = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;autoprefixer&#x27;</span>);
+<span class="hljs-keyword">var</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;html-webpack-plugin&#x27;</span>);
+<span class="hljs-keyword">var</span> ExtractTextPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;extract-text-webpack-plugin&#x27;</span>);
+<span class="hljs-keyword">var</span> OpenBrowserPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;open-browser-webpack-plugin&#x27;</span>);
+
+<span class="hljs-built_in">module</span>.exports = &#123;
+    entry: &#123;
+        js: [<span class="hljs-string">&#x27;./app.js&#x27;</span>],
+        vendor: [<span class="hljs-string">&#x27;react&#x27;</span>, <span class="hljs-string">&#x27;classnames&#x27;</span>, <span class="hljs-string">&#x27;react-router&#x27;</span>, <span class="hljs-string">&#x27;react-dom&#x27;</span>, <span class="hljs-string">&#x27;react-addons-css-transition-group&#x27;</span>]
+    &#125;,
+    output: &#123;
+        path: path.resolve(__dirname, <span class="hljs-string">&#x27;dist&#x27;</span>),
+        filename: <span class="hljs-string">&#x27;./bundle.js&#x27;</span>
+    &#125;,
+    devServer:&#123;
+        proxy:&#123;
+            <span class="hljs-string">&#x27;/api&#x27;</span>:&#123;
+                target:<span class="hljs-string">&#x27;http://localhost:5000&#x27;</span>,
+                secure: <span class="hljs-literal">false</span>,
+                changeOrigin: <span class="hljs-literal">true</span>,
+                pathRewrite: &#123;<span class="hljs-string">&#x27;^/api&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span>&#125;
+            &#125;
+        &#125;,
+    &#125;,
+    <span class="hljs-built_in">module</span>: &#123;
         loaders: [
-            {
-                test: /\.js[x]?$/,
-                exclude: /node_modules/,
-                loader: &#39;babel&#39;,
-                query: {
-                    cacheDirectory: true,
-                    presets: [&#39;es2015&#39;, &#39;react&#39;]
-                }
-            }, {
-                test: /\.less$/,
-                loader: &#39;style!css!postcss!less&#39;
-            }, {
-                test: /\.css/,
-                loader: ExtractTextPlugin.extract(&#39;style&#39;, &#39;css&#39;, &#39;postcss&#39;)
-            }, {
-                test: /\.(png|jpg|svg)$/,
-                loader: &#39;url?limit=25000&#39;
-            }
+            &#123;
+                test: <span class="hljs-regexp">/\.js[x]?$/</span>,
+                exclude: <span class="hljs-regexp">/node_modules/</span>,
+                loader: <span class="hljs-string">&#x27;babel&#x27;</span>,
+                query: &#123;
+                    cacheDirectory: <span class="hljs-literal">true</span>,
+                    presets: [<span class="hljs-string">&#x27;es2015&#x27;</span>, <span class="hljs-string">&#x27;react&#x27;</span>]
+                &#125;
+            &#125;, &#123;
+                test: <span class="hljs-regexp">/\.less$/</span>,
+                loader: <span class="hljs-string">&#x27;style!css!postcss!less&#x27;</span>
+            &#125;, &#123;
+                test: <span class="hljs-regexp">/\.css/</span>,
+                loader: ExtractTextPlugin.extract(<span class="hljs-string">&#x27;style&#x27;</span>, <span class="hljs-string">&#x27;css&#x27;</span>, <span class="hljs-string">&#x27;postcss&#x27;</span>)
+            &#125;, &#123;
+                test: <span class="hljs-regexp">/\.(png|jpg|svg)$/</span>,
+                loader: <span class="hljs-string">&#x27;url?limit=25000&#x27;</span>
+            &#125;
         ]
-    },
+    &#125;,
     postcss: [autoprefixer],
     plugins: [
-        new webpack.DefinePlugin({
-            DEBUG: process.env.NODE_ENV !== &#39;production&#39;
-        }),
-        new ExtractTextPlugin(&#39;weui.min.css&#39;),
-        new webpack.optimize.CommonsChunkPlugin(&#39;vendor&#39;, &#39;vendor.bundle.js&#39;),
-
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, &#39;./index.html&#39;)
-        }),
+        <span class="hljs-keyword">new</span> webpack.DefinePlugin(&#123;
+            DEBUG: process.env.NODE_ENV !== <span class="hljs-string">&#x27;production&#x27;</span>
+        &#125;),
+        <span class="hljs-keyword">new</span> ExtractTextPlugin(<span class="hljs-string">&#x27;weui.min.css&#x27;</span>),
+        <span class="hljs-keyword">new</span> webpack.optimize.CommonsChunkPlugin(<span class="hljs-string">&#x27;vendor&#x27;</span>, <span class="hljs-string">&#x27;vendor.bundle.js&#x27;</span>),
+        
+        <span class="hljs-keyword">new</span> HtmlWebpackPlugin(&#123;
+            template: path.join(__dirname, <span class="hljs-string">&#x27;./index.html&#x27;</span>)
+        &#125;),
     ]
-};
+&#125;;
 </code></pre>
-                <p>​ 更多的webpack学习，请移步
-                  <a href="https://zhaoda.gitbooks.io/webpack/content/" target="_blank" rel="noopener">webpack学习入门</a>
-                </p>
-                <p>整个工程demo在GitHub上
-                  <a href="https://github.com/Cocoon-break/wechat_public_template" target="_blank"
-                                                                                                  rel="noopener">wechat_public_template</a>
-                </p>
-                <h2 id="常规问题">
-                  <a href="#常规问题" class="headerlink" title="常规问题"></a>常规问题</h2>
-                <ul>
-                  <li>
-                    <p>网页无法适应全屏？</p>
-                    <p>在开发过程中发现body标签高度始终无法全屏，及时设置高度为100%，也无法生效。</p>
-                    <pre><code class="html">&lt;!--1.添加移动适配设置 --&gt;
-&lt;meta name=&quot;viewport&quot;
-          content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no&quot;/&gt;
 
-&lt;!--2.添加js动态的把body高度设置为，设备屏高--&gt;
-&lt;script&gt;
-        function setHeight() {
-            document.body.style.height = screen.height + &#39;px&#39;;
-        }
-&lt;/script&gt;
+<p>​    更多的webpack学习，请移步<a target="_blank" rel="noopener" href="https://zhaoda.gitbooks.io/webpack/content/">webpack学习入门</a></p>
+<p>整个工程demo在GitHub上<a target="_blank" rel="noopener" href="https://github.com/Cocoon-break/wechat_public_template">wechat_public_template</a></p>
+<h2 id="常规问题"><a href="#常规问题" class="headerlink" title="常规问题"></a>常规问题</h2><ul>
+<li><p>网页无法适应全屏？</p>
+<p>在开发过程中发现body标签高度始终无法全屏，及时设置高度为100%，也无法生效。</p>
+ <pre><code class="hljs html"><span class="hljs-comment">&lt;!--1.添加移动适配设置 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span></span>
+<span class="hljs-tag">          <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no&quot;</span>/&gt;</span>
 
-&lt;!--3.在body onload 时执行js--&gt;
-&lt;body style=&quot;width: 100%;&quot; onload=&quot;setHeight()&quot;&gt;&lt;/body&gt;
-</code></pre>
-                  </li>
-                </ul>
-                <h2 id="开源库使用时遇到的问题">
-                  <a href="#开源库使用时遇到的问题" class="headerlink" title="开源库使用时遇到的问题"></a>开源库使用时遇到的问题</h2>
-                <ul>
-                  <li>
-                    <p>在使用react-weui 发现样式无法生效</p>
-                    <pre><code class="js">import &#39;react-weui/lib/react-weui.min.css&#39;;//导入对应样式文件
-</code></pre>
-                  </li>
-                  <li>
-                    <p>在使用fontawesome 时，发现图标无法显示</p>
-                    <pre><code class="html"> &lt;!--在html中把样式文件加上--&gt;
- &lt;link rel=&quot;stylesheet&quot; href=&quot;src/css/fontAwesome/css/font-awesome.min.css&quot;&gt;
-</code></pre>
-                  </li>
-                  <li>
-                    <p>开发时想通过fetch直接请求服务端接口，解决跨域问题</p>
-                    <pre><code class="js">//package.json 使用webpack-dev-server 启动开发环境，重点是-d
-&quot;scripts&quot;:{
-  &quot;start&quot;: &quot;webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080&quot;,
-}
+<span class="hljs-comment">&lt;!--2.添加js动态的把body高度设置为，设备屏高--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setHeight</span>(<span class="hljs-params"></span>) </span>&#123;</span>
+<span class="javascript">            <span class="hljs-built_in">document</span>.body.style.height = screen.height + <span class="hljs-string">&#x27;px&#x27;</span>;</span>
+        &#125;
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 
-//webpack.config.js 配置代理
-  module.exports = {
-    //其他配置省略
-    devServer:{
-        proxy:{
-            &#39;/api&#39;:{
-                target:&#39;http://localhost:5000&#39;,
-                secure: false,
-                changeOrigin: true,
-                pathRewrite: {&#39;^/api&#39;: &#39;&#39;}
-            }
-        },
-    },
-  }
+<span class="hljs-comment">&lt;!--3.在body onload 时执行js--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width: 100%;&quot;</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">&quot;setHeight()&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></code></pre>
 
-//使用时代码
-  fetch(&#39;/api/show_operation/1&#39;)
-            .then(response=&gt;response.json())
-            .then(result=&gt;console.log(result))
 
-//说明：通过proxy配置可以最终发出的请求路径为http://localhost:500/show_operation/1
-</code></pre>
-                  </li>
-                </ul>
 
-                <hr>
-              </div>
-              <br>
-              <div>
-                <p>
+</li>
+</ul>
+<h2 id="开源库使用时遇到的问题"><a href="#开源库使用时遇到的问题" class="headerlink" title="开源库使用时遇到的问题"></a>开源库使用时遇到的问题</h2><ul>
+<li><p>在使用react-weui 发现样式无法生效</p>
+<pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;react-weui/lib/react-weui.min.css&#x27;</span>;<span class="hljs-comment">//导入对应样式文件</span></code></pre>
+</li>
+<li><p>在使用fontawesome 时，发现图标无法显示</p>
+ <pre><code class="hljs html"><span class="hljs-comment">&lt;!--在html中把样式文件加上--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;src/css/fontAwesome/css/font-awesome.min.css&quot;</span>&gt;</span></code></pre>
+</li>
+<li><p>开发时想通过fetch直接请求服务端接口，解决跨域问题</p>
+<pre><code class="hljs js"><span class="hljs-comment">//package.json 使用webpack-dev-server 启动开发环境，重点是-d</span>
+<span class="hljs-string">&quot;scripts&quot;</span>:&#123;
+  <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;webpack-dev-server -d --hot --inline --progress --colors --host 0.0.0.0 --port 8080&quot;</span>,
+&#125;
 
-                  <span>
-                    <i class="iconfont icon-inbox"></i>
+<span class="hljs-comment">//webpack.config.js 配置代理</span>
+  <span class="hljs-built_in">module</span>.exports = &#123;
+    <span class="hljs-comment">//其他配置省略</span>
+    devServer:&#123;
+        proxy:&#123;
+            <span class="hljs-string">&#x27;/api&#x27;</span>:&#123;
+                target:<span class="hljs-string">&#x27;http://localhost:5000&#x27;</span>,
+                secure: <span class="hljs-literal">false</span>,
+                changeOrigin: <span class="hljs-literal">true</span>,
+                pathRewrite: &#123;<span class="hljs-string">&#x27;^/api&#x27;</span>: <span class="hljs-string">&#x27;&#x27;</span>&#125;
+            &#125;
+        &#125;,
+    &#125;,
+  &#125;
+  
+<span class="hljs-comment">//使用时代码</span>
+  fetch(<span class="hljs-string">&#x27;/api/show_operation/1&#x27;</span>)
+            .then(<span class="hljs-function"><span class="hljs-params">response</span>=&gt;</span>response.json())
+            .then(<span class="hljs-function"><span class="hljs-params">result</span>=&gt;</span><span class="hljs-built_in">console</span>.log(result))
+  
+<span class="hljs-comment">//说明：通过proxy配置可以最终发出的请求路径为http://localhost:500/show_operation/1</span></code></pre>
 
-                    <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF">前端</a>
-                    &nbsp;
 
-                  </span>&nbsp;&nbsp;
 
-                  <span>
-                    <i class="iconfont icon-tag"></i>
+</li>
+</ul>
 
-                    <a class="hover-with-bg" href="/tags/react%20web">react web</a>
-
-                  </span>
-
-                </p>
-
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用
-                  <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC"
-                                                                                                  rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
-
-              </div>
             </div>
-          </div>
-        </div>
-        <div class="d-none d-lg-block col-lg-2 toc-container">
-          <div id="toc">
-            <p class="h4">
-              <i class="far fa-list-alt"></i>&nbsp;目录</p>
-            <div id="tocbot"></div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/react-web/">react web</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2017/06/30/caddy%E7%9A%84%E7%AE%80%E6%98%93%E4%BD%BF%E7%94%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">caddy的简易使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2017/06/19/python%20%E5%BC%80%E5%8F%91%E6%9C%8D%E5%8A%A1%E7%AB%AF/">
+                        <span class="hidden-mobile">python 开发服务端</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
 
+            
+          </article>
         </div>
       </div>
     </div>
-
-    <!-- custom -->
-
-    <!-- Comments -->
-    <div class="col-lg-7 mx-auto nopadding-md">
-      <div class="container comments mx-auto" id="comments">
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
 
       </div>
-    </div>
+    
+  </div>
+</div>
 
+<!-- Custom -->
+
+
+    
   </main>
 
-  <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-    <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
-  </a>
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
 
-  <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-                                                                                  aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header text-center">
-          <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-          <button type="button" id="local-search-close" class="close" data-dismiss="modal"
-                                                                                          aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
         </div>
-        <div class="modal-body mx-3">
-          <div class="md-form mb-5">
-            <input type="text" id="local-search-input" class="form-control validate">
-            <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-          </div>
-          <div class="list-group" id="local-search-result"></div>
-        </div>
+        <div class="list-group" id="local-search-result"></div>
       </div>
     </div>
   </div>
+</div>
+  
 
-  <footer class="mt-5">
-    <div class="text-center py-3">
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener">
-        <b>Hexo</b>
-      </a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <b>Fluid</b>
-      </a>
-      <br>
+  
 
-      <!-- 不蒜子统计PV -->
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
 
-      &nbsp;
-      <span id="busuanzi_container_site_pv"></span>总访问量
-      <span id="busuanzi_value_site_pv"></span> 次&nbsp;
+  
 
-      <!-- 不蒜子统计UV -->
+  
+</footer>
 
-      &nbsp;
-      <span id="busuanzi_container_site_uv"></span>总访客数
-      <span id="busuanzi_value_site_uv"></span> 人&nbsp;
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
 
-      <br>
+<!-- Plugins -->
 
-      <!-- cnzz Analytics icon -->
 
-    </div>
-  </footer>
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
-  <!-- SCRIPTS -->
-  <script src="/lib/jquery/jquery.min.js"></script>
-  <script src="/lib/popper/popper.min.js"></script>
-  <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/lib/mdbootstrap/js/mdb.min.js"></script>
-  <script src="/js/main.js"></script>
 
-  <script src="/js/lazyload.js"></script>
 
-  <script src="/lib/tocbot/tocbot.min.js"></script>
+  
 
-  <script src="/js/post.js"></script>
 
-  <script src="/lib/smoothscroll/SmoothScroll.min.js"></script>
 
-  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
 
-  <!-- Plugins -->
-  <!-- Tencent Analytics -->
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
-    var _mtac = {};
-    (function() {
-      var mta = document.createElement("script");
-      mta.src = "//pingjs.qq.com/h5/stats.js?v2.0.4";
-      mta.setAttribute("name", "MTAH5");
-      mta.setAttribute("sid", "500712823");
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(mta, s);
-    })();
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
   </script>
 
-  <!-- cnzz Analytics -->
-
-  <script src="/lib/prettify/prettify.min.js">
 
 
-  </script>
-  <script>
-    $(document).ready(function() {
-      $('pre').addClass('prettyprint  ');
-      prettyPrint();
-    })
-
-  </script>
-
-  <script src="/lib/typed/typed.min.js">
-  </script>
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
     var typed = new Typed('#subtitle', {
       strings: [
@@ -520,21 +606,20 @@ module.exports = {
       loop: false,
     });
     typed.stop();
-    $(document).ready(function() {
+    $(document).ready(function () {
       $(".typed-cursor").addClass("h2");
       typed.start();
     });
-
   </script>
 
-  <script src="/lib/anchor/anchor.min.js">
 
 
-  </script>
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
   <script>
     anchors.options = {
       placement: "right",
-      visible: "false",
+      visible: "hover",
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -542,39 +627,56 @@ module.exports = {
       res.push(".markdown-body > " + item)
     }
     anchors.add(res.join(", "))
-
   </script>
 
-  <script src="/js/local-search.js">
 
 
-  </script>
+  <script  src="/js/local-search.js" ></script>
   <script>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function() {
-      getSearchFile(path);
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
-
   </script>
 
-  <script src="/lib/fancybox/jquery.fancybox.min.js">
 
 
-  </script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
-      function() {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
-
   </script>
 
-</body>
 
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
 </html>
