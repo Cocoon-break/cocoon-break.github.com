@@ -17,7 +17,7 @@
   <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
   <meta name="author" content="cocoon-break">
   <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
-  <title>MySQL系列一之基础使用 - Cocoon-break的博客</title>
+  <title>并发模型及线程模型概述 - Cocoon-break的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2018-08-12 19:47" pubdate>
-        2018年8月12日 晚上
+      <time datetime="2020-08-10 20:40" pubdate>
+        2020年8月10日 晚上
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      2.5k 字
     </span>
   
 
@@ -187,7 +187,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      30
+      28
        分钟
     </span>
   
@@ -217,508 +217,91 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">MySQL系列一之基础使用</h1>
+            <h1 style="display: none">并发模型及线程模型概述</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>MySQL是平常使用较多的数据，因项目需要发现自身对MySQL有所欠缺。所以复习了一下MySQL知识，做个总结归纳。本文介绍为基础知识，从数据库链接开始，包括一些常用SQL语句，和MySQL的一些数据类型。建议使用docker 的MySQL 进行SQL练习。同时推荐个人比较喜欢使用的数据库可视化软件Table Plus。</p>
-<h3 id="链接MySQL服务"><a href="#链接MySQL服务" class="headerlink" title="链接MySQL服务"></a>链接MySQL服务</h3><p>通过命令行建立链接</p>
-<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> -u 参数指定用户名，-p指定密码，-P指定端口默认是3306，-h 是指定主机地址,-e 指定链接之后操作</span>
-mysql -uroot -proot -P3306 -h 127.0.0.1
-mysql -uroot -proot -e&quot;show databases&quot; 
-<span class="hljs-meta">#</span><span class="bash"> 建立链接的同时，执行提前写好的sql文件</span>
-mysql -uroot -proot &lt; test.sql</code></pre>
-
-<h3 id="数据库管理"><a href="#数据库管理" class="headerlink" title="数据库管理"></a>数据库管理</h3><p>数据库管理包括，数据库创建，数据库删除，数据库使用等操作</p>
-<pre><code class="hljs mysql">-- 创建数据库并指定字符集
-create database test charset utf8;
--- 数据库查看
-show databases;
--- 删除数据库
-drop database test;
--- 一般为了删除不存在的数据库报错，可以通过if exits
-drop database if exits test;
--- 使用数据库
-use test;</code></pre>
-
-<h3 id="数据表管理"><a href="#数据表管理" class="headerlink" title="数据表管理"></a>数据表管理</h3><p>数据表管理包括，数据表创建，数据表删除，数据表记录增删改，数据表字段名修改</p>
-<pre><code class="hljs mysql">-- 创建class 表id 自增，同时指定表字符集
-create table class (id int primary key AUTO_INCREMENT,cname varchar(30) NOT NULL,description varchar(100) default NULL) charset utf8;
--- 数据表插入单条数据，和多条数据
-INSERT INTO class set cname &#x3D;&#39;golang&#39;,description&#x3D;&#39;开发语言&#39;;
-INSERT INTO class (cname,description) VALUES(&#39;PHP&#39;,&#39;开发语言&#39;),(&#39;Mysql&#39;,&#39;数据库&#39;);
--- 数据表删除单条记录
-delete from class where cname&#x3D;&#39;golang&#39;;
--- 数据表修改单条记录
-update class set cname &#x3D; &quot;PHP2&quot; where id&#x3D;2;
--- 删除表
-drop table if exits class;</code></pre>
-
-<p>创建数据模板表，后续可以根据模板表创建新的数据表</p>
-<pre><code class="hljs mysql">-- 复制表结构
-create table tcopy like class;
--- 复制表同时复制数据
-create table tcopy select * from class;</code></pre>
-
-<p>数据表字段名称修改以及字段增删</p>
-<pre><code class="hljs mysql">-- 数据表重命名
-alter table class rename classes;
-rename table classes to class;
--- 数据表增加字段
-alter table class add school varchar(50);
--- 数据表删除字段
-alter table class drop school;
--- 修改字段名
-alter table class CHANGE description descriptions varchar(30);</code></pre>
-
-<p>数据表相关主键操作，主键的增删</p>
-<pre><code class="hljs mysql">-- 主键为自增字段，需要删除自增属性后才可以删除主键
-alter table class MODIFY id int not null;-- 删除自增
-alter table class DROP PRIMARY key;-- 删除主键
-
--- 添加表主键
-alter table class add PRIMARY KEY(id);-- 添加表主键
-alter table class MODIFY id int not null AUTO_INCREMENT;-- 添加自增列
-alter table class modify id int not null AUTO_INCREMENT ,add PRIMARY key(id);</code></pre>
-
-<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>MySQL数据类型包括字符串，数值类型，枚举类型</p>
-<p><strong>字符串数据类型</strong></p>
-<table>
+              <h3 id="Goroutine-amp-Scheduler"><a href="#Goroutine-amp-Scheduler" class="headerlink" title="Goroutine &amp; Scheduler"></a>Goroutine &amp; Scheduler</h3><p>在上一篇的<a href="">并发模型和线程模型概述</a>中我们了解到线程模型的分类。同时也知道了线程是 CPU 调度的实体，线程是真正在 CPU 上执行指令的实体。</p>
+<p>每个程序启动的时候，都会创建一个初始进程，并启动一个线程。而线程可以取创建更多的线程。线程可以独立的执行。CPU 在这一层进行调度，而非进程。</p>
+<p>在了解golang的scheduler之前，我们先了解下os scheduler。</p>
+<h4 id="os-scheduler"><a href="#os-scheduler" class="headerlink" title="os scheduler"></a>os scheduler</h4><p>调度是一个非常广泛的概念，在很多领域中都会使用调度这个术语，在计算机科学中，调度就是将一种任务分配给资源的方法。调度的核心就是对有限资源进行分配以实现最大化资源利用率或者降低系统的尾延迟，调度系统面对的就是资源的需求和供给不平衡的问题。任务可能是计算机任务，如线程、进程或者数据流，这些任务会被调度到硬件资源上执行。例如CPU等硬件设备</p>
+<p>os scheduler 保证如果有可以执行的线程时，就不会让CPU闲着。并且还要保证，所有可执行的线程都看起来在同时执行。另外，OS scheduler 在保证高优先级的线程执行机会大于低优先级线程的同时，不能让低优先级的线程始终得不到执行的机会。OS scheduler 还需要做到迅速决策，以降低延时。</p>
+<p>当然操作系统的调度器是十分复杂，它必须要考虑到底层的硬件结构，包括但不限于处理器数和内核数，cpu cache和NUMA。如果没有这些东西，调度器就没办法尽可能有效的工作。</p>
+<h4 id="Go-scheduler"><a href="#Go-scheduler" class="headerlink" title="Go scheduler"></a>Go scheduler</h4><p>今天的Go语言调度器有着非常优异的性能，但是在最初的调度器不仅实现非常简陋，也无法支撑高并发的服务。调度器经过几个大版本的迭代才有今天的优异性能。对于之前的调度器不做过多的赘述，我们主要学习下在go1.12之后基于抢占式的调度器。其他的调度可以从<a target="_blank" rel="noopener" href="https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-goroutine/">Go调度器</a> 了解</p>
+<h5 id="G-P-M-模型"><a href="#G-P-M-模型" class="headerlink" title="G-P-M 模型"></a>G-P-M 模型</h5><p>每个OS线程都有一个固定大小的内存块（一般是2M）来做栈，这个栈会用来存储当前正在被调用或者挂起的函数的内部变量。这个固定大小的栈同时很大又很小。因为2M的栈对于小小的Goroutine来说是很大的内存浪费，对于一些复杂的任务来说又显得太小。因此，Go语言做了自己的线程。Goroutine的栈初始仅为2K，随着任务执行按需增长，最大可达1G，完全由Go自己的调度器GoScheduler来调度。此外G C还会周期性的将不在使用的内存回收，收缩栈空间。</p>
+<p>先来了解下G-P- M</p>
+<ul>
+<li>G：表示Gorutine，每个Goroutine对应一个G结构体，G存储Goroutine的运行堆栈、状态以及任务函数，可重用。</li>
+<li>M：Machine，OS线程抽象，代表着真正执行计算的资源，在绑定有效的P后，进入schedule循环。</li>
+<li>P：Processor，表示逻辑处理器。</li>
+</ul>
+<p>在Go程序启动，主机上定义的每一个虚拟内核都会为它分配一个逻辑处理器(P)，比如我的机器上有4个物理核，每个物理核上有两个硬件线程（超线程），那么Go程序会分配4*2=8个逻辑处理器（P）。每个P会分配一个OS线程（M），这个现场时OS来处理，并且OS还负责把现场放置到Core上去执行。这意味着Go程序在我的机器上有8个可用的线程执行，每个线程单独连到一个P上。G并非执行体，每个G都要绑定到P才能被调度执行。</p>
+<h5 id="G-P-M模型调度"><a href="#G-P-M模型调度" class="headerlink" title="G-P-M模型调度"></a>G-P-M模型调度</h5><p>根据G- P- M模型我们知道，G的数量是可以成千上万个的。而P和M是和硬件相关的。所以延伸出两种用来保存G的任务队列：一种是Global任务队列，一种是每个P维护Local任务队列。</p>
+<p>当通过go 关键字创建一个新的Goroutine的时候，它会优先被放入P的本地队列。为了允许Goroutine，M需要持有一个P，接着M会启动一个OS线程，循环从P的本地队列取出一个Goroutine并执行。当M执行完了当前P的Local队列里所有的G后，P也不会就这个闲下来，它会先尝试从Global队列寻找G来执行，如果Global队列为空，它会随机挑选另外一个P，从它的队列里拿走一半的G到自己的队列中执行。</p>
+<p>如果一切正常，调度器会以上述的那种方式顺畅的运行，但是这个世界没这么美好，总有意外发生，以下分析Goroutine在两种例外情况下的行为</p>
+<p>Go runtime 会在下面的 Goroutine 被阻塞的情况下运行另外一个 Goroutine：</p>
+<ul>
+<li>blocking syscall (for example opening a file)</li>
+<li>network input</li>
+<li>channel operations</li>
+<li>primitives in the sync package</li>
+</ul>
+<p>这四种场景又可归类为两种类型：</p>
+<ol>
+<li><p>用户态阻塞/唤醒</p>
+<p>当 Goroutine 因为 channel 操作或者 network I/O 而阻塞时（实际上 Golang 已经用 netpoller 实现了 Goroutine 网络 I/O 阻塞不会导致 M 被阻塞，仅阻塞 G，这里仅仅是举个栗子），对应的 G 会被放置到某个 wait 队列(如 channel 的 waitq)，该 G 的状态由<code>_Gruning</code>变为<code>_Gwaitting</code>，而 M 会跳过该 G 尝试获取并执行下一个 G，如果此时没有 runnable 的 G 供 M 运行，那么 M 将解绑 P，并进入 sleep 状态；当阻塞的 G 被另一端的 G2 唤醒时（比如 channel 的可读/写通知），G 被标记为 runnable，尝试加入 G2 所在 P 的 runnext，然后再是 P 的 Local 队列和 Global 队列。</p>
+</li>
+<li><p>系统调用阻塞</p>
+<p>当 G 被阻塞在某个系统调用上时，此时 G 会阻塞在<code>_Gsyscall</code>状态，M 也处于 block on syscall 状态，此时的 M 可被抢占调度：执行该 G 的 M 会与 P 解绑，而 P 则尝试与其它 idle 的 M 绑定，继续执行其它 G。如果没有其它 idle 的 M，但 P 的 Local 队列中仍然有 G 需要执行，则创建一个新的 M；当系统调用完成后，G 会重新尝试获取一个 idle 的 P 进入它的 Local 队列恢复执行，如果没有 idle 的 P，G 会被标记为 runnable 加入到 Global 队列。</p>
+</li>
+</ol>
+<p>更多的调度过程可参考<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903846825705485">理解golang调度之二 ：Go调度器</a>含图解</p>
+<h4 id="工作负载"><a href="#工作负载" class="headerlink" title="工作负载"></a>工作负载</h4><p>如何知道无序执行(并发)是可行的呢？了解所处理问题的工作负载(workload)是一个起点。有两种类型的工作负载在并发的时候要考虑到。</p>
+<ul>
+<li>**CPU密集(CPU-Bound)**：这种工作负载情况不会有Goroutines自动切换到waiting状态的情况，也不会有自动从waiting状态切到其他状态的情况。这种情况发生在进行持续计算的时候。线程计算Pi值就是CPU-Bound。</li>
+<li>**IO密集(IO-Bound)**：这种工作负载会导致Goroutines自动进入等待状态。这种工作发生在持续地请求网络资源、或者是进行系统调用、或者是等待事件发生的情况。一个Goroutines需要读文件就是IO-Bound。我把同步事件(mutexes，atomic)类似导致Goroutine等待的情况归到此类。</li>
+</ul>
+<p><strong>cpu-bound的工作负载，你需要并行去使用并发</strong>。一个单独的OS/硬件线程处理多个Goroutines效率很低，因为Goroutines在这个工作负载里不会主动进入或者是离开等待状态。Goroutines数多于OS/硬件线程数的时候会降低工作负载的执行速度，因为从OS线程换上或者是换下Goroutines会有延迟(切换的时间)。上下文切换会在workload里创建出“一切都停止”事件，因为在切换的时候你的所有workload都不会执行。</p>
+<p><strong>在IO-Bound的workloads里，你不需要并行去使用并发</strong>。一个单独OS/硬件线程可以有效率地处理多个Goroutines，因为Goroutines作为它自己workload的一部分可以自动进入或者离开等待状态(waiting)。Goroutines数量多于OS/硬件线程数可以加速workload的执行,因为Goroutines在OS线程上切换不会创建“一切都停止”事件。你的workload会自然停止并且这会让一个不同的Goroutine去有效率地使用相同的OS/硬件线程，而不是让OS/硬件线程空闲下来。</p>
+<h4 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h4><table>
 <thead>
 <tr>
-<th align="left">类型</th>
-<th align="left">大小</th>
-<th align="left">用途</th>
+<th>类型</th>
+<th>线程数</th>
+<th>结论</th>
+<th>原因</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="left">CHAR</td>
-<td align="left">0-255字节</td>
-<td align="left">定长字符串</td>
+<td>CPU密集型</td>
+<td>1</td>
+<td>起一个goroutine，性能要好于起多个goroutine</td>
+<td>1个OS线程中，无法并行计算。多个goroutine 上下文切换会增加性能损耗</td>
 </tr>
 <tr>
-<td align="left">VARCHAR</td>
-<td align="left">0-65535 字节</td>
-<td align="left">变长字符串</td>
+<td>CPU密集型</td>
+<td>大于1</td>
+<td>起多个goroutine，性能要好于起一个goroutine</td>
+<td>多个OS线程中可以并行计算。收益大于goroutine上下文切换</td>
 </tr>
 <tr>
-<td align="left">TINYBLOB</td>
-<td align="left">0-255字节</td>
-<td align="left">不超过 255 个字符的二进制字符串</td>
+<td>IO密集型</td>
+<td>1</td>
+<td>起多个goroutine，性能高于起一个goroutine</td>
+<td>1个OS线程中，多个goroutine都能有效共享一个OS线程，每个goroutine能够自动进行上下文切换，OS线程一直有事情做</td>
 </tr>
 <tr>
-<td align="left">TINYTEXT</td>
-<td align="left">0-255字节</td>
-<td align="left">短文本字符串</td>
-</tr>
-<tr>
-<td align="left">BLOB</td>
-<td align="left">0-65 535字节</td>
-<td align="left">二进制形式的长文本数据</td>
-</tr>
-<tr>
-<td align="left">TEXT</td>
-<td align="left">0-65 535字节</td>
-<td align="left">长文本数据</td>
-</tr>
-<tr>
-<td align="left">MEDIUMBLOB</td>
-<td align="left">0-16 777 215字节</td>
-<td align="left">二进制形式的中等长度文本数据</td>
-</tr>
-<tr>
-<td align="left">MEDIUMTEXT</td>
-<td align="left">0-16 777 215字节</td>
-<td align="left">中等长度文本数据</td>
-</tr>
-<tr>
-<td align="left">LONGBLOB</td>
-<td align="left">0-4 294 967 295字节</td>
-<td align="left">二进制形式的极大文本数据</td>
-</tr>
-<tr>
-<td align="left">LONGTEXT</td>
-<td align="left">0-4 294 967 295字节</td>
-<td align="left">极大文本数据</td>
+<td>IO密集型</td>
+<td>大于1</td>
+<td>起多个goroutine，性能高于起一个goroutine</td>
+<td>多个OS线程和1个OS线程相比差距不大，额外的OS/硬件线程并没有提供更好的性能。这是因为更多的goroutine会进入等待状态。</td>
 </tr>
 </tbody></table>
-<p>CHAR类型是定长的数据类型，比如定义20长度的<code>char</code>类型即使只存一个字符，也占20个长度，好处是处理速度快，缺点是占用空间大。</p>
-<p>VARCHAR类型是变长数据类型，空间受内容长度影响。</p>
-<p><strong>字符串常用函数</strong></p>
-<table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>作用</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>UPPER()/LOWER()</td>
-<td>将内容全部改成大写/小写</td>
-<td>select UPPER(cname) from class;</td>
-</tr>
-<tr>
-<td>CONCAT()</td>
-<td>字符拼接</td>
-<td>select concat(cname,description) from class;</td>
-</tr>
-<tr>
-<td>Left()/Right()</td>
-<td>用于取左或右指定数量的字符</td>
-<td>select left(cname,3) from class;</td>
-</tr>
-<tr>
-<td>mid</td>
-<td>从中间取字符串</td>
-<td>select *  from class where mid(cname,2,2) = ‘hp’;</td>
-</tr>
-<tr>
-<td>substring</td>
-<td>从指定位置开始向右截取字符串</td>
-<td>select *  from class where SUBSTRING(cname,2) = ‘hp’;</td>
-</tr>
-<tr>
-<td>char_length</td>
-<td>获取字符串数量</td>
-<td>select char_length(cname) from class;</td>
-</tr>
-</tbody></table>
-<p>正则表达式和like的使用</p>
-<pre><code class="hljs mysql">-- 正则匹配php 或者MySQL
-SELECT * FROM class WHERE cname REGEXP &#39;php|mysql&#39;;
--- _用于匹配一个字符，%用于匹配任意多个字符
-SELECT *  FROM class WHERE cname LIKE &#39;_h%&#39;;</code></pre>
-
-<p><strong>数值整型类型</strong></p>
-<table>
-<thead>
-<tr>
-<th>MySQL数据类型</th>
-<th>含义（有符号）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>tinyint(m)</td>
-<td>1个字节 范围(-128~127)</td>
-</tr>
-<tr>
-<td>smallint(m)</td>
-<td>2个字节 范围(-32768~32767)</td>
-</tr>
-<tr>
-<td>mediumint(m)</td>
-<td>3个字节 范围(-8388608~8388607)</td>
-</tr>
-<tr>
-<td>int(m)</td>
-<td>4个字节 范围(-2147483648~2147483647)</td>
-</tr>
-<tr>
-<td>bigint(m)</td>
-<td>8个字节 范围(+-9.22*10的18次方)</td>
-</tr>
-</tbody></table>
-<p>取值范围如果加了unsigned，则最大值翻倍，如tinyint unsigned的取值范围为(0~256)。</p>
-<p><strong>数值浮点型</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">类型</th>
-<th align="left">大小</th>
-<th align="left">范围（有符号）</th>
-<th align="left">范围（无符号）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">FLOAT</td>
-<td align="left">4 字节</td>
-<td align="left">(-3.402 823 466 E+38，-1.175 494 351 E-38)，0，(1.175 494 351 E-38，3.402 823 466 351 E+38)</td>
-<td align="left">0，(1.175 494 351 E-38，3.402 823 466 E+38)</td>
-</tr>
-<tr>
-<td align="left">DOUBLE</td>
-<td align="left">8 字节</td>
-<td align="left">(-1.797 693 134 862 315 7 E+308，-2.225 073 858 507 201 4 E-308)，0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-<td align="left">0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-</tr>
-<tr>
-<td align="left">DECIMAL</td>
-<td align="left">DECIMAL(M,D) ，m&lt;65 是总个数，d&lt;30</td>
-<td align="left">依赖于M和D的值</td>
-<td align="left">依赖于M和D的值</td>
-</tr>
-</tbody></table>
-<p><strong>ENUM/SET</strong></p>
-<p>ENUM 类型因为只允许在集合中取得一个值，有点类似于单选项。</p>
-<p>SET 类型与 ENUM 类型相似但不相同。SET 类型可以从预定义的集合中取得任意数量的值。　一个 SET 类型最多可以包含 64 项元素。</p>
-<h3 id="日期时间"><a href="#日期时间" class="headerlink" title="日期时间"></a>日期时间</h3><table>
-<thead>
-<tr>
-<th>日期时间类型</th>
-<th>占用空间</th>
-<th>日期格式</th>
-<th>最小值</th>
-<th>最大值</th>
-<th>零值表示</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>DATETIME</td>
-<td>8 bytes</td>
-<td>YYYY-MM-DD HH:MM:SS</td>
-<td>1000-01-01 00:00:00</td>
-<td>9999-12-31 23:59:59</td>
-<td>0000-00-00 00:00:00</td>
-</tr>
-<tr>
-<td>TIMESTAMP</td>
-<td>4 bytes</td>
-<td>YYYY-MM-DD HH:MM:SS</td>
-<td>1970-01-01 08:00:01</td>
-<td>2038-01-19 03:14:07</td>
-<td>00000000000000</td>
-</tr>
-<tr>
-<td>DATE</td>
-<td>4 bytes</td>
-<td>YYYY-MM-DD</td>
-<td>1000-01-01</td>
-<td>9999-12-31</td>
-<td>0000-00-00</td>
-</tr>
-<tr>
-<td>TIME</td>
-<td>3 bytes</td>
-<td>HH:MM:SS</td>
-<td>-838:59:59</td>
-<td>838:59:59</td>
-<td>00:00:00</td>
-</tr>
-<tr>
-<td>YEAR</td>
-<td>1 bytes</td>
-<td>YYYY</td>
-<td>1901</td>
-<td>2155</td>
-<td>0000</td>
-</tr>
-</tbody></table>
-<p>Mysql保存日期格式使用 YYYY-MM-DD HH:MM:SS的ISO 8601标准,</p>
-<p>创建字段</p>
-<pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">class</span> <span class="hljs-keyword">ADD</span> create_at datetime <span class="hljs-keyword">default</span> <span class="hljs-literal">null</span>;</code></pre>
-
-<p>对于时间有一些数据格式化表示，通常有一些格式化参数，常用的格式化参数如下：更多的查询官方文档</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%Y</td>
-<td>年，4 位</td>
-</tr>
-<tr>
-<td>%y</td>
-<td>年，2位</td>
-</tr>
-<tr>
-<td>%M</td>
-<td>月名</td>
-</tr>
-<tr>
-<td>%m</td>
-<td>月，数值(00-12)</td>
-</tr>
-<tr>
-<td>%H</td>
-<td>小时 (00-23)</td>
-</tr>
-<tr>
-<td>%h</td>
-<td>小时 (01-12)</td>
-</tr>
-<tr>
-<td>%i</td>
-<td>分钟，数值(00-59)</td>
-</tr>
-<tr>
-<td>%s</td>
-<td>秒(00-59)</td>
-</tr>
-<tr>
-<td>%r</td>
-<td>时间，12-小时（hh:mm:ss AM 或 PM）</td>
-</tr>
-</tbody></table>
-<p>使用示例</p>
-<pre><code class="hljs mysql">select cname,DATE_FORMAT(create_at,&#39;%Y年%m月%d %H时%i分%s秒&#39;) as create_at from class;
-select cname,TIME_FORMAT(create_at,&#39;%r&#39;) as create_at from class;</code></pre>
-
-<p><strong>添加数据时自动更新时间</strong></p>
-<pre><code class="hljs mysql">alter table class add updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;</code></pre>
-
-<p>只要该条记录有任何一个字段被修改，则自动更新update_at字段的值</p>
-<p><strong>常用函数</strong></p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>HOUR</td>
-<td>小时</td>
-</tr>
-<tr>
-<td>MINUTE</td>
-<td>分</td>
-</tr>
-<tr>
-<td>SECOND</td>
-<td>秒</td>
-</tr>
-<tr>
-<td>YEAR</td>
-<td>年</td>
-</tr>
-<tr>
-<td>MONTH</td>
-<td>月</td>
-</tr>
-<tr>
-<td>DAY</td>
-<td>日</td>
-</tr>
-<tr>
-<td>TIME</td>
-<td>获取时间</td>
-</tr>
-<tr>
-<td>WEEK</td>
-<td>周</td>
-</tr>
-<tr>
-<td>QUARTER</td>
-<td>季</td>
-</tr>
-<tr>
-<td>CURRENT_DATE（CURDATE）</td>
-<td>当前日期</td>
-</tr>
-<tr>
-<td>CURRENT_TIME</td>
-<td>当前时间</td>
-</tr>
-<tr>
-<td>NOW</td>
-<td>当前时间</td>
-</tr>
-<tr>
-<td>DAYOFYEAR</td>
-<td>一年中的日数</td>
-</tr>
-<tr>
-<td>DAYOFMONTH</td>
-<td>月份中日数</td>
-</tr>
-<tr>
-<td>DAYOFWEEK</td>
-<td>星期天（1）到星期六（7）</td>
-</tr>
-<tr>
-<td>WEEKDAY</td>
-<td>星期一（0）到星期天（6）</td>
-</tr>
-<tr>
-<td>TO_DAYS</td>
-<td>从元年到现在的天数（忽略时间部分）</td>
-</tr>
-<tr>
-<td>FROM_DAYS</td>
-<td>根据天数得到日期（忽略时间部分）</td>
-</tr>
-<tr>
-<td>TIME_TO_SEC</td>
-<td>时间转为秒数（忽略日期部分）</td>
-</tr>
-<tr>
-<td>SEC_TO_TIME</td>
-<td>根据秒数转为时间（忽略日期部分）</td>
-</tr>
-<tr>
-<td>UNIX_TIMESTAMP</td>
-<td>根据日期返回秒数（包括日期与时间）</td>
-</tr>
-<tr>
-<td>FROM_UNIXTIME</td>
-<td>根据秒数返回日期与时间（包括日期与时间）</td>
-</tr>
-<tr>
-<td>DATEDIFF</td>
-<td>两个日期相差的天数（忽略时间部分）</td>
-</tr>
-<tr>
-<td>TIMEDIFF</td>
-<td>计算两个时间的间隔（忽略日期部分）</td>
-</tr>
-<tr>
-<td>TIMESTAMPDIFF</td>
-<td>根据指定单位计算两个日期时间的间隔（包括日期与时间）</td>
-</tr>
-<tr>
-<td>LAST_DAY</td>
-<td>该月的最后一天</td>
-</tr>
-</tbody></table>
-<p>使用示例</p>
-<pre><code class="hljs mysql">-- 使用函数分割时间
-select cname,YEAR(create_at),MONTH(create_at),DAY(create_at),HOUR(create_at),MINUTE(create_at),SECOND(create_at) from class;
--- 当前时间
-SELECT now(),CURDATE(),CURRENT_DATE(),CURRENT_TIME(),NOW();
--- 时间计算
-SELECT DAYOFYEAR(now()),DAYOFMONTH(now()),DAYOFWEEK(now()),WEEKDAY(now());</code></pre>
-
-<p>**时间计算 常用函数 **</p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ADDTIME</td>
-<td>添加时间（负数为减少），只对时间有效</td>
-</tr>
-<tr>
-<td>TIMESTAMP</td>
-<td>添加时间（负数为减少），只对时间有效</td>
-</tr>
-<tr>
-<td>DATE_ADD</td>
-<td>根据单位添加时间，支持单位有YEAR/MONTH/DAY/HOUR/MINUTE/SECOND/HOUR_MINUTE（负数时等于DATE_SUB)</td>
-</tr>
-<tr>
-<td>DATE_SUB</td>
-<td>DATE_ADD的反函数</td>
-</tr>
-<tr>
-<td>LAST_DAY</td>
-<td>指定月最后一天日期</td>
-</tr>
-</tbody></table>
-<p>使用示例</p>
-<pre><code class="hljs mysql">-- 获取七小时之前的时间
-select ADDTIME(now(),&#39;-7:00:00&#39;)
--- 获取七天之后的时间，interval表示间隔
-SELECT DATE_ADD(now(),INTERVAL 7 DAY);
--- 获取本月第一天的日期
-SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
-
-<p>本文参考链接[后盾人MySQL教程]([<a target="_blank" rel="noopener" href="http://houdunren.gitee.io/note/mysql/2%20%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html]">http://houdunren.gitee.io/note/mysql/2%20%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html]</a>(<a target="_blank" rel="noopener" href="http://houdunren.gitee.io/note/mysql/2">http://houdunren.gitee.io/note/mysql/2</a> 基本操作.html))</p>
+<p>该表格结论来自于<a target="_blank" rel="noopener" href="https://juejin.im/post/6844903847568080904">理解golang调度之三：并发</a></p>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://qcrao.com/2019/09/02/dive-into-go-scheduler/">https://qcrao.com/2019/09/02/dive-into-go-scheduler/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/XF6v3Vapqsqt17FuTVst">https://www.infoq.cn/article/XF6v3Vapqsqt17FuTVst</a></p>
+<p><a target="_blank" rel="noopener" href="https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-goroutine/">https://draveness.me/golang/docs/part3-runtime/ch06-concurrency/golang-goroutine/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jiujuan/p/12735559.html">https://www.cnblogs.com/jiujuan/p/12735559.html</a></p>
 
             </div>
             <hr>
@@ -728,7 +311,7 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/DB/">DB</a>
+                      <a class="hover-with-bg" href="/categories/golang/">golang</a>
                     
                   </div>
                 
@@ -736,7 +319,7 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/mysql/">mysql</a>
+                      <a class="hover-with-bg" href="/tags/golang/">golang</a>
                     
                   </div>
                 
@@ -749,9 +332,9 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2018/08/15/MySQL%E7%B3%BB%E5%88%97%E4%BA%8C/">
+                      <a href="/2020/10/19/%E4%BC%A0%E7%BB%9FPOS%E6%B5%81%E7%A8%8B%E5%8F%8A%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL系列二之基础使用</span>
+                        <span class="hidden-mobile">传统POS流程及名词解释</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -759,8 +342,8 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2018/03/21/%E8%84%9A%E6%9C%AC%E8%B7%91%E6%89%B9/">
-                        <span class="hidden-mobile">身份证识别跑批脚本</span>
+                      <a href="/2020/07/08/%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B%E5%8F%8A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0/">
+                        <span class="hidden-mobile">并发模型及线程模型概述</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -1007,7 +590,7 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
       if ('true' === 'true') {
         var viewCtn = document.querySelector('#leancloud-post-views-container');
         if (viewCtn || enableIncr) {
-          var target = decodeURI('/2018/08/12/MySQL%E7%B3%BB%E5%88%97%E4%B8%80/');
+          var target = decodeURI('/2020/08/10/Goroutine%20&amp;%20Scheduler/');
           var viewGetter = getRecord(Counter, target).then((record) => {
             incrArr.push(buildIncrement(record.objectId))
             if (viewCtn) {
@@ -1101,7 +684,7 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "MySQL系列一之基础使用&nbsp;",
+        "并发模型及线程模型概述&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

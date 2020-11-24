@@ -17,7 +17,7 @@
   <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
   <meta name="author" content="cocoon-break">
   <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
-  <title>MySQL系列一之基础使用 - Cocoon-break的博客</title>
+  <title>并发模型及线程模型概述 - Cocoon-break的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -165,8 +165,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2018-08-12 19:47" pubdate>
-        2018年8月12日 晚上
+      <time datetime="2020-07-08 18:50" pubdate>
+        2020年7月8日 晚上
       </time>
     </span>
   
@@ -177,7 +177,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      2.9k 字
     </span>
   
 
@@ -217,508 +217,93 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">MySQL系列一之基础使用</h1>
+            <h1 style="display: none">并发模型及线程模型概述</h1>
             
             <div class="markdown-body" id="post-body">
-              <p>MySQL是平常使用较多的数据，因项目需要发现自身对MySQL有所欠缺。所以复习了一下MySQL知识，做个总结归纳。本文介绍为基础知识，从数据库链接开始，包括一些常用SQL语句，和MySQL的一些数据类型。建议使用docker 的MySQL 进行SQL练习。同时推荐个人比较喜欢使用的数据库可视化软件Table Plus。</p>
-<h3 id="链接MySQL服务"><a href="#链接MySQL服务" class="headerlink" title="链接MySQL服务"></a>链接MySQL服务</h3><p>通过命令行建立链接</p>
-<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> -u 参数指定用户名，-p指定密码，-P指定端口默认是3306，-h 是指定主机地址,-e 指定链接之后操作</span>
-mysql -uroot -proot -P3306 -h 127.0.0.1
-mysql -uroot -proot -e&quot;show databases&quot; 
-<span class="hljs-meta">#</span><span class="bash"> 建立链接的同时，执行提前写好的sql文件</span>
-mysql -uroot -proot &lt; test.sql</code></pre>
+              <h3 id="同步异步"><a href="#同步异步" class="headerlink" title="同步异步"></a>同步异步</h3><p>要了解各种并发模型思想，首先要了解什么是同步，什么是异步？什么是阻塞，什么是非阻塞？</p>
+<p>举一个例子说明，领导安排小东开发：</p>
+<p><strong>同步阻塞：</strong>领导安排小东开发后，一直盯着小东开发，直到小东开发完成之后，才去干其它活。</p>
+<p><strong>同步不阻塞：</strong>领导安排小东开发后，就忙自己的事情去了，每隔一会儿就过来询问小东是否完成了没。</p>
+<p><strong>异步阻塞：</strong>领导安排小东开发后，不盯着小东，也不会忙其他事，小东开发完成后就通知领导。</p>
+<p><strong>异步不阻塞：</strong>领导安排小东开发后，就忙自己的事情去了，小东开发完成后就通知领导。</p>
+<p><strong>总结：</strong></p>
+<p>同步，是调用者主动去查看调用的状态；</p>
+<p>异步，则是被调用者来通知调用者；</p>
+<p>阻塞和非阻塞的区别是调用后是否立即返回</p>
+<h3 id="并发模型"><a href="#并发模型" class="headerlink" title="并发模型"></a>并发模型</h3><h4 id="进程和线程的区别"><a href="#进程和线程的区别" class="headerlink" title="进程和线程的区别"></a>进程和线程的区别</h4><p>进程是操作系统资源分配的基本单位，线程是 CPU 调度的基本单位。从操作系统层面去看是进程，从 CPU 层面去看是线程。</p>
+<p>进程的空间是独立，各个进程相互不干扰，每个进程拥有自己的进程内存，上下文环境，进程控制块，一个进程至少有一个或者多个线程。线程属于进程，线程要存在必须依赖于进程，线程共享进程的内存，但线程有自己的栈空间，能创建多少个线程也取决于进程内存的大小。</p>
+<p>线程的上下文切换代价比进程要小的多。<br>进程之间强调的是通信，线程之间强调的是同步（数据安全）。</p>
+<p><a target="_blank" rel="noopener" href="https://learnku.com/articles/32807">转自链接</a></p>
+<h4 id="并发模型-1"><a href="#并发模型-1" class="headerlink" title="并发模型"></a>并发模型</h4><ol>
+<li><p>单进/线程-循环处理任务</p>
+<p>单进程和单线程本质是一样的，不具备并发处理的能力，只能串行处理任务。</p>
+</li>
+<li><p>多进程单线程</p>
+<p>主进程负责监听和管理连接，当有客户端请求来时，就fork一个子进程来处理连接。这种模型会比较稳定，最大的好处是隔离性，子进程万一 crash 并不会影响到父进程，也不会产生线程安全问题。但是创建进程对内存消耗会比较，并且CPU在多个进程间来回切换开销也大，所以子进程不适合过多，总的来说这种模型对系统的负担过重</p>
+</li>
+<li><p>单进程多线程</p>
+<p>单进程多线程和多进程单线程的方式类似，只不过是替换成线程。主线程负责监听，管理连接，子线程负责处理业务逻辑。多线程提高了响应速度，让IO和计算相互重叠，降低延时。但是也带来了频繁地创建、销毁线程，这对系统也是个不小的开销。同时也要处理同步的问题，当多个线程请求同一个资源时，需要用锁之类的手段来保证线程安全。最后一个是线程的奔溃会影响整个进程，稳定性不如多进程。</p>
+</li>
+<li><p>多进程多线程</p>
+<p>这种并发模型是在开启多个子进程后，每个子进程下面又会开启多个线程。这种模式下并发承受能力会比单纯的多进程好许多，但是这个也分情况，比如在<strong>CPU密集型作业</strong>下未必会比多进程好，因为每一个进程下的多线程上下文不断切换的开销是非常大的。cpu 本来就在多个进程间切换，现在又要在单个进程下的多个线程间切换，cpu 大部分时间都在切换上下文了，真正用于计算的时间反而很少，因此影响了其性能。</p>
+</li>
+<li><p>IO多路复用</p>
+<p>IO多路复用是一种同步IO模型，实现一个线程可以监视多个文件句柄；一旦某个文件句柄就绪，就能够通知应用程序进行相应的读写操作；没有文件句柄就绪时会阻塞应用程序，交出cpu。多路是指网络连接，复用指的是同一个线程。</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/6844904200141438984">彻底理解 IO多路复用</a></p>
+</li>
+<li><p>协程</p>
+<p>协程基于用户空间的调度器，具体的调度算法由具体的编译器和开发者实现，相比多线程和事件回调的方式，更加灵活可控。不同语言协程的调度方式也不一样，python 是在代码里显式地<code>yield</code>进行切换，golang 则是用 go 语法来开启<code>goroutine</code>，具体的调度由语言层面提供的运行时执行。</p>
+</li>
+</ol>
+<h3 id="线程模型"><a href="#线程模型" class="headerlink" title="线程模型"></a>线程模型</h3><p>线程的实现可以分为三类，内核级线程，用户级线程，以及混合型线程。</p>
+<p>以下内容摘抄自<a target="_blank" rel="noopener" href="https://www.infoq.cn/article/XF6v3Vapqsqt17FuTVst">Goroutine并发调度模型深度解析之手撸一个高性能Goroutine池</a></p>
+<p><strong><a target="_blank" rel="noopener" href="https://helix979.github.io/jkoo/post/os-scheduler/">内核调度实体（KSE，Kernel Scheduling Entity）</a></strong></p>
+<ol>
+<li><p>内核级线程模型</p>
+<p>用户线程与内核线程KSE是一对一（1 : 1）的映射模型，也就是每一个用户线程绑定一个实际的内核线程，而线程的调度则完全交付给操作系统内核去做，应用程序对线程的创建、终止以及同步都基于内核提供的系统调用来完成，大部分编程语言的线程库(比如Java的java.lang.Thread、C++11的std::thread等等)都是对操作系统的线程（内核级线程）的一层封装，创建出来的每个线程与一个独立的KSE静态绑定，因此其调度完全由操作系统内核调度器去做，也就是说，一个进程里创建出来的多个线程每一个都绑定一个KSE。</p>
+<p>这种模型的优势和劣势同样明显：优势是实现简单，直接借助操作系统内核的线程以及调度器，所以CPU可以快速切换调度线程，于是多个线程可以同时运行，因此相较于用户级线程模型它真正做到了并行处理；但它的劣势是，由于直接借助了操作系统内核来创建、销毁和以及多个线程之间的上下文切换和调度，因此资源成本大幅上涨，且对性能影响很大。</p>
+<pre><code class="hljs mermaid">graph BT
+A[内核线程] --&gt;B(用户线程)
+C[内核线程] --&gt;D(用户线程)
+E[内核线程] --&gt;F(用户线程)</code></pre>
 
-<h3 id="数据库管理"><a href="#数据库管理" class="headerlink" title="数据库管理"></a>数据库管理</h3><p>数据库管理包括，数据库创建，数据库删除，数据库使用等操作</p>
-<pre><code class="hljs mysql">-- 创建数据库并指定字符集
-create database test charset utf8;
--- 数据库查看
-show databases;
--- 删除数据库
-drop database test;
--- 一般为了删除不存在的数据库报错，可以通过if exits
-drop database if exits test;
--- 使用数据库
-use test;</code></pre>
 
-<h3 id="数据表管理"><a href="#数据表管理" class="headerlink" title="数据表管理"></a>数据表管理</h3><p>数据表管理包括，数据表创建，数据表删除，数据表记录增删改，数据表字段名修改</p>
-<pre><code class="hljs mysql">-- 创建class 表id 自增，同时指定表字符集
-create table class (id int primary key AUTO_INCREMENT,cname varchar(30) NOT NULL,description varchar(100) default NULL) charset utf8;
--- 数据表插入单条数据，和多条数据
-INSERT INTO class set cname &#x3D;&#39;golang&#39;,description&#x3D;&#39;开发语言&#39;;
-INSERT INTO class (cname,description) VALUES(&#39;PHP&#39;,&#39;开发语言&#39;),(&#39;Mysql&#39;,&#39;数据库&#39;);
--- 数据表删除单条记录
-delete from class where cname&#x3D;&#39;golang&#39;;
--- 数据表修改单条记录
-update class set cname &#x3D; &quot;PHP2&quot; where id&#x3D;2;
--- 删除表
-drop table if exits class;</code></pre>
 
-<p>创建数据模板表，后续可以根据模板表创建新的数据表</p>
-<pre><code class="hljs mysql">-- 复制表结构
-create table tcopy like class;
--- 复制表同时复制数据
-create table tcopy select * from class;</code></pre>
+</li>
+</ol>
+<ol start="2">
+<li><p>用户级线程模型</p>
+<p>用户线程与内核线程KSE是多对一（N : 1）的映射模型，多个用户线程的一般从属于单个进程并且多线程的调度是由用户自己的线程库来完成，线程的创建、销毁以及多线程之间的协调等操作都是由用户自己的线程库来负责而无须借助系统调用来实现。一个进程中所有创建的线程都只和同一个KSE在运行时动态绑定，也就是说，操作系统只知道用户进程而对其中的线程是无感知的，内核的所有调度都是基于用户进程。许多语言实现的 <strong>协程库</strong>基本上都属于这种方式（比如python的gevent）。</p>
+<pre><code class="hljs mermaid">graph BT
+A[内核线程] --&gt;B(用户线程)
+A--&gt;D(用户线程)
+A --&gt;F(用户线程)</code></pre>
 
-<p>数据表字段名称修改以及字段增删</p>
-<pre><code class="hljs mysql">-- 数据表重命名
-alter table class rename classes;
-rename table classes to class;
--- 数据表增加字段
-alter table class add school varchar(50);
--- 数据表删除字段
-alter table class drop school;
--- 修改字段名
-alter table class CHANGE description descriptions varchar(30);</code></pre>
+<p>由于线程调度是在用户层面完成的，也就是相较于内核调度不需要让CPU在用户态和内核态之间切换，这种实现方式相比内核级线程可以做的很轻量级，对系统资源的消耗会小很多，因此可以创建的线程数量与上下文切换所花费的代价也会小得多。</p>
+<p>但该模型有个原罪：并不能做到真正意义上的并发，假设在某个用户进程上的某个用户线程因为一个阻塞调用（比如I/O阻塞）而被CPU给中断（抢占式调度）了，那么该进程内的所有线程都被阻塞（因为单个用户进程内的线程自调度是没有CPU时钟中断的，从而没有轮转调度），整个进程被挂起。即便是多CPU的机器，也无济于事，因为在用户级线程模型下，一个CPU关联运行的是整个用户进程，进程内的子线程绑定到CPU执行是由用户进程调度的，内部线程对CPU是不可见的，此时可以理解为CPU的调度单位是用户进程。所以很多的<strong>协程库</strong>会把自己一些阻塞的操作重新封装为完全的非阻塞形式，然后在以前要阻塞的点上，主动让出自己，并通过某种方式通知或唤醒其他待执行的用户线程在该KSE上运行，从而避免了内核调度器由于KSE阻塞而做上下文切换，这样整个进程也不会被阻塞了。</p>
+</li>
+<li><p>两级线程模型（混合型线程模型）</p>
+<p>两级线程模型是博采众长之后的产物，充分吸收前两种线程模型的优点且尽量规避它们的缺点。</p>
+<p>在此模型下，用户线程与内核KSE是多对多（N : M）的映射模型：首先，区别于用户级线程模型，两级线程模型中的一个进程可以与多个内核线程KSE关联，也就是说一个进程内的多个线程可以分别绑定一个自己的KSE，这点和内核级线程模型相似；其次，又区别于内核级线程模型，它的进程里的线程并不与KSE唯一绑定，而是可以多个用户线程映射到同一个KSE，当某个KSE因为其绑定的线程的阻塞操作被内核调度出CPU时，其关联的进程中其余用户线程可以重新与其他KSE绑定运行。</p>
+<pre><code class="hljs mermaid">graph BT
+A[内核线程] --&gt;B(用户线程)
+A--&gt;D(用户线程)
+A --&gt;F(用户线程)
+K[内核线程] --&gt;B
+K--&gt;D
+K--&gt;F
+Z[内核线程] --&gt;B
+Z--&gt;D
+Z--&gt;F</code></pre>
 
-<p>数据表相关主键操作，主键的增删</p>
-<pre><code class="hljs mysql">-- 主键为自增字段，需要删除自增属性后才可以删除主键
-alter table class MODIFY id int not null;-- 删除自增
-alter table class DROP PRIMARY key;-- 删除主键
-
--- 添加表主键
-alter table class add PRIMARY KEY(id);-- 添加表主键
-alter table class MODIFY id int not null AUTO_INCREMENT;-- 添加自增列
-alter table class modify id int not null AUTO_INCREMENT ,add PRIMARY key(id);</code></pre>
-
-<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>MySQL数据类型包括字符串，数值类型，枚举类型</p>
-<p><strong>字符串数据类型</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">类型</th>
-<th align="left">大小</th>
-<th align="left">用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">CHAR</td>
-<td align="left">0-255字节</td>
-<td align="left">定长字符串</td>
-</tr>
-<tr>
-<td align="left">VARCHAR</td>
-<td align="left">0-65535 字节</td>
-<td align="left">变长字符串</td>
-</tr>
-<tr>
-<td align="left">TINYBLOB</td>
-<td align="left">0-255字节</td>
-<td align="left">不超过 255 个字符的二进制字符串</td>
-</tr>
-<tr>
-<td align="left">TINYTEXT</td>
-<td align="left">0-255字节</td>
-<td align="left">短文本字符串</td>
-</tr>
-<tr>
-<td align="left">BLOB</td>
-<td align="left">0-65 535字节</td>
-<td align="left">二进制形式的长文本数据</td>
-</tr>
-<tr>
-<td align="left">TEXT</td>
-<td align="left">0-65 535字节</td>
-<td align="left">长文本数据</td>
-</tr>
-<tr>
-<td align="left">MEDIUMBLOB</td>
-<td align="left">0-16 777 215字节</td>
-<td align="left">二进制形式的中等长度文本数据</td>
-</tr>
-<tr>
-<td align="left">MEDIUMTEXT</td>
-<td align="left">0-16 777 215字节</td>
-<td align="left">中等长度文本数据</td>
-</tr>
-<tr>
-<td align="left">LONGBLOB</td>
-<td align="left">0-4 294 967 295字节</td>
-<td align="left">二进制形式的极大文本数据</td>
-</tr>
-<tr>
-<td align="left">LONGTEXT</td>
-<td align="left">0-4 294 967 295字节</td>
-<td align="left">极大文本数据</td>
-</tr>
-</tbody></table>
-<p>CHAR类型是定长的数据类型，比如定义20长度的<code>char</code>类型即使只存一个字符，也占20个长度，好处是处理速度快，缺点是占用空间大。</p>
-<p>VARCHAR类型是变长数据类型，空间受内容长度影响。</p>
-<p><strong>字符串常用函数</strong></p>
-<table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>作用</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>UPPER()/LOWER()</td>
-<td>将内容全部改成大写/小写</td>
-<td>select UPPER(cname) from class;</td>
-</tr>
-<tr>
-<td>CONCAT()</td>
-<td>字符拼接</td>
-<td>select concat(cname,description) from class;</td>
-</tr>
-<tr>
-<td>Left()/Right()</td>
-<td>用于取左或右指定数量的字符</td>
-<td>select left(cname,3) from class;</td>
-</tr>
-<tr>
-<td>mid</td>
-<td>从中间取字符串</td>
-<td>select *  from class where mid(cname,2,2) = ‘hp’;</td>
-</tr>
-<tr>
-<td>substring</td>
-<td>从指定位置开始向右截取字符串</td>
-<td>select *  from class where SUBSTRING(cname,2) = ‘hp’;</td>
-</tr>
-<tr>
-<td>char_length</td>
-<td>获取字符串数量</td>
-<td>select char_length(cname) from class;</td>
-</tr>
-</tbody></table>
-<p>正则表达式和like的使用</p>
-<pre><code class="hljs mysql">-- 正则匹配php 或者MySQL
-SELECT * FROM class WHERE cname REGEXP &#39;php|mysql&#39;;
--- _用于匹配一个字符，%用于匹配任意多个字符
-SELECT *  FROM class WHERE cname LIKE &#39;_h%&#39;;</code></pre>
-
-<p><strong>数值整型类型</strong></p>
-<table>
-<thead>
-<tr>
-<th>MySQL数据类型</th>
-<th>含义（有符号）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>tinyint(m)</td>
-<td>1个字节 范围(-128~127)</td>
-</tr>
-<tr>
-<td>smallint(m)</td>
-<td>2个字节 范围(-32768~32767)</td>
-</tr>
-<tr>
-<td>mediumint(m)</td>
-<td>3个字节 范围(-8388608~8388607)</td>
-</tr>
-<tr>
-<td>int(m)</td>
-<td>4个字节 范围(-2147483648~2147483647)</td>
-</tr>
-<tr>
-<td>bigint(m)</td>
-<td>8个字节 范围(+-9.22*10的18次方)</td>
-</tr>
-</tbody></table>
-<p>取值范围如果加了unsigned，则最大值翻倍，如tinyint unsigned的取值范围为(0~256)。</p>
-<p><strong>数值浮点型</strong></p>
-<table>
-<thead>
-<tr>
-<th align="left">类型</th>
-<th align="left">大小</th>
-<th align="left">范围（有符号）</th>
-<th align="left">范围（无符号）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">FLOAT</td>
-<td align="left">4 字节</td>
-<td align="left">(-3.402 823 466 E+38，-1.175 494 351 E-38)，0，(1.175 494 351 E-38，3.402 823 466 351 E+38)</td>
-<td align="left">0，(1.175 494 351 E-38，3.402 823 466 E+38)</td>
-</tr>
-<tr>
-<td align="left">DOUBLE</td>
-<td align="left">8 字节</td>
-<td align="left">(-1.797 693 134 862 315 7 E+308，-2.225 073 858 507 201 4 E-308)，0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-<td align="left">0，(2.225 073 858 507 201 4 E-308，1.797 693 134 862 315 7 E+308)</td>
-</tr>
-<tr>
-<td align="left">DECIMAL</td>
-<td align="left">DECIMAL(M,D) ，m&lt;65 是总个数，d&lt;30</td>
-<td align="left">依赖于M和D的值</td>
-<td align="left">依赖于M和D的值</td>
-</tr>
-</tbody></table>
-<p><strong>ENUM/SET</strong></p>
-<p>ENUM 类型因为只允许在集合中取得一个值，有点类似于单选项。</p>
-<p>SET 类型与 ENUM 类型相似但不相同。SET 类型可以从预定义的集合中取得任意数量的值。　一个 SET 类型最多可以包含 64 项元素。</p>
-<h3 id="日期时间"><a href="#日期时间" class="headerlink" title="日期时间"></a>日期时间</h3><table>
-<thead>
-<tr>
-<th>日期时间类型</th>
-<th>占用空间</th>
-<th>日期格式</th>
-<th>最小值</th>
-<th>最大值</th>
-<th>零值表示</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>DATETIME</td>
-<td>8 bytes</td>
-<td>YYYY-MM-DD HH:MM:SS</td>
-<td>1000-01-01 00:00:00</td>
-<td>9999-12-31 23:59:59</td>
-<td>0000-00-00 00:00:00</td>
-</tr>
-<tr>
-<td>TIMESTAMP</td>
-<td>4 bytes</td>
-<td>YYYY-MM-DD HH:MM:SS</td>
-<td>1970-01-01 08:00:01</td>
-<td>2038-01-19 03:14:07</td>
-<td>00000000000000</td>
-</tr>
-<tr>
-<td>DATE</td>
-<td>4 bytes</td>
-<td>YYYY-MM-DD</td>
-<td>1000-01-01</td>
-<td>9999-12-31</td>
-<td>0000-00-00</td>
-</tr>
-<tr>
-<td>TIME</td>
-<td>3 bytes</td>
-<td>HH:MM:SS</td>
-<td>-838:59:59</td>
-<td>838:59:59</td>
-<td>00:00:00</td>
-</tr>
-<tr>
-<td>YEAR</td>
-<td>1 bytes</td>
-<td>YYYY</td>
-<td>1901</td>
-<td>2155</td>
-<td>0000</td>
-</tr>
-</tbody></table>
-<p>Mysql保存日期格式使用 YYYY-MM-DD HH:MM:SS的ISO 8601标准,</p>
-<p>创建字段</p>
-<pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">class</span> <span class="hljs-keyword">ADD</span> create_at datetime <span class="hljs-keyword">default</span> <span class="hljs-literal">null</span>;</code></pre>
-
-<p>对于时间有一些数据格式化表示，通常有一些格式化参数，常用的格式化参数如下：更多的查询官方文档</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%Y</td>
-<td>年，4 位</td>
-</tr>
-<tr>
-<td>%y</td>
-<td>年，2位</td>
-</tr>
-<tr>
-<td>%M</td>
-<td>月名</td>
-</tr>
-<tr>
-<td>%m</td>
-<td>月，数值(00-12)</td>
-</tr>
-<tr>
-<td>%H</td>
-<td>小时 (00-23)</td>
-</tr>
-<tr>
-<td>%h</td>
-<td>小时 (01-12)</td>
-</tr>
-<tr>
-<td>%i</td>
-<td>分钟，数值(00-59)</td>
-</tr>
-<tr>
-<td>%s</td>
-<td>秒(00-59)</td>
-</tr>
-<tr>
-<td>%r</td>
-<td>时间，12-小时（hh:mm:ss AM 或 PM）</td>
-</tr>
-</tbody></table>
-<p>使用示例</p>
-<pre><code class="hljs mysql">select cname,DATE_FORMAT(create_at,&#39;%Y年%m月%d %H时%i分%s秒&#39;) as create_at from class;
-select cname,TIME_FORMAT(create_at,&#39;%r&#39;) as create_at from class;</code></pre>
-
-<p><strong>添加数据时自动更新时间</strong></p>
-<pre><code class="hljs mysql">alter table class add updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;</code></pre>
-
-<p>只要该条记录有任何一个字段被修改，则自动更新update_at字段的值</p>
-<p><strong>常用函数</strong></p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>HOUR</td>
-<td>小时</td>
-</tr>
-<tr>
-<td>MINUTE</td>
-<td>分</td>
-</tr>
-<tr>
-<td>SECOND</td>
-<td>秒</td>
-</tr>
-<tr>
-<td>YEAR</td>
-<td>年</td>
-</tr>
-<tr>
-<td>MONTH</td>
-<td>月</td>
-</tr>
-<tr>
-<td>DAY</td>
-<td>日</td>
-</tr>
-<tr>
-<td>TIME</td>
-<td>获取时间</td>
-</tr>
-<tr>
-<td>WEEK</td>
-<td>周</td>
-</tr>
-<tr>
-<td>QUARTER</td>
-<td>季</td>
-</tr>
-<tr>
-<td>CURRENT_DATE（CURDATE）</td>
-<td>当前日期</td>
-</tr>
-<tr>
-<td>CURRENT_TIME</td>
-<td>当前时间</td>
-</tr>
-<tr>
-<td>NOW</td>
-<td>当前时间</td>
-</tr>
-<tr>
-<td>DAYOFYEAR</td>
-<td>一年中的日数</td>
-</tr>
-<tr>
-<td>DAYOFMONTH</td>
-<td>月份中日数</td>
-</tr>
-<tr>
-<td>DAYOFWEEK</td>
-<td>星期天（1）到星期六（7）</td>
-</tr>
-<tr>
-<td>WEEKDAY</td>
-<td>星期一（0）到星期天（6）</td>
-</tr>
-<tr>
-<td>TO_DAYS</td>
-<td>从元年到现在的天数（忽略时间部分）</td>
-</tr>
-<tr>
-<td>FROM_DAYS</td>
-<td>根据天数得到日期（忽略时间部分）</td>
-</tr>
-<tr>
-<td>TIME_TO_SEC</td>
-<td>时间转为秒数（忽略日期部分）</td>
-</tr>
-<tr>
-<td>SEC_TO_TIME</td>
-<td>根据秒数转为时间（忽略日期部分）</td>
-</tr>
-<tr>
-<td>UNIX_TIMESTAMP</td>
-<td>根据日期返回秒数（包括日期与时间）</td>
-</tr>
-<tr>
-<td>FROM_UNIXTIME</td>
-<td>根据秒数返回日期与时间（包括日期与时间）</td>
-</tr>
-<tr>
-<td>DATEDIFF</td>
-<td>两个日期相差的天数（忽略时间部分）</td>
-</tr>
-<tr>
-<td>TIMEDIFF</td>
-<td>计算两个时间的间隔（忽略日期部分）</td>
-</tr>
-<tr>
-<td>TIMESTAMPDIFF</td>
-<td>根据指定单位计算两个日期时间的间隔（包括日期与时间）</td>
-</tr>
-<tr>
-<td>LAST_DAY</td>
-<td>该月的最后一天</td>
-</tr>
-</tbody></table>
-<p>使用示例</p>
-<pre><code class="hljs mysql">-- 使用函数分割时间
-select cname,YEAR(create_at),MONTH(create_at),DAY(create_at),HOUR(create_at),MINUTE(create_at),SECOND(create_at) from class;
--- 当前时间
-SELECT now(),CURDATE(),CURRENT_DATE(),CURRENT_TIME(),NOW();
--- 时间计算
-SELECT DAYOFYEAR(now()),DAYOFMONTH(now()),DAYOFWEEK(now()),WEEKDAY(now());</code></pre>
-
-<p>**时间计算 常用函数 **</p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>ADDTIME</td>
-<td>添加时间（负数为减少），只对时间有效</td>
-</tr>
-<tr>
-<td>TIMESTAMP</td>
-<td>添加时间（负数为减少），只对时间有效</td>
-</tr>
-<tr>
-<td>DATE_ADD</td>
-<td>根据单位添加时间，支持单位有YEAR/MONTH/DAY/HOUR/MINUTE/SECOND/HOUR_MINUTE（负数时等于DATE_SUB)</td>
-</tr>
-<tr>
-<td>DATE_SUB</td>
-<td>DATE_ADD的反函数</td>
-</tr>
-<tr>
-<td>LAST_DAY</td>
-<td>指定月最后一天日期</td>
-</tr>
-</tbody></table>
-<p>使用示例</p>
-<pre><code class="hljs mysql">-- 获取七小时之前的时间
-select ADDTIME(now(),&#39;-7:00:00&#39;)
--- 获取七天之后的时间，interval表示间隔
-SELECT DATE_ADD(now(),INTERVAL 7 DAY);
--- 获取本月第一天的日期
-SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
-
-<p>本文参考链接[后盾人MySQL教程]([<a target="_blank" rel="noopener" href="http://houdunren.gitee.io/note/mysql/2%20%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html]">http://houdunren.gitee.io/note/mysql/2%20%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.html]</a>(<a target="_blank" rel="noopener" href="http://houdunren.gitee.io/note/mysql/2">http://houdunren.gitee.io/note/mysql/2</a> 基本操作.html))</p>
+<p>所以，两级线程模型既不是用户级线程模型那种完全靠自己调度的也不是内核级线程模型完全靠操作系统调度的，而是中间态（自身调度与系统调度协同工作），也就是 — 『薛定谔的模型』（误），因为这种模型的高度复杂性，操作系统内核开发者一般不会使用，所以更多时候是作为第三方库的形式出现，而Go语言中的runtime调度器就是采用的这种实现方案，实现了Goroutine与KSE之间的动态关联，不过Go语言的实现更加高级和优雅；该模型为何被称为两级？<strong>即用户调度器实现用户线程到KSE的『调度』，内核调度器实现KSE到CPU上的『调度』</strong></p>
+</li>
+</ol>
+<p>参考链接:</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/entry/6844903680651558919">https://juejin.im/entry/6844903680651558919</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/6844904200141438984">https://juejin.im/post/6844904200141438984</a></p>
+<p><a target="_blank" rel="noopener" href="https://learnku.com/articles/32807">https://learnku.com/articles/32807</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/XF6v3Vapqsqt17FuTVst">https://www.infoq.cn/article/XF6v3Vapqsqt17FuTVst</a></p>
 
             </div>
             <hr>
@@ -728,7 +313,7 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/DB/">DB</a>
+                      <a class="hover-with-bg" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a>
                     
                   </div>
                 
@@ -736,7 +321,7 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/mysql/">mysql</a>
+                      <a class="hover-with-bg" href="/tags/%E6%89%A9%E5%B1%95/">扩展</a>
                     
                   </div>
                 
@@ -749,9 +334,9 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2018/08/15/MySQL%E7%B3%BB%E5%88%97%E4%BA%8C/">
+                      <a href="/2020/08/10/Goroutine%20&amp;%20Scheduler/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">MySQL系列二之基础使用</span>
+                        <span class="hidden-mobile">并发模型及线程模型概述</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -759,8 +344,8 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2018/03/21/%E8%84%9A%E6%9C%AC%E8%B7%91%E6%89%B9/">
-                        <span class="hidden-mobile">身份证识别跑批脚本</span>
+                      <a href="/2018/10/15/java%20%E4%B9%8B%20JNA/">
+                        <span class="hidden-mobile">java 之 JNA</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -1007,7 +592,7 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
       if ('true' === 'true') {
         var viewCtn = document.querySelector('#leancloud-post-views-container');
         if (viewCtn || enableIncr) {
-          var target = decodeURI('/2018/08/12/MySQL%E7%B3%BB%E5%88%97%E4%B8%80/');
+          var target = decodeURI('/2020/07/08/%E5%B9%B6%E5%8F%91%E6%A8%A1%E5%9E%8B%E5%8F%8A%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0/');
           var viewGetter = getRecord(Counter, target).then((record) => {
             incrArr.push(buildIncrement(record.objectId))
             if (viewCtn) {
@@ -1101,7 +686,7 @@ SELECT DATE_SUB(now(),INTERVAL DAYOFMONTH(now())-1 DAY);</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "MySQL系列一之基础使用&nbsp;",
+        "并发模型及线程模型概述&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
