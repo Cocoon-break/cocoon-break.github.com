@@ -1,0 +1,917 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/lufei.jpg">
+  <link rel="icon" type="image/png" href="/img/lufei.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
+  <meta name="author" content="cocoon-break">
+  <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
+  <title>golang 之 cgo - Cocoon-break的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吴生坪</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/coloradoablaze.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-08-30 18:00" pubdate>
+        2018年8月30日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">golang 之 cgo</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>使用golang开发有段时间，公司内部很多产品都是用golang开发的，除了底层核心的算法层是用C++ 写的，其他基本都是利用go进行封装对外提供给客户。由于底层是使用的是c++，上层使用的go，所以避免不了使用的cgo了。那什么是cgo呢？简单来说cgo支持创建调用C代码的Go包。下面我们来一步一步介绍cgo。</p>
+<h3 id="cgo-的简单例子"><a href="#cgo-的简单例子" class="headerlink" title="cgo 的简单例子"></a>cgo 的简单例子</h3><p>让我们从一个简单的cgo 例子说起</p>
+<pre><code class="hljs go"><span class="hljs-keyword">package</span> main
+<span class="hljs-comment">//#include &lt;stdio.h&gt;</span>
+<span class="hljs-comment">//#include &lt;stdlib.h&gt;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-comment">//该语句要单独写一行</span>
+
+<span class="hljs-keyword">import</span> (
+   <span class="hljs-string">&quot;unsafe&quot;</span>
+)
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;
+   <span class="hljs-comment">//C.CString将go string 转换成C string</span>
+   s := C.CString(<span class="hljs-string">&quot;Hello, World\n&quot;</span>)
+   <span class="hljs-comment">// C.CString() 返回的 C 字符串是在堆上新创建的并且不受 GC 的管理，</span>
+   <span class="hljs-comment">// 使用完后需要自行调用 C.free() 释放，否则会造成内存泄露，</span>
+   <span class="hljs-comment">// 而且这种内存泄露pprof 也定位不出来</span>
+   <span class="hljs-keyword">defer</span> C.free(unsafe.Pointer(s))
+   <span class="hljs-comment">//C.puts 函数向标准输出窗口打印，</span>
+   C.puts(s)
+&#125;</code></pre>
+
+<p>虽然上面的代码有注释了，但是还是有一些需要特别注意的。</p>
+<ol>
+<li><p>第二行到第五行，需要注意的是#include 前面的//，不要认为是注释。这里的意思是引用了C的标准库。这个//的注释是叫preamble。必须和底下的import “C” 中间挨着不能有空行的。否则会导致后面的编译无法通过。当然除了//也可以使用/**/。同时这里的import “C” 需要和其他的import 隔开，并不能放到同一个import中，否则程序无法检测是否包含cgo</p>
+<pre><code class="hljs go"><span class="hljs-comment">//#include &lt;stdio.h&gt;</span>
+<span class="hljs-comment">//#include &lt;stdlib.h&gt;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span></code></pre>
+</li>
+<li><p>第二个是main 函数里面的内容</p>
+<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;
+   <span class="hljs-comment">//C.CString将go string 转换成C string</span>
+   s := C.CString(<span class="hljs-string">&quot;Hello, World\n&quot;</span>)
+   <span class="hljs-comment">// C.CString() 返回的 C 字符串是在堆上新创建的并且不受 GC 的管理，</span>
+   <span class="hljs-comment">// 使用完后需要自行调用 C.free() 释放，否则会造成内存泄露，</span>
+   <span class="hljs-comment">// 而且这种内存泄露pprof 也定位不出来</span>
+   <span class="hljs-keyword">defer</span> C.free(unsafe.Pointer(s))
+   <span class="hljs-comment">//C.puts 函数向标准输出窗口打印，</span>
+   C.puts(s)
+&#125;</code></pre>
+
+<ul>
+<li><p>Go代码中的<code>s</code>变量在传递给c代码使用完成之后，需要调用<code>C.free</code>进行释放。首先我们需要先看下golang的字符串和C中的字符串在底层中的内存模型。</p>
+<p><img src="/images/golang/string.jpg" srcset="/img/loading.gif"></p>
+<p>从上图中我们可以看出golang 和 C 字符串在底层中的内存模型是不一样的。golang 字串符串并没有用 ‘\0’ 终止符标识字符串的结束，因此直接将 golang 字符串底层数据指针传递给 C 函数是不行的。一种方案类似切片的传递一样将字符串数据指针和长度传递给 C 函数后，C 函数实现中自行申请一段内存拷贝字符串数据然后加上未层终止符后再使用。更好的方案是使用标准库提供的 C.CString()将 golang 的字符串转换成 C 字符串然后传递给 C 函数调用。</p>
+<p>我们看下官方文档对CString的说明。所以我们也就知道C.free的作用是什么了</p>
+<pre><code class="hljs go"><span class="hljs-comment">// Go string to C string</span>
+<span class="hljs-comment">// The C string is allocated in the C heap using malloc.</span>
+<span class="hljs-comment">// It is the caller&#x27;s responsibility to arrange for it to be</span>
+<span class="hljs-comment">// freed, such as by calling C.free (be sure to include stdlib.h</span>
+<span class="hljs-comment">// if C.free is needed).</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">C</span>.<span class="hljs-title">CString</span><span class="hljs-params">(<span class="hljs-keyword">string</span>)</span> *<span class="hljs-title">C</span>.<span class="hljs-title">char</span></span>
+
+<span class="hljs-comment">// 这个文档上的大概意思是</span>
+<span class="hljs-comment">// C string在C的堆上使用malloc申请。调用者有责任在合适的时候对该字符串进行释放，释放方式可以是调用C.free（调用C.free需包含stdlib.h）</span></code></pre>
+
+<p>我们来看看其他几种C类型和Go类型相互转换的。可以看出CBytes 也是需要我们手动free的。</p>
+<pre><code class="hljs go"><span class="hljs-comment">// Go []byte slice to C array</span>
+<span class="hljs-comment">// The C array is allocated in the C heap using malloc.</span>
+<span class="hljs-comment">// It is the caller&#x27;s responsibility to arrange for it to be</span>
+<span class="hljs-comment">// freed, such as by calling C.free (be sure to include stdlib.h</span>
+<span class="hljs-comment">// if C.free is needed).</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">C</span>.<span class="hljs-title">CBytes</span><span class="hljs-params">([]<span class="hljs-keyword">byte</span>)</span> <span class="hljs-title">unsafe</span>.<span class="hljs-title">Pointer</span></span>
+
+<span class="hljs-comment">// C string to Go string</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">C</span>.<span class="hljs-title">GoString</span><span class="hljs-params">(*C.char)</span> <span class="hljs-title">string</span></span>
+
+<span class="hljs-comment">// C data with explicit length to Go string</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">C</span>.<span class="hljs-title">GoStringN</span><span class="hljs-params">(*C.char, C.<span class="hljs-keyword">int</span>)</span> <span class="hljs-title">string</span></span>
+
+<span class="hljs-comment">// C data with explicit length to Go []byte</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">C</span>.<span class="hljs-title">GoBytes</span><span class="hljs-params">(unsafe.Pointer, C.<span class="hljs-keyword">int</span>)</span> []<span class="hljs-title">byte</span></span></code></pre>
+
+<p>一般来说，c语言里都是秉承哪个模块申请就由哪个模块释放的原则，因为跨库申请释放可能由于各自链接的内存管理库不一致导致出现难以排查的bug。并且换个角度来说，被调用模块也无法知道传入的内存是在堆上申请还是栈上申请的，是否需要释放。<br>所以Go传入c模块的内存，c模块也许会对这块内存再次进行拷贝，但是c模块肯定不会释放（即<code>free</code>）传入的这份内存。<br>所以，一般来说，Go在调用完c函数之后，Go需要释放拷贝生成的这块内存。</p>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>其中需要留意的是unsafe.Pointer 这个函数。消除内存拷贝可以通过<code>unsafe.Pointer</code>获取原始指针进行传递。<code>unsafe.Pointer</code>是一种特殊意义的指针，它可以包含任意类型的地址，有点类似于C语言里的void*指针，全能型的。</li>
+</ul>
+<p>Go语言中数值类型和C语言数据类型基本上是相似的。但是还是有不同的。这里就不详细介绍了。更多的cgo 类型装换可以参考<a target="_blank" rel="noopener" href="https://books.studygolang.com/advanced-go-programming-book/ch2-cgo/ch2-03-cgo-types.html">Go语言高级编程</a></p>
+<h3 id="Go-和-C-之间的数组传递"><a href="#Go-和-C-之间的数组传递" class="headerlink" title="Go 和 C 之间的数组传递"></a>Go 和 C 之间的数组传递</h3><h4 id="Go数组到C"><a href="#Go数组到C" class="headerlink" title="Go数组到C"></a>Go数组到C</h4><p>我们还是直接来看下例子。我们在C 中遍历数组，并计算数组内值的和。</p>
+<pre><code class="hljs go"><span class="hljs-keyword">package</span> main
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">#include &lt;stdio.h&gt;</span>
+<span class="hljs-comment">#include &lt;string.h&gt;</span>
+<span class="hljs-comment">#include &lt;stdlib.h&gt;</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">int loop(int** list_data, int leng, char** data)</span>
+<span class="hljs-comment">&#123;</span>
+<span class="hljs-comment">  int* m = (int*)list_data;</span>
+<span class="hljs-comment">  int sum = 0;</span>
+<span class="hljs-comment">  for(int i=0; i&lt;leng; i++)</span>
+<span class="hljs-comment">  &#123;</span>
+<span class="hljs-comment">    sum += m[i];</span>
+<span class="hljs-comment">  &#125;</span>
+<span class="hljs-comment">  *data = &quot;finised task&quot;;</span>
+<span class="hljs-comment">  return sum;</span>
+<span class="hljs-comment">&#125;</span>
+<span class="hljs-comment">*/</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-comment">//该语句要单独写一行</span>
+<span class="hljs-keyword">import</span> (
+	<span class="hljs-string">&quot;unsafe&quot;</span>
+	<span class="hljs-string">&quot;fmt&quot;</span>
+)
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">GoSilence2CArray</span><span class="hljs-params">()</span></span> &#123;
+	<span class="hljs-keyword">var</span> ids = []<span class="hljs-keyword">int32</span>&#123;<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>&#125;
+	<span class="hljs-keyword">var</span> res *C.char
+	length := C.<span class="hljs-keyword">int</span>(<span class="hljs-built_in">len</span>(ids))
+	le := C.loop((**C.<span class="hljs-keyword">int</span>)(unsafe.Pointer(&amp;ids[<span class="hljs-number">0</span>])), length, &amp;res)
+	fmt.Println(le)
+	fmt.Println(C.GoString(res))
+	fmt.Println(ids)
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;
+	GoSilence2CArray()
+&#125;</code></pre>
+
+<p>整个例子需要注意的就是调用C.loop 函数的时候，将Go中的Slice传给C函数。其中最重要的loop的第一个参数，将数组转换的代码了。我们来看以下使用loop函数的写法。</p>
+<pre><code class="hljs go"><span class="hljs-comment">//正确写法</span>
+le := C.loop((**C.<span class="hljs-keyword">int</span>)(unsafe.Pointer(&amp;ids[<span class="hljs-number">0</span>])), length, &amp;res)
+<span class="hljs-comment">//错误写法</span>
+le := C.loop((**C.<span class="hljs-keyword">int</span>)(unsafe.Pointer(&amp;ids)), length, &amp;res)</code></pre>
+
+<p>Slice在Go中实际上不是一个完全意义上的数组，它只是一种数据结构，带有若干头部。如果直接&amp;ids，那相当于把ids这个数据结构的地址处的数据强制转换为<code>(**C.int)</code>。这样导致的后果完全不可期，运行时core掉是再正常不过的后果。所以正确的写法应该是<code>(**C.int)(unsafe.Pointer(&amp;ids[0]))</code>。从slice的第一个元素地址开始。对于slice的内部数据结构可以查看<a target="_blank" rel="noopener" href="http://blog.golang.org/go-slices-usage-and-internals">slice的使用和内部结构</a></p>
+<h4 id="C数组到Go-slice"><a href="#C数组到Go-slice" class="headerlink" title="C数组到Go slice"></a>C数组到Go slice</h4><p>还是直接看例子</p>
+<pre><code class="hljs go"><span class="hljs-keyword">package</span> main
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">#include &lt;stdio.h&gt;</span>
+<span class="hljs-comment">#include &lt;string.h&gt;</span>
+<span class="hljs-comment">#include &lt;stdlib.h&gt;</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">typedef struct&#123;</span>
+<span class="hljs-comment">   char* name;</span>
+<span class="hljs-comment">&#125;person;</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">person* get_person(int n)&#123;</span>
+<span class="hljs-comment">   person* ret = (person*)malloc(sizeof(person) * n);</span>
+<span class="hljs-comment">   for(int i=0;i&lt;n;i++)&#123;</span>
+<span class="hljs-comment">      ret[i].name=&quot;wu&quot;;</span>
+<span class="hljs-comment">   &#125;</span>
+<span class="hljs-comment">   return ret;</span>
+<span class="hljs-comment">&#125;</span>
+<span class="hljs-comment">*/</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span> <span class="hljs-comment">//该语句要单独写一行</span>
+<span class="hljs-keyword">import</span> (
+	<span class="hljs-string">&quot;unsafe&quot;</span>
+	<span class="hljs-string">&quot;fmt&quot;</span>
+)
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">CArray2GoSilence</span><span class="hljs-params">()</span></span> &#123;
+	size := <span class="hljs-number">2</span>
+	person := C.get_person(C.<span class="hljs-keyword">int</span>(size))
+	person_array := (*[<span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">30</span>]C.person)(unsafe.Pointer(person))
+	<span class="hljs-keyword">var</span> names []<span class="hljs-keyword">string</span>
+	<span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; size; i++ &#123;
+		name := C.GoString(person_array[i].name)
+		names = <span class="hljs-built_in">append</span>(names, name)
+	&#125;
+	<span class="hljs-keyword">for</span> _, name := <span class="hljs-keyword">range</span> names &#123;
+		fmt.Println(name)
+	&#125;
+	C.free(unsafe.Pointer(person))
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;
+	CArray2GoSilence()
+&#125;</code></pre>
+
+<p>C语言中的数组与Go语言中的数组差异较大，后者是值类型，而前者与C中的指针大部分场合都可以随意转换。目前似乎无法直接显式的在两者之间进行转型，官方文档也没有说明。但我们可以通过编写转换函数，将C的数组转换为Go的Slice。<code>(*[1 &lt;&lt; 30]C.person)(unsafe.Pointer(person))</code> 是获取足够大的内存地址，然后通过遍历该数组的地址。获取数组的元素。可以在for中将元素添加到slice中。</p>
+<h3 id="cgo利用pkg-config-使用第三方的so库"><a href="#cgo利用pkg-config-使用第三方的so库" class="headerlink" title="cgo利用pkg_config 使用第三方的so库"></a>cgo利用pkg_config 使用第三方的so库</h3><h4 id="pkg-config"><a href="#pkg-config" class="headerlink" title="pkg_config"></a>pkg_config</h4><p>我们在使用第三方库的时候就少不了使用第三方库的头文件和库文件。我们在编译、链接的时候，必须要指定这些头文件和库的位置。<strong>pkg-config</strong> 是一个在<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BA%90%E4%BB%A3%E7%A0%81">源代码</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%BC%96%E8%AF%91">编译</a>时查询已安装的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%BA%93">库</a>的使用接口的计算机工具<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%BD%AF%E4%BB%B6">软件</a>。pkg-config原本是设计用于<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Linux">Linux</a>的，但现在在各个版本的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/BSD">BSD</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Windows">windows</a>、<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Mac_OS_X">Mac OS X</a>和<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Solaris">Solaris</a>上都有着可用的版本。</p>
+<p>那么pkg-config有什么作用呢？</p>
+<ol>
+<li>检查库的版本号。如果所需要的库的版本不满足要求，它会打印出错误信息，避免链接错误版本的库文件。</li>
+<li>获得编译预处理参数，如宏定义，头文件的位置。</li>
+<li>得链接参数，如库及依赖的其它库的位置，文件名及其它一些连接参数。</li>
+<li>自动加入所依赖的其它库的设置。</li>
+</ol>
+<p>pkg-config是如和得到这些信息呢？为了让pkg-config可以得到这些信息，要求库的提供者，提供一个.pc文件。以下是这是一个用于<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=Libpng&action=edit&redlink=1">libpng</a>的.pc文件的样例:</p>
+<pre><code class="hljs shell">prefix=/usr/local
+exec_prefix=$&#123;prefix&#125;
+libdir=$&#123;exec_prefix&#125;/lib
+includedir=$&#123;exec_prefix&#125;/include
+  
+Name: libpng12
+Description: Loads and saves PNG files
+Version: 1.2.8
+Libs: -L$&#123;libdir&#125; -lpng12 -lz
+Cflags: -I$&#123;includedir&#125;/libpng12</code></pre>
+
+<p>这个文件告诉我们这些库可以在/usr/local/lib找到，头文件可以在/usr/local/include里找到，库的名字是libpng12并且版本号是1.2.8。它也提供了用于编译依赖于libpng的源代码时需要的链接器参数。</p>
+<p>pkg-config默认会去/usr/local/lib/pkgconfig目录下，寻找.pc文件。</p>
+<h4 id="cgo-使用pkg-config"><a href="#cgo-使用pkg-config" class="headerlink" title="cgo 使用pkg-config"></a>cgo 使用pkg-config</h4><p>我们先来看下cgo 中使用pkg-config的例子。以下是我做餐盘识别项目中涉及到cgo部分</p>
+<pre><code class="hljs go"><span class="hljs-keyword">package</span> cgo
+<span class="hljs-comment">// #cgo pkg-config: megproduct</span>
+<span class="hljs-comment">// #cgo CXXFLAGS: -std=c++11</span>
+<span class="hljs-comment">// #include &quot;plate.h&quot;</span>
+<span class="hljs-comment">// #include &quot;stdlib.h&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;C&quot;</span>
+<span class="hljs-comment">//后续使用方法和go 调用C的方式一致了</span></code></pre>
+
+<p>我们可以看到cgo有配置pkg-config的配置文件megproduct.pc，这个pc文件可以放在/usr/local/lib/pkgconfig目录下，也可以将其添加到环境变量PKG_CONFIG_PATH中。根据megproduct.pc 查找库的头文件和so文件。</p>
+<p>我们来看下megproduct.pc 是咋样的</p>
+<pre><code class="hljs shell">prefix=/go/DATA/plate-sdk-190710
+libdir=$&#123;prefix&#125;/lib
+includedir=$&#123;prefix&#125;/include
+
+Name: megproduct
+Description: megproduct, built in megproduct
+Version: 1.1
+Requires:
+Libs: $&#123;libdir&#125;/libmegproduct.so
+Libs.private: -Wl,--push-state,--as-needed,-lpthread,-lrt,-ldl,-lm,--pop-state
+Cflags: -I$&#123;includedir&#125;</code></pre>
+
+<p>使用pkg-config少了很多配置的文件。所以如果使用第三方库进行cgo 开发还是建议使用pkg-config</p>
+<p>本篇文章更多讲的是cgo的使用，并没有涉及到底层cgo的内部实现，后续如果有时间会对cgo 底层的实现讲解。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.pengrl.com/p/29054/">Go语言使用cgo时的内存管理笔记</a></p>
+<p>​            <a target="_blank" rel="noopener" href="https://golang.org/cmd/cgo/">官方文档</a></p>
+<p>​            <a target="_blank" rel="noopener" href="http://blog.golang.org/go-slices-usage-and-internals">slice的使用和内部结构</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/golang/">golang</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/golang-cgo/">golang cgo</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/09/10/013_golang%E4%B9%8Bslice_map/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">golang 之 slice & defer 关键字</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/08/25/011_MySQL%E7%B3%BB%E5%88%97%E4%BA%94/">
+                        <span class="hidden-mobile">MySQL系列五之原理及性能</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer>
+  (function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'true' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/2018/08/30/012_golang%E4%B9%8Bcgo/');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = 'w6SDFMpFI1CAALLLBp2eaulT-gzGzoHsz'
+    var app_key = 'ffyRHGjvFWDQBO4uQldmg8ie'
+    var server_url = 'https://w6sdfmpf.lc-cn-n1-shared.com'
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "golang 之 cgo&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

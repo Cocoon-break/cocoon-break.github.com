@@ -1,0 +1,896 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/lufei.jpg">
+  <link rel="icon" type="image/png" href="/img/lufei.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
+  <meta name="author" content="cocoon-break">
+  <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
+  <title>golang 之 slice &amp; defer 关键字 - Cocoon-break的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吴生坪</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/coloradoablaze.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-09-10 19:53" pubdate>
+        2018年9月10日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">golang 之 slice &amp; defer 关键字</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p>今天我们讲讲golang的slice和defer。</p>
+<p>slice是go里面一个很重要的数据结构，使用这种结构来管理数据集合。slice 类似其他语言中的数组，但是又有一些其他不同的属性。</p>
+<p>在正式开始讲slice之前我们来说一说golang 中的<code>defer</code>，原本觉得自己对defer有一定了解了。但是昨天看了一本书，才发现自己对defer 的了解是这么浅，在没有运行以下代码前你能否得出正确答案呢？运行代码之后能否回答为什么？</p>
+<pre><code class="hljs go"><span class="hljs-keyword">package</span> main
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">f</span><span class="hljs-params">()</span> <span class="hljs-params">(result <span class="hljs-keyword">int</span>)</span></span> &#123;
+	<span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;
+		result++
+	&#125;()
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">f2</span><span class="hljs-params">()</span> <span class="hljs-params">(r <span class="hljs-keyword">int</span>)</span></span> &#123;
+	t := <span class="hljs-number">5</span>
+	<span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;
+		t = t + <span class="hljs-number">5</span>
+	&#125;()
+	<span class="hljs-keyword">return</span> t
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">f3</span><span class="hljs-params">()</span> <span class="hljs-params">(r <span class="hljs-keyword">int</span>)</span></span> &#123;
+	<span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(r <span class="hljs-keyword">int</span>)</span></span> &#123;
+		r = r + <span class="hljs-number">5</span>
+	&#125;(r)
+	<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;
+	fmt.Println(f())
+	fmt.Println(f2())
+	fmt.Println(f3())
+&#125;</code></pre>
+
+<p>答案留在最后讲解</p>
+<h3 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h3><h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>在说slice之前，我们先来了解下数组。</p>
+<p>数组是指定长度和元素类型的数据集合。比如以下数组</p>
+<pre><code class="hljs go"><span class="hljs-keyword">var</span> intArr [<span class="hljs-number">3</span>]<span class="hljs-keyword">int</span><span class="hljs-comment">//创建了长度为3的int数组</span>
+a[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span> <span class="hljs-comment">//根据索引访问元素</span>
+fmt.<span class="hljs-built_in">println</span>(a[<span class="hljs-number">1</span>])<span class="hljs-comment">//int 类型数组默认值为0</span></code></pre>
+
+<p>数组不需要显式初始化。Go的数组是值类型。数组变量表示整个数组，它不是指向数组的第一个元素的指针，这就意味着赋值和函数传参操作时，将会复制数组的内容（后续和slice对比，slice是创建指针指向地址）。可以写一个简单的程序将数组的地址打印出来，进行对比。</p>
+<h4 id="slice-1"><a href="#slice-1" class="headerlink" title="slice"></a>slice</h4><p>在实际使用中我们很少使用到数组，因为数组不够灵活。比如：一旦数组中的数据足够大，每次使用数组都要重新复制一遍，耗费大量内存和时间。slice并不会实际复制一份数据，它只是创建一个新的数据结构，包含了另外的一个指针，一个长度和一个容量数据。我们来看下slice在源码中的定义</p>
+<pre><code class="hljs go"><span class="hljs-keyword">type</span> slice <span class="hljs-keyword">struct</span> &#123;
+	array unsafe.Pointer<span class="hljs-comment">// 指向底层数组的指针</span>
+	<span class="hljs-built_in">len</span>   <span class="hljs-keyword">int</span><span class="hljs-comment">// 长度，切片可用元素的个数，slice的下标不能超过长度 </span>
+	<span class="hljs-built_in">cap</span>   <span class="hljs-keyword">int</span><span class="hljs-comment">// 容量 &gt;= 长度，在底层不扩容的情况下，cap是len的最大限度</span>
+&#125;</code></pre>
+
+<p>需要注意的是：底层数组是可以被多个slice同时指向的，也就是对一个slice的元素进行修改会影响到其他的slice。</p>
+<h5 id="slice的扩容"><a href="#slice的扩容" class="headerlink" title="slice的扩容"></a>slice的扩容</h5><p>在对slice进行append等操作时，可能会造成slice的自动扩容。我们来看下源码是怎么扩容的</p>
+<pre><code class="hljs go"><span class="hljs-comment">// growslice handles slice growth during append.</span>
+<span class="hljs-comment">// It is passed the slice element type, the old slice, and the desired new minimum capacity,</span>
+<span class="hljs-comment">// and it returns a new slice with at least that capacity, with the old data</span>
+<span class="hljs-comment">// copied into it.</span>
+<span class="hljs-comment">// The new slice&#x27;s length is set to the old slice&#x27;s length,</span>
+<span class="hljs-comment">// NOT to the new requested capacity.</span>
+<span class="hljs-comment">// This is for codegen convenience. The old slice&#x27;s length is used immediately</span>
+<span class="hljs-comment">// to calculate where to write new values during an append.</span>
+<span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> When the old backend is gone, reconsider this decision.</span>
+<span class="hljs-comment">// The SSA backend might prefer the new length or to return only ptr/cap and save stack space.</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">growslice</span><span class="hljs-params">(et *_type, old slice, <span class="hljs-built_in">cap</span> <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">slice</span></span> &#123;
+	<span class="hljs-comment">//忽略部分源码</span>
+	newcap := old.<span class="hljs-built_in">cap</span>
+	doublecap := newcap + newcap
+	<span class="hljs-keyword">if</span> <span class="hljs-built_in">cap</span> &gt; doublecap &#123;
+		newcap = <span class="hljs-built_in">cap</span>
+	&#125; <span class="hljs-keyword">else</span> &#123;
+		<span class="hljs-keyword">if</span> old.<span class="hljs-built_in">len</span> &lt; <span class="hljs-number">1024</span> &#123;
+			newcap = doublecap
+		&#125; <span class="hljs-keyword">else</span> &#123;
+			<span class="hljs-comment">// Check 0 &lt; newcap to detect overflow</span>
+			<span class="hljs-comment">// and prevent an infinite loop.</span>
+			<span class="hljs-keyword">for</span> <span class="hljs-number">0</span> &lt; newcap &amp;&amp; newcap &lt; <span class="hljs-built_in">cap</span> &#123;
+				newcap += newcap / <span class="hljs-number">4</span>
+			&#125;
+			<span class="hljs-comment">// Set newcap to the requested cap when</span>
+			<span class="hljs-comment">// the newcap calculation overflowed.</span>
+			<span class="hljs-keyword">if</span> newcap &lt;= <span class="hljs-number">0</span> &#123;
+				newcap = <span class="hljs-built_in">cap</span>
+			&#125;
+		&#125;
+	&#125;
+<span class="hljs-comment">//忽略部分源码</span>
+	<span class="hljs-keyword">return</span> slice&#123;p, old.<span class="hljs-built_in">len</span>, newcap&#125;
+&#125;</code></pre>
+
+<p>当slice中的cap不够使用是会调用growslice函数进行扩容，具体的扩容规则是</p>
+<ul>
+<li>如果新的大小是当前大小2倍以上，则大小增长为新大小</li>
+<li>如果当前大小小于1024，按每次2倍增长，否则每次按当前大小1/4增长。直到增长的大小超过或等于新大小。</li>
+</ul>
+<p>扩容之后，向 Go 内存管理器申请内存，将老 slice 中的数据复制过去，并且将 append 的元素添加到新的底层数组中。最后向 <code>growslice</code> 函数调用者返回一个新的 slice，这个 slice 的长度并没有变化，而容量却增大了。</p>
+<h5 id="nil-slice-和空slice"><a href="#nil-slice-和空slice" class="headerlink" title="nil slice 和空slice"></a>nil slice 和空slice</h5><p>nil slice 是描述一个不存在的切片，也就是说它的指针指向nil，没有实际上地址，长度和容量也都为0。</p>
+<p>而空的切片是是描述空的一个集合，但是它的指针指向了一个地址，长度和容量也为0。</p>
+<p>nil切片和空切片很相似，长度和容量都是0，官方建议尽量使用 <code>nil</code> 切片。</p>
+<table>
+<thead>
+<tr>
+<th>创建方式</th>
+<th>nil切片</th>
+<th>空切片</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方式一</td>
+<td>var s1 []int</td>
+<td>var s2 = []int{}</td>
+</tr>
+<tr>
+<td>方式二</td>
+<td>var s4 = *new([]int)</td>
+<td>var s3 = make([]int, 0)</td>
+</tr>
+<tr>
+<td>长度</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>容量</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>和nil比较</td>
+<td>true</td>
+<td>false</td>
+</tr>
+</tbody></table>
+<h4 id="slice-和unsafe-Pointer相互转换"><a href="#slice-和unsafe-Pointer相互转换" class="headerlink" title="slice 和unsafe.Pointer相互转换"></a>slice 和unsafe.Pointer相互转换</h4><p>在上一篇的cgo 部分中将c的数组转到go slice 部分中有涉及到unsafe.Pointer。</p>
+<p>我们先来看看从slice中获取一块内存地址</p>
+<pre><code class="hljs go">slice:=<span class="hljs-built_in">make</span>([]<span class="hljs-keyword">int</span>,<span class="hljs-number">10</span>)
+ptr:=unsafe.Pointer(&amp;slice[<span class="hljs-number">0</span>])<span class="hljs-comment">//获取数组中第一个元素的内存地址</span></code></pre>
+
+<p>从内存指针构造出Go的slice结构会比较麻烦，总共有三种方式</p>
+<p>第一种，先将<code>ptr</code>强制类型转换为另一种指针，一个指向<code>[1&lt;&lt;10]int</code>数组的指针，这里数组大小其实是假的。然后用slice操作取出这个数组的前10个，于是<code>s</code>就是一个10个元素的slice。</p>
+<pre><code class="hljs go"><span class="hljs-keyword">var</span> ptr unsafe.Pointer
+s := ((*[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">10</span>]<span class="hljs-keyword">int</span>)(ptr))[:<span class="hljs-number">10</span>]</code></pre>
+
+<p>第二种，模拟go 底层的slice结构，将结构体赋值给s。和第一种相比，这里的cap和1&lt;&lt;10意思是相同的</p>
+<pre><code class="hljs go"><span class="hljs-keyword">var</span> ptr unsafe.Pointer
+<span class="hljs-keyword">var</span> s1 = <span class="hljs-keyword">struct</span> &#123;
+    addr <span class="hljs-keyword">uintptr</span>
+    <span class="hljs-built_in">len</span> <span class="hljs-keyword">int</span>
+    <span class="hljs-built_in">cap</span> <span class="hljs-keyword">int</span>
+&#125;&#123;ptr, length, length&#125;
+s := *(*[]<span class="hljs-keyword">byte</span>)(unsafe.Pointer(&amp;s1))</code></pre>
+
+<p>第三种方法，通过reflect.SliceHeader的方式来构造slice。</p>
+<pre><code class="hljs go"><span class="hljs-keyword">var</span> o []<span class="hljs-keyword">byte</span>
+sliceHeader := (*reflect.SliceHeader)((unsafe.Pointer(&amp;o)))
+sliceHeader.Cap = length
+sliceHeader.Len = length
+sliceHeader.Data = <span class="hljs-keyword">uintptr</span>(ptr)</code></pre>
+
+<h3 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h3><p>不知道你是否得出文章开始代码的正确结果呢？</p>
+<p> <code>defer</code> 会在当前函数或者方法返回之前执行传入的函数。它会经常被用于关闭文件描述符、关闭数据库连接以及解锁资源。要真正理解文章前面的问题，我们要理解<strong>return xxx这一条语句并不是一条原子指令!</strong></p>
+<p>函数返回的过程是这样的：先给返回值赋值，然后调用defer表达式，最后才是返回到调用函数中。</p>
+<p>defer表达式可能会在设置函数返回值之后，在返回到调用函数之前，修改返回值，使最终的函数返回值与你想象的不一致。</p>
+<p>其实使用defer时，用一个简单的转换规则改写一下，就不会迷糊了。改写规则是将return语句拆成两句写，return xxx会被改写成:</p>
+<pre><code class="hljs shell">返回值 = xxx
+调用defer函数
+空的return</code></pre>
+
+<p> 这样你就能理解为啥会得出文章一开始函数的结果了。我们来查看下改写之后的代码</p>
+<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">f</span><span class="hljs-params">()</span> <span class="hljs-params">(result <span class="hljs-keyword">int</span>)</span></span> &#123;
+	result = <span class="hljs-number">0</span> <span class="hljs-comment">//return语句不是一条原子调用，return xxx其实是赋值＋ret指令</span>
+	<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123; <span class="hljs-comment">//defer被插入到return之前执行，也就是赋返回值和ret指令之间</span>
+		result++
+	&#125;()
+	<span class="hljs-keyword">return</span>
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">f2</span><span class="hljs-params">()</span> <span class="hljs-params">(r <span class="hljs-keyword">int</span>)</span></span> &#123;
+	t := <span class="hljs-number">5</span>
+	r = t <span class="hljs-comment">//赋值指令</span>
+	<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123; <span class="hljs-comment">//defer被插入到赋值与返回之间执行，这个例子中返回值r没被修改过</span>
+		t = t + <span class="hljs-number">5</span>
+	&#125;()
+	<span class="hljs-keyword">return</span> <span class="hljs-comment">//空的return指令</span>
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">f3</span><span class="hljs-params">()</span> <span class="hljs-params">(r <span class="hljs-keyword">int</span>)</span></span> &#123;
+	r = <span class="hljs-number">1</span> <span class="hljs-comment">//给返回值赋值</span>
+	<span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(r <span class="hljs-keyword">int</span>)</span></span> &#123; <span class="hljs-comment">//这里改的r是传值传进去的r，不会改变要返回的那个r值</span>
+		r = r + <span class="hljs-number">5</span>
+	&#125;(r)
+	<span class="hljs-keyword">return</span> <span class="hljs-comment">//空的return</span>
+&#125;</code></pre>
+
+<p>接下来我们来看看另外一小段代码</p>
+<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;
+  startedAt := time.Now()
+	<span class="hljs-keyword">defer</span> fmt.Println(time.Since(startedAt))
+	time.Sleep(time.Second)
+&#125;
+<span class="hljs-comment">//输出结果并不是1s，而是几百纳秒</span></code></pre>
+
+<p>上面的输出结果背后的原因是什么呢？经过分析，我们会发现调用 <code>defer</code> 关键字会立刻对函数中引用的外部参数进行拷贝，所以 <code>time.Since(startedAt)</code> 的结果不是在 <code>main</code> 函数退出之前计算的，而是在 <code>defer</code> 关键字调用时计算的，最终导致上述代码输出。当然上面的解决办法是很简单的。只要defer 那添加一个匿名函数就可以解决了。我们总结一下<code>defer</code> 关键字使用传值的方式传递参数时会进行预计算，导致不符合预期的结果。</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://halfrost.com/go_slice/">深入解析go中slice底层实现</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/qcrao-2018/p/10631989.html">深度解析Go语音之slice</a></p>
+<p><a target="_blank" rel="noopener" href="https://tiancaiamao.gitbooks.io/go-internals/content/zh/03.4.html">深入解析Go</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/golang/">golang</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/golang/">golang</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/10/15/java%20%E4%B9%8B%20JNA/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">java 之 JNA</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/08/30/012_golang%E4%B9%8Bcgo/">
+                        <span class="hidden-mobile">golang 之 cgo</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer>
+  (function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'true' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/2018/09/10/013_golang%E4%B9%8Bslice_map/');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = 'w6SDFMpFI1CAALLLBp2eaulT-gzGzoHsz'
+    var app_key = 'ffyRHGjvFWDQBO4uQldmg8ie'
+    var server_url = 'https://w6sdfmpf.lc-cn-n1-shared.com'
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "golang 之 slice & defer 关键字&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>

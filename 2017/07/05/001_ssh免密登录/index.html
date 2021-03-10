@@ -1,0 +1,801 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/lufei.jpg">
+  <link rel="icon" type="image/png" href="/img/lufei.jpg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Linux golang 随笔 Python 开发效率 mysql">
+  <meta name="author" content="cocoon-break">
+  <meta name="keywords" content="Linux golang 随笔 Python 开发效率 mysql">
+  <title>ssh 免密登录 - Cocoon-break的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>吴生坪</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/coloradoablaze.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2017-07-05 13:45" pubdate>
+        2017年7月5日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">ssh 免密登录</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <p> 做后端开发经常遇到一个情况是使用公司的虚拟机很多，每次都要记住用户名密码和IP是一件很麻烦的事情，所以在想有没有一种能够免密快速ssh的方式？</p>
+<h3 id="什么是SSH"><a href="#什么是SSH" class="headerlink" title="什么是SSH"></a>什么是SSH</h3><p>简单来说SSH 是一种网络协议，用于计算机之间的加密登录，早起的互联网通信都是明文通信的，一旦被截获密码就泄露出去了。于是就有了SSH协议，将登录信息全部加密。目前SSH协议已经在全世界广泛使用了，且成为各个L inux发行版本的标配。（桌面版本的Linux不支持SSH，需要安装OpenSSH）</p>
+<h3 id="SSH的过程"><a href="#SSH的过程" class="headerlink" title="SSH的过程"></a>SSH的过程</h3><p>SSH 默认使用的是RSA加密算法</p>
+<ol>
+<li>请求主机Client用户使用<code>ssh user@host</code>命令对远程Server发起登录</li>
+<li>远程主机将自己的公钥返回给请求主机</li>
+<li>请求主机使用公钥对用户输入的密码进行加密</li>
+<li>请求主机将加密后的信息发送给远程主机</li>
+<li>远程主机使用私钥对密码进行解密</li>
+<li>最后，远程主机判断解密后的密码是否与用户密码一致，一致就同意登陆，否则反之</li>
+</ol>
+<pre><code class="hljs mermaid">sequenceDiagram
+    autonumber
+    Client-&gt;&gt;Server: ssh user@host
+    Server-&gt;&gt;Client: return public_key
+    Client-&gt;&gt;Client: use public_key encrypt password
+    Client-&gt;&gt;Server: send encrypted password
+    Server-&gt;&gt;Server: use private_key decrypt password
+    Server-&gt;&gt;Server: check password</code></pre>
+
+<p>整个过程看上去没啥问题，但是相比HTTPS 协议安全性是稍差的，那是因为SSH协议没用CA证书签发机构，很容利用自签的证书来截获请求冒充远程主机来取得登录密码的。SSH发现这个问题之后，想了一个办法来绕开这个问题。引入了know_hosts。</p>
+<h3 id="know-hosts作用"><a href="#know-hosts作用" class="headerlink" title="know_hosts作用"></a>know_hosts作用</h3><p>在第一次ssh的时候我们都会看到这样的一个提示</p>
+<pre><code class="hljs shell">The authenticity of host &#x27;10.122.48.130 (10.122.48.130)&#x27; can&#x27;t be established.
+RSA key fingerprint is ee:6e:68:7d:91:8c:d8:d9:1d:ab:61:9b:5f:53:68:d3.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added &#x27;10.122.48.130&#x27; (RSA) to the list of known hosts.</code></pre>
+
+<p>这句话提示的是：无法确认主机的真实性，只知道它的公钥指纹，是否建立连接？这个方式就将主机被冒充的风险抛给了使用者。当然对公钥的核对也是一个问题，这就需要远程主机公开公钥。在上面的提示中输入<code>yes</code>之后，s sh就会将远程主机的公钥写入本地的know_hosts文件中。第二次ssh的时候就会核对这个公钥指纹，如果不一致则无法ssh 成功。</p>
+<p>具体的know_hosts内容样例，IP 加密算法 指纹信息</p>
+<pre><code class="hljs shell">10.122.48.130 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6G4lMkyH4O2IcWxRmbecn6aMTi3r3+eS2W05CLT7zl3EgWyx7nYEXzWeGl7OMhW+OBDsukuMCOApcG+ge4EaQEqVEWAFn+/Dr5HwUyFFTeEj/fP/3/Xq6/3rt277iJHHSyXsWW29+e2w3OjB/eJJ20lJ4nC7fdghZw4AFSP5YVwhXPtTs2I2cX5ziP4guvpNJPCQq/DNt1uZvvsEt7jmQW8K6YixcHNTipKvhAZGZlx/soamu60WAMr8nmhLy4Svc56rLZYTYIkIvZqRzSDfqDCo9/NcOh2oaa1LBUJBD3hZ9F7lpxnfS6tpHEnowGb1wQtdFhLfJ7gGvTzGeAFRow==</code></pre>
+
+<p>之前遇到过这样的一个问题，以前已经添加了know_hosts的IP，发现远程主机指纹变化了，导致无法ssh，这时需要将对应IP的这样一行删除即可。主机指纹变化有可能是系统重装，也有可能是IP被其他机器获取了。</p>
+<p>Know_hosts文件是在没用用户下的<code>～/.ssh/know_hosts</code></p>
+<h3 id="别名免密登录"><a href="#别名免密登录" class="headerlink" title="别名免密登录"></a>别名免密登录</h3><h4 id="免密登录的公钥认证过程"><a href="#免密登录的公钥认证过程" class="headerlink" title="免密登录的公钥认证过程"></a>免密登录的公钥认证过程</h4><ol>
+<li>请求机Client将自己的公钥存储在远程机Server的authorized_keys中</li>
+<li>远程机在收到请求机的请求后，会在 authorized_keys 中匹配到 Client 的公钥 pubKey，并生成随机数 R，用 Client 的公钥对该随机数进行加密得到 pubKey(R)，然后将加密后信息发送给 Client。</li>
+<li>Client 端通过私钥进行解密得到随机数 R，然后对随机数 R 和本次会话的 SessionKey 利用 MD5 生成摘要 Digest1，发送给 Server 端。</li>
+<li>Server 端会也会对 R 和 SessionKey 利用同样摘要算法生成 Digest2。</li>
+<li>Server 端会最后比较 Digest1 和 Digest2 是否相同，完成认证过程。</li>
+</ol>
+<pre><code class="hljs mermaid">sequenceDiagram
+    Client --&gt;&gt;Server: add client public_key to server
+    Server-&gt;&gt;Client: return client public_key(R)
+    Client-&gt;&gt;Client: private_key decrypt R
+    Client-&gt;&gt;Server: send MD5(R+sessionKey)
+    Server-&gt;&gt;Server: MD5(R+sessionKey)
+    Server-&gt;&gt;Server: check Digest1 Digest2</code></pre>
+
+<h4 id="ssh-免密登录应用"><a href="#ssh-免密登录应用" class="headerlink" title="ssh 免密登录应用"></a>ssh 免密登录应用</h4><ol>
+<li><p>请求端Client生成自己的公私钥</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 如果不想设置指定信息，一路回车即可</span>
+ssh-keygen</code></pre>
+
+<p>可以在请求端Client的当前用户目录下的.ssh文件下看到id_rsa 和id_rsa.pub文件</p>
+</li>
+<li><p>将自己的公钥添加到远程主机Server上</p>
+<pre><code class="hljs shell">ssh-copy-id -i ~/.ssh/id_rsa.pub user@host</code></pre>
+
+<p>在远处主机的用户目录下的.ssh 下有authorized_keys文件</p>
+</li>
+<li><p>在上面两步完成后已经可以进行免密登录了，但是还是需要指定用户和IP。想要添加别名登录的话，需要在请求端Client的～/.ssh下创建config文件。config文件配置如下</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 服务器1</span>
+Host 130
+    HostName 10.122.48.130
+    Port 22
+    User root
+    IdentityFile /home/test/.ssh/id_rsa
+    
+<span class="hljs-meta">#</span><span class="bash"> 服务器2</span>
+Host 131
+    HostName 10.122.48.131
+    Port 22
+    User root
+    IdentityFile /home/test/.ssh/id_rsa</code></pre>
+
+<p>在请求端Client上执行 <code>ssh 130</code>相当于执行<code>ssh root@10.122.48.130</code>并且不需要密码。</p>
+</li>
+</ol>
+<h3 id="AutoSSH"><a href="#AutoSSH" class="headerlink" title="AutoSSH"></a>AutoSSH</h3><p>ssh的反向穿透技术，可以实现内网服务在公网上提供服务。ssh一般用来客户端远程登录到服务器上，而ssh反向穿透“反其道而行之”，由服务端主动发起请求连接客户端，然后在客户端打开一个端口，之后发往客户端的数据包将会转发到服务端。但是ssh不支持自动重连功能，这时我们就可以用上autossh了。</p>
+<p>我们可以利用autossh将内网端口映射到外网上。由于autossh 并不是Linux自带的，所以需要自己编译安装。</p>
+<p>在内网机器B上进行编译安装</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">1.将autossh下载到服务器B上</span>
+wget http://fossies.org/Linux/privat/autossh-1.4e.tgz
+<span class="hljs-meta">#</span><span class="bash">2.解压</span>
+tar xzvf autossh-1.4e.tgz
+<span class="hljs-meta">#</span><span class="bash">3. 编译安装</span>
+ cd autossh-1.4e
+ ./configure
+ make
+ make install</code></pre>
+
+<p>将内网机器B的公钥添加到公网机器A上</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 如果没生成过公钥执行生成公钥</span>
+ssh-keygen
+<span class="hljs-meta">#</span><span class="bash"> 将内网机器B的公钥添加到公网机器上</span>
+ssh-copy-id -i ~/.ssh/id_rsa.pub user@hostA</code></pre>
+
+<p>在内网机器使用autossh</p>
+<pre><code class="hljs shell">autossh -M 10000 -NR 9200:localhost:9200 -i ~/.ssh/id_rsa use@hostA</code></pre>
+
+<p>参数说明：-M 参数指定监听这个反向链接的端口，如果断了会自动重连</p>
+<p>后面的两个9200端口分别是指定公网上暴露的端口后内网暴露的端口</p>
+<p>到了这个整个工作就完成了，这时访问公网IP的9200端口，就会访问内网中9200端口的服务。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Linux/">Linux</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/shell/">shell</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2017/08/28/006_%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95%E7%AE%80%E4%BB%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">加密算法简介</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2017/05/27/005_mac%E6%95%88%E7%8E%87/">
+                        <span class="hidden-mobile">Mac下效率工具</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer>
+  (function () {
+    // 查询存储的记录
+    function getRecord(Counter, target) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {target, time: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    }
+
+    // 发起自增请求
+    function increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    }
+
+    // 构建自增请求体
+    function buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "time": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    }
+
+    // 校验是否为有效的 UV
+    function validUV() {
+      var key = 'LeanCloud_UV_Flag';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    }
+
+    function addCount(Counter) {
+      var enableIncr = 'true' === 'true' && window.location.hostname !== 'localhost';
+      var getterArr = [];
+      var incrArr = [];
+
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#leancloud-site-pv-container');
+      if (pvCtn || enableIncr) {
+        var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+          incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-pv');
+          if (ele) {
+            ele.innerText = record.time + 1;
+            if (pvCtn) {
+              pvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#leancloud-site-uv-container');
+      if (uvCtn || enableIncr) {
+        var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+          var vuv = validUV();
+          vuv && incrArr.push(buildIncrement(record.objectId))
+          var ele = document.querySelector('#leancloud-site-uv');
+          if (ele) {
+            ele.innerText = record.time + (vuv ? 1 : 0);
+            if (uvCtn) {
+              uvCtn.style.display = 'inline';
+            }
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 如果是文章，请求文章的浏览数，并自增
+      if ('true' === 'true') {
+        var viewCtn = document.querySelector('#leancloud-post-views-container');
+        if (viewCtn || enableIncr) {
+          var target = decodeURI('/2017/07/05/001_ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95/');
+          var viewGetter = getRecord(Counter, target).then((record) => {
+            incrArr.push(buildIncrement(record.objectId))
+            if (viewCtn) {
+              var ele = document.querySelector('#leancloud-post-views');
+              if (ele) {
+                ele.innerText = (record.time || 0) + 1;
+                viewCtn.style.display = 'inline';
+              }
+            }
+          });
+          getterArr.push(viewGetter);
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && increment(Counter, incrArr);
+        })
+      }
+    }
+
+    var app_id = 'w6SDFMpFI1CAALLLBp2eaulT-gzGzoHsz'
+    var app_key = 'ffyRHGjvFWDQBO4uQldmg8ie'
+    var server_url = 'https://w6sdfmpf.lc-cn-n1-shared.com'
+
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': app_id,
+            'X-LC-Key': app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+
+      addCount(Counter);
+    }
+
+    var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(resp => resp.json())
+        .then(({api_server}) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "ssh 免密登录&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+</body>
+</html>
